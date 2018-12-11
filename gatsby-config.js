@@ -1,3 +1,14 @@
+// TODO: solve this with siteConfig
+require(`dotenv`).config({
+    path: `.env.${process.env.NODE_ENV}`,
+})
+
+if (!process.env.GHOST_API_URL || !process.env.GHOST_API_KEY) {
+    throw new Error(
+        `GHOST_API_URL and GHOST_API_KEY are required to build. Check the CONTRIBUTING guide.`
+    )
+}
+
 module.exports = {
     siteMetadata: {
         title: `Ghost Gatsby Starter`,
@@ -14,8 +25,16 @@ module.exports = {
                 name: `pages`,
             },
         },
-        `gatsby-transformer-sharp`,
+        {
+            resolve: `gatsby-source-ghost`,
+            options: {
+                apiUrl: `${process.env.GHOST_API_URL}`,
+                clientId: `ghost-frontend`,
+                clientSecret: `${process.env.GHOST_API_KEY}`,
+            },
+        },
         `gatsby-plugin-sharp`,
+        `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
@@ -32,10 +51,10 @@ module.exports = {
                 background_color: `#ffffff`,
                 theme_color: `#663399`,
                 display: `minimal-ui`,
-                icon: `src/assets/gatsby-icon.png`,
+                icon: `src/assets/ghost-icon.png`,
             },
         },
-        `gatsby-plugin-offline`,
         `gatsby-plugin-react-helmet`,
+        `gatsby-plugin-offline`,
     ],
 }
