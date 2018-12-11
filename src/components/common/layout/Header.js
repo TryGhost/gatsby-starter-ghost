@@ -1,14 +1,12 @@
 import React from 'react'
 import { Link } from 'gatsby'
 
-import { Logo } from '../.'
-
 const Header = () => (
     <header>
         <nav>
             <div>
                 <a href="https://ghost.org">
-                    <Logo />
+                    <img src="/assets/ghost-icon.png" />
                 </a>
                 <Link to="/" >Home</Link>
             </div>
