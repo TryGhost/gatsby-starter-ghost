@@ -27,9 +27,7 @@
   "devDependencies": {
     "eslint": "5.9.0",
     "eslint-plugin-ghost": "0.0.27",
-    "eslint-plugin-react": "7.11.1",
-    "gh-pages": "^1.2.0",
-    "prettier": "^1.14.2"
+    "eslint-plugin-react": "7.11.1"
   },
   "dependencies": {
     "gatsby": "^2.0.29",
@@ -39,7 +37,6 @@
     "gatsby-plugin-offline": "^2.0.5",
     "gatsby-plugin-react-helmet": "^3.0.0",
     "gatsby-plugin-sharp": "^2.0.6",
-    "gatsby-plugin-typography": "^2.2.0",
     "gatsby-source-filesystem": "^2.0.2",
     "gatsby-source-ghost": "^2.1.2",
     "gatsby-transformer-sharp": "^2.1.3",
@@ -47,11 +44,6 @@
     "prismjs": "^1.15.0",
     "react": "^16.5.1",
     "react-dom": "^16.5.1",
-    "react-helmet": "^5.2.0",
-    "react-typography": "^0.16.13",
-    "typeface-merriweather": "0.0.43",
-    "typeface-montserrat": "0.0.43",
-    "typography": "^0.16.17",
-    "typography-theme-wordpress-2016": "^0.15.10"
+    "react-helmet": "^5.2.0"
   }
 }
