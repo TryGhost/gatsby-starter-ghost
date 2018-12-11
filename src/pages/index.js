@@ -1,68 +1,70 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
-import get from 'lodash/get'
-import Helmet from 'react-helmet'
+import PropTypes from 'prop-types'
+import { graphql } from 'gatsby'
 
-import Bio from '../components/Bio'
-import Layout from '../components/Layout'
+import { Layout } from '../components/common/layout'
+import { PostCard } from '../components/common'
+// import { MetaData } from '../components/common/meta'
 
-class BlogIndex extends React.Component {
-    render() {
-        const siteTitle = get(this, `props.data.site.siteMetadata.title`)
-        const siteDescription = get(
-            this,
-            `props.data.site.siteMetadata.description`
-        )
-        const posts = get(this, `props.data.allMarkdownRemark.edges`)
+const IndexPage = ({ data, location }) => {
+    // Add meta title and description for this page here to overwrite the site meta data as set in the config
+    const title = ``
+    const description = ``
 
-        return (
-            <Layout location={this.props.location} title={siteTitle}>
-                <Helmet
-                    htmlAttributes={{ lang: `en` }}
-                    meta={[{ name: `description`, content: siteDescription }]}
-                    title={siteTitle}
-                />
-                <Bio />
-                {posts.map(({ node }) => {
-                    const title = get(node, `frontmatter.title`) || node.fields.slug
-                    return (
-                        <div key={node.fields.slug}>
-                            <h3>
-                                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                                    {title}
-                                </Link>
-                            </h3>
-                            <small>{node.frontmatter.date}</small>
-                            <p dangerouslySetInnerHTML={{ __html: node.excerpt }} />
-                        </div>
-                    )
-                })}
+    const posts = data.allGhostPost.edges
+
+    return (
+        <>
+            {/* <MetaData
+                data={data}
+                location={location}
+                type="website"
+                title={title || data.site.siteMetadata.title}
+                description={description || data.site.siteMetadata.description}
+            /> */}
+            <Layout>
+                <div>
+                    <section>
+                        {posts.map(({ node }) => (
+                            <PostCard key={node.id} post={node} />
+                        ))}
+                    </section>
+                </div>
             </Layout>
-        )
-    }
+        </>
+    )
 }
 
-export default BlogIndex
+IndexPage.propTypes = {
+    data: PropTypes.shape({
+        site: PropTypes.shape({
+            siteMetadata: PropTypes.shape({
+                siteUrl: PropTypes.string.isRequired,
+                title: PropTypes.string.isRequired,
+                description: PropTypes.string.isRequired,
+            }).isRequired,
+        }).isRequired,
+        allGhostPost: PropTypes.object.isRequired,
+    }).isRequired,
+    location: PropTypes.shape({
+        pathname: PropTypes.string.isRequired,
+    }).isRequired,
+}
+
+export default IndexPage
 
 export const pageQuery = graphql`
-  query {
+  query GhostPostQuery {
     site {
-      siteMetadata {
-        title
-        description
-      }
+        ...SiteMetaFields
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allGhostPost(
+        sort: { order: DESC, fields: [published_at] },
+        limit: 50,
+    ) {
       edges {
         node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-          }
+          ...GhostPostListFields
         }
       }
     }
