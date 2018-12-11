@@ -1,68 +1,66 @@
-const _ = require('lodash')
-const Promise = require('bluebird')
-const path = require('path')
-const { createFilePath } = require('gatsby-source-filesystem')
+const _ = require(`lodash`)
+const Promise = require(`bluebird`)
+const path = require(`path`)
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
+    const { createPage } = actions
 
-  return new Promise((resolve, reject) => {
-    const blogPost = path.resolve('./src/templates/blog-post.js')
-    resolve(
-      graphql(
-        `
-          {
-            allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, limit: 1000) {
-              edges {
-                node {
-                  fields {
-                    slug
-                  }
-                  frontmatter {
-                    title
-                  }
+    return new Promise((resolve, reject) => {
+        const postTemplate = path.resolve(`./src/templates/post.js`)
+        resolve(
+            // TODO: go over needed fields here
+            graphql(`
+                {
+                    allGhostPost(
+                        sort: {order: ASC, fields: published_at},
+                        filter: {
+                            slug: {ne: "data-schema"}
+                        }
+                    ) {
+                        edges {
+                            node {
+                                slug
+                                title
+                                url
+                                published_at
+                                feature_image
+                                tags {
+                                    slug
+                                    name
+                                    description
+                                    meta_title
+                                    meta_description
+                                    feature_image
+                                }
+                            }
+                        }
+                    }
+                }`
+            ).then((result) => {
+                if (result.errors) {
+                    return reject(result.errors)
                 }
-              }
-            }
-          }
-        `
-      ).then(result => {
-        if (result.errors) {
-          console.log(result.errors)
-          reject(result.errors)
-        }
 
-        // Create blog posts pages.
-        const posts = result.data.allMarkdownRemark.edges;
+                const items = result.data.allGhostPost.edges
 
-        _.each(posts, (post, index) => {
-          const previous = index === posts.length - 1 ? null : posts[index + 1].node;
-          const next = index === 0 ? null : posts[index - 1].node;
+                _.forEach(items, ({ node }) => {
+                    // Update the existing URL field to reflect the URL in Gatsby and
+                    // not in Ghost. Also needed to link to related posts.
+                    node.url = node.slug
 
-          createPage({
-            path: post.node.fields.slug,
-            component: blogPost,
-            context: {
-              slug: post.node.fields.slug,
-              previous,
-              next,
-            },
-          })
-        })
-      })
-    )
-  })
-}
+                    createPage({
+                        path: node.slug,
+                        component: path.resolve(postTemplate),
+                        context: {
+                            // Data passed to context is available
+                            // in page queries as GraphQL variables.
+                            slug: node.slug,
+                        },
+                    })
+                })
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
-  const { createNodeField } = actions
-
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
+                return resolve()
+            })
+        )
     })
-  }
 }
