@@ -4,24 +4,26 @@ import { graphql } from 'gatsby'
 
 import { Layout } from '../components/common/layout'
 import { PostCard } from '../components/common'
-// import { MetaData } from '../components/common/meta'
+import { MetaData } from '../components/common/meta'
 
 const IndexPage = ({ data, location }) => {
-    // Add meta title and description for this page here to overwrite the site meta data as set in the config
+    // Add meta title, description, and image for this page here to overwrite the site meta data as set in the config
     const title = ``
     const description = ``
+    const image = ``
 
     const posts = data.allGhostPost.edges
 
     return (
         <>
-            {/* <MetaData
+            <MetaData
                 data={data}
                 location={location}
                 type="website"
                 title={title || data.site.siteMetadata.title}
                 description={description || data.site.siteMetadata.description}
-            /> */}
+                image={image}
+            />
             <Layout>
                 <div>
                     <section>
