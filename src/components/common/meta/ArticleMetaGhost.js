@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 
 import getPostExcerpt from '../../../utils/getPostExcerpt'
+import { removeInternalTags, getPrimaryTag } from '../../../utils/tag-utils'
 import getAuthorProperties from './getAuthorProperties'
 import ImageMeta from './ImageMeta'
 
@@ -15,9 +16,8 @@ const ArticleMetaGhost = ({ data, canonical }) => {
 
     const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
-    // TODO: why not using the tag utils here?
-    const publicTags = _.map(_.filter(ghostPost.tags, { visibility: `public` }), `name`)
-    const primaryTag = _.get(ghostPost.primaryTag, `name`, publicTags[0])
+    const publicTags = _.map(removeInternalTags(ghostPost.tags), `name`)
+    const primaryTag = getPrimaryTag(publicTags)
     const seoImage = ghostPost.feature_image ? ghostPost.feature_image : `../../../assets/ghost-icon.png` // TODO: set fallback image in config
 
     return (

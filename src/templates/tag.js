@@ -12,6 +12,7 @@ const Tag = ({ data, location }) => {
 
     return (
         <>
+            {/* Todo: refactor meta data for tags, as it's more similar to posts than to a website */}
             <MetaData
                 data={data}
                 location={location}
