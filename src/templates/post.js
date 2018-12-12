@@ -5,8 +5,7 @@ import Prism from 'prismjs'
 
 import { Layout } from '../components/common/layout'
 import { MetaData } from '../components/common/meta'
-
-// TODO: add tag helper here to link to tag
+import { Tags } from '../components/common'
 
 class Post extends React.Component {
     componentDidMount() {
@@ -33,6 +32,12 @@ class Post extends React.Component {
                             <h1>{post.title}</h1>
                             <div>
                                 <p>Written by: </p><Link to={`/author/${post.primary_author.slug}/`}>{post.primary_author.name}</Link>
+                                <Tags
+                                    post={post}
+                                    prefix="Filed under: "
+                                    permalink="/tag/:slug/"
+                                    separator=" / "
+                                />
                             </div>
                             <section
                                 className="post-content external-scripts"
