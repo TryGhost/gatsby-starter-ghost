@@ -10,6 +10,19 @@ export const siteMetaFields = graphql`
     }
 `
 
+// Used for tag archive pages
+export const ghostTagFields = graphql`
+    fragment GhostTagFields on GhostTag {
+        slug
+        name
+        visibility
+        feature_image
+        description
+        meta_title
+        meta_description
+    }
+`
+
 // Used for single pages
 export const ghostPostFields = graphql`
     fragment GhostPostFields on GhostPost {
