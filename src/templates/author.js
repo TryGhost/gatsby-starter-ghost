@@ -34,7 +34,7 @@ const Author = ({ data, location }) => {
                             {author.twitter ? <a href={author.twitter} target="_blank" rel="noopener noreferrer">Website</a> : null}
                             {/* Todo: facebook url helper */}
                             {author.facebook ? <a href={author.facebook} target="_blank" rel="noopener noreferrer">Website</a> : null}
-                            <a href={`https://feedly.com/i/subscription/feed/${author.url}rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
+                            <a href={`https://feedly.com/i/subscription/feed/${data.site.siteMetadata.siteUrl}/author/${author.slug}/rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
                         </div>
                     </div>
                 </header>
