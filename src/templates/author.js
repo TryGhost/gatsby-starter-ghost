@@ -12,11 +12,11 @@ const Author = ({ data, location }) => {
 
     return (
         <>
-            {/* Todo: refactor meta data for tags, as it's more similar to posts than to a website */}
+            {/* Todo: add meta data for author */}
             <MetaData
                 data={data}
                 location={location}
-                type="series"
+                type="profile"
                 title={author.name}
                 description={author.bio || data.site.siteMetadata.description}
                 image={author.profile_image ? author.profile_image : `../assets/ghost-icon.png`}

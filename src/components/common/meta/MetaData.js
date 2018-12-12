@@ -22,7 +22,7 @@ const MetaData = ({
                 canonical={canonical}
             />
         )
-    } else if (type === `website` || type === `series`) {
+    } else if (type === `website` || type === `series` || type === `profile`) { // TODO add profile/author meta data
         return (
             <WebsiteMeta
                 data={data}
@@ -52,7 +52,7 @@ MetaData.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
     }).isRequired,
-    type: PropTypes.oneOf([`website`, `series`, `article`]).isRequired,
+    type: PropTypes.oneOf([`website`, `series`, `article`, `profile`]).isRequired,
     title: PropTypes.string,
     description: PropTypes.string,
     image: PropTypes.string,
