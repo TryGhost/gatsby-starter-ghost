@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Prism from 'prismjs'
 
 import { Layout } from '../components/common/layout'
 import { MetaData } from '../components/common/meta'
+
+// TODO: add tag helper here to link to tag
 
 class Post extends React.Component {
     componentDidMount() {
@@ -29,6 +31,9 @@ class Post extends React.Component {
                     <div>
                         <article>
                             <h1>{post.title}</h1>
+                            <div>
+                                <p>Written by: </p><Link to={`/author/${post.primary_author.slug}/`}>{post.primary_author.name}</Link>
+                            </div>
                             <section
                                 className="post-content external-scripts"
                                 dangerouslySetInnerHTML={{ __html: post.html }}
