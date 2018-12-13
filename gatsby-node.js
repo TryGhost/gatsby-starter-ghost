@@ -145,5 +145,52 @@ exports.createPages = ({ graphql, actions }) => {
         )
     })
 
-    return Promise.all([createPosts, createTags, createAuthors])
+    const createPages = new Promise((resolve, reject) => {
+        const pageTemplate = path.resolve(`./src/templates/page.js`)
+        resolve(
+            graphql(`
+                {
+                    allGhostPage(
+                        sort: {order: ASC, fields: published_at},
+                        filter: {
+                            slug: {ne: "data-schema-page"}
+                        }
+                    ) {
+                        edges {
+                            node {
+                                slug
+                                url
+                            }
+                        }
+                    }
+                }`
+            ).then((result) => {
+                if (result.errors) {
+                    return reject(result.errors)
+                }
+
+                const items = result.data.allGhostPage.edges
+
+                _.forEach(items, ({ node }) => {
+                    // Update the existing URL field to reflect the URL in Gatsby and
+                    // not in Ghost. Also needed to link to related posts.
+                    node.url = `/${node.slug}/`
+
+                    createPage({
+                        path: node.url,
+                        component: path.resolve(pageTemplate),
+                        context: {
+                            // Data passed to context is available
+                            // in page queries as GraphQL variables.
+                            slug: node.slug,
+                        },
+                    })
+                })
+
+                return resolve()
+            })
+        )
+    })
+
+    return Promise.all([createPosts, createTags, createAuthors, createPages])
 }
