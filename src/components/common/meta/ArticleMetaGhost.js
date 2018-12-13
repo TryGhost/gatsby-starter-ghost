@@ -7,18 +7,16 @@ import getPostExcerpt from '../../../utils/getPostExcerpt'
 import { removeInternalTags, getPrimaryTag } from '../../../utils/tag-utils'
 import getAuthorProperties from './getAuthorProperties'
 import ImageMeta from './ImageMeta'
-
-// TODO: add publisher info back?
+import config from '../../../utils/siteConfig'
 
 const ArticleMetaGhost = ({ data, canonical }) => {
     const { ghostPost } = data
-    const { siteMetadata } = data.site
 
     const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(removeInternalTags(ghostPost.tags), `name`)
     const primaryTag = getPrimaryTag(publicTags)
-    const seoImage = ghostPost.feature_image ? ghostPost.feature_image : `../../../assets/ghost-icon.png` // TODO: set fallback image in config
+    const shareImage = ghostPost.feature_image ? ghostPost.feature_image : config.shareImage
 
     return (
         <>
@@ -27,7 +25,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta name="description" content={ghostPost.meta_description || excerpt} />
                 <link rel="canonical" href={canonical} />
 
-                <meta property="og:site_name" content={siteMetadata.title} />
+                <meta property="og:site_name" content={config.siteTitle} />
                 <meta name="og:type" content="article" />
                 <meta name="og:title"
                     content={
@@ -68,9 +66,9 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta name="twitter:data1" content={author.name} />
                 {primaryTag ? <meta name="twitter:label2" content="Filed under" /> : null}
                 {primaryTag ? <meta name="twitter:data2" content={primaryTag} /> : null}
-                {/* TODO: get sites twitter handle */}
-                <meta name="twitter:site" content="@tryghost" />
-                <meta name="twitter:creator" content="@tryghost" />
+
+                {config.twitterUser ? <meta name="twitter:site" content={`https://twitter.com/${_.trimStart(config.twitterUser, `@`)}/`} /> : null}
+                {config.twitterUser ? <meta name="twitter:creator" content={config.twitterUser} /> : null}
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
@@ -88,19 +86,19 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                         "dateModified": "${ghostPost.updated_at}",
                         "image": {
                             "@type": "ImageObject",
-                            "url": "${seoImage}",
-                            "width": 1000,
-                            "height": 563
+                            "url": "${shareImage}",
+                            "width": "${config.shareImageWidth}",
+                            "height": "${config.shareImageHeight}"
                         },
                         "description": "${ghostPost.meta_description || excerpt}",
                         "mainEntityOfPage": {
                             "@type": "WebPage",
-                            "@id": "${siteMetadata.siteUrl}"
+                            "@id": "${config.siteUrl}"
                         }
                     }
                 `}</script>
             </Helmet>
-            <ImageMeta image={seoImage} />
+            <ImageMeta image={shareImage} />
         </>
     )
 }
@@ -129,13 +127,6 @@ ArticleMetaGhost.propTypes = {
             og_description: PropTypes.string,
             twitter_title: PropTypes.string,
             twitter_description: PropTypes.string,
-        }).isRequired,
-        site: PropTypes.shape({
-            siteMetadata: PropTypes.shape({
-                siteUrl: PropTypes.string.isRequired,
-                title: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-            }).isRequired,
         }).isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
