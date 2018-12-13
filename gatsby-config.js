@@ -28,7 +28,7 @@ try {
     const { apiUrl, clientId, clientSecret } = ghostConfig.production
 
     if (!apiUrl || !clientId || !clientSecret || clientSecret.match(/<key>/)) {
-        throw new Error(`GHOST_API_URL and GHOST_API_KEY are required to build. Check the README.`)
+        throw new Error(`GHOST_API_URL and GHOST_API_KEY are required to build. Check the README.`) // eslint-disable-line
     }
 }
 
