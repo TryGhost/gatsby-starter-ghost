@@ -36,7 +36,7 @@ exports.createPages = ({ graphql, actions }) => {
                     node.url = node.slug
 
                     createPage({
-                        path: node.slug,
+                        path: node.url,
                         component: path.resolve(postTemplate),
                         context: {
                             // Data passed to context is available
