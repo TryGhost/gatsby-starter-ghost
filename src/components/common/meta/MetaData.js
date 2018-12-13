@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import url from 'url'
 
-import ArticleMetaGhost from './ArticleMetaGhost'
+import ArticleMeta from './ArticleMeta'
 import WebsiteMeta from './WebsiteMeta'
 
 const MetaData = ({
@@ -17,7 +17,7 @@ const MetaData = ({
 
     if (type === `article`) {
         return (
-            <ArticleMetaGhost
+            <ArticleMeta
                 data={data}
                 canonical={canonical}
             />
