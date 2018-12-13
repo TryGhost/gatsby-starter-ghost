@@ -12,14 +12,10 @@ const Author = ({ data, location }) => {
 
     return (
         <>
-            {/* Todo: add meta data for author */}
             <MetaData
                 data={data}
                 location={location}
                 type="profile"
-                title={author.name}
-                description={author.bio || data.site.siteMetadata.description}
-                image={author.profile_image ? author.profile_image : `../assets/ghost-icon.png`}
             />
             <Layout>
                 <header>
@@ -80,9 +76,6 @@ export default Author
 
 export const pageQuery = graphql`
     query($slug: String!) {
-        site {
-            ...SiteMetaFields
-        }
         ghostAuthor(slug: { eq: $slug }) {
             ...GhostAuthorFields
         }

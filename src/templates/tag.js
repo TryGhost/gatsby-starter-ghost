@@ -12,14 +12,10 @@ const Tag = ({ data, location }) => {
 
     return (
         <>
-            {/* Todo: refactor meta data for tags, as it's more similar to posts than to a website */}
             <MetaData
                 data={data}
                 location={location}
                 type="series"
-                title={tag.meta_title || tag.name}
-                description={tag.meta_description || tag.description || data.site.siteMetadata.description}
-                image={tag.feature_image ? tag.feature_image : `../assets/ghost-icon.png`}
             />
             <Layout>
                 <header>
@@ -69,9 +65,6 @@ export default Tag
 
 export const pageQuery = graphql`
     query($slug: String!) {
-        site {
-            ...SiteMetaFields
-        }
         ghostTag(slug: { eq: $slug }) {
             ...GhostTagFields
         }

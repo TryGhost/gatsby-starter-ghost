@@ -24,7 +24,6 @@ class Page extends React.Component {
                     data={this.props.data}
                     location={this.props.location}
                     type="website"
-                    image={page.feature_image}
                 />
                 <Layout>
                     <div>
@@ -57,9 +56,6 @@ export default Page
 
 export const postQuery = graphql`
     query($slug: String!) {
-        site {
-            ...SiteMetaFields
-        }
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
         }

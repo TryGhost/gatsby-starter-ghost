@@ -40,14 +40,10 @@ const MetaData = ({
 
 MetaData.propTypes = {
     data: PropTypes.shape({
-        site: PropTypes.shape({
-            siteMetadata: PropTypes.shape({
-                siteUrl: PropTypes.string.isRequired,
-                title: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-            }).isRequired,
-        }).isRequired,
         ghostPost: PropTypes.object,
+        ghostTag: PropTypes.object,
+        ghostAuthor: PropTypes.object,
+        ghostPage: PropTypes.object,
     }).isRequired,
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,

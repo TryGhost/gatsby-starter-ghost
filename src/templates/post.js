@@ -66,9 +66,6 @@ export default Post
 
 export const postQuery = graphql`
     query($slug: String!) {
-        site {
-            ...SiteMetaFields
-        }
         ghostPost(slug: { eq: $slug }) {
             ...GhostPostFields
         }

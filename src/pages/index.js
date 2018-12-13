@@ -8,11 +8,6 @@ import { PostCard } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 const IndexPage = ({ data, location }) => {
-    // Add meta title, description, and image for this page here to overwrite the site meta data as set in the config
-    const title = ``
-    const description = ``
-    const image = ``
-
     const posts = data.allGhostPost.edges
 
     return (
@@ -21,9 +16,6 @@ const IndexPage = ({ data, location }) => {
                 data={data}
                 location={location}
                 type="website"
-                title={title || data.site.siteMetadata.title}
-                description={description || data.site.siteMetadata.description}
-                image={image}
             />
             <Layout>
                 <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
@@ -59,9 +51,6 @@ export default IndexPage
 
 export const pageQuery = graphql`
   query GhostPostQuery {
-    site {
-        ...SiteMetaFields
-    }
     file(relativePath: {eq: "ghost-icon.png"}) {
         childImageSharp {
             fixed(width: 30, height: 30) {
