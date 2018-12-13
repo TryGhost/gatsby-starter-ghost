@@ -14,10 +14,12 @@ module.exports = {
         title: `Ghost Gatsby Starter`,
         author: `Ghost`,
         description: `Thoughts, stories and ideas`,
-        siteUrl: `https://tryghost.github.io/gatsby-starter-ghost/`,
+        siteUrl: `https://tryghost.github.io/`,
     },
-    pathPrefix: `/gatsby-starter-ghost`,
     plugins: [
+        /**
+         *  Content Plugins
+         */
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -35,13 +37,9 @@ module.exports = {
         },
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
-        {
-            resolve: `gatsby-plugin-google-analytics`,
-            options: {
-                //trackingId: `ADD YOUR TRACKING ID HERE`,
-            },
-        },
-        `gatsby-plugin-feed`,
+        /**
+         *  Utility Plugins
+         */
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
@@ -55,6 +53,7 @@ module.exports = {
             },
         },
         `gatsby-plugin-react-helmet`,
+        `gatsby-plugin-force-trailing-slashes`,
         `gatsby-plugin-offline`,
     ],
 }

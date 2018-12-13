@@ -33,6 +33,7 @@
     "@tryghost/helpers": "^0.1.0",
     "gatsby": "^2.0.29",
     "gatsby-plugin-feed": "^2.0.8",
+    "gatsby-plugin-force-trailing-slashes": "^1.0.4",
     "gatsby-plugin-google-analytics": "^2.0.5",
     "gatsby-plugin-manifest": "^2.0.5",
     "gatsby-plugin-offline": "^2.0.5",
