@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import url from 'url'
 
+import config from '../../../utils/siteConfig'
 import ArticleMeta from './ArticleMeta'
 import WebsiteMeta from './WebsiteMeta'
 
@@ -13,7 +14,7 @@ const MetaData = ({
     image,
     location,
 }) => {
-    const canonical = url.resolve(data.site.siteMetadata.siteUrl, location.pathname, `/`)
+    const canonical = url.resolve(config.siteUrl, location.pathname, `/`)
 
     if (type === `article`) {
         return (

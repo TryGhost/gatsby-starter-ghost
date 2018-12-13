@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from "react-helmet"
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import url from 'url'
 
 import getPostExcerpt from '../../../utils/getPostExcerpt'
 import { removeInternalTags, getPrimaryTag } from '../../../utils/tag-utils'
@@ -17,6 +18,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
     const publicTags = _.map(removeInternalTags(ghostPost.tags), `name`)
     const primaryTag = getPrimaryTag(publicTags)
     const shareImage = ghostPost.feature_image ? ghostPost.feature_image : config.shareImage
+    const publisherLogo = url.resolve(config.siteUrl, config.siteIcon)
 
     return (
         <>
@@ -89,6 +91,16 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                             "url": "${shareImage}",
                             "width": "${config.shareImageWidth}",
                             "height": "${config.shareImageHeight}"
+                        },
+                        "publisher": {
+                            "@type": "Organization",
+                            "name": "${config.publisherName}",
+                            "logo": {
+                                "@type": "ImageObject",
+                                "url": "${publisherLogo}",
+                                "width": 60,
+                                "height": 60
+                            }
                         },
                         "description": "${ghostPost.meta_description || excerpt}",
                         "mainEntityOfPage": {
