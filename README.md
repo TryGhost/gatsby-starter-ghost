@@ -13,4 +13,7 @@ gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost
 👉🏼 [data-stub.json](https://gist.github.com/AileenCGN/172ed94bcd18a328034e0259dbf3e702)
 
 ## Running in development
-`gatsby develop`
+- `yarn dev` or `gatsby develop`
+- `yarn build` or `gatsby build`
+- `yarn serve` to create production build and serve it on port 9000
+- `yarn lint`
