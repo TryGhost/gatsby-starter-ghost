@@ -23,9 +23,8 @@ try {
 
 module.exports = {
     siteMetadata: {
-        title: `Ghost Gatsby Starter`,
-        author: `Ghost`,
-        description: `Thoughts, stories and ideas`,
+        title: config.siteTitle,
+        description: config.siteDescription,
         siteUrl: config.siteUrl,
     },
     plugins: [
@@ -63,13 +62,13 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `Gatsby Starter Ghost`,
+                name: config.siteTitle,
                 short_name: `TryGhost`,
                 start_url: `/`,
-                background_color: `#ffffff`,
-                theme_color: `#663399`,
+                background_color: config.backgroundColor,
+                theme_color: config.themeColor,
                 display: `minimal-ui`,
-                icon: `src/images/ghost-icon.png`,
+                icon: `${config.siteUrl}${config.siteLogo}`,
             },
         },
         `gatsby-plugin-react-helmet`,
