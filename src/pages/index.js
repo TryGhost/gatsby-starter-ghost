@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 import { Layout } from '../components/common/layout'
 import { PostCard } from '../components/common'
@@ -25,6 +26,7 @@ const IndexPage = ({ data, location }) => {
                 image={image}
             />
             <Layout>
+                <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
                 <div>
                     <section>
                         {posts.map(({ node }) => (
@@ -59,6 +61,13 @@ export const pageQuery = graphql`
   query GhostPostQuery {
     site {
         ...SiteMetaFields
+    }
+    file(relativePath: {eq: "ghost-icon.png"}) {
+        childImageSharp {
+            fixed(width: 30, height: 30) {
+                ...GatsbyImageSharpFixed
+            }
+        }
     }
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
