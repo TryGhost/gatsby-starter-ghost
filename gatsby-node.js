@@ -33,7 +33,7 @@ exports.createPages = ({ graphql, actions }) => {
                 _.forEach(items, ({ node }) => {
                     // Update the existing URL field to reflect the URL in Gatsby and
                     // not in Ghost. Also needed to link to related posts.
-                    node.url = node.slug
+                    node.url = `/${node.slug}/`
 
                     createPage({
                         path: node.url,
@@ -105,6 +105,9 @@ exports.createPages = ({ graphql, actions }) => {
                 {
                     allGhostAuthor(
                         sort: {order: ASC, fields: name},
+                        filter: {
+                            slug: {ne: "data-schema-author"}
+                        }
                     ) {
                         edges {
                             node {
