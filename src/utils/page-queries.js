@@ -160,13 +160,3 @@ export const ghostPostListFields = graphql`
         }
     }
 `
-
-// Used for tags archive pages
-export const ghostTagListFields = graphql`
-    fragment GhostTagListFields on GhostPost {
-        tags {
-          name
-          slug
-        }
-    }
-`
