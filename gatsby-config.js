@@ -29,6 +29,8 @@ module.exports = {
                 name: `pages`,
             },
         },
+        // Setup for optimised images.
+        // See https://www.gatsbyjs.org/packages/gatsby-image/
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -36,6 +38,8 @@ module.exports = {
                 name: `images`,
             },
         },
+        `gatsby-plugin-sharp`,
+        `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-source-ghost`,
             options: {
@@ -44,8 +48,6 @@ module.exports = {
                 clientSecret: `${process.env.GHOST_API_KEY}`,
             },
         },
-        `gatsby-plugin-sharp`,
-        `gatsby-transformer-sharp`,
         /**
          *  Utility Plugins
          */
