@@ -1,3 +1,5 @@
+const path = require(`path`)
+
 // TODO: solve this with siteConfig
 require(`dotenv`).config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -23,8 +25,15 @@ module.exports = {
         {
             resolve: `gatsby-source-filesystem`,
             options: {
-                path: `${__dirname}/src/pages`,
+                path: path.join(__dirname, `src`, `pages`),
                 name: `pages`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                path: path.join(__dirname, `src`, `images`),
+                name: `images`,
             },
         },
         {
