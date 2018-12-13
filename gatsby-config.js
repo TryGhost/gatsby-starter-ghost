@@ -1,14 +1,35 @@
 const path = require(`path`)
 
-// TODO: solve this with siteConfig
-require(`dotenv`).config({
-    path: `.env.${process.env.NODE_ENV}`,
-})
+// // TODO: solve this with siteConfig
+// require(`dotenv`).config({
+//     path: `.env.${process.env.NODE_ENV}`,
+// })
 
-if (!process.env.GHOST_API_URL || !process.env.GHOST_API_KEY) {
-    throw new Error(
-        `GHOST_API_URL and GHOST_API_KEY are required to build. Check the CONTRIBUTING guide.`
-    )
+// if (!process.env.GHOST_API_URL || !process.env.GHOST_API_KEY) {
+//     throw new Error(
+//         `GHOST_API_URL and GHOST_API_KEY are required to build. Check the CONTRIBUTING guide.`
+//     )
+// }
+
+const config = require(`./src/utils/siteConfig`)
+let ghostConfig
+
+try {
+    ghostConfig = require(`./.ghost`)
+} catch (e) {
+    ghostConfig = {
+        production: {
+            apiUrl: process.env.GHOST_API_URL,
+            clientId: `ghost-frontend`,
+            clientSecret: process.env.GHOST_API_KEY,
+        },
+    }
+} finally {
+    const { apiUrl, clientId, clientSecret } = ghostConfig.production
+
+    if (!apiUrl || !clientId || !clientSecret || clientSecret.match(/<key>/)) {
+        throw new Error(`GHOST_API_URL and GHOST_API_KEY are required to build. Check the README.`)
+    }
 }
 
 module.exports = {
@@ -16,7 +37,7 @@ module.exports = {
         title: `Ghost Gatsby Starter`,
         author: `Ghost`,
         description: `Thoughts, stories and ideas`,
-        siteUrl: `https://tryghost.github.io/`,
+        siteUrl: config.siteUrl,
     },
     plugins: [
         /**
@@ -42,11 +63,10 @@ module.exports = {
         `gatsby-transformer-sharp`,
         {
             resolve: `gatsby-source-ghost`,
-            options: {
-                apiUrl: `${process.env.GHOST_API_URL}`,
-                clientId: `ghost-frontend`,
-                clientSecret: `${process.env.GHOST_API_KEY}`,
-            },
+            options:
+                process.env.NODE_ENV === `development`
+                    ? ghostConfig.development
+                    : ghostConfig.production,
         },
         /**
          *  Utility Plugins

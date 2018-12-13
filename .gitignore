@@ -76,3 +76,6 @@ yarn-error.log
 # config files
 .env.*
 !.env.example
+.ghost.json*
+!.ghost.json.example
+

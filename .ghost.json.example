@@ -1,0 +1,12 @@
+{
+  "development": {
+    "apiUrl": "http://localhost:2368",
+    "clientId": "ghost-frontend",
+    "clientSecret": "<key>"
+  },
+  "production": {
+    "apiUrl": "https://example.com",
+    "clientId": "ghost-frontend",
+    "clientSecret": "<key>"
+  }
+}
