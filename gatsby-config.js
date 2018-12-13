@@ -1,16 +1,5 @@
 const path = require(`path`)
 
-// // TODO: solve this with siteConfig
-// require(`dotenv`).config({
-//     path: `.env.${process.env.NODE_ENV}`,
-// })
-
-// if (!process.env.GHOST_API_URL || !process.env.GHOST_API_KEY) {
-//     throw new Error(
-//         `GHOST_API_URL and GHOST_API_KEY are required to build. Check the CONTRIBUTING guide.`
-//     )
-// }
-
 const config = require(`./src/utils/siteConfig`)
 let ghostConfig
 
@@ -25,7 +14,7 @@ try {
         },
     }
 } finally {
-    const { apiUrl, clientId, clientSecret } = ghostConfig.production
+    const { apiUrl, clientId, clientSecret } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production
 
     if (!apiUrl || !clientId || !clientSecret || clientSecret.match(/<key>/)) {
         throw new Error(`GHOST_API_URL and GHOST_API_KEY are required to build. Check the README.`) // eslint-disable-line
