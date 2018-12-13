@@ -40,7 +40,7 @@ class Post extends React.Component {
                                 />
                             </div>
                             <section
-                                className="post-content external-scripts"
+                                className="external-scripts"
                                 dangerouslySetInnerHTML={{ __html: post.html }}
                             />
                         </article>
