@@ -68,7 +68,7 @@ module.exports = {
                 background_color: config.backgroundColor,
                 theme_color: config.themeColor,
                 display: `minimal-ui`,
-                icon: `${config.siteUrl}${config.siteIcon}`,
+                icon: `static/${config.siteIcon}`,
             },
         },
         `gatsby-plugin-react-helmet`,
