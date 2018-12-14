@@ -12,10 +12,7 @@ const IndexPage = ({ data, location }) => {
 
     return (
         <>
-            <MetaData
-                data={data}
-                location={location}
-            />
+            <MetaData location={location} />
             <Layout>
                 <div className="container">
                     <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
@@ -33,6 +30,9 @@ const IndexPage = ({ data, location }) => {
 IndexPage.propTypes = {
     data: PropTypes.shape({
         allGhostPost: PropTypes.object.isRequired,
+        file: PropTypes.shape({
+            childImageSharp: PropTypes.object.isRequired,
+        }).isRequired,
     }).isRequired,
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
