@@ -15,7 +15,6 @@ const IndexPage = ({ data, location }) => {
             <MetaData
                 data={data}
                 location={location}
-                type="website"
             />
             <Layout>
                 <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
@@ -54,6 +53,7 @@ export const pageQuery = graphql`
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
         limit: 50,
+        filter: { slug: {ne: "data-schema"}}
     ) {
       edges {
         node {
