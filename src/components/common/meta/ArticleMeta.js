@@ -11,7 +11,7 @@ import ImageMeta from './ImageMeta'
 import config from '../../../utils/siteConfig'
 
 const ArticleMetaGhost = ({ data, canonical }) => {
-    const { ghostPost } = data
+    const ghostPost = data
 
     const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
@@ -117,29 +117,27 @@ const ArticleMetaGhost = ({ data, canonical }) => {
 
 ArticleMetaGhost.propTypes = {
     data: PropTypes.shape({
-        ghostPost: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            published_at: PropTypes.string.isRequired,
-            updated_at: PropTypes.string.isRequired,
-            meta_title: PropTypes.string,
-            meta_description: PropTypes.string,
-            primary_author: PropTypes.object.isRequired,
-            feature_image: PropTypes.string,
-            tags: PropTypes.arrayOf(
-                PropTypes.shape({
-                    name: PropTypes.string,
-                    slug: PropTypes.string,
-                    visibility: PropTypes.string,
-                })
-            ),
-            primaryTag: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        published_at: PropTypes.string.isRequired,
+        updated_at: PropTypes.string.isRequired,
+        meta_title: PropTypes.string,
+        meta_description: PropTypes.string,
+        primary_author: PropTypes.object.isRequired,
+        feature_image: PropTypes.string,
+        tags: PropTypes.arrayOf(
+            PropTypes.shape({
                 name: PropTypes.string,
-            }),
-            og_title: PropTypes.string,
-            og_description: PropTypes.string,
-            twitter_title: PropTypes.string,
-            twitter_description: PropTypes.string,
-        }).isRequired,
+                slug: PropTypes.string,
+                visibility: PropTypes.string,
+            })
+        ),
+        primaryTag: PropTypes.shape({
+            name: PropTypes.string,
+        }),
+        og_title: PropTypes.string,
+        og_description: PropTypes.string,
+        twitter_title: PropTypes.string,
+        twitter_description: PropTypes.string,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
 }

@@ -8,35 +8,62 @@ import WebsiteMeta from './WebsiteMeta'
 
 const MetaData = ({
     data,
-    type,
     title,
     description,
     image,
     location,
 }) => {
+    // TODO: check out the canoncial plugin
     const canonical = url.resolve(config.siteUrl, location.pathname, `/`)
+    const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data
 
-    if (type === `article`) {
+    if (ghostPost) {
         return (
             <ArticleMeta
-                data={data}
+                data={ghostPost}
                 canonical={canonical}
             />
         )
-    } else if (type === `website` || type === `series` || type === `profile`) { // TODO add profile/author meta data
+    } else if (ghostTag) {
         return (
             <WebsiteMeta
-                data={data}
+                data={ghostTag}
+                canonical={canonical}
+                type="Series"
+            />
+        )
+    } else if (ghostAuthor) {
+        return (
+            <WebsiteMeta
+                data={ghostAuthor}
+                canonical={canonical}
+                type="Profile"
+            />
+        )
+    } else if (ghostPage) {
+        return (
+            <WebsiteMeta
+                data={ghostPage}
+                canonical={canonical}
+                type="WebSite"
+            />
+        )
+    } else {
+        title = title || config.siteTitleMeta
+        description = description || config.siteDescriptionMeta
+        image = image || config.shareImage
+
+        return (
+            <WebsiteMeta
+                data={{}}
                 canonical={canonical}
                 title={title}
                 description={description}
                 image={image}
-                type={type}
+                type="WebSite"
             />
         )
     }
-
-    return null
 }
 
 MetaData.propTypes = {
@@ -49,7 +76,6 @@ MetaData.propTypes = {
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
     }).isRequired,
-    type: PropTypes.oneOf([`website`, `series`, `article`, `profile`]).isRequired,
     title: PropTypes.string,
     description: PropTypes.string,
     image: PropTypes.string,

@@ -8,6 +8,10 @@ import config from '../../../utils/siteConfig'
 
 const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
     const publisherLogo = url.resolve(config.siteUrl, config.siteIcon)
+    const shareImage = image || data.feature_image || data.profile_image
+
+    description = description || data.description
+    description = description || data.name || data.title
 
     return (
         <>
@@ -16,7 +20,7 @@ const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
                 <meta name="description" content={description} />
                 <link rel="canonical" href={canonical} />
                 <meta property="og:site_name" content={config.siteTitle} />
-                <meta property="og:type" content="website" />
+                <meta property="og:type" content={type === `Profile` ? `Profile` : `website`} />
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={canonical} />
@@ -27,11 +31,11 @@ const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
-                        "@type": ${type && type === `series` ? `"Series"` : `"WebSite"`},
+                        "@type": ${type},
                         "url": "${canonical}",
                         "image": {
                             "@type": "ImageObject",
-                            "url": "${image}",
+                            "url": "${shareImage}",
                             "width": "${config.shareImageWidth}",
                             "height": "${config.shareImageHeight}"
                         },
@@ -53,22 +57,24 @@ const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
                     }
                 `}</script>
             </Helmet>
-            <ImageMeta image={image} />
+            <ImageMeta image={shareImage} />
         </>
     )
 }
 
 WebsiteMeta.propTypes = {
     data: PropTypes.shape({
-        ghostTag: PropTypes.object,
-        ghostAuthor: PropTypes.object,
-        ghostPage: PropTypes.object,
+        title: PropTypes.string,
+        feature_image: PropTypes.string,
+        description: PropTypes.string,
+        bio: PropTypes.string,
+        profile_image: PropTypes.string,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`website`, `series`, `profile`]).isRequired,
+    type: PropTypes.oneOf([`WebSite`, `Series`, `Profile`]).isRequired,
 }
 
 export default WebsiteMeta
