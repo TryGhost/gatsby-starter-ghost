@@ -5,6 +5,7 @@ import url from 'url'
 import config from '../../../utils/siteConfig'
 import ArticleMeta from './ArticleMeta'
 import WebsiteMeta from './WebsiteMeta'
+import AuthorMeta from './AuthorMeta'
 
 const MetaData = ({
     data,
@@ -34,10 +35,9 @@ const MetaData = ({
         )
     } else if (ghostAuthor) {
         return (
-            <WebsiteMeta
+            <AuthorMeta
                 data={ghostAuthor}
                 canonical={canonical}
-                type="Profile"
             />
         )
     } else if (ghostPage) {
@@ -51,7 +51,7 @@ const MetaData = ({
     } else {
         title = title || config.siteTitleMeta
         description = description || config.siteDescriptionMeta
-        image = image || config.shareImage
+        image = url.resolve(config.siteUrl, image || config.shareImage)
 
         return (
             <WebsiteMeta
@@ -64,6 +64,10 @@ const MetaData = ({
             />
         )
     }
+}
+
+MetaData.defaultProps = {
+    data: {},
 }
 
 MetaData.propTypes = {
