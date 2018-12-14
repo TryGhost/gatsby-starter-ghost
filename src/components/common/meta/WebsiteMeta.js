@@ -20,7 +20,7 @@ const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
                 <meta name="description" content={description} />
                 <link rel="canonical" href={canonical} />
                 <meta property="og:site_name" content={config.siteTitle} />
-                <meta property="og:type" content={type === `Profile` ? `Profile` : `website`} />
+                <meta property="og:type" content={type === `Person` ? `profile` : `website`} />
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={canonical} />
@@ -71,10 +71,10 @@ WebsiteMeta.propTypes = {
         profile_image: PropTypes.string,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    type: PropTypes.oneOf([`WebSite`, `Series`, `Profile`]).isRequired,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    image: PropTypes.string,
+    type: PropTypes.oneOf([`WebSite`, `Series`, `Person`]).isRequired,
 }
 
 export default WebsiteMeta
