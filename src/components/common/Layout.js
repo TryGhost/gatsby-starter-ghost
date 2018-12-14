@@ -15,7 +15,7 @@ const DefaultLayout = ({ children, bodyClass }) => (
         </Helmet>
 
         <header className="site-head">
-            <nav className="container">
+            <nav className="site-nav container">
                 <div>
                     <a href="https://ghost.org">
                         <img src="/assets/ghost-icon.png" />
@@ -37,7 +37,7 @@ const DefaultLayout = ({ children, bodyClass }) => (
         </main>
 
         <footer className="site-foot">
-            <div className="container">
+            <div className="site-foot-content container">
                 <ul>
                     <li><a href="https://forum.ghost.org">Forum</a></li>
                     <li><a href="https://twitter.com/tryghost">@TryGhost</a></li>

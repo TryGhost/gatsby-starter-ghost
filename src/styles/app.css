@@ -486,3 +486,59 @@ h6 {
     margin: 0 auto;
 }
 
+/* Header
+/* ---------------------------------------------------------- */
+
+.site-head {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    background: #15171A;
+}
+
+.site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Main
+/* ---------------------------------------------------------- */
+
+.site-main {
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+}
+
+/* Index
+/* ---------------------------------------------------------- */
+
+.post-feed {
+
+}
+
+.post-card {
+    margin: 4vw;
+    color: inherit;
+    text-decoration: none;
+}
+
+.post-card:hover {
+    text-decoration: none;
+}
+
+/* Footer
+/* ---------------------------------------------------------- */
+
+.site-foot {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #fff;
+    background: #15171A;
+}
+
+.site-foot-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

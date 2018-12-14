@@ -10,7 +10,7 @@ const PostCard = ({ post }) => {
     const tags = removeInternalTags(post.tags)
 
     return (
-        <Link to={post.slug}>
+        <Link to={post.slug} className="post-card">
             <header>
                 <h2>{post.title}</h2>
             </header>
