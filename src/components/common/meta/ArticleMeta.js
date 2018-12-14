@@ -12,7 +12,6 @@ import config from '../../../utils/siteConfig'
 
 const ArticleMetaGhost = ({ data, canonical }) => {
     const ghostPost = data
-
     const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(removeInternalTags(ghostPost.tags), `name`)

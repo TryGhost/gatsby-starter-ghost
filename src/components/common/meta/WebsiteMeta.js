@@ -8,10 +8,10 @@ import config from '../../../utils/siteConfig'
 
 const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
     const publisherLogo = url.resolve(config.siteUrl, config.siteIcon)
-    const shareImage = image || data.feature_image || data.profile_image
+    const shareImage = url.resolve(config.siteUrl, image || data.feature_image || config.shareImage)
 
-    description = description || data.description
-    description = description || data.name || data.title
+    description = description || data.meta_description || data.description || config.siteDescriptionMeta || config.siteDescription
+    title = `${title} || ${data.meta_title || data.name || data.title} - ${config.siteTitle}`
 
     return (
         <>
@@ -20,7 +20,7 @@ const WebsiteMeta = ({ data, canonical, title, description, image, type }) => {
                 <meta name="description" content={description} />
                 <link rel="canonical" href={canonical} />
                 <meta property="og:site_name" content={config.siteTitle} />
-                <meta property="og:type" content={type === `Person` ? `profile` : `website`} />
+                <meta property="og:type" content="website" />
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
                 <meta property="og:url" content={canonical} />
@@ -74,7 +74,7 @@ WebsiteMeta.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     image: PropTypes.string,
-    type: PropTypes.oneOf([`WebSite`, `Series`, `Person`]).isRequired,
+    type: PropTypes.oneOf([`WebSite`, `Series`]).isRequired,
 }
 
 export default WebsiteMeta
