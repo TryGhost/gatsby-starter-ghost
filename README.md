@@ -1,52 +1,63 @@
-# gatsby-starter-ghost
+# Gastby Starter Ghost
 
-A starter template to build lightning fast websites with Ghost and Gatsby
+A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
 
-Install this starter (assuming Gatsby is installed) by running from your CLI:
+
+## Installing
 
 ```bash
+# With Gatsby CLI
 gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost.git
 ```
 
-## Running in development
-
-For local development, it's easiest to run with a local Ghost installation. Here are the steps:
-
-### 1. Setup local Ghost installation
-
-Install a new local instance of Ghost 👉🏼 https://docs.ghost.org/install/local/
-
 ```bash
-ghost install local
-```
-
-Go through the setup process for the local Ghost installation. Once done, you need to import a
-data stub file, which is needed to create the Gatsby schema.
-
-Download this file 👉🏼 [data-stub.json](https://gist.github.com/AileenCGN/172ed94bcd18a328034e0259dbf3e702)
-Import via Labs from within your Ghost Admin.
-
-### 2. Clone the starter:
-
-```bash
+# From Source
 git clone git@github.com:TryGhost/gatsby-starter-ghost.git
 cd gatsby-starter-ghost
+```
+
+Then install dependencies
+
+```bash
 yarn
 ```
 
-### 3. Setup the starter
 
-Copy the existing `.ghost.json.example` and save as `.ghost.json`.
-Add the `clientSecret` from your local install
+## Running 
 
-### 4. Run in development
+Start the development server. You now have a Gatsby site pulling content from headless Ghost.
 
-- `yarn dev` or `gatsby develop`
+```bash
+gatsby develop
+```
 
-To run the actual production build, you can run
-- `yarn build` or `gatsby build`
-- `yarn serve` to create production build and serve it on port 9000
+By default, the starter will populate content from a default Ghost install located at https://gatsby.ghost.io.
 
-Note, that you will need to fill the `production` section in your `.ghost.json` file in order to run a production build.
+To use your own install, edit the `.ghost.json` config file with your credentials. You can find your `clientSecret` by viewing source of your Ghost homepage, located in the `<head>`.
 
-To check for linting issues, run `yarn lint`.
+Because of how Gatsby/GraphQL work, at least 1 copy of every object/field must exist in Ghost for things to function correctly. That means you must have at least 1 post, author, tag, etc - with every single field populated - for the queries to work properly.
+
+As a shortcut, you can download and import this 👉🏼 [data-stub.json](https://gist.github.com/AileenCGN/172ed94bcd18a328034e0259dbf3e702) - which will automatically populate all the required fields, and then be excluded from the Gatsby build.
+
+
+## Optimising
+
+You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO. 
+
+
+## Extra options
+
+```bash
+# Run a production build, locally
+gatsby build
+
+# Serve a production build, locally
+gatsby serve
+```
+
+Gatsby `develop` uses the `dev` config in `ghost.json` - while Gatsby `serve` uses the `production` config. 
+
+
+# Copyright & License
+
+Copyright (c) 2013-2018 Ghost Foundation - Released under the [MIT license](LICENSE).
