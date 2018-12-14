@@ -5,6 +5,7 @@ import { graphql } from 'gatsby'
 import { Layout } from '../components/common/layout'
 import { PostCard } from '../components/common'
 import { MetaData } from '../components/common/meta'
+import config from '../utils/siteConfig'
 
 const Author = ({ data, location }) => {
     const author = data.ghostAuthor
@@ -30,7 +31,7 @@ const Author = ({ data, location }) => {
                             {author.twitter ? <a href={author.twitter} target="_blank" rel="noopener noreferrer">Website</a> : null}
                             {/* Todo: facebook url helper */}
                             {author.facebook ? <a href={author.facebook} target="_blank" rel="noopener noreferrer">Website</a> : null}
-                            <a href={`https://feedly.com/i/subscription/feed/${data.site.siteMetadata.siteUrl}/author/${author.slug}/rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
+                            <a href={`https://feedly.com/i/subscription/feed/${config.siteUrl}/author/${author.slug}/rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
                         </div>
                     </div>
                 </header>
@@ -48,13 +49,6 @@ const Author = ({ data, location }) => {
 
 Author.propTypes = {
     data: PropTypes.shape({
-        site: PropTypes.shape({
-            siteMetadata: PropTypes.shape({
-                siteUrl: PropTypes.string.isRequired,
-                title: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired,
-            }).isRequired,
-        }).isRequired,
         ghostAuthor: PropTypes.shape({
             name: PropTypes.string.isRequired,
             cover_image: PropTypes.string,
