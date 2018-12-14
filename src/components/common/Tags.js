@@ -34,17 +34,17 @@ const Tags = (props) => {
 
     if (props.separator) {
         opts.separator = React.isValidElement(props.separator) ? props.separator :
-            <span className={props.separatorClasses}>{props.separator}</span>
+            <><span className={props.separatorClasses}>{props.separator}</span></>
     }
 
     if (props.prefix) {
         opts.prefix = React.isValidElement(props.prefix) ? props.prefix :
-            <span className={props.prefixClasses}>{props.prefix}</span>
+            <><span className={props.prefixClasses}>{props.prefix}</span></>
     }
 
     if (props.suffix) {
         opts.suffix = React.isValidElement(props.suffix) ? props.suffix :
-            <span className={props.suffixClasses}>{props.suffix}</span>
+            <><span className={props.suffixClasses}>{props.suffix}</span></>
     }
 
     opts.fn = function process(tag) {
@@ -52,10 +52,12 @@ const Tags = (props) => {
         tagLink = tagLink.replace(/:slug/, tag.slug) || `/${tag.slug}/`
 
         return props.autolink ?
-            <span className={props.classes} key={tag.slug}>
-                <Link to={tagLink} className={props.linkClasses}>{tag.name}</Link>
-            </span> :
-            <span className={props.classes} key={tag.slug}>{tag.name}</span>
+            <>
+                <span className={props.classes} key={tag.slug}>
+                    <Link to={tagLink} className={props.linkClasses}>{tag.name}</Link>
+                </span>
+            </> :
+            <><span className={props.classes} key={tag.slug}>{tag.name}</span></>
     }
 
     return (
