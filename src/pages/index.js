@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-import { Layout } from '../components/common/layout'
+import { Layout } from '../components/common'
 import { PostCard } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
@@ -17,8 +17,8 @@ const IndexPage = ({ data, location }) => {
                 location={location}
             />
             <Layout>
-                <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
-                <div>
+                <div className="container">
+                    <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
                     <section>
                         {posts.map(({ node }) => (
                             <PostCard key={node.id} post={node} />

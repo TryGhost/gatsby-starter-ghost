@@ -11,12 +11,10 @@ const PostCard = ({ post }) => {
 
     return (
         <Link to={post.slug}>
-            <div>
-                <header>
-                    <h2>{post.title}</h2>
-                </header>
-                {excerpt ? <section>{excerpt}</section> : null}
-            </div>
+            <header>
+                <h2>{post.title}</h2>
+            </header>
+            {excerpt ? <section>{excerpt}</section> : null}
             <footer>
                 <div>
                     {post.featured ? <span>Featured</span> : null}

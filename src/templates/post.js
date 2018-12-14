@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { graphql, Link } from 'gatsby'
 import Prism from 'prismjs'
 
-import { Layout } from '../components/common/layout'
+import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 import { Tags } from '../components/common'
 
