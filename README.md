@@ -8,11 +8,11 @@ Install this starter (assuming Gatsby is installed) by running from your CLI:
 gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost.git
 ```
 
-# Running in development
+## Running in development
 
 For local development, it's easiest to run with a local Ghost installation. Here are the steps:
 
-## 1. Setup local Ghost installation
+### 1. Setup local Ghost installation
 
 Install a new local instance of Ghost 👉🏼 https://docs.ghost.org/install/local/
 
@@ -26,7 +26,7 @@ data stub file, which is needed to create the Gatsby schema.
 Download this file 👉🏼 [data-stub.json](https://gist.github.com/AileenCGN/172ed94bcd18a328034e0259dbf3e702)
 Import via Labs from within your Ghost Admin.
 
-## Clone the starter:
+### 2. Clone the starter:
 
 ```bash
 git clone git@github.com:TryGhost/gatsby-starter-ghost.git
@@ -34,12 +34,12 @@ cd gatsby-starter-ghost
 yarn
 ```
 
-## Setup the starter
+### 3. Setup the starter
 
 Copy the existing `.ghost.json.example` and save as `.ghost.json`.
 Add the `clientSecret` from your local install
 
-## Run in development
+### 4. Run in development
 
 - `yarn dev` or `gatsby develop`
 
