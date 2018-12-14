@@ -1,0 +1,12 @@
+{
+  "development": {
+    "apiUrl": "https://gatsby.ghost.io",
+    "clientId": "ghost-frontend",
+    "clientSecret": "7379890321dd"
+  },
+  "production": {
+    "apiUrl": "https://gatsby.ghost.io",
+    "clientId": "ghost-frontend",
+    "clientSecret": "7379890321dd"
+  }
+}

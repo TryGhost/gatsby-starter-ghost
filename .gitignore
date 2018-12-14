@@ -72,8 +72,3 @@ typings/
 .cache/
 public
 yarn-error.log
-
-# config files
-.ghost.json*
-!.ghost.json.example
-
