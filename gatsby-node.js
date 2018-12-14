@@ -28,6 +28,10 @@ exports.createPages = ({ graphql, actions }) => {
                     return reject(result.errors)
                 }
 
+                if (!result.data.allGhostPost) {
+                    return resolve()
+                }
+
                 const items = result.data.allGhostPost.edges
 
                 _.forEach(items, ({ node }) => {
@@ -73,6 +77,10 @@ exports.createPages = ({ graphql, actions }) => {
             ).then((result) => {
                 if (result.errors) {
                     return reject(result.errors)
+                }
+
+                if (!result.data.allGhostTag) {
+                    return resolve()
                 }
 
                 const items = result.data.allGhostTag.edges
@@ -122,6 +130,10 @@ exports.createPages = ({ graphql, actions }) => {
                     return reject(result.errors)
                 }
 
+                if (!result.data.allGhostAuthor) {
+                    return resolve()
+                }
+
                 const items = result.data.allGhostAuthor.edges
 
                 _.forEach(items, ({ node }) => {
@@ -167,6 +179,10 @@ exports.createPages = ({ graphql, actions }) => {
             ).then((result) => {
                 if (result.errors) {
                     return reject(result.errors)
+                }
+
+                if (!result.data.allGhostPage) {
+                    return resolve()
                 }
 
                 const items = result.data.allGhostPage.edges
