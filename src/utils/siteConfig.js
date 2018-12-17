@@ -6,7 +6,7 @@ module.exports = {
 
     // TODO: work with those properties
     postsPerHomePage: 7, // Number of posts shown on the 1st page of of the index.js template (home page)
-    postsPerPage: 6, // Number of posts shown on paginated pages
+    postsPerPage: 3, // Number of posts shown on paginated pages
 
     siteTitleMeta: `Ghost Gatsby Starter`, // This allows an alternative site title for SEO schema.
     siteDescriptionMeta: `A starter template to build amazing static websites with Ghost and Gatbsy`,

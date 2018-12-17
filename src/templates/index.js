@@ -42,7 +42,7 @@ IndexPage.propTypes = {
 export default IndexPage
 
 export const pageQuery = graphql`
-  query GhostPostQuery {
+  query GhostPostQuery($limit: Int!, $skip: Int!) {
     file(relativePath: {eq: "ghost-icon.png"}) {
         childImageSharp {
             fixed(width: 30, height: 30) {
@@ -52,7 +52,8 @@ export const pageQuery = graphql`
     }
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
-        limit: 50,
+        limit: $limit,
+        skip: $skip,
         filter: { slug: {ne: "data-schema"}}
     ) {
       edges {

@@ -1,12 +1,15 @@
 const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
+const config = require(`./src/utils/siteConfig`)
+const { paginate } = require(`gatsby-awesome-pagination`)
 
 exports.createPages = ({ graphql, actions }) => {
     const { createPage } = actions
 
     const createPosts = new Promise((resolve, reject) => {
         const postTemplate = path.resolve(`./src/templates/post.js`)
+        const indexTemplate = path.resolve(`./src/templates/index.js`)
         resolve(
             graphql(`
                 {
@@ -48,6 +51,21 @@ exports.createPages = ({ graphql, actions }) => {
                             slug: node.slug,
                         },
                     })
+                })
+
+                // Create a paginated blog, e.g., /, /page/2, /page/3
+                paginate({
+                    createPage,
+                    items: items,
+                    itemsPerPage: config.postsPerPage,
+                    component: indexTemplate,
+                    pathPrefix: ({ pageNumber }) => {
+                        if (pageNumber === 0) {
+                            return `/`
+                        } else {
+                            return `/page`
+                        }
+                    },
                 })
 
                 return resolve()
