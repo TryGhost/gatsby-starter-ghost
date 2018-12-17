@@ -4,9 +4,7 @@ module.exports = {
     `A starter template to build amazing static websites with Ghost and Gatbsy`,
     siteUrl: `http://localhost:8000`, // Site domain. Do not include a trailing slash! If you wish to use a path prefix you can read more about that here: https://www.gatsbyjs.org/docs/path-prefix/
 
-    // TODO: work with those properties
-    postsPerHomePage: 7, // Number of posts shown on the 1st page of of the index.js template (home page)
-    postsPerPage: 3, // Number of posts shown on paginated pages
+    postsPerPage: 5, // Number of posts shown on paginated pages
 
     siteTitleMeta: `Ghost Gatsby Starter`, // This allows an alternative site title for SEO schema.
     siteDescriptionMeta: `A starter template to build amazing static websites with Ghost and Gatbsy`,

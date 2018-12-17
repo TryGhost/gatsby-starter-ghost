@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-import { Layout } from '../components/common'
-import { PostCard } from '../components/common'
+import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
-const IndexPage = ({ data, location }) => {
+const IndexPage = ({ data, location, pageContext }) => {
     const posts = data.allGhostPost.edges
 
     return (
@@ -22,6 +21,7 @@ const IndexPage = ({ data, location }) => {
                         ))}
                     </section>
                 </div>
+                <Pagination pageContext={pageContext} />
             </Layout>
         </>
     )
