@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout } from '../components/common'
-import { PostCard } from '../components/common'
+import { Layout, PostCard } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 const Tag = ({ data, location }) => {
@@ -57,13 +56,13 @@ Tag.propTypes = {
 export default Tag
 
 export const pageQuery = graphql`
-    query($slug: String!) {
+    query GhostTagQuery($slug: String!) {
         ghostTag(slug: { eq: $slug }) {
             ...GhostTagFields
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
-            filter: {tags: {elemMatch: {slug: {eq: $slug}}}}
+            filter: {tags: {elemMatch: {slug: {eq: $slug}}}},
             limit: 50,
         ) {
             edges {

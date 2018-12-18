@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout } from '../components/common'
-import { PostCard } from '../components/common'
+import { Layout, PostCard } from '../components/common'
 import { MetaData } from '../components/common/meta'
 import config from '../utils/siteConfig'
 
@@ -69,13 +68,13 @@ Author.propTypes = {
 export default Author
 
 export const pageQuery = graphql`
-    query($slug: String!) {
+    query GhostAuthorQuery($slug: String!) {
         ghostAuthor(slug: { eq: $slug }) {
             ...GhostAuthorFields
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
-            filter: {authors: {elemMatch: {slug: {eq: $slug}}}}
+            filter: {authors: {elemMatch: {slug: {eq: $slug}}}},
             limit: 50,
         ) {
             edges {
