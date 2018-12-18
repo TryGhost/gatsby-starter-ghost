@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 
 const Pagination = ({ pageContext }) => {
-    const { previousPagePath, nextPagePath } = pageContext
+    const { previousPagePath, nextPagePath, humanPageNumber, numberOfPages } = pageContext
 
     return (
         <nav role="navigation">
@@ -15,6 +15,10 @@ const Pagination = ({ pageContext }) => {
                         </Link>
                     </div>
                 )}
+                {/* TODO: Remove me again. Just here to show possibilities */}
+                <div>
+                    <p>{humanPageNumber} / {numberOfPages}</p>
+                </div>
                 {nextPagePath && (
                     <div>
                         <Link to={nextPagePath} rel="next">

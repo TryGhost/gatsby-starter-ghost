@@ -53,7 +53,7 @@ exports.createPages = ({ graphql, actions }) => {
                     })
                 })
 
-                // Create a paginated blog, e.g., /, /page/2, /page/3
+                // Pagination for posts, e.g., /, /page/2, /page/3
                 paginate({
                     createPage,
                     items: items,
