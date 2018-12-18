@@ -3,6 +3,7 @@ module.exports = {
     siteDescription:
     `A starter template to build amazing static websites with Ghost and Gatbsy`,
     siteUrl: `http://localhost:8000`, // Site domain. Do not include a trailing slash! If you wish to use a path prefix you can read more about that here: https://www.gatsbyjs.org/docs/path-prefix/
+    lang: `en`,
 
     postsPerPage: 5, // Number of posts shown on paginated pages
 

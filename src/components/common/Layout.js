@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link } from 'gatsby'
 
+import config from '../../utils/siteConfig'
+
 // Additional styles
 import '../../styles/app.css'
 
@@ -10,7 +12,7 @@ const DefaultLayout = ({ children, bodyClass }) => (
     <React.Fragment>
 
         <Helmet>
-            <html lang="en" />
+            <html lang={config.lang} />
             <body className={bodyClass} />
         </Helmet>
 
