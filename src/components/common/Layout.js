@@ -25,9 +25,8 @@ const DefaultLayout = ({ children, bodyClass }) => (
                     <Link to="/" >Home</Link>
                 </div>
                 <div>
-                    <Link to="#">Page 1</Link>
+                    <Link to="/about">About</Link>
                     <Link to="#">Page 2</Link>
-                    <Link to="#">Page 3</Link>
                 </div>
             </nav>
         </header>
