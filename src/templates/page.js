@@ -30,7 +30,7 @@ class Page extends React.Component {
                         <article>
                             <h1>{page.title}</h1>
                             <section
-                                className="external-scripts"
+                                className="content-body load-external-scripts"
                                 dangerouslySetInnerHTML={{ __html: page.html }}
                             />
                         </article>

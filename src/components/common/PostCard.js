@@ -11,15 +11,18 @@ const PostCard = ({ post }) => {
 
     return (
         <Link to={post.slug} className="post-card">
-            <header>
-                <h2>{post.title}</h2>
+            <header className="post-card-header">
+                {tags ? <div className="post-card-tags"> {tags.map((tag, i) => <span key={i}>{tag.name}</span>)} </div> : null}
+                {post.featured ? <span>Featured</span> : null}
+                <h2 className="post-card-title">{post.title}</h2>
             </header>
-            {excerpt ? <section>{excerpt}</section> : null}
-            <footer>
-                <div>
-                    {post.featured ? <span>Featured</span> : null}
-                    {/* TODO: replace with Ghost SDK tag helper */}
-                    {tags ? tags.map((tag, i) => <span key={i}>{tag.name}</span>) : null}
+            {excerpt ? <section className="post-card-excerpt">{excerpt}</section> : null}
+            <footer className="post-card-footer">
+                <div className="post-card-footer-left">
+                    Author
+                </div>
+                <div className="post-card-footer-right">
+                    2 min read
                 </div>
             </footer>
         </Link>

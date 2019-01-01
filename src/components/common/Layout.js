@@ -10,43 +10,69 @@ import '../../styles/app.css'
 
 const DefaultLayout = ({ children, bodyClass }) => (
     <React.Fragment>
-
         <Helmet>
             <html lang={config.lang} />
             <body className={bodyClass} />
         </Helmet>
 
-        <header className="site-head">
-            <nav className="site-nav container">
-                <div>
-                    <a href="https://ghost.org">
-                        <img src="/assets/ghost-icon.png" />
-                    </a>
-                    <Link to="/" >Home</Link>
-                </div>
-                <div>
-                    <Link to="/about">About</Link>
-                    <Link to="#">Page 2</Link>
-                </div>
-            </nav>
-        </header>
+        <div className="viewport">
 
-        <main className="site-main">
+            <div className="viewport-top">
 
-            {children}
+                <header className="site-head">
+                    <div className="container">
+                        <div className="site-mast">
+                            <div className="site-mast-left">
+                                <Link to="/">
+                                    <img className="site-logo" src="/images/logo.svg" alt="" />
+                                </Link>
+                            </div>
+                            <div className="site-mast-right">
+                                <Link className="site-nav-item" to="/">Twitter</Link>
+                                <Link className="site-nav-item" to="/">Facebook</Link>
+                                <Link className="site-nav-item" to="/">RSS</Link>
+                            </div>
+                        </div>
+                        <div className="site-banner">
+                            <h1 className="site-banner-title">Site Title</h1>
+                            <p className="site-banner-desc">Site description goes here description goes here description goes here description goes here description goes here description goes here</p>
+                        </div>
+                        <nav className="site-nav">
+                            <div className="site-nav-left">
+                                <Link className="site-nav-item" to="/">Home</Link>
+                                <Link className="site-nav-item" to="/">Home</Link>
+                                <Link className="site-nav-item" to="/">Home</Link>
+                            </div>
+                            <div className="site-nav-right">
+                                <Link className="site-nav-item" to="/">Subscribe</Link>
+                            </div>
+                        </nav>
+                    </div>
+                </header>
 
-        </main>
+                <main className="site-main">
+                    {children}
+                </main>
 
-        <footer className="site-foot">
-            <div className="site-foot-content container">
-                <ul>
-                    <li><a href="https://forum.ghost.org">Forum</a></li>
-                    <li><a href="https://twitter.com/tryghost">@TryGhost</a></li>
-                </ul>
             </div>
-        </footer>
 
-    </ React.Fragment>
+            <div className="viewport-bottom">
+
+                <footer className="site-foot">
+                    <div className="site-foot-nav container">
+                        <div className="site-foot-nav-left">
+                    All content © 2019 London &mdash; Published with <a className="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
+                        </div>
+                        <div className="site-foot-nav-right">
+                            <Link className="site-foot-nav-item" to="/">Home</Link>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+
+    </React.Fragment>
 )
 
 DefaultLayout.propTypes = {
