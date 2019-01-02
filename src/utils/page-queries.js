@@ -42,6 +42,7 @@ export const ghostAuthorFields = graphql`
 export const ghostPostFields = graphql`
     fragment GhostPostFields on GhostPost {
         # Main fields
+        id
         title
         slug
         featured
@@ -218,37 +219,5 @@ export const ghostPageFields = graphql`
         codeinjection_foot
         codeinjection_head
         comment_id
-    }
-`
-
-// Used for index pages
-export const ghostPostListFields = graphql`
-    fragment GhostPostListFields on GhostPost {
-        id
-        slug
-        title
-        custom_excerpt
-        feature_image
-        plaintext
-        featured
-
-        # Dates formatted
-        created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
-        published_at_pretty: published_at(formatString: "DD MMMM, YYYY")
-        updated_at_pretty: updated_at(formatString: "DD MMMM, YYYY")
-
-        # Dates unformatted
-        created_at
-        published_at
-        updated_at
-
-        tags {
-          name
-          slug
-        }
-        authors {
-          name
-          slug
-        }
     }
 `

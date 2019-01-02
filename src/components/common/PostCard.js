@@ -19,7 +19,7 @@ const PostCard = ({ post }) => {
             {excerpt ? <section className="post-card-excerpt">{excerpt}</section> : null}
             <footer className="post-card-footer">
                 <div className="post-card-footer-left">
-                    Author
+                    {post.primary_author.name}
                 </div>
                 <div className="post-card-footer-right">
                     2 min read
