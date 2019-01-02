@@ -117,10 +117,8 @@ export const ghostPostFields = graphql`
         html
 
         # Additional fields
-        custom_template
         url
         visibility
-        locale
         uuid
         status
         page
@@ -209,10 +207,8 @@ export const ghostPageFields = graphql`
         html
 
         # Additional fields
-        custom_template
         url
         visibility
-        locale
         uuid
         status
         page
