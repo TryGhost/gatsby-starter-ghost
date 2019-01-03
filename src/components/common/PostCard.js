@@ -1,18 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
+import { Tags } from '@tryghost/helpers-gatsby'
 
 import { getPostExcerpt } from '../../utils/getPostExcerpt'
-import { removeInternalTags } from '../../utils/tag-utils'
 
 const PostCard = ({ post }) => {
     const excerpt = getPostExcerpt(post)
-    const tags = removeInternalTags(post.tags)
-
     return (
         <Link to={post.slug} className="post-card">
             <header className="post-card-header">
-                {tags ? <div className="post-card-tags"> {tags.map((tag, i) => <span key={i}>{tag.name}</span>)} </div> : null}
+                {post.tags ? <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div> : null}
                 {post.featured ? <span>Featured</span> : null}
                 <h2 className="post-card-title">{post.title}</h2>
             </header>

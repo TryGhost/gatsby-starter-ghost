@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@tryghost/helpers": "0.1.0",
+    "@tryghost/helpers-gatsby": "^0.1.2",
     "gatsby": "2.0.67",
     "gatsby-awesome-pagination": "0.3.3",
     "gatsby-image": "2.0.25",
