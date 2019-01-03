@@ -1,28 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import Prism from 'prismjs'
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
-class Post extends React.Component {
-    componentDidMount() {
-    // TODO: Prism for Webpack currently supports basic languages. `handlebars`,
-    // `yaml`, and `json` are not amongst those. To load those languages, you'd
-    // need to load them specifically following the webpack instructions here:
-    // https://prismjs.com/#examples and https://github.com/mAAdhaTTah/babel-plugin-prismjs
-        Prism.highlightAll()
-    }
+const Post = ({ data, location }) => {
+    const post = data.ghostPost
 
-    render() {
-        const post = this.props.data.ghostPost
-
-        return (
+    return (
             <>
                 <MetaData
-                    data={this.props.data}
-                    location={this.props.location}
+                    data={data}
+                    location={location}
                     type="article"
                 />
                 <Layout>
@@ -35,8 +25,7 @@ class Post extends React.Component {
                     </article>
                 </Layout>
             </>
-        )
-    }
+    )
 }
 
 Post.propTypes = {

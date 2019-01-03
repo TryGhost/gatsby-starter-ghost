@@ -44,7 +44,6 @@
     "gatsby-source-ghost": "2.1.2",
     "gatsby-transformer-sharp": "2.1.9",
     "lodash": "4.17.11",
-    "prismjs": "1.15.0",
     "react": "16.5.1",
     "react-dom": "16.5.1",
     "react-helmet": "5.2.0"

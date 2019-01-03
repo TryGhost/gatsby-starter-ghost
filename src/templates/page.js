@@ -1,44 +1,33 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
-import Prism from 'prismjs'
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
-class Page extends React.Component {
-    componentDidMount() {
-    // TODO: Prism for Webpack currently supports basic languages. `handlebars`,
-    // `yaml`, and `json` are not amongst those. To load those languages, you'd
-    // need to load them specifically following the webpack instructions here:
-    // https://prismjs.com/#examples and https://github.com/mAAdhaTTah/babel-plugin-prismjs
-        Prism.highlightAll()
-    }
+const Page = ({ data, location }) => {
+    const page = data.ghostPage
 
-    render() {
-        const page = this.props.data.ghostPage
-
-        return (
-            <>
-                <MetaData
-                    data={this.props.data}
-                    location={this.props.location}
-                    type="website"
-                />
-                <Layout>
-                    <div>
-                        <article>
-                            <h1>{page.title}</h1>
-                            <section
-                                className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: page.html }}
-                            />
-                        </article>
-                    </div>
-                </Layout>
-            </>
-        )
-    }
+    return (
+        <>
+            <MetaData
+                data={data}
+                location={location}
+                type="website"
+            />
+            <Layout>
+                <div>
+                    <article>
+                        <h1>{page.title}</h1>
+                        <section
+                            className="content-body load-external-scripts"
+                            dangerouslySetInnerHTML={{ __html: page.html }}
+                        />
+                    </article>
+                </div>
+            </Layout>
+        </>
+    )
 }
 
 Page.propTypes = {
