@@ -1,22 +1,6 @@
 import PropTypes from 'prop-types'
 import _ from 'lodash'
-
-/* removeInternalTags
-* Takes an array of tags (Ghost post) and return a filtered array
-* without internal tags, starting with a `#`
-*/
-export const removeInternalTags = function removeInternalTags(tags) {
-    // Get rid of internal tags
-    return tags.filter(tag => !tag.name.match(/^#/))
-}
-
-removeInternalTags.proptypes = {
-    tags: PropTypes.arrayOf(
-        PropTypes.shape({
-            name: PropTypes.string.isRequired,
-        }).isRequired,
-    ).isRequired,
-}
+const tagsHelper = require(`@tryghost/helpers/tags`)
 
 /* getPrimaryTag
 * Takes an array of tags (Ghost post) and returns the first tag from
@@ -65,8 +49,8 @@ export const getTagsforPostCollection = function getTagsforPostCollection(posts,
 
         tags.push(node.tags)
     })
-
-    return _.sortedUniqBy(removeInternalTags(_.sortBy(_.flattenDeep(tags), `name`)), `name`)
+    const sortedTags = _.sortBy(_.flattenDeep(tags), `name`)
+    return _.sortedUniqBy(tagsHelper({ tags: sortedTags }, { visibility: `public`, fn: tag => tag }), `name`)
 }
 
 getTagsforPostCollection.proptypes = {

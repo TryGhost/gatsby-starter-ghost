@@ -733,22 +733,18 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
 "@tryghost/helpers-gatsby@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-0.1.2.tgz#0db8c672bdfea047c508d650abc895b42c32b7c5"
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-0.1.3.tgz#3ef41069228361889332c6c9cde3c3a7bbeb5510"
+  integrity sha512-ny7tJOhSY/U7b3ROJTJHBNlhsz6ZZAyptCem+kLogLafNB5hHJPtZpxlbI1EAdB4bj+iBpWu09uVGRFQW8cOPw==
   dependencies:
-    "@tryghost/helpers" "^0.1.0"
+    "@tryghost/helpers" "^0.1.2"
     gatsby-link "^2.0.7"
     prop-types "^15.6.2"
 
-"@tryghost/helpers@0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-0.1.0.tgz#c8bf755d643e5a9d7d37afbc6bcbd2a3dbb14e4e"
-  dependencies:
-    lodash "^4.17.11"
-
-"@tryghost/helpers@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-0.1.1.tgz#cc325b6a21fb7772f3595387772f0d638cd0e1c8"
+"@tryghost/helpers@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-0.1.2.tgz#f698aa518e888e61dc524e5cc161113d2e32ffe1"
+  integrity sha512-rWfYR1JzuTP1g3aUV75/J4bDBAsO8KLe8VptXWn0gMulNxfYo0SU2KZClJc7FW9z9eb2cgn45ZY+2HvzppExIA==
   dependencies:
     lodash "^4.17.11"
 
