@@ -5,16 +5,18 @@ import _ from 'lodash'
 import url from 'url'
 
 import getPostExcerpt from '../../../utils/getPostExcerpt'
-import { removeInternalTags, getPrimaryTag } from '../../../utils/tag-utils'
+import { getPrimaryTag } from '../../../utils/tag-utils'
 import getAuthorProperties from './getAuthorProperties'
 import ImageMeta from './ImageMeta'
 import config from '../../../utils/siteConfig'
+
+const tagsHelper = require(`@tryghost/helpers/tags`)
 
 const ArticleMetaGhost = ({ data, canonical }) => {
     const ghostPost = data
     const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
-    const publicTags = _.map(removeInternalTags(ghostPost.tags), `name`)
+    const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = getPrimaryTag(publicTags)
     const shareImage = ghostPost.feature_image ? ghostPost.feature_image : config.shareImage
     const publisherLogo = url.resolve(config.siteUrl, config.siteIcon)
