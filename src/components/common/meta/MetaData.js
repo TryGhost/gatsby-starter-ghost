@@ -14,7 +14,6 @@ const MetaData = ({
     image,
     location,
 }) => {
-    // TODO: check out the canoncial plugin
     const canonical = url.resolve(config.siteUrl, location.pathname, `/`)
     const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data
 

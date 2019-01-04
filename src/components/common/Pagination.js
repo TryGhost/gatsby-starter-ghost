@@ -15,7 +15,6 @@ const Pagination = ({ pageContext }) => {
                         </Link>
                     </div>
                 )}
-                {/* TODO: Remove me again. Just here to show possibilities */}
                 <div>
                     <p>{humanPageNumber} / {numberOfPages}</p>
                 </div>
