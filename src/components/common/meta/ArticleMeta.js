@@ -5,7 +5,6 @@ import _ from 'lodash'
 import url from 'url'
 
 import getPostExcerpt from '../../../utils/getPostExcerpt'
-import { getPrimaryTag } from '../../../utils/tag-utils'
 import getAuthorProperties from './getAuthorProperties'
 import ImageMeta from './ImageMeta'
 import config from '../../../utils/siteConfig'
@@ -17,7 +16,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
     const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
-    const primaryTag = getPrimaryTag(publicTags)
+    const primaryTag = publicTags[0] || ``
     const shareImage = ghostPost.feature_image ? ghostPost.feature_image : config.shareImage
     const publisherLogo = url.resolve(config.siteUrl, config.siteIcon)
 
