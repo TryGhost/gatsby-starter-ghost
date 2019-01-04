@@ -1,15 +1,5 @@
 import { graphql } from 'gatsby'
 
-export const siteMetaFields = graphql`
-    fragment SiteMetaFields on Site {
-        siteMetadata {
-            siteUrl
-            title
-            description
-        }
-    }
-`
-
 // Used for tag archive pages
 export const ghostTagFields = graphql`
     fragment GhostTagFields on GhostTag {
@@ -128,8 +118,7 @@ export const ghostPostFields = graphql`
     }
 `
 
-// TODO: reuse post fields for pages
-// Used for single posts
+// Used for single pages
 export const ghostPageFields = graphql`
     fragment GhostPageFields on GhostPage {
         # Main fields
