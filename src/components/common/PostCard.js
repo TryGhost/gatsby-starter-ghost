@@ -6,9 +6,11 @@ import { Tags } from '@tryghost/helpers-gatsby'
 import { getPostExcerpt } from '../../utils/getPostExcerpt'
 
 const PostCard = ({ post }) => {
+    const url = `${post.slug}/`
     const excerpt = getPostExcerpt(post)
+
     return (
-        <Link to={post.slug} className="post-card">
+        <Link to={url} className="post-card">
             <header className="post-card-header">
                 {post.tags ? <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div> : null}
                 {post.featured ? <span>Featured</span> : null}
