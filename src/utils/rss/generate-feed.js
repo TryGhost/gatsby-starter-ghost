@@ -1,5 +1,5 @@
 const cheerio = require(`cheerio`)
-const tagsHelper = require(`@tryghost/helpers/tags`)
+const tagsHelper = require(`@tryghost/helpers`).tags
 const _ = require(`lodash`)
 
 const generateItem = function generateItem(post) {
