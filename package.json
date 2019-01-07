@@ -35,6 +35,7 @@
     "gatsby": "2.0.67",
     "gatsby-awesome-pagination": "0.3.3",
     "gatsby-image": "2.0.25",
+    "gatsby-plugin-feed": "^2.0.11",
     "gatsby-plugin-force-trailing-slashes": "1.0.4",
     "gatsby-plugin-manifest": "2.0.12",
     "gatsby-plugin-offline": "2.0.19",

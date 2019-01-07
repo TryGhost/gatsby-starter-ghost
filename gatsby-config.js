@@ -1,6 +1,8 @@
 const path = require(`path`)
 
 const config = require(`./src/utils/siteConfig`)
+const generateRSSFeed = require(`./src/utils/rss/generate-feed`)
+
 let ghostConfig
 
 try {
@@ -69,6 +71,26 @@ module.exports = {
                 theme_color: config.themeColor,
                 display: `minimal-ui`,
                 icon: `static/${config.siteIcon}`,
+            },
+        },
+        {
+            resolve: `gatsby-plugin-feed`,
+            options: {
+                query: `
+                {
+                  site {
+                    siteMetadata {
+                      title
+                      description
+                      siteUrl
+                      site_url: siteUrl
+                    }
+                  }
+                }
+              `,
+                feeds: [
+                    generateRSSFeed(config),
+                ],
             },
         },
         `gatsby-plugin-react-helmet`,
