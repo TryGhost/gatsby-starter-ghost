@@ -1,17 +1,6 @@
 const cheerio = require(`cheerio`)
-
-const generateTags = function generateTags(data) {
-    if (data.tags) {
-        return data.tags.reduce(function (tags, tag) {
-            if (tag.visibility !== `internal`) {
-                tags.push(tag.name)
-            }
-            return tags
-        }, [])
-    }
-
-    return []
-}
+const tagsHelper = require(`@tryghost/helpers/tags`)
+const _ = require(`lodash`)
 
 const generateItem = function generateItem(post) {
     const itemUrl = post.url
@@ -24,7 +13,7 @@ const generateItem = function generateItem(post) {
         guid: post.id,
         url: itemUrl,
         date: post.published_at,
-        categories: generateTags(post),
+        categories: _.map(tagsHelper(post, { visibility: `public`, fn: tag => tag }), `name`),
         author: post.primary_author ? post.primary_author.name : null,
         custom_elements: [],
     }
@@ -128,7 +117,7 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
             }
         }
   `,
-        output: `/rss.xml`,
+        output: `/rss`,
     }
 }
 
