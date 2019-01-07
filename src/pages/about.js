@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 

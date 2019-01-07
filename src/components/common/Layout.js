@@ -5,9 +5,17 @@ import { Link } from 'gatsby'
 
 import config from '../../utils/siteConfig'
 
-// Additional styles
+// Styles
 import '../../styles/app.css'
 
+/**
+* Main layout component
+*
+* The Layout component wraps around each page and tmeplate.
+* It also provides the header, footer as well as the main
+* styles, and meta data for each page.
+*
+*/
 const DefaultLayout = ({ children, bodyClass }) => (
     <>
         <Helmet>
@@ -18,7 +26,7 @@ const DefaultLayout = ({ children, bodyClass }) => (
         <div className="viewport">
 
             <div className="viewport-top">
-
+                {/* The main header section on top of the screen */}
                 <header className="site-head">
                     <div className="container">
                         <div className="site-mast">
@@ -51,13 +59,14 @@ const DefaultLayout = ({ children, bodyClass }) => (
                 </header>
 
                 <main className="site-main">
+                    {/* All the main content gets inserted here, index.js, post.js */}
                     {children}
                 </main>
 
             </div>
 
             <div className="viewport-bottom">
-
+                {/* The footer at the very bottom of the screen */}
                 <footer className="site-foot">
                     <div className="site-foot-nav container">
                         <div className="site-foot-nav-left">
