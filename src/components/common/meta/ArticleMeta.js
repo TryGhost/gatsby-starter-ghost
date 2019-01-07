@@ -9,7 +9,7 @@ import getAuthorProperties from './getAuthorProperties'
 import ImageMeta from './ImageMeta'
 import config from '../../../utils/siteConfig'
 
-const tagsHelper = require(`@tryghost/helpers/tags`)
+import { tags as tagsHelper } from '@tryghost/helpers'
 
 const ArticleMetaGhost = ({ data, canonical }) => {
     const ghostPost = data
