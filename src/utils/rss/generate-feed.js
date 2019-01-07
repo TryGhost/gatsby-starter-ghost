@@ -1,3 +1,5 @@
+const cheerio = require(`cheerio`)
+
 const generateTags = function generateTags(data) {
     if (data.tags) {
         return data.tags.reduce(function (tags, tag) {
@@ -14,6 +16,7 @@ const generateTags = function generateTags(data) {
 const generateItem = function generateItem(post) {
     const itemUrl = post.url
     const html = post.html
+    const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     const item = {
         title: post.title,
         // @TODO: DRY this up with data/meta/index & other excerpt code
@@ -41,13 +44,13 @@ const generateItem = function generateItem(post) {
         })
 
         // Also add the image to the content, because not all readers support media:content
-        // htmlContent(`p`).first().before(`<img src="` + imageUrl + `" />`)
-        // htmlContent(`img`).attr(`alt`, post.title)
+        htmlContent(`p`).first().before(`<img src="` + imageUrl + `" />`)
+        htmlContent(`img`).attr(`alt`, post.title)
     }
 
     item.custom_elements.push({
         'content:encoded': {
-            _cdata: html,
+            _cdata: htmlContent.html(),
         },
     })
     return item
