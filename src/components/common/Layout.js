@@ -9,7 +9,7 @@ import config from '../../utils/siteConfig'
 import '../../styles/app.css'
 
 const DefaultLayout = ({ children, bodyClass }) => (
-    <React.Fragment>
+    <>
         <Helmet>
             <html lang={config.lang} />
             <body className={bodyClass} />
@@ -72,7 +72,7 @@ const DefaultLayout = ({ children, bodyClass }) => (
             </div>
         </div>
 
-    </React.Fragment>
+    </>
 )
 
 DefaultLayout.propTypes = {
