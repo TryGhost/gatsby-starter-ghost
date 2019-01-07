@@ -732,21 +732,21 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@tryghost/helpers-gatsby@^0.1.2":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-0.1.3.tgz#3ef41069228361889332c6c9cde3c3a7bbeb5510"
-  integrity sha512-ny7tJOhSY/U7b3ROJTJHBNlhsz6ZZAyptCem+kLogLafNB5hHJPtZpxlbI1EAdB4bj+iBpWu09uVGRFQW8cOPw==
+"@tryghost/helpers-gatsby@0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-0.2.0.tgz#9651cd12be3f2dcee0c492a30c4af90f3f61e567"
+  integrity sha512-vqTlS+YSscz9hWlwQ/WqoC01RimhlbdxQN9xW6mXSwMTmM37hUEJlVg+9yx8S9n6lSE5cdG9yyY3uTu1xKQvPw==
   dependencies:
-    "@tryghost/helpers" "^0.1.2"
+    "@tryghost/helpers" "^0.2.0"
     gatsby-link "^2.0.7"
     prop-types "^15.6.2"
 
-"@tryghost/helpers@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-0.1.2.tgz#f698aa518e888e61dc524e5cc161113d2e32ffe1"
-  integrity sha512-rWfYR1JzuTP1g3aUV75/J4bDBAsO8KLe8VptXWn0gMulNxfYo0SU2KZClJc7FW9z9eb2cgn45ZY+2HvzppExIA==
+"@tryghost/helpers@0.2.0", "@tryghost/helpers@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-0.2.0.tgz#66fb195a1f44c5e5cf56ee70ea2e525e4a4030be"
+  integrity sha512-7H1SblyHTu4YFXgm7YuR0us/D+VyN2lFJbt/Z7qUu9/VOsmjn7tsDjwgvuejXpdVcfCSzO0RInNLKGroZNJGqA==
   dependencies:
-    lodash "^4.17.11"
+    lodash-es "^4.17.11"
 
 "@types/configstore@^2.1.1":
   version "2.1.1"
@@ -6640,6 +6640,11 @@ lockfile@^1.0.4:
   resolved "https://registry.yarnpkg.com/lockfile/-/lockfile-1.0.4.tgz#07f819d25ae48f87e538e6578b6964a4981a5609"
   dependencies:
     signal-exit "^3.0.2"
+
+lodash-es@^4.17.11:
+  version "4.17.11"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
+  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
 
 lodash._basecopy@^3.0.0:
   version "3.0.1"
