@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard } from '../components/common'
+import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 import config from '../utils/siteConfig'
 
-const Author = ({ data, location }) => {
+const Author = ({ data, location, pageContext }) => {
     const author = data.ghostAuthor
     const posts = data.allGhostPost.edges
 
@@ -40,6 +40,7 @@ const Author = ({ data, location }) => {
                             <PostCard key={node.id} post={node} />
                         ))}
                     </div>
+                    <Pagination pageContext={pageContext} />
                 </main>
             </Layout>
         </>
@@ -68,14 +69,15 @@ Author.propTypes = {
 export default Author
 
 export const pageQuery = graphql`
-    query GhostAuthorQuery($slug: String!) {
+    query GhostAuthorQuery($slug: String!, $limit: Int!, $skip: Int!) {
         ghostAuthor(slug: { eq: $slug }) {
             ...GhostAuthorFields
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
             filter: {authors: {elemMatch: {slug: {eq: $slug}}}},
-            limit: 50,
+            limit: $limit,
+            skip: $skip
         ) {
             edges {
                 node {

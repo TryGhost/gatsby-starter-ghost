@@ -6,7 +6,6 @@ import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 const Tag = ({ data, location, pageContext }) => {
-    console.log(`​Tag -> pageContext`, pageContext)
     const tag = data.ghostTag
     const posts = data.allGhostPost.edges
 
