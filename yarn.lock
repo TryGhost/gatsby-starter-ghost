@@ -735,7 +735,6 @@
 "@tryghost/helpers-gatsby@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-0.2.0.tgz#9651cd12be3f2dcee0c492a30c4af90f3f61e567"
-  integrity sha512-vqTlS+YSscz9hWlwQ/WqoC01RimhlbdxQN9xW6mXSwMTmM37hUEJlVg+9yx8S9n6lSE5cdG9yyY3uTu1xKQvPw==
   dependencies:
     "@tryghost/helpers" "^0.2.0"
     gatsby-link "^2.0.7"
@@ -744,7 +743,6 @@
 "@tryghost/helpers@0.2.0", "@tryghost/helpers@^0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-0.2.0.tgz#66fb195a1f44c5e5cf56ee70ea2e525e4a4030be"
-  integrity sha512-7H1SblyHTu4YFXgm7YuR0us/D+VyN2lFJbt/Z7qUu9/VOsmjn7tsDjwgvuejXpdVcfCSzO0RInNLKGroZNJGqA==
   dependencies:
     lodash-es "^4.17.11"
 
@@ -2404,7 +2402,6 @@ charenc@~0.0.1:
 cheerio@^1.0.0-rc.2:
   version "1.0.0-rc.2"
   resolved "https://registry.yarnpkg.com/cheerio/-/cheerio-1.0.0-rc.2.tgz#4b9f53a81b27e4d5dac31c0ffd0cfa03cc6830db"
-  integrity sha1-S59TqBsn5NXawxwP/Qz6A8xoMNs=
   dependencies:
     css-select "~1.2.0"
     dom-serializer "~0.1.0"
@@ -4780,7 +4777,6 @@ gatsby-node-helpers@^0.3.0:
 gatsby-plugin-feed@^2.0.11:
   version "2.0.11"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-feed/-/gatsby-plugin-feed-2.0.11.tgz#1baa33565c131415a2c971aa49adea02a08bf935"
-  integrity sha512-YefZwUeKiPd2OVz15XlRtb9LqNA0d66ThVCNwpr1kqyMRQg22pwmE2D+ZVLEWlB6uQv/92kY4hw13W6fKcpTFQ==
   dependencies:
     "@babel/runtime" "^7.0.0"
     lodash.merge "^4.6.0"
@@ -4880,9 +4876,9 @@ gatsby-source-filesystem@2.0.12:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-ghost@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-2.1.2.tgz#4cf86a8399be663c4380a0d81a765c6afc900101"
+gatsby-source-ghost@2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-2.2.0.tgz#e8e9e4b461a3b0f6042cc413c8eb0f1cf1fd0e32"
   dependencies:
     axios "^0.18.0"
     bluebird "^3.5.1"
@@ -6656,7 +6652,6 @@ lockfile@^1.0.4:
 lodash-es@^4.17.11:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.11.tgz#145ab4a7ac5c5e52a3531fb4f310255a152b4be0"
-  integrity sha512-DHb1ub+rMjjrxqlB3H56/6MXtm1lSksDp2rA2cNWjG8mlDUYFhUj3Di2Zn5IwSU87xLv8tNIQ7sSwE/YOX/D/Q==
 
 lodash._basecopy@^3.0.0:
   version "3.0.1"
@@ -7037,12 +7032,10 @@ miller-rabin@^4.0.0:
 mime-db@~1.25.0:
   version "1.25.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.25.0.tgz#c18dbd7c73a5dbf6f44a024dc0d165a1e7b1c392"
-  integrity sha1-wY29fHOl2/b0SgJNwNFloeexw5I=
 
 mime-types@2.1.13:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/mime-types/-/mime-types-2.1.13.tgz#e07aaa9c6c6b9a7ca3012c69003ad25a39e92a88"
-  integrity sha1-4HqqnGxrmnyjASxpADrSWjnpKog=
   dependencies:
     mime-db "~1.25.0"
 
@@ -9103,7 +9096,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
 rss@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/rss/-/rss-1.2.2.tgz#50a1698876138133a74f9a05d2bdc8db8d27a921"
-  integrity sha1-UKFpiHYTgTOnT5oF0r3I240nqSE=
   dependencies:
     mime-types "2.1.13"
     xml "1.0.1"
@@ -10936,7 +10928,6 @@ xml2js@^0.4.5:
 xml@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/xml/-/xml-1.0.1.tgz#78ba72020029c5bc87b8a81a3cfcd74b4a2fc1e5"
-  integrity sha1-eLpyAgApxbyHuKgaPPzXS0ovweU=
 
 xmlbuilder@~9.0.1:
   version "9.0.7"
