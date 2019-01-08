@@ -88,6 +88,7 @@ exports.createPages = ({ graphql, actions }) => {
                             node {
                                 slug
                                 url
+                                postCount
                             }
                         }
                     }
@@ -102,20 +103,30 @@ exports.createPages = ({ graphql, actions }) => {
                 }
 
                 const items = result.data.allGhostTag.edges
+                const postsPerPage = config.postsPerPage
 
                 _.forEach(items, ({ node }) => {
+                    const totalPosts = node.postCount !== null ? node.postCount : 0
+                    const numPages = Math.ceil(totalPosts / postsPerPage)
+
                     // Update the existing URL field to reflect the URL in Gatsby and
                     // not in Ghost.
-                    node.url = `/tag/${node.slug}/`,
+                    node.url = `/tag/${node.slug}/`
 
-                    createPage({
-                        path: node.url,
-                        component: path.resolve(tagsTemplate),
-                        context: {
-                            // Data passed to context is available
-                            // in page queries as GraphQL variables.
-                            slug: node.slug,
-                        },
+                    Array.from({ length: numPages }).forEach((_, i) => {
+                        createPage({
+                            path: i === 0 ? node.url : `${node.url}page/${i + 1}/`,
+                            component: path.resolve(tagsTemplate),
+                            context: {
+                                // Data passed to context is available
+                                // in page queries as GraphQL variables.
+                                slug: node.slug,
+                                limit: postsPerPage,
+                                skip: i * postsPerPage,
+                                numPages: numPages,
+                                currentPage: i + 1,
+                            },
+                        })
                     })
                 })
 

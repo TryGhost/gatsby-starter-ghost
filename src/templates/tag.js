@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout, PostCard } from '../components/common'
+import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
-const Tag = ({ data, location }) => {
+const Tag = ({ data, location, pageContext }) => {
+    console.log(`​Tag -> pageContext`, pageContext)
     const tag = data.ghostTag
     const posts = data.allGhostPost.edges
 
@@ -34,6 +35,7 @@ const Tag = ({ data, location }) => {
                             <PostCard key={node.id} post={node} />
                         ))}
                     </div>
+                    <Pagination pageContext={pageContext} />
                 </main>
             </Layout>
         </>
@@ -56,14 +58,15 @@ Tag.propTypes = {
 export default Tag
 
 export const pageQuery = graphql`
-    query GhostTagQuery($slug: String!) {
+    query GhostTagQuery($slug: String!, $limit: Int!, $skip: Int!) {
         ghostTag(slug: { eq: $slug }) {
             ...GhostTagFields
         }
         allGhostPost(
             sort: { order: DESC, fields: [published_at] },
             filter: {tags: {elemMatch: {slug: {eq: $slug}}}},
-            limit: 50,
+            limit: $limit,
+            skip: $skip
         ) {
             edges {
                 node {
