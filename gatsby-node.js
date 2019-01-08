@@ -107,13 +107,19 @@ exports.createPages = ({ graphql, actions }) => {
 
                 _.forEach(items, ({ node }) => {
                     const totalPosts = node.postCount !== null ? node.postCount : 0
-                    const numPages = Math.ceil(totalPosts / postsPerPage)
+                    const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
                     // Update the existing URL field to reflect the URL in Gatsby and
                     // not in Ghost.
                     node.url = `/tag/${node.slug}/`
 
-                    Array.from({ length: numPages }).forEach((_, i) => {
+                    Array.from({ length: numberOfPages }).forEach((_, i) => {
+                        const currentPage = i + 1
+                        const prevPageNumber = currentPage <= 1 ? null : currentPage - 1
+                        const nextPageNumber = currentPage + 1 > numberOfPages ? null : currentPage + 1
+                        const previousPagePath = prevPageNumber ? prevPageNumber === 1 ? node.url : `${node.url}page/${prevPageNumber}/` : null
+                        const nextPagePath = nextPageNumber ? `${node.url}page/${nextPageNumber}/` : null
+
                         createPage({
                             path: i === 0 ? node.url : `${node.url}page/${i + 1}/`,
                             component: path.resolve(tagsTemplate),
@@ -123,8 +129,12 @@ exports.createPages = ({ graphql, actions }) => {
                                 slug: node.slug,
                                 limit: postsPerPage,
                                 skip: i * postsPerPage,
-                                numPages: numPages,
-                                currentPage: i + 1,
+                                numberOfPages: numberOfPages,
+                                currentPage: currentPage,
+                                prevPageNumber: prevPageNumber,
+                                nextPageNumber: nextPageNumber,
+                                previousPagePath: previousPagePath,
+                                nextPagePath: nextPagePath,
                             },
                         })
                     })
@@ -150,6 +160,7 @@ exports.createPages = ({ graphql, actions }) => {
                             node {
                                 slug
                                 url
+                                postCount
                             }
                         }
                     }
