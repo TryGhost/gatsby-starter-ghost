@@ -61,7 +61,6 @@ export const ghostPostFields = graphql`
         twitter_title
 
         # Authors
-        author
         authors {
             name
             slug
@@ -109,9 +108,7 @@ export const ghostPostFields = graphql`
 
         # Additional fields
         url
-        visibility
         uuid
-        status
         page
         codeinjection_foot
         codeinjection_head
@@ -151,7 +148,6 @@ export const ghostPageFields = graphql`
         twitter_title
 
         # Authors
-        author
         authors {
             name
             slug
@@ -199,9 +195,7 @@ export const ghostPageFields = graphql`
 
         # Additional fields
         url
-        visibility
         uuid
-        status
         page
         codeinjection_foot
         codeinjection_head
