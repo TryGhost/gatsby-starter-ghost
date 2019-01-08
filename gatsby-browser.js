@@ -15,7 +15,7 @@ var trustAllScripts = function () {
     for (var i = 0; i < scriptNodes.length; i += 1) {
         var node = scriptNodes[i];
         var s = document.createElement('script');
-        s.type = 'text/javascript';
+        s.type = node.type || 'text/javascript';
 
         if (node.attributes.src) {
             s.src = node.attributes.src.value;
