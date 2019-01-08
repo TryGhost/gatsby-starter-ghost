@@ -11,15 +11,14 @@ try {
     ghostConfig = {
         production: {
             apiUrl: process.env.GHOST_API_URL,
-            clientId: `ghost-frontend`,
-            clientSecret: process.env.GHOST_API_KEY,
+            contentApiKey: process.env.GHOST_CONTENT_API_KEY,
         },
     }
 } finally {
-    const { apiUrl, clientId, clientSecret } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production
+    const { apiUrl, contentApiKey } = process.env.NODE_ENV === `development` ? ghostConfig.development : ghostConfig.production
 
-    if (!apiUrl || !clientId || !clientSecret || clientSecret.match(/<key>/)) {
-        throw new Error(`GHOST_API_URL and GHOST_API_KEY are required to build. Check the README.`) // eslint-disable-line
+    if (!apiUrl || !contentApiKey || contentApiKey.match(/<key>/)) {
+        throw new Error(`GHOST_API_URL and GHOST_CONTENT_API_KEY are required to build. Check the README.`) // eslint-disable-line
     }
 }
 

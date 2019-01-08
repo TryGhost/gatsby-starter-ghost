@@ -95,7 +95,6 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
                         meta_description
 
                         # Authors
-                        author
                         authors {
                             name
                         }
