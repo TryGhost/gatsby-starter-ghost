@@ -23,7 +23,7 @@ yarn
 ```
 
 
-## Running 
+## Running
 
 Start the development server. You now have a Gatsby site pulling content from headless Ghost.
 
@@ -33,7 +33,7 @@ gatsby develop
 
 By default, the starter will populate content from a default Ghost install located at https://gatsby.ghost.io.
 
-To use your own install, edit the `.ghost.json` config file with your credentials. You can find your `clientSecret` by viewing source of your Ghost homepage, located in the `<head>`.
+To use your own install, edit the `.ghost.json` config file with your credentials. You can find or your `contentApiKey` in the "Integrations" screen in Ghost Admin.
 
 Because of how Gatsby/GraphQL work, at least 1 copy of every object/field must exist in Ghost for things to function correctly. That means you must have at least 1 post, author, tag, etc - with every single field populated - for the queries to work properly.
 
@@ -48,14 +48,14 @@ To deploy to your Netlify account, hit the button below.
 
 [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/)
 
-The ghost-frontend `clientSecret` is generally not considered to be sensitive information, and exists so that it can be changed in the event of abuse, so most people commit it directly to their `ghost.json` config file. If you prefer to keep this information out of your repository you can remove this config and set [Netlify ENV variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) for production builds instead.
+Content API Keys are generally not considered to be sensitive information, they exist so that they can be changed in the event of abuse so most people commit it directly to their `ghost.json` config file. If you prefer to keep this information out of your repository you can remove this config and set [Netlify ENV variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) for production builds instead.
 
 Once deployed, you can set up a [Ghost + Netlify Integration](https://docs.ghost.org/integrations/netlify/) to use deploy hooks from Ghost to trigger Netlify rebuilds. That way, any time data changes in Ghost, your site will rebuild on Netlify.
 
 
 ## Optimising
 
-You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO. 
+You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
 
 
 ## Extra options
@@ -68,7 +68,7 @@ gatsby build
 gatsby serve
 ```
 
-Gatsby `develop` uses the `dev` config in `ghost.json` - while Gatsby `serve` uses the `production` config. 
+Gatsby `develop` uses the `dev` config in `ghost.json` - while Gatsby `serve` uses the `production` config.
 
 
 # Copyright & License
