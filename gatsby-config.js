@@ -11,8 +11,7 @@ try {
     ghostConfig = {
         production: {
             apiUrl: process.env.GHOST_API_URL,
-            clientId: `ghost-frontend`,
-            clientSecret: process.env.GHOST_CONTENT_API_KEY,
+            contentApiKey: process.env.GHOST_CONTENT_API_KEY,
         },
     }
 } finally {
