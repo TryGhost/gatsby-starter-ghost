@@ -462,6 +462,7 @@ h4,
 h5,
 h6 {
     margin-top: 0;
+    color: var(--color-base);
     line-height: 1.15;
     font-weight: 700;
     text-rendering: optimizeLegibility;
@@ -469,12 +470,12 @@ h6 {
 
 h1 {
     margin: 0 0 0.5em 0;
-    font-size: 5rem;
+    font-size: 4rem;
     font-weight: 700;
 }
 @media (max-width: 500px) {
     h1 {
-        font-size: 2.2rem;
+        font-size: 2rem;
     }
 }
 
@@ -534,10 +535,19 @@ h6 {
 }
 
 .content {
-    max-width: 780px;
-    margin: 4vw auto;
-    font-size: 1.9rem;
-    line-height: 1.6em;
+    max-width: 720px;
+    margin: 3vw auto;
+    font-size: 2rem;
+    line-height: 1.7em;
+}
+
+.content-title {
+    font-size: 5rem;
+}
+@media (max-width: 500px) {
+    .content-title {
+        font-size: 2.2rem;
+    }
 }
 
 .content-body {
@@ -598,6 +608,7 @@ h6 {
 .site-banner-title {
     margin: 0;
     padding: 0;
+    color: #fff;
     font-size: 4rem;
     line-height: 1.3em;
 }
