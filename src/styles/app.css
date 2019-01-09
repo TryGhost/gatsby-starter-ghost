@@ -572,6 +572,7 @@ h6 {
 }
 
 .site-nav-item {
+    display: inline-block;
     padding: 5px 10px;
     color: #fff;
     opacity: 0.7;
@@ -639,6 +640,21 @@ h6 {
 
 .site-nav-right {
     margin: 0 -10px 0 20px;
+}
+
+.site-nav-button {
+    display: inline-block;
+    padding: 5px 10px;
+    border: #fff 1px solid;
+    color: #fff;
+    font-size: 1.3rem;
+    line-height: 1em;
+    border-radius: var(--radius);
+    opacity: 0.7;
+}
+
+.site-nav-button:hover {
+    text-decoration: none;
 }
 
 /* Main
