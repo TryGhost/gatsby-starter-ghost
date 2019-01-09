@@ -2,8 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, StaticQuery, graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 import { Navigation } from '.'
+import config from '../../utils/siteConfig'
 
 // Styles
 import '../../styles/app.css'
@@ -18,6 +20,8 @@ import '../../styles/app.css'
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const settings = data.allGhostSettings.edges[0].node
+    const twitterUrl = settings.twitter ? `https://twitter.com/${settings.twitter.replace(/^@/, ``)}` : null
+    const facebookUrl = settings.facebook ? `https://www.facebook.com/${settings.twitter.replace(/^\//, ``)}` : null
 
     return (
     <>
@@ -35,13 +39,20 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         <div className="site-mast">
                             <div className="site-mast-left">
                                 <Link to="/">
-                                    <img className="site-logo" src="/images/logo.svg" alt="logo" />
+                                    {/* The logoe in the top left corner. When no logo is defined we fall back to
+                                    * a logo defined in /images using Gatsby image.
+                                    * Further info 👉🏼 https://www.gatsbyjs.org/docs/working-with-images/#optimizing-images-with-gatsby-image
+                                    */}
+                                    {settings.logo ?
+                                        <img className="site-logo" src={settings.logo} alt="logo" />
+                                        : <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
+                                    }
                                 </Link>
                             </div>
                             <div className="site-mast-right">
-                                <Link className="site-nav-item" to="/">Twitter</Link>
-                                <Link className="site-nav-item" to="/">Facebook</Link>
-                                <Link className="site-nav-item" to="/">RSS</Link>
+                                {settings.twitter && <a href={twitterUrl} className="site-nav-item" target="_blank" rel="noopener noreferrer">Twitter</a>}
+                                {settings.facebook && <a href={facebookUrl} className="site-nav-item" target="_blank" rel="noopener noreferrer">Facebook</a>}
+                                <a className="site-nav-item" href={`https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
                             </div>
                         </div>
                         { isHome ?
@@ -93,6 +104,9 @@ DefaultLayout.propTypes = {
     children: PropTypes.node.isRequired,
     bodyClass: PropTypes.string,
     isHome: PropTypes.bool,
+    data: PropTypes.shape({
+        allGhostSettings: PropTypes.object.isRequired,
+    }).isRequired,
 }
 
 const DefaultLayoutSettingsQuery = props => (
@@ -100,11 +114,18 @@ const DefaultLayoutSettingsQuery = props => (
         query={graphql`
             query GhostSettings {
                 allGhostSettings {
-                edges {
-                    node {
-                        ...GhostSetttingsFields
+                    edges {
+                        node {
+                            ...GhostSetttingsFields
+                        }
                     }
                 }
+                file(relativePath: {eq: "ghost-icon.png"}) {
+                    childImageSharp {
+                        fixed(width: 30, height: 30) {
+                            ...GatsbyImageSharpFixed
+                        }
+                    }
                 }
             }
         `}
