@@ -9,7 +9,7 @@ const PostCard = ({ post }) => {
     return (
         <Link to={url} className="post-card">
             <header className="post-card-header">
-                {post.feature_image ? 
+                {post.feature_image ?
                     <div className="post-card-image" style={{
                         backgroundImage: `url(${post.feature_image})` ,
                     }}></div> : null}
@@ -20,11 +20,12 @@ const PostCard = ({ post }) => {
             <section className="post-card-excerpt">{post.excerpt}</section>
             <footer className="post-card-footer">
                 <div className="post-card-footer-left">
-                    {post.primary_author.name}
+
                 </div>
                 <div className="post-card-footer-right">
+                    {post.primary_author.name}
                     {/* Todo: replace with reading time helper */}
-                    2 min read
+                    <div>2 min read</div>
                 </div>
             </footer>
         </Link>

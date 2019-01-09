@@ -707,10 +707,14 @@ h6 {
 
 .post-card-footer {
     display: flex;
-    justify-content: space-between;
     margin: 10px 0 0 0;
     color: var(--color-secondary);
 }
+
+.post-card-footer-right {
+    display: flex;
+    flex-direction: column;
+};
 
 
 /* Tag Archives
