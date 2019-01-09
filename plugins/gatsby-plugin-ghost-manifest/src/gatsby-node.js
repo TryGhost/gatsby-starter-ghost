@@ -19,7 +19,7 @@ function generateIcons(icons, srcIcon) {
 }
 
 exports.onPostBuild = async ({ graphql }, pluginOptions) => {
-    let { icon, ...manifest } = pluginOptions.manifest
+    let { icon, ...manifest } = pluginOptions
 
     const { data } = await graphql(pluginOptions.query)
     const siteTitle = data.allGhostSettings.edges[0].node.title || `No Title`
@@ -32,6 +32,7 @@ exports.onPostBuild = async ({ graphql }, pluginOptions) => {
     delete manifest.plugins
     delete manifest.legacy
     delete manifest.theme_color_in_head
+    delete manifest.query
 
     // If icons are not manually defined, use the default icon set.
     if (!manifest.icons) {

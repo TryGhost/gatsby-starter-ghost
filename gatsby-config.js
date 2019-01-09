@@ -68,14 +68,12 @@ module.exports = {
         {
             resolve: `gatsby-plugin-ghost-manifest`,
             options: {
-                manifest: {
-                    short_name: config.shortTitle,
-                    start_url: `/`,
-                    background_color: config.backgroundColor,
-                    theme_color: config.themeColor,
-                    display: `minimal-ui`,
-                    icon: `static/${config.siteIcon}`,
-                },
+                short_name: config.shortTitle,
+                start_url: `/`,
+                background_color: config.backgroundColor,
+                theme_color: config.themeColor,
+                display: `minimal-ui`,
+                icon: `static/${config.siteIcon}`,
                 query: `
                 {
                     allGhostSettings {

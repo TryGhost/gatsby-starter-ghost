@@ -38,14 +38,14 @@ function () {
   var _ref2 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee(_ref, pluginOptions) {
-    var graphql, _pluginOptions$manife, icon, manifest, _ref3, data, siteTitle, iconPath;
+    var graphql, icon, manifest, _ref3, data, siteTitle, iconPath;
 
     return _regenerator.default.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             graphql = _ref.graphql;
-            _pluginOptions$manife = pluginOptions.manifest, icon = _pluginOptions$manife.icon, manifest = (0, _objectWithoutPropertiesLoose2.default)(_pluginOptions$manife, ["icon"]);
+            icon = pluginOptions.icon, manifest = (0, _objectWithoutPropertiesLoose2.default)(pluginOptions, ["icon"]);
             _context.next = 4;
             return graphql(pluginOptions.query);
 
@@ -59,7 +59,8 @@ function () {
             });
             delete manifest.plugins;
             delete manifest.legacy;
-            delete manifest.theme_color_in_head; // If icons are not manually defined, use the default icon set.
+            delete manifest.theme_color_in_head;
+            delete manifest.query; // If icons are not manually defined, use the default icon set.
 
             if (!manifest.icons) {
               manifest.icons = defaultIcons;
@@ -89,7 +90,7 @@ function () {
               Promise.resolve();
             }
 
-          case 16:
+          case 17:
           case "end":
             return _context.stop();
         }
