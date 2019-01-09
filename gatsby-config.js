@@ -80,6 +80,7 @@ module.exports = {
                 ],
             },
         },
+        `gatsby-plugin-sitemap`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-force-trailing-slashes`,
         `gatsby-plugin-offline`,
