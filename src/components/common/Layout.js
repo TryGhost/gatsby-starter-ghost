@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Link, StaticQuery, graphql } from 'gatsby'
 
+import { Navigation } from '.'
+
 // Styles
 import '../../styles/app.css'
 
@@ -51,9 +53,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         <nav className="site-nav">
                             <div className="site-nav-left">
                                 {/* The navigation items as setup in Ghost */}
-                                {settings.navigation.map((navItem, i) => (
-                                    <Link to={navItem.url} key={i}>{navItem.label}</Link>
-                                ))}
+                                <Navigation data={settings.navigation} navClass="site-nav-item" />
                             </div>
                             <div className="site-nav-right">
                                 <Link className="site-nav-item" to="/">Subscribe</Link>
