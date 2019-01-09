@@ -3,11 +3,8 @@ import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
 
-import { getPostExcerpt } from '../../utils/getPostExcerpt'
-
 const PostCard = ({ post }) => {
     const url = `${post.slug}/`
-    const excerpt = getPostExcerpt(post)
 
     return (
         <Link to={url} className="post-card">
@@ -16,7 +13,7 @@ const PostCard = ({ post }) => {
                 {post.featured ? <span>Featured</span> : null}
                 <h2 className="post-card-title">{post.title}</h2>
             </header>
-            {excerpt ? <section className="post-card-excerpt">{excerpt}</section> : null}
+            <section className="post-card-excerpt">{post.excerpt}</section>
             <footer className="post-card-footer">
                 <div className="post-card-footer-left">
                     {post.primary_author.name}
