@@ -21,7 +21,7 @@ import '../../styles/app.css'
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     const settings = data.allGhostSettings.edges[0].node
     const twitterUrl = settings.twitter ? `https://twitter.com/${settings.twitter.replace(/^@/, ``)}` : null
-    const facebookUrl = settings.facebook ? `https://www.facebook.com/${settings.twitter.replace(/^\//, ``)}` : null
+    const facebookUrl = settings.facebook ? `https://www.facebook.com/${settings.facebook.replace(/^\//, ``)}` : null
 
     return (
     <>
