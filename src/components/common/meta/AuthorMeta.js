@@ -1,16 +1,19 @@
 import React from 'react'
-import Helmet from "react-helmet"
+import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
+import { StaticQuery, graphql } from 'gatsby'
 
 import ImageMeta from './ImageMeta'
 import getAuthorProperties from './getAuthorProperties'
 import config from '../../../utils/siteConfig'
 
-const AuthorMeta = ({ data, canonical }) => {
+const AuthorMeta = ({ data, settings, canonical }) => {
+    settings = settings.allGhostSettings.edges[0].node
+
     const author = getAuthorProperties(data)
     const shareImage = author.image || config.shareImage
-    const title = `${data.name} - ${config.siteTitle}`
-    const description = data.bio || config.siteDescriptionMeta || config.siteDescription
+    const title = `${data.name} - ${settings.title}`
+    const description = data.bio || config.siteDescriptionMeta || settings.description
 
     return (
         <>
@@ -18,7 +21,7 @@ const AuthorMeta = ({ data, canonical }) => {
                 <title>{title}</title>
                 <meta name="description" content={description} />
                 <link rel="canonical" href={canonical} />
-                <meta property="og:site_name" content={config.siteTitle} />
+                <meta property="og:site_name" content={settings.title} />
                 <meta property="og:type" content="profile" />
                 <meta property="og:title" content={title} />
                 <meta property="og:description" content={description} />
@@ -26,7 +29,8 @@ const AuthorMeta = ({ data, canonical }) => {
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
                 <meta name="twitter:url" content={canonical} />
-                <meta name="twitter:site" content="@tryghost" />
+                {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
+                {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
@@ -44,7 +48,7 @@ const AuthorMeta = ({ data, canonical }) => {
                             "@type": "WebPage",
                             "@id": "${config.siteUrl}"
                         },
-                        "description": "${data.bio}"
+                        "description": "${description}"
                     }
                 `}</script>
             </Helmet>
@@ -61,8 +65,26 @@ AuthorMeta.propTypes = {
         website: PropTypes.string,
         twitter: PropTypes.string,
         facebook: PropTypes.string,
+        allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
 }
 
-export default AuthorMeta
+const AuthorMetaQuery = props => (
+    <StaticQuery
+        query={graphql`
+            query GhostSettingsAuthorMeta {
+                allGhostSettings {
+                    edges {
+                        node {
+                            ...GhostSetttingsFields
+                        }
+                    }
+                }
+            }
+        `}
+        render={data => <AuthorMeta settings={data} {...props} />}
+    />
+)
+
+export default AuthorMetaQuery
