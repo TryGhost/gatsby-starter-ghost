@@ -46,23 +46,25 @@ const generateItem = function generateItem(post) {
 }
 
 const generateRSSFeed = function generateRSSFeed(siteConfig) {
-    const feed = {
-        title: siteConfig.siteTitle,
-        description: siteConfig.siteDescription,
-        // generator: `Ghost ` + data.safeVersion,
-        generator: `Ghost 2.9`,
-        feed_url: `${siteConfig.siteUrl}/rss/`,
-        site_url: `${siteConfig.siteUrl}/`,
-        image_url: `${siteConfig.siteUrl}/favicon.png`,
-        ttl: `60`,
-        custom_namespaces: {
-            content: `http://purl.org/rss/1.0/modules/content/`,
-            media: `http://search.yahoo.com/mrss/`,
-        },
-    }
     return {
         serialize: ({ query: { allGhostPost } }) => allGhostPost.edges.map(edge => Object.assign({}, generateItem(edge.node))),
-        setup: () => {
+        setup: ({ query: { allGhostSettings } }) => {
+            const siteTitle = allGhostSettings.edges[0].node.title || `No Title`
+            const siteDescription = allGhostSettings.edges[0].node.description || `No Description`
+            const feed = {
+                title: siteTitle,
+                description: siteDescription,
+                // generator: `Ghost ` + data.safeVersion,
+                generator: `Ghost 2.9`,
+                feed_url: `${siteConfig.siteUrl}/rss/`,
+                site_url: `${siteConfig.siteUrl}/`,
+                image_url: `${siteConfig.siteUrl}/favicon.png`,
+                ttl: `60`,
+                custom_namespaces: {
+                    content: `http://purl.org/rss/1.0/modules/content/`,
+                    media: `http://search.yahoo.com/mrss/`,
+                },
+            }
             return {
                 ...feed,
             }
