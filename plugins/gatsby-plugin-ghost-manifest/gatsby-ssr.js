@@ -1,0 +1,83 @@
+"use strict";
+
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
+var _react = _interopRequireDefault(require("react"));
+
+var _gatsby = require("gatsby");
+
+var _common = require("./common.js");
+
+var _jsxFileName = "/Users/rish/Code/Ghost-Master/gatsby-starter-ghost/plugins/gatsby-plugin-ghost-manifest/src/gatsby-ssr.js";
+
+exports.onRenderBody = function (_ref, pluginOptions) {
+  var setHeadComponents = _ref.setHeadComponents;
+  // We use this to build a final array to pass as the argument to setHeadComponents at the end of onRenderBody.
+  var headComponents = [];
+  var icons = pluginOptions.icons || _common.defaultIcons; // If icons were generated, also add a favicon link.
+
+  if (pluginOptions.icon) {
+    var favicon = icons && icons.length ? icons[0].src : null;
+
+    if (favicon) {
+      headComponents.push(_react.default.createElement("link", {
+        key: "gatsby-plugin-manifest-icon-link",
+        rel: "shortcut icon",
+        href: (0, _gatsby.withPrefix)(favicon),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17
+        },
+        __self: this
+      }));
+    }
+  } // Add manifest link tag.
+
+
+  headComponents.push(_react.default.createElement("link", {
+    key: "gatsby-plugin-manifest-link",
+    rel: "manifest",
+    href: (0, _gatsby.withPrefix)("/manifest.webmanifest"),
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 28
+    },
+    __self: this
+  })); // The user has an option to opt out of the theme_color meta tag being inserted into the head.
+
+  if (pluginOptions.theme_color) {
+    var insertMetaTag = Object.keys(pluginOptions).includes("theme_color_in_head") ? pluginOptions.theme_color_in_head : true;
+
+    if (insertMetaTag) {
+      headComponents.push(_react.default.createElement("meta", {
+        key: "gatsby-plugin-manifest-meta",
+        name: "theme-color",
+        content: pluginOptions.theme_color,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 44
+        },
+        __self: this
+      }));
+    }
+  }
+
+  if (pluginOptions.legacy) {
+    var iconLinkTags = icons.map(function (icon) {
+      return _react.default.createElement("link", {
+        key: "gatsby-plugin-manifest-apple-touch-icon-" + icon.sizes,
+        rel: "apple-touch-icon",
+        sizes: icon.sizes,
+        href: (0, _gatsby.withPrefix)("" + icon.src),
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55
+        },
+        __self: this
+      });
+    });
+    headComponents = [].concat(headComponents, iconLinkTags);
+  }
+
+  setHeadComponents(headComponents);
+};
