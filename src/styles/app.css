@@ -531,8 +531,7 @@ h6 {
 }
 
 .content {
-    max-width: 720px;
-    margin: 3vw auto;
+    margin: 0 auto;
     font-size: 2rem;
     line-height: 1.7em;
 }
@@ -803,6 +802,23 @@ h6 {
         width: 80px;
     }
 }
+
+
+/* Post
+/* ----------------------------------------------------------- */
+.post-full-content {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #fff;
+}
+
+.post-feature-image img {
+    margin: 0 0 3vw;
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
 
 /* Pagination
 /* ---------------------------------------------------------- */
