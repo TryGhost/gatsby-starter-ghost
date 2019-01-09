@@ -18,30 +18,31 @@ const Author = ({ data, location, pageContext }) => {
                 type="profile"
             />
             <Layout>
-                <header>
-                    <div>
-                        {author.profile_image ? <img src={author.profile_image} alt={author.name} /> : null}
-                        <h1>{author.name}</h1>
-                        {author.bio ? <h2>{author.bio}</h2> : null}
-                        <div>
-                            {author.location ? <div>{author.location} <span>&bull;</span></div> : null}
-                            {author.website ? <a href={author.website} target="_blank" rel="noopener noreferrer">Website</a> : null}
-                            {/* Todo: twitter url helper */}
-                            {author.twitter ? <a href={author.twitter} target="_blank" rel="noopener noreferrer">Website</a> : null}
-                            {/* Todo: facebook url helper */}
-                            {author.facebook ? <a href={author.facebook} target="_blank" rel="noopener noreferrer">Website</a> : null}
-                            <a href={`https://feedly.com/i/subscription/feed/${config.siteUrl}/author/${author.slug}/rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
+                <div className="container">
+                    <header className="author-header">
+                        <div className="author-header-content">
+                            <h1>{author.name}</h1>
+                            {author.bio ? <p>{author.bio}</p> : null }
+                            <div className="author-header-meta">
+                                {author.website ? <a className="author-header-item" href={author.website} target="_blank" rel="noopener noreferrer">Website</a> : null}
+                                {/* Todo: twitter url helper */}
+                                {author.twitter ? <a className="author-header-item" href={author.twitter} target="_blank" rel="noopener noreferrer">Twitter</a> : null}
+                                {/* Todo: facebook url helper */}
+                                {author.facebook ? <a className="author-header-item" href={author.facebook} target="_blank" rel="noopener noreferrer">Facebook</a> : null}
+                            </div>
                         </div>
-                    </div>
-                </header>
-                <main>
-                    <div>
+                        <div className="author-header-image">
+                            {author.profile_image ? <img src={author.profile_image} alt={author.name} /> : null}
+                        </div>
+                    </header>
+                    <section className="post-feed">
                         {posts.map(({ node }) => (
+                            // The tag below includes the markup for each post - components/common/PostCard.js
                             <PostCard key={node.id} post={node} />
                         ))}
-                    </div>
+                    </section>
                     <Pagination pageContext={pageContext} />
-                </main>
+                </div>
             </Layout>
         </>
     )

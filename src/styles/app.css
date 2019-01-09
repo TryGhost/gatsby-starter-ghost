@@ -728,7 +728,8 @@ h6 {
 /* ---------------------------------------------------------- */
 
 .author-header {
-    max-width: 690px;
+    display: flex;
+    justify-content: space-between;
     margin: 0 0 4vw;
 }
 
@@ -739,10 +740,46 @@ h6 {
 .author-header p {
     margin: 0;
     color: var(--color-secondary);
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     line-height: 1.3em;
 }
 
+.author-header-image {
+    flex: 0 0 auto;
+    margin: 0 0 0 4vw;
+    height: 120px;
+    width: 120px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.author-header-meta {
+    display: flex;
+    margin: 1rem 0 0 0;
+}
+
+.author-header-item {
+    display: block;
+    padding: 2px 10px;
+}
+
+.author-header-item:first-child {
+    padding-left: 0;
+}
+
+@media (max-width: 500px) {
+    .author-header {
+        border-bottom: var(--color-bg) 1px solid;
+        padding-bottom: 4vw;
+    }
+    .author-header p {
+        font-size: 1.7rem;
+    }
+    .author-header-image {
+        height: 80px;
+        width: 80px;
+    }
+}
 
 /* Pagination
 /* ---------------------------------------------------------- */
