@@ -16,15 +16,13 @@ const Page = ({ data, location }) => {
                 type="website"
             />
             <Layout>
-                <div>
-                    <article>
-                        <h1>{page.title}</h1>
-                        <section
-                            className="content-body load-external-scripts"
-                            dangerouslySetInnerHTML={{ __html: page.html }}
-                        />
-                    </article>
-                </div>
+                <article className="content container">
+                    <h1 className="content-title">{page.title}</h1>
+                    <section
+                        className="content-body load-external-scripts"
+                        dangerouslySetInnerHTML={{ __html: page.html }}
+                    />
+                </article>
             </Layout>
         </>
     )
