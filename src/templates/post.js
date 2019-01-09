@@ -16,13 +16,15 @@ const Post = ({ data, location }) => {
                     type="article"
                 />
                 <Layout>
-                    <article className="content container">
-                        <h1 className="content-title">{post.title}</h1>
-                        <section
-                            className="content-body load-external-scripts"
-                            dangerouslySetInnerHTML={{ __html: post.html }}
-                        />
-                    </article>
+                    <div className="container">
+                        <article className="content">
+                            <h1 className="content-title">{post.title}</h1>
+                            <section
+                                className="content-body load-external-scripts"
+                                dangerouslySetInnerHTML={{ __html: post.html }}
+                            />
+                        </article>
+                    </div>
                 </Layout>
             </>
     )
