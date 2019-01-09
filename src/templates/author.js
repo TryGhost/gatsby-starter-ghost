@@ -4,11 +4,12 @@ import { graphql } from 'gatsby'
 
 import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
-import config from '../utils/siteConfig'
 
 const Author = ({ data, location, pageContext }) => {
     const author = data.ghostAuthor
     const posts = data.allGhostPost.edges
+    const twitterUrl = author.twitter ? `https://twitter.com/${author.twitter.replace(/^@/, ``)}` : null
+    const facebookUrl = author.facebook ? `https://www.facebook.com/${author.facebook.replace(/^\//, ``)}` : null
 
     return (
         <>
@@ -22,17 +23,15 @@ const Author = ({ data, location, pageContext }) => {
                     <header className="author-header">
                         <div className="author-header-content">
                             <h1>{author.name}</h1>
-                            {author.bio ? <p>{author.bio}</p> : null }
+                            {author.bio && <p>{author.bio}</p>}
                             <div className="author-header-meta">
-                                {author.website ? <a className="author-header-item" href={author.website} target="_blank" rel="noopener noreferrer">Website</a> : null}
-                                {/* Todo: twitter url helper */}
-                                {author.twitter ? <a className="author-header-item" href={author.twitter} target="_blank" rel="noopener noreferrer">Twitter</a> : null}
-                                {/* Todo: facebook url helper */}
-                                {author.facebook ? <a className="author-header-item" href={author.facebook} target="_blank" rel="noopener noreferrer">Facebook</a> : null}
+                                {author.website && <a className="author-header-item" href={author.website} target="_blank" rel="noopener noreferrer">Website</a>}
+                                {twitterUrl && <a className="author-header-item" href={twitterUrl} target="_blank" rel="noopener noreferrer">Twitter</a>}
+                                {facebookUrl && <a className="author-header-item" href={facebookUrl} target="_blank" rel="noopener noreferrer">Facebook</a>}
                             </div>
                         </div>
                         <div className="author-header-image">
-                            {author.profile_image ? <img src={author.profile_image} alt={author.name} /> : null}
+                            {author.profile_image && <img src={author.profile_image} alt={author.name} />}
                         </div>
                     </header>
                     <section className="post-feed">
