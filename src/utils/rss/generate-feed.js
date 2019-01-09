@@ -8,7 +8,7 @@ const generateItem = function generateItem(post) {
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     const item = {
         title: post.title,
-        description: post.custom_excerpt || post.meta_description,
+        description: post.excerpt,
         guid: post.id,
         url: itemUrl,
         date: post.published_at,
@@ -91,7 +91,7 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
                         updated_at
 
                         # SEO
-                        custom_excerpt
+                        excerpt
                         meta_title
                         meta_description
 
