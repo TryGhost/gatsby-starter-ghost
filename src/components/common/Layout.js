@@ -16,7 +16,7 @@ import '../../styles/app.css'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ children, bodyClass }) => (
+const DefaultLayout = ({ children, bodyClass, isHome }) => (
     <>
         <Helmet>
             <html lang={config.lang} />
@@ -41,10 +41,12 @@ const DefaultLayout = ({ children, bodyClass }) => (
                                 <Link className="site-nav-item" to="/">RSS</Link>
                             </div>
                         </div>
-                        <div className="site-banner">
-                            <h1 className="site-banner-title">Site Title</h1>
-                            <p className="site-banner-desc">Site description goes here description goes here description goes here description goes here description goes here description goes here</p>
-                        </div>
+                        { isHome ? 
+                            <div className="site-banner">
+                                <h1 className="site-banner-title">Site Title</h1>
+                                <p className="site-banner-desc">Site description goes here description goes here description goes here description goes here description goes here description goes here</p>
+                            </div> : 
+                            null}
                         <nav className="site-nav">
                             <div className="site-nav-left">
                                 <Link className="site-nav-item" to="/">Home</Link>
@@ -87,6 +89,7 @@ const DefaultLayout = ({ children, bodyClass }) => (
 DefaultLayout.propTypes = {
     children: PropTypes.node.isRequired,
     bodyClass: PropTypes.string,
+    isHome: PropTypes.bool,
 }
 
 export default DefaultLayout
