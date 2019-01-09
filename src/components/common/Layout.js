@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { Link } from 'gatsby'
-
-import config from '../../utils/siteConfig'
+import { Link, StaticQuery, graphql } from 'gatsby'
 
 // Styles
 import '../../styles/app.css'
@@ -16,10 +14,13 @@ import '../../styles/app.css'
 * styles, and meta data for each page.
 *
 */
-const DefaultLayout = ({ children, bodyClass, isHome }) => (
+const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
+    const settings = data.allGhostSettings.edges[0].node
+
+    return (
     <>
         <Helmet>
-            <html lang={config.lang} />
+            <html lang={settings.lang} />
             <body className={bodyClass} />
         </Helmet>
 
@@ -41,17 +42,15 @@ const DefaultLayout = ({ children, bodyClass, isHome }) => (
                                 <Link className="site-nav-item" to="/">RSS</Link>
                             </div>
                         </div>
-                        { isHome ? 
+                        { isHome ?
                             <div className="site-banner">
-                                <h1 className="site-banner-title">Site Title</h1>
-                                <p className="site-banner-desc">Site description goes here description goes here description goes here description goes here description goes here description goes here</p>
-                            </div> : 
+                                <h1 className="site-banner-title">{settings.title}</h1>
+                                <p className="site-banner-desc">{settings.description}</p>
+                            </div> :
                             null}
                         <nav className="site-nav">
                             <div className="site-nav-left">
-                                <Link className="site-nav-item" to="/">Home</Link>
-                                <Link className="site-nav-item" to="/">Home</Link>
-                                <Link className="site-nav-item" to="/">Home</Link>
+
                             </div>
                             <div className="site-nav-right">
                                 <Link className="site-nav-item" to="/">Subscribe</Link>
@@ -84,7 +83,8 @@ const DefaultLayout = ({ children, bodyClass, isHome }) => (
         </div>
 
     </>
-)
+    )
+}
 
 DefaultLayout.propTypes = {
     children: PropTypes.node.isRequired,
@@ -92,4 +92,21 @@ DefaultLayout.propTypes = {
     isHome: PropTypes.bool,
 }
 
-export default DefaultLayout
+const DefaultLayoutSettingsQuery = props => (
+    <StaticQuery
+        query={graphql`
+            query GhostSettings {
+                allGhostSettings {
+                edges {
+                    node {
+                        ...GhostSetttingsFields
+                    }
+                }
+                }
+            }
+        `}
+        render={data => <DefaultLayout data={data} {...props} />}
+    />
+)
+
+export default DefaultLayoutSettingsQuery
