@@ -1,5 +1,6 @@
 import React from 'react'
 import Helmet from "react-helmet"
+import { StaticQuery, graphql } from 'gatsby'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import url from 'url'
@@ -10,13 +11,15 @@ import config from '../../../utils/siteConfig'
 
 import { tags as tagsHelper } from '@tryghost/helpers'
 
-const ArticleMetaGhost = ({ data, canonical }) => {
+const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const ghostPost = data
+    settings = settings.allGhostSettings.edges[0].node
+
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = publicTags[0] || ``
     const shareImage = ghostPost.feature_image ? ghostPost.feature_image : config.shareImage
-    const publisherLogo = url.resolve(config.siteUrl, config.siteIcon)
+    const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
 
     return (
         <>
@@ -25,7 +28,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta name="description" content={ghostPost.meta_description || ghostPost.excerpt} />
                 <link rel="canonical" href={canonical} />
 
-                <meta property="og:site_name" content={config.siteTitle} />
+                <meta property="og:site_name" content={settings.title} />
                 <meta name="og:type" content="article" />
                 <meta name="og:title"
                     content={
@@ -45,7 +48,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta property="article:published_time" content={ghostPost.published_at} />
                 <meta property="article:modified_time" content={ghostPost.updated_at} />
                 {publicTags.map((keyword, i) => (<meta property="article:tag" content={keyword} key={i} />))}
-                <meta property="article:author" content="https://www.facebook.com/ghost/" />
+                {author.facebookUrl && <meta property="article:author" content={author.facebookUrl} />}
 
                 <meta name="twitter:title"
                     content={
@@ -64,11 +67,11 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta name="twitter:url" content={canonical} />
                 <meta name="twitter:label1" content="Written by" />
                 <meta name="twitter:data1" content={author.name} />
-                {primaryTag ? <meta name="twitter:label2" content="Filed under" /> : null}
-                {primaryTag ? <meta name="twitter:data2" content={primaryTag} /> : null}
+                {primaryTag && <meta name="twitter:label2" content="Filed under" />}
+                {primaryTag && <meta name="twitter:data2" content={primaryTag} />}
 
-                {config.twitterUser ? <meta name="twitter:site" content={`https://twitter.com/${_.trimStart(config.twitterUser, `@`)}/`} /> : null}
-                {config.twitterUser ? <meta name="twitter:creator" content={config.twitterUser} /> : null}
+                {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
+                {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
@@ -92,7 +95,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                         },
                         "publisher": {
                             "@type": "Organization",
-                            "name": "${config.publisherName}",
+                            "name": "${settings.title}",
                             "logo": {
                                 "@type": "ImageObject",
                                 "url": "${publisherLogo}",
@@ -137,8 +140,26 @@ ArticleMetaGhost.propTypes = {
         twitter_title: PropTypes.string,
         twitter_description: PropTypes.string,
         excerpt: PropTypes.string.isRequired,
+        allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
 }
 
-export default ArticleMetaGhost
+const ArticleMetaQuery = props => (
+    <StaticQuery
+        query={graphql`
+            query GhostSettingsArticleMeta {
+                allGhostSettings {
+                    edges {
+                        node {
+                            ...GhostSetttingsFields
+                        }
+                    }
+                }
+            }
+        `}
+        render={data => <ArticleMetaGhost settings={data} {...props} />}
+    />
+)
+
+export default ArticleMetaQuery
