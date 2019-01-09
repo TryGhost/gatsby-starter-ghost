@@ -213,8 +213,8 @@ export const ghostPageFields = graphql`
 `
 
 // Used for settings
-export const ghostSetttingsFields = graphql`
-    fragment GhostSetttingsFields on GhostSettings {
+export const ghostSettingsFields = graphql`
+    fragment GhostSettingsFields on GhostSettings {
         title
         description
         logo
