@@ -19,6 +19,7 @@ const PostCard = ({ post }) => {
                     {post.primary_author.name}
                 </div>
                 <div className="post-card-footer-right">
+                    {/* Todo: replace with reading time helper */}
                     2 min read
                 </div>
             </footer>
@@ -36,6 +37,9 @@ PostCard.propTypes = {
             })
         ),
         excerpt: PropTypes.string.isRequired,
+        primary_author: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }).isRequired,
     }).isRequired,
 }
 
