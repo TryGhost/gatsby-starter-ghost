@@ -1,7 +1,7 @@
 module.exports = {
     siteUrl: `https://gatsby.ghost.org`, // Site domain. Do not include a trailing slash!
 
-    postsPerPage: 5, // Number of posts shown on paginated pages
+    postsPerPage: 12, // Number of posts shown on paginated pages
 
     siteTitleMeta: `Ghost Gatsby Starter`, // This allows an alternative site title for meta data for pages.
     siteDescriptionMeta: `A starter template to build amazing static websites with Ghost and Gatbsy`, // This allows an alternative site description for meta data for pages.
