@@ -37,6 +37,7 @@ export const ghostPostFields = graphql`
         slug
         featured
         feature_image
+        excerpt
 
         # Dates formatted
         created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
@@ -124,6 +125,7 @@ export const ghostPageFields = graphql`
         slug
         featured
         feature_image
+        excerpt
 
         # Dates formatted
         created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
