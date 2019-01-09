@@ -91,7 +91,7 @@ const WebsiteMetaQuery = props => (
                 allGhostSettings {
                     edges {
                         node {
-                            ...GhostSetttingsFields
+                            ...GhostSettingsFields
                         }
                     }
                 }

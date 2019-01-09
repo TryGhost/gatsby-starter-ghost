@@ -112,7 +112,7 @@ const DefaultLayoutSettingsQuery = props => (
                 allGhostSettings {
                     edges {
                         node {
-                            ...GhostSetttingsFields
+                            ...GhostSettingsFields
                         }
                     }
                 }

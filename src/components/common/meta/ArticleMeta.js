@@ -154,7 +154,7 @@ const ArticleMetaQuery = props => (
                 allGhostSettings {
                     edges {
                         node {
-                            ...GhostSetttingsFields
+                            ...GhostSettingsFields
                         }
                     }
                 }

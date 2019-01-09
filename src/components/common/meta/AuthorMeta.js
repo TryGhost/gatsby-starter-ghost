@@ -79,7 +79,7 @@ const AuthorMetaQuery = props => (
                 allGhostSettings {
                     edges {
                         node {
-                            ...GhostSetttingsFields
+                            ...GhostSettingsFields
                         }
                     }
                 }
