@@ -25,6 +25,7 @@ what's here to work the way you'd like it to.
     --color-primary: #3eb0ef;
     --color-base: #15171A;
     --color-secondary: #5B7A81;
+    --color-border: #c7d5d8;
     --color-bg: #f5f5f5;
 
     /* Fonts */
@@ -39,7 +40,7 @@ what's here to work the way you'd like it to.
     /* Sizes */
     --height: 4rem;
     --margin: 2rem;
-    --radius: 0.5rem;
+    --radius: 0.6rem;
 
 }
 
@@ -543,6 +544,9 @@ h6 {
     .content-title {
         font-size: 2.2rem;
     }
+    .content {
+        font-size: 1.8rem;
+    }
 }
 
 .content-body {
@@ -784,8 +788,32 @@ h6 {
 /* Pagination
 /* ---------------------------------------------------------- */
 
+.pagination {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 4vw 0 0;
+}
+
 .pagination a {
-    color: var(--color-base);
+    display: inline-block;
+    padding: 10px 10px;
+    border: var(--color-border) 1px solid;
+    color: var(--color-secondary);
+    text-decoration: none;
+    line-height: 1em;
+    border-radius: var(--radius);
+}
+
+.pagination-location {
+    position: absolute;
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    text-align: center;
+    color: var(--color-secondary);
+    font-size: 1.3rem;
 }
 
 
@@ -805,11 +833,11 @@ h6 {
     justify-content: space-between;
 }
 
-.site-foot-nav-item {
+.site-foot-nav a {
     color: rgba(255,255,255,0.7);
 }
 
-.site-foot-nav-item:hover {
+.site-foot-nav a:hover {
     text-decoration: none;
     color: rgba(255,255,255,1);
 }

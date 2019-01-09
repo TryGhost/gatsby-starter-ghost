@@ -9,21 +9,20 @@ const Pagination = ({ pageContext }) => {
         <nav className="pagination" role="navigation">
             <div>
                 {previousPagePath && (
-                    <div>
-                        <Link to={previousPagePath} rel="prev">
+
+                    <Link to={previousPagePath} rel="prev">
                             Previous
-                        </Link>
-                    </div>
+                    </Link>
+
                 )}
-                <div>
-                    <p>{humanPageNumber} / {numberOfPages}</p>
-                </div>
+            </div>
+            <div className="pagination-location">Page {humanPageNumber} of {numberOfPages}</div>
+            <div>
                 {nextPagePath && (
-                    <div>
-                        <Link to={nextPagePath} rel="next">
+
+                    <Link to={nextPagePath} rel="next">
                             Next
-                        </Link>
-                    </div>
+                    </Link>
                 )}
             </div>
         </nav>
