@@ -19,14 +19,14 @@ import '../../styles/app.css'
 *
 */
 const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
-    const settings = data.allGhostSettings.edges[0].node
-    const twitterUrl = settings.twitter ? `https://twitter.com/${settings.twitter.replace(/^@/, ``)}` : null
-    const facebookUrl = settings.facebook ? `https://www.facebook.com/${settings.facebook.replace(/^\//, ``)}` : null
+    const site = data.allGhostSettings.edges[0].node
+    const twitterUrl = site.twitter ? `https://twitter.com/${site.twitter.replace(/^@/, ``)}` : null
+    const facebookUrl = site.facebook ? `https://www.facebook.com/${site.facebook.replace(/^\//, ``)}` : null
 
     return (
     <>
         <Helmet>
-            <html lang={settings.lang} />
+            <html lang={site.lang} />
             <body className={bodyClass} />
         </Helmet>
 
@@ -39,32 +39,28 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         <div className="site-mast">
                             <div className="site-mast-left">
                                 <Link to="/">
-                                    {/* The logo in the top left corner. When no logo is defined we fall back to
-                                    * a logo defined in /images using Gatsby image.
-                                    * Further info 👉🏼 https://www.gatsbyjs.org/docs/working-with-images/#optimizing-images-with-gatsby-image
-                                    */}
-                                    {settings.logo ?
-                                        <img className="site-logo" src={settings.logo} alt="logo" />
-                                        : <Img fixed={data.file.childImageSharp.fixed} alt="Ghost" />
+                                    {site.logo ?
+                                        <img className="site-logo" src={site.logo} alt="{site.title}" />
+                                        : <Img fixed={data.file.childImageSharp.fixed} alt="{site.title}" />
                                     }
                                 </Link>
                             </div>
                             <div className="site-mast-right">
-                                {settings.twitter && <a href={twitterUrl} className="site-nav-item" target="_blank" rel="noopener noreferrer">Twitter</a>}
-                                {settings.facebook && <a href={facebookUrl} className="site-nav-item" target="_blank" rel="noopener noreferrer">Facebook</a>}
+                                {site.twitter && <a href={twitterUrl} className="site-nav-item" target="_blank" rel="noopener noreferrer">Twitter</a>}
+                                {site.facebook && <a href={facebookUrl} className="site-nav-item" target="_blank" rel="noopener noreferrer">Facebook</a>}
                                 <a className="site-nav-item" href={`https://feedly.com/i/subscription/feed/${config.siteUrl}/rss/`} target="_blank" rel="noopener noreferrer">RSS</a>
                             </div>
                         </div>
                         { isHome ?
                             <div className="site-banner">
-                                <h1 className="site-banner-title">{settings.title}</h1>
-                                <p className="site-banner-desc">{settings.description}</p>
+                                <h1 className="site-banner-title">{site.title}</h1>
+                                <p className="site-banner-desc">{site.description}</p>
                             </div> :
                             null}
                         <nav className="site-nav">
                             <div className="site-nav-left">
                                 {/* The navigation items as setup in Ghost */}
-                                <Navigation data={settings.navigation} navClass="site-nav-item" />
+                                <Navigation data={site.navigation} navClass="site-nav-item" />
                             </div>
                             <div className="site-nav-right">
                                 <Link className="site-nav-item" to="/">Subscribe</Link>
@@ -85,10 +81,10 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                 <footer className="site-foot">
                     <div className="site-foot-nav container">
                         <div className="site-foot-nav-left">
-                    All content © 2019 London &mdash; Published with <a className="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
+                            <Link to="/">{site.title}</Link> © 2019 &mdash; Published with <a className="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
                         </div>
                         <div className="site-foot-nav-right">
-                            <Navigation data={settings.navigation} navClass="site-foot-nav-item" />
+                            <Navigation data={site.navigation} navClass="site-foot-nav-item" />
                         </div>
                     </div>
                 </footer>
