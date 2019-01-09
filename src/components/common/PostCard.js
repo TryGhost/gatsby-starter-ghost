@@ -35,6 +35,7 @@ PostCard.propTypes = {
                 name: PropTypes.string,
             })
         ),
+        excerpt: PropTypes.string.isRequired,
     }).isRequired,
 }
 
