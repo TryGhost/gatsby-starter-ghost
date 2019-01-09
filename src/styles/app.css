@@ -697,6 +697,14 @@ h6 {
     line-height: 1.55em;
 }
 
+.post-card-image {
+    margin: 0 0 10px 0;
+    width: auto;
+    height: 200px;
+    background: var(--color-secondary) no-repeat center center;
+    background-size: cover;
+}
+
 .post-card-footer {
     display: flex;
     justify-content: space-between;

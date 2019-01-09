@@ -9,6 +9,10 @@ const PostCard = ({ post }) => {
     return (
         <Link to={url} className="post-card">
             <header className="post-card-header">
+                {post.feature_image ? 
+                    <div className="post-card-image" style={{
+                        backgroundImage: `url(${post.feature_image})` ,
+                    }}></div> : null}
                 {post.tags ? <div className="post-card-tags"> <Tags post={post} visibility="public" autolink={false} /></div> : null}
                 {post.featured ? <span>Featured</span> : null}
                 <h2 className="post-card-title">{post.title}</h2>
@@ -30,6 +34,7 @@ const PostCard = ({ post }) => {
 PostCard.propTypes = {
     post: PropTypes.shape({
         title: PropTypes.string.isRequired,
+        feature_image: PropTypes.string,
         featured: PropTypes.bool,
         tags: PropTypes.arrayOf(
             PropTypes.shape({
