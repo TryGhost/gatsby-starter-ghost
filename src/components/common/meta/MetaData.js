@@ -8,6 +8,11 @@ import ArticleMeta from './ArticleMeta'
 import WebsiteMeta from './WebsiteMeta'
 import AuthorMeta from './AuthorMeta'
 
+/**
+* MetaData will generate all relevant meta data information incl.
+* JSON-LD (schema.org), Open Graph (Facebook) and Twitter properties.
+*
+*/
 const MetaData = ({
     data,
     settings,
