@@ -14,7 +14,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     const shareImage = url.resolve(config.siteUrl, image || data.feature_image || config.shareImage)
 
     description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
-    title = `${title} || ${data.meta_title || data.name || data.title} - ${settings.title}`
+    title = `${title || data.meta_title || data.name || data.title} - ${settings.title}`
 
     return (
         <>
