@@ -8,7 +8,6 @@ const generateItem = function generateItem(post) {
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     const item = {
         title: post.title,
-        // @TODO: DRY this up with data/meta/index & other excerpt code
         description: post.custom_excerpt || post.meta_description,
         guid: post.id,
         url: itemUrl,
