@@ -1,10 +1,18 @@
-/* TOC
+/* App.css
 /* ---------------------------------------------------------- /*
+
+These are just some base styles to get you started. You delete
+these and start over using your toolset of choice, or evolve
+what's here to work the way you'd like it to.
+
+# Table of Contents
 
 - Vars
 - Reset
 - Defaults
 - Layout
+- Pagination
+- Footer
 
 /* Variables
 /* ---------------------------------------------------------- */
@@ -14,7 +22,7 @@
     /* Colours */
     --color-primary: #3eb0ef;
     --color-base: #15171A;
-    --color-secondary: #a0a4a9;
+    --color-secondary: #5B7A81;
     --color-bg: #f5f5f5;
 
     /* Fonts */
@@ -677,6 +685,14 @@ h6 {
     justify-content: space-between;
     margin: 10px 0 0 0;
     color: var(--color-secondary);
+}
+
+
+/* Pagination
+/* ---------------------------------------------------------- */
+
+.pagination a {
+    color: var(--color-base);
 }
 
 
