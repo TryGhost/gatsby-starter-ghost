@@ -204,3 +204,24 @@ export const ghostPageFields = graphql`
         comment_id
     }
 `
+
+// Used for settings
+export const ghostSetttingsFields = graphql`
+    fragment GhostSetttingsFields on GhostSettings {
+        title
+        description
+        logo
+        # icon
+        cover_image
+        facebook
+        twitter
+        lang
+        timezone
+        # ghost_head
+        # ghost_food
+        navigation {
+            label
+            url
+        }
+    }
+`
