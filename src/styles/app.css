@@ -813,10 +813,11 @@ h6 {
 
 .pagination a {
     display: inline-block;
-    padding: 10px 10px;
+    padding: 10px 15px;
     border: var(--color-border) 1px solid;
     color: var(--color-secondary);
     text-decoration: none;
+    font-size: 1.4rem;
     line-height: 1em;
     border-radius: var(--radius);
 }
@@ -855,4 +856,13 @@ h6 {
 .site-foot-nav a:hover {
     text-decoration: none;
     color: rgba(255,255,255,1);
+}
+
+.site-foot-nav-right a {
+    display: inline-block;
+    padding: 2px 5px;
+}
+
+.site-foot-nav-right a:last-child {
+    padding-right: 0;
 }
