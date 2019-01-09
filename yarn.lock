@@ -732,9 +732,9 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@tryghost/content-api@^0.3.2":
-  version "0.3.2"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-0.3.2.tgz#5779a0f99907ae41f9d6375c6b4c2e9e6c06f392"
+"@tryghost/content-api@0.3.3":
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-0.3.3.tgz#7dbabc530ebce88bd8b5acfccc60641af05fa274"
   dependencies:
     axios "0.18.0"
     ghost-ignition "^2.9.6"
@@ -4903,7 +4903,6 @@ gatsby-plugin-sharp@2.0.15:
 gatsby-plugin-sitemap@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-sitemap/-/gatsby-plugin-sitemap-2.0.4.tgz#cb7221f8f9d3458b3efcf4aaffd140c108b18688"
-  integrity sha512-tL8f19AcbI0VTeBoDpSBA1WJTAObJwLCcpQAkjovqOh+Scb3s+UADT9VXZvaLKIk3zFx37aCqT+l+lpeTs/ghg==
   dependencies:
     "@babel/runtime" "^7.0.0"
     minimatch "^3.0.4"
@@ -4937,11 +4936,11 @@ gatsby-source-filesystem@2.0.12:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-ghost@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.1.0.tgz#1cec9c8766a3d3e2571ced5424e8f283707e57a0"
+gatsby-source-ghost@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.1.1.tgz#2e828f8224a420453fc063255f4d35941f6a50cd"
   dependencies:
-    "@tryghost/content-api" "^0.3.2"
+    "@tryghost/content-api" "0.3.3"
     bluebird "^3.5.1"
     gatsby-node-helpers "^0.3.0"
     qs "^6.5.2"
@@ -9543,7 +9542,6 @@ simple-swizzle@^0.2.2:
 sitemap@^1.12.0:
   version "1.13.0"
   resolved "https://registry.yarnpkg.com/sitemap/-/sitemap-1.13.0.tgz#569cbe2180202926a62a266cd3de09c9ceb43f83"
-  integrity sha1-Vpy+IYAgKSamKiZs094Jyc60P4M=
   dependencies:
     underscore "^1.7.0"
     url-join "^1.1.0"
@@ -10433,7 +10431,6 @@ unc-path-regex@^0.1.2:
 underscore@^1.7.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/underscore/-/underscore-1.9.1.tgz#06dce34a0e68a7babc29b365b8e74b8925203961"
-  integrity sha512-5/4etnCkd9c8gwgowi5/om/mYO5ajCaOgdzj/oW+0eQV9WxKBDZw5+ycmKmeaTXjInS/W0BzpGLo2xR2aBwZdg==
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"
@@ -10555,7 +10552,6 @@ urix@^0.1.0:
 url-join@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
-  integrity sha1-dBxsL0WWxIMNZxhGCSDQySIC3Hg=
 
 url-loader@^1.0.1:
   version "1.1.2"
