@@ -726,13 +726,42 @@ h6 {
 
 .post-card-footer {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin: 10px 0 0 0;
     color: var(--color-secondary);
+}
+
+.post-card-footer-left {
+    display: flex;
+    align-items: center;
 }
 
 .post-card-footer-right {
     display: flex;
     flex-direction: column;
+}
+
+.post-card-avatar {
+    width: 30px;
+    height: 30px;
+    margin: 0 7px 0 0;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-card-avatar .author-profile-image {
+    display: block;
+    width: 100%;
+    background: var(--color-secondary);
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.post-card-avatar .default-avatar {
+    width: 26px;
 }
 
 
