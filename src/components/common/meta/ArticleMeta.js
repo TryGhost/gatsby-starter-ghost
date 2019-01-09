@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import _ from 'lodash'
 import url from 'url'
 
-import getPostExcerpt from '../../../utils/getPostExcerpt'
 import getAuthorProperties from './getAuthorProperties'
 import ImageMeta from './ImageMeta'
 import config from '../../../utils/siteConfig'
@@ -13,7 +12,6 @@ import { tags as tagsHelper } from '@tryghost/helpers'
 
 const ArticleMetaGhost = ({ data, canonical }) => {
     const ghostPost = data
-    const excerpt = getPostExcerpt(ghostPost)
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = publicTags[0] || ``
@@ -24,7 +22,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
         <>
             <Helmet>
                 <title>{ghostPost.meta_title || ghostPost.title}</title>
-                <meta name="description" content={ghostPost.meta_description || excerpt} />
+                <meta name="description" content={ghostPost.meta_description || ghostPost.excerpt} />
                 <link rel="canonical" href={canonical} />
 
                 <meta property="og:site_name" content={config.siteTitle} />
@@ -39,7 +37,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta name="og:description"
                     content={
                         ghostPost.og_description ||
-                        excerpt ||
+                        ghostPost.excerpt ||
                         ghostPost.meta_description
                     }
                 />
@@ -59,7 +57,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                 <meta name="twitter:description"
                     content={
                         ghostPost.twitter_description ||
-                        excerpt ||
+                        ghostPost.excerpt ||
                         ghostPost.meta_description
                     }
                 />
@@ -102,7 +100,7 @@ const ArticleMetaGhost = ({ data, canonical }) => {
                                 "height": 60
                             }
                         },
-                        "description": "${ghostPost.meta_description || excerpt}",
+                        "description": "${ghostPost.meta_description || ghostPost.excerpt}",
                         "mainEntityOfPage": {
                             "@type": "WebPage",
                             "@id": "${config.siteUrl}"
@@ -138,6 +136,7 @@ ArticleMetaGhost.propTypes = {
         og_description: PropTypes.string,
         twitter_title: PropTypes.string,
         twitter_description: PropTypes.string,
+        excerpt: PropTypes.string.isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
 }
