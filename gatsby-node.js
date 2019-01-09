@@ -4,9 +4,16 @@ const path = require(`path`)
 const config = require(`./src/utils/siteConfig`)
 const { paginate } = require(`gatsby-awesome-pagination`)
 
+/**
+* Here is the place where Gatsby creates the URLs for all the
+* posts, tags, pages and authors that we fetched from the Ghost site.
+*/
 exports.createPages = ({ graphql, actions }) => {
     const { createPage } = actions
 
+    /**
+    * Posts
+    */
     const createPosts = new Promise((resolve, reject) => {
         const postTemplate = path.resolve(`./src/templates/post.js`)
         const indexTemplate = path.resolve(`./src/templates/index.js`)
@@ -38,8 +45,8 @@ exports.createPages = ({ graphql, actions }) => {
                 const items = result.data.allGhostPost.edges
 
                 _.forEach(items, ({ node }) => {
-                    // Update the existing URL field to reflect the URL in Gatsby and
-                    // not in Ghost. Also needed to link to related posts.
+                    // This part here defines, that our posts will use
+                    // a `/:slug/` permalink.
                     node.url = `/${node.slug}/`
 
                     createPage({
@@ -73,6 +80,9 @@ exports.createPages = ({ graphql, actions }) => {
         )
     })
 
+    /**
+    * Tags
+    */
     const createTags = new Promise((resolve, reject) => {
         const tagsTemplate = path.resolve(`./src/templates/tag.js`)
         resolve(
@@ -109,8 +119,8 @@ exports.createPages = ({ graphql, actions }) => {
                     const totalPosts = node.postCount !== null ? node.postCount : 0
                     const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-                    // Update the existing URL field to reflect the URL in Gatsby and
-                    // not in Ghost.
+                    // This part here defines, that our tag pages will use
+                    // a `/tag/:slug/` permalink.
                     node.url = `/tag/${node.slug}/`
 
                     Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -145,6 +155,9 @@ exports.createPages = ({ graphql, actions }) => {
         )
     })
 
+    /**
+    * Authors
+    */
     const createAuthors = new Promise((resolve, reject) => {
         const authorTemplate = path.resolve(`./src/templates/author.js`)
         resolve(
@@ -181,8 +194,8 @@ exports.createPages = ({ graphql, actions }) => {
                     const totalPosts = node.postCount !== null ? node.postCount : 0
                     const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
-                    // Update the existing URL field to reflect the URL in Gatsby and
-                    // not in Ghost.
+                    // This part here defines, that our author pages will use
+                    // a `/author/:slug/` permalink.
                     node.url = `/author/${node.slug}/`
 
                     Array.from({ length: numberOfPages }).forEach((_, i) => {
@@ -216,6 +229,9 @@ exports.createPages = ({ graphql, actions }) => {
         )
     })
 
+    /**
+    * Pages
+    */
     const createPages = new Promise((resolve, reject) => {
         const pageTemplate = path.resolve(`./src/templates/page.js`)
         resolve(
@@ -247,8 +263,8 @@ exports.createPages = ({ graphql, actions }) => {
                 const items = result.data.allGhostPage.edges
 
                 _.forEach(items, ({ node }) => {
-                    // Update the existing URL field to reflect the URL in Gatsby and
-                    // not in Ghost.
+                    // This part here defines, that our pages will use
+                    // a `/:slug/` permalink.
                     node.url = `/${node.slug}/`
 
                     createPage({
