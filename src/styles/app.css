@@ -604,6 +604,10 @@ h6 {
     margin: 0 -10px 0 20px;
 }
 
+.site-mast-right .site-nav-item:last-child {
+    padding-right: 0;
+}
+
 .site-banner {
     max-width: 80%;
     margin: 0 auto;
