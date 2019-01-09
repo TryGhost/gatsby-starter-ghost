@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { StaticQuery, graphql } from 'gatsby'
 import url from 'url'
 
 import config from '../../../utils/siteConfig'
@@ -9,6 +10,7 @@ import AuthorMeta from './AuthorMeta'
 
 const MetaData = ({
     data,
+    settings,
     title,
     description,
     image,
@@ -16,6 +18,7 @@ const MetaData = ({
 }) => {
     const canonical = url.resolve(config.siteUrl, location.pathname, `/`)
     const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data
+    settings = settings.allGhostSettings.edges[0].node
 
     if (ghostPost) {
         return (
@@ -48,8 +51,8 @@ const MetaData = ({
             />
         )
     } else {
-        title = title || config.siteTitleMeta
-        description = description || config.siteDescriptionMeta
+        title = title || config.siteTitleMeta || settings.title
+        description = description || config.siteDescriptionMeta || settings.description
         image = url.resolve(config.siteUrl, image || config.shareImage)
 
         return (
@@ -76,6 +79,9 @@ MetaData.propTypes = {
         ghostAuthor: PropTypes.object,
         ghostPage: PropTypes.object,
     }).isRequired,
+    settings: PropTypes.shape({
+        allGhostSettings: PropTypes.object.isRequired,
+    }).isRequired,
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
     }).isRequired,
@@ -84,4 +90,22 @@ MetaData.propTypes = {
     image: PropTypes.string,
 }
 
-export default MetaData
+const MetaDataQuery = props => (
+    <StaticQuery
+        query={graphql`
+            query GhostSettingsMetaData {
+                allGhostSettings {
+                    edges {
+                        node {
+                            title
+                            description
+                        }
+                    }
+                }
+            }
+        `}
+        render={data => <MetaData settings={data} {...props} />}
+    />
+)
+
+export default MetaDataQuery
