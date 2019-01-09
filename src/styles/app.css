@@ -583,6 +583,11 @@ h6 {
     opacity: 1;
 }
 
+.site-nav-icon {
+    height: 15px;
+    margin: -5px 0 0;
+}
+
 .site-logo {
     height: 25px;
 }
@@ -594,6 +599,8 @@ h6 {
 }
 
 .site-mast-right {
+    display: flex;
+    align-items: center;
     margin: 0 -10px 0 20px;
 }
 
