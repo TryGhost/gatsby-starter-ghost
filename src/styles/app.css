@@ -11,6 +11,8 @@ what's here to work the way you'd like it to.
 - Reset
 - Defaults
 - Layout
+- Tag Archives
+- Author Archives
 - Pagination
 - Footer
 
@@ -33,13 +35,6 @@ what's here to work the way you'd like it to.
     --font-normal: 400;
     --font-bold: 700;
     --font-heavy: 800;
-
-    /* Breakpoints */
-    --xlarge: 1680px;
-    --large: 1280px;
-    --medium: 980px;
-    --small: 740px;
-    --xsmall: 480px;
 
     /* Sizes */
     --height: 4rem;
@@ -696,6 +691,56 @@ h6 {
     justify-content: space-between;
     margin: 10px 0 0 0;
     color: var(--color-secondary);
+}
+
+
+/* Tag Archives
+/* ---------------------------------------------------------- */
+
+.tag-header {
+    max-width: 690px;
+    margin: 0 0 4vw;
+}
+
+.tag-header h1 {
+    margin: 0 0 1rem 0;
+}
+
+.tag-header p {
+    margin: 0;
+    color: var(--color-secondary);
+    font-size: 2.2rem;
+    line-height: 1.3em;
+}
+
+@media (max-width: 500px) {
+    .tag-header {
+        border-bottom: var(--color-bg) 1px solid;
+        padding-bottom: 4vw;
+    }
+    .tag-header p {
+        font-size: 1.7rem;
+    }
+}
+
+
+/* Author Archives
+/* ---------------------------------------------------------- */
+
+.author-header {
+    max-width: 690px;
+    margin: 0 0 4vw;
+}
+
+.author-header h1 {
+    margin: 0 0 1rem 0;
+}
+
+.author-header p {
+    margin: 0;
+    color: var(--color-secondary);
+    font-size: 1.8rem;
+    line-height: 1.3em;
 }
 
 
