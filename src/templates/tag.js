@@ -5,6 +5,12 @@ import { graphql } from 'gatsby'
 import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
+/**
+* Tag page (/tag/:slug)
+*
+* Loads all posts for the requested tag incl. pagination.
+*
+*/
 const Tag = ({ data, location, pageContext }) => {
     const tag = data.ghostTag
     const posts = data.allGhostPost.edges

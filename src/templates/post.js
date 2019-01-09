@@ -5,6 +5,12 @@ import { graphql } from 'gatsby'
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
+/**
+* Single post view (/:slug)
+*
+* This file renders a single post and loads all the content.
+*
+*/
 const Post = ({ data, location }) => {
     const post = data.ghostPost
 
@@ -19,6 +25,8 @@ const Post = ({ data, location }) => {
                     <div className="container">
                         <article className="content">
                             <h1 className="content-title">{post.title}</h1>
+
+                            {/* The main post content */}
                             <section
                                 className="content-body load-external-scripts"
                                 dangerouslySetInnerHTML={{ __html: post.html }}

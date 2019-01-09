@@ -5,6 +5,12 @@ import { graphql } from 'gatsby'
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
+/**
+* Single page (/:slug)
+*
+* This file renders a single page and loads all the content.
+*
+*/
 const Page = ({ data, location }) => {
     const page = data.ghostPage
 
@@ -18,6 +24,8 @@ const Page = ({ data, location }) => {
             <Layout>
                 <article className="content container">
                     <h1 className="content-title">{page.title}</h1>
+
+                    {/* The main post content */}
                     <section
                         className="content-body load-external-scripts"
                         dangerouslySetInnerHTML={{ __html: page.html }}

@@ -5,6 +5,12 @@ import { graphql } from 'gatsby'
 import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
+/**
+* Author page (/author/:slug)
+*
+* Loads all posts for the requested author incl. pagination.
+*
+*/
 const Author = ({ data, location, pageContext }) => {
     const author = data.ghostAuthor
     const posts = data.allGhostPost.edges
