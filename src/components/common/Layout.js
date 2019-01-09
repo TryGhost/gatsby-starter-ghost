@@ -39,7 +39,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                         <div className="site-mast">
                             <div className="site-mast-left">
                                 <Link to="/">
-                                    {/* The logoe in the top left corner. When no logo is defined we fall back to
+                                    {/* The logo in the top left corner. When no logo is defined we fall back to
                                     * a logo defined in /images using Gatsby image.
                                     * Further info 👉🏼 https://www.gatsbyjs.org/docs/working-with-images/#optimizing-images-with-gatsby-image
                                     */}
