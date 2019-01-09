@@ -22,6 +22,11 @@ import { MetaData } from '../components/common/meta'
 */
 const AboutPage = ({ location }) => (
         <>
+            {/* Pages that are created with Gatsby need to have their own meta data
+            * properties like title and description. You can set them up here, or
+            * let the fallback values (siteTitleMeta, siteDescriptionMeta, shareImage) work instead.
+            * In that case, you can simply remove title, description, and image here.
+            */}
             <MetaData
                 location={location}
                 title="About Ghost + Gatsby"
