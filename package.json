@@ -30,8 +30,8 @@
     "eslint-plugin-react": "7.11.1"
   },
   "dependencies": {
-    "@tryghost/helpers": "0.2.0",
-    "@tryghost/helpers-gatsby": "0.2.0",
+    "@tryghost/helpers": "0.3.0",
+    "@tryghost/helpers-gatsby": "0.2.6",
     "cheerio": "^1.0.0-rc.2",
     "gatsby": "2.0.67",
     "gatsby-awesome-pagination": "0.3.3",

@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
 import { Tags } from '@tryghost/helpers-gatsby'
+import { readingTime as readingTimeHelper } from '@tryghost/helpers'
 
 const PostCard = ({ post }) => {
     const url = `${post.slug}/`
+    const readingTime = readingTimeHelper(post)
 
     return (
         <Link to={url} className="post-card">
@@ -24,8 +26,7 @@ const PostCard = ({ post }) => {
                 </div>
                 <div className="post-card-footer-right">
                     {post.primary_author.name}
-                    {/* Todo: replace with reading time helper */}
-                    <div>2 min read</div>
+                    <div>{readingTime}</div>
                 </div>
             </footer>
         </Link>
