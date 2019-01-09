@@ -50,7 +50,10 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                             null}
                         <nav className="site-nav">
                             <div className="site-nav-left">
-
+                                {/* The navigation items as setup in Ghost */}
+                                {settings.navigation.map((navItem, i) => (
+                                    <Link to={navItem.url} key={i}>{navItem.label}</Link>
+                                ))}
                             </div>
                             <div className="site-nav-right">
                                 <Link className="site-nav-item" to="/">Subscribe</Link>
