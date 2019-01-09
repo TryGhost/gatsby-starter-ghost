@@ -77,7 +77,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
                     All content © 2019 London &mdash; Published with <a className="site-foot-nav-item" href="https://ghost.org" target="_blank" rel="noopener noreferrer">Ghost</a>
                         </div>
                         <div className="site-foot-nav-right">
-                            <Link className="site-foot-nav-item" to="/">Home</Link>
+                            <Navigation data={settings.navigation} navClass="site-foot-nav-item" />
                         </div>
                     </div>
                 </footer>
