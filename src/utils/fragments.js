@@ -218,14 +218,14 @@ export const ghostSettingsFields = graphql`
         title
         description
         logo
-        # icon
+        icon
         cover_image
         facebook
         twitter
         lang
         timezone
-        # ghost_head
-        # ghost_food
+        ghost_head
+        ghost_foot
         navigation {
             label
             url

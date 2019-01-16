@@ -44,10 +44,6 @@ By default, the starter will populate content from a default Ghost install locat
 
 To use your own install, edit the `.ghost.json` config file with your credentials. You can find or your `contentApiKey` in the "Integrations" screen in Ghost Admin.
 
-Because of how Gatsby/GraphQL work, at least 1 copy of every object/field must exist in Ghost for things to function correctly. That means you must have at least 1 post, author, tag, etc - with every single field populated - for the queries to work properly.
-
-As a shortcut, you can download and import this 👉🏼 [data-stub.json](https://gist.github.com/AileenCGN/172ed94bcd18a328034e0259dbf3e702) - which will automatically populate all the required fields, and then be excluded from the Gatsby build.
-
 &nbsp;
 
 # Deploying with Netlify

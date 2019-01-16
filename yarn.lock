@@ -732,9 +732,9 @@
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
 
-"@tryghost/content-api@0.3.3":
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-0.3.3.tgz#7dbabc530ebce88bd8b5acfccc60641af05fa274"
+"@tryghost/content-api@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.0.0.tgz#34da08f5f5e799d9ec31940df554072b7e5ef57c"
   dependencies:
     axios "0.18.0"
     ghost-ignition "^2.9.6"
@@ -742,7 +742,6 @@
 "@tryghost/helpers-gatsby@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-1.0.0.tgz#fddd76a01e3d324ffec7ded6f8e99ec00bf13c21"
-  integrity sha512-y18dC4ebelheGI8FN2GaXRHuD5LsZK1z/+Elxga3WHDXmNcMpUYsaRrKuYDvRITz6GqOqPQEiT1+hC7+CMm00g==
   dependencies:
     "@tryghost/helpers" "^1.0.0"
     gatsby-link "^2.0.7"
@@ -751,7 +750,6 @@
 "@tryghost/helpers@1.0.0", "@tryghost/helpers@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-1.0.0.tgz#e474d54fe6c8a08a9c97bcaf8b1b4ab4a4f950fd"
-  integrity sha512-r5u+KwvSzWMY+i7q7BVWgFd1lXBALybQJlPRR6Rv4ipmHNv55JccEXVLlfJRslohBexoQ8dKs4Jn5tfyUyQppw==
   dependencies:
     lodash-es "^4.17.11"
 
@@ -4936,11 +4934,11 @@ gatsby-source-filesystem@2.0.12:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-ghost@3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.1.1.tgz#2e828f8224a420453fc063255f4d35941f6a50cd"
+gatsby-source-ghost@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.2.0.tgz#85af8ebf7d1fc32f86694432537372f451b3c5b3"
   dependencies:
-    "@tryghost/content-api" "0.3.3"
+    "@tryghost/content-api" "1.0.0"
     bluebird "^3.5.1"
     gatsby-node-helpers "^0.3.0"
     qs "^6.5.2"
