@@ -224,8 +224,8 @@ export const ghostSettingsFields = graphql`
         twitter
         lang
         timezone
-        ghost_head
-        ghost_foot
+        codeinjection_head
+        codeinjection_foot
         navigation {
             label
             url

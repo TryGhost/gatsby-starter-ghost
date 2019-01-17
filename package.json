@@ -44,7 +44,7 @@
     "gatsby-plugin-sharp": "2.0.15",
     "gatsby-plugin-sitemap": "^2.0.4",
     "gatsby-source-filesystem": "2.0.12",
-    "gatsby-source-ghost": "3.2.0",
+    "gatsby-source-ghost": "3.3.0",
     "gatsby-transformer-sharp": "2.1.9",
     "lodash": "4.17.11",
     "react": "16.5.1",

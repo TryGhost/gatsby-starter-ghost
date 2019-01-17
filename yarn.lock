@@ -4934,9 +4934,9 @@ gatsby-source-filesystem@2.0.12:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-ghost@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.2.0.tgz#85af8ebf7d1fc32f86694432537372f451b3c5b3"
+gatsby-source-ghost@3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.3.0.tgz#0976da2ed05eaa53f7d3cc5d6e28211519efc23e"
   dependencies:
     "@tryghost/content-api" "1.0.0"
     bluebird "^3.5.1"
