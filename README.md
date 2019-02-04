@@ -76,7 +76,7 @@ gatsby build
 gatsby serve
 ```
 
-Gatsby `develop` uses the `dev` config in `ghost.json` - while Gatsby `serve` uses the `production` config.
+Gatsby `develop` uses the `dev` config in `.ghost.json` - while Gatsby `build` uses the `production` config.
 
 &nbsp;
 
