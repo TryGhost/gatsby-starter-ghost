@@ -1,0 +1,20 @@
+{
+    "name": "gatsby-plugin-html-to-mobiledoc",
+    "description": "Gatsby plugin which adds a manifest.webmanifest to make sites progressive web apps",
+    "version": "0.0.1",
+    "author": "Me",
+    "keywords": [
+        "gatsby",
+        "gatsby-plugin",
+        "favicon",
+        "icons",
+        "manifest.webmanifest",
+        "progressive-web-app",
+        "pwa"
+    ],
+    "license": "MIT",
+    "main": "index.js",
+    "peerDependencies": {
+        "gatsby": ">2.0.0-alpha"
+    }
+}

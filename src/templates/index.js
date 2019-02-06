@@ -58,6 +58,14 @@ export const pageQuery = graphql`
       edges {
         node {
           ...GhostPostFields
+          feature_image_local{
+            childImageSharp {
+              fluid(maxWidth: 500, quality: 100) {
+                ...GatsbyImageSharpFluid_withWebp
+                presentationWidth
+              }
+            }
+          }
         }
       }
     }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 
-import { Layout } from '../components/common'
+import { Layout, Mobiledoc } from '../components/common'
 import { MetaData } from '../components/common/meta'
 
 /**
@@ -13,6 +13,7 @@ import { MetaData } from '../components/common/meta'
 */
 const Page = ({ data, location }) => {
     const page = data.ghostPage
+    const files = data.allFile.edges
 
     return (
         <>
@@ -28,9 +29,9 @@ const Page = ({ data, location }) => {
 
                         {/* The main page content */}
                         <section
-                            className="content-body load-external-scripts"
-                            dangerouslySetInnerHTML={{ __html: page.html }}
-                        />
+                            className="content-body load-external-scripts">
+                            <Mobiledoc mobiledoc={page.parsed_mobiledoc.mobiledoc} files={files}/>
+                        </section>
                     </article>
                 </div>
             </Layout>
@@ -55,6 +56,21 @@ export const postQuery = graphql`
     query($slug: String!) {
         ghostPage(slug: { eq: $slug }) {
             ...GhostPageFields
+        }
+        allFile {
+          edges {
+            node {
+              id
+              publicURL
+              childImageSharp {
+                id
+                fluid(maxWidth: 1000, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp
+                  presentationWidth
+                }
+              }
+            }
+          }
         }
     }
 `

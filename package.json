@@ -33,8 +33,10 @@
     "eslint-plugin-react": "7.11.1"
   },
   "dependencies": {
+    "@dailybeast/mobiledoc-react-renderer": "^1.2.1",
     "@tryghost/helpers": "1.0.0",
     "@tryghost/helpers-gatsby": "1.0.0",
+    "@tryghost/html-to-mobiledoc": "^0.2.1",
     "cheerio": "^1.0.0-rc.2",
     "gatsby": "2.0.67",
     "gatsby-awesome-pagination": "0.3.3",
@@ -44,14 +46,18 @@
     "gatsby-plugin-manifest": "2.0.12",
     "gatsby-plugin-offline": "2.0.19",
     "gatsby-plugin-react-helmet": "3.0.4",
+    "gatsby-plugin-remote-images": "^1.0.1",
     "gatsby-plugin-sharp": "2.0.15",
     "gatsby-plugin-sitemap": "^2.0.4",
     "gatsby-source-filesystem": "2.0.12",
     "gatsby-source-ghost": "3.3.0",
     "gatsby-transformer-sharp": "2.1.9",
+    "image-size": "^0.7.1",
     "lodash": "4.17.11",
     "react": "16.5.1",
     "react-dom": "16.5.1",
-    "react-helmet": "5.2.0"
+    "react-helmet": "5.2.0",
+    "utila": "^0.5.0-dev.1",
+    "verror": "^1.10.0"
   }
 }

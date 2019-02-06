@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 
 import { Layout, PostCard, Pagination } from '../components/common'
 import { MetaData } from '../components/common/meta'
@@ -37,7 +38,12 @@ const Author = ({ data, location, pageContext }) => {
                             </div>
                         </div>
                         <div className="author-header-image">
-                            {author.profile_image && <img src={author.profile_image} alt={author.name} />}
+                            {author.profile_image ?
+                                author.profile_image_local ?
+                                    <Img className="author-profile-image" alt={author.name} fixed={author.profile_image_local.childImageSharp.fixed} /> :
+                                    <img src={author.profile_image} alt={author.name} /> :
+                                <img className="default-avatar" src="/images/icons/avatar.svg" alt={author.name}/>
+                            }
                         </div>
                     </header>
                     <section className="post-feed">
@@ -87,7 +93,15 @@ export const pageQuery = graphql`
         ) {
             edges {
                 node {
-                ...GhostPostFields
+                  ...GhostPostFields
+                  feature_image_local{
+                    childImageSharp {
+                      fluid(maxWidth: 1000, quality: 100) {
+                        ...GatsbyImageSharpFluid_withWebp
+                        presentationWidth
+                      }
+                    }
+                  }
                 }
             }
         }
