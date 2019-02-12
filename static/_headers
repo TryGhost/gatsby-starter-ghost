@@ -10,4 +10,4 @@
   Feature-Policy: accelerometer 'none'; camera 'none'; geolocation 'none'; gyroscope 'none'; magnetometer 'none'; microphone 'none'; payment 'none'; usb 'none'
 
 /rss
-  content-type: "application/rss+xml"
+  content-type: application/rss+xml; charset=UTF-8
