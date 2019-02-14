@@ -35,7 +35,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
-                        "@type": ${type},
+                        "@type": "${type}",
                         "url": "${canonical}",
                         "image": {
                             "@type": "ImageObject",
