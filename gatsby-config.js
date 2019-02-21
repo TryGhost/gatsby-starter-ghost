@@ -108,7 +108,7 @@ module.exports = {
                 ],
             },
         },
-        `gatsby-plugin-sitemap`,
+        `gatsby-plugin-ghost-sitemap`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-force-trailing-slashes`,
         `gatsby-plugin-offline`,
