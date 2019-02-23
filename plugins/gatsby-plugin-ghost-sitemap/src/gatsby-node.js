@@ -1,7 +1,7 @@
 import path from 'path'
 import url from 'url'
 import fs from 'fs-extra'
-import { defaultOptions, runQuery, writeFile } from './internals'
+import { defaultOptions, runQuery } from './internals'
 import Manager from './SiteMapManager'
 
 const publicPath = `./public`
