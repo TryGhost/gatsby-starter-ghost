@@ -62,6 +62,14 @@ function () {
 
   _proto.getSiteMapXml = function getSiteMapXml(type) {
     return this[type].getXml();
+  } // This is the equivalent of adding the URLs on bootstrap by listening to the events
+  // like we do in Ghost core
+  ;
+
+  _proto.addUrl = function addUrl(type, _ref) {
+    var url = _ref.url,
+        node = _ref.node;
+    return this[type].addUrl(url, node);
   };
 
   return SiteMapManager;
