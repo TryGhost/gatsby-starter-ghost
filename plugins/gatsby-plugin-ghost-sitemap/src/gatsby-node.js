@@ -1,5 +1,6 @@
 import path from 'path'
 import url from 'url'
+import fs from 'fs-extra'
 import { defaultOptions, runQuery, writeFile } from './internals'
 import Manager from './SiteMapManager'
 
@@ -42,7 +43,7 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         ...options,
     }
 
-    // const saved = path.join(publicPath, output)
+    const saved = path.join(publicPath, output)
 
     const manager = new Manager()
 
@@ -64,6 +65,13 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         }
     })
 
-    // return await writeFile(saved, map.toString())
+    const indexSiteMap = manager.getIndexXml()
+
+    try {
+        await fs.writeFile(saved, indexSiteMap)
+    } catch (err) {
+        console.error(err)
+    }
+
     return
 }

@@ -17,6 +17,8 @@ var _path = _interopRequireDefault(require("path"));
 
 var _url = _interopRequireDefault(require("url"));
 
+var _fsExtra = _interopRequireDefault(require("fs-extra"));
+
 var _internals = require("./internals");
 
 var _SiteMapManager = _interopRequireDefault(require("./SiteMapManager"));
@@ -62,7 +64,7 @@ function () {
   var _ref3 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee(_ref2, pluginOptions) {
-    var graphql, pathPrefix, options, _defaultOptions$optio, query, output, exclude, mapping, manager, excludeOptions, queryRecords;
+    var graphql, pathPrefix, options, _defaultOptions$optio, query, output, exclude, mapping, saved, manager, excludeOptions, queryRecords, indexSiteMap;
 
     return _regenerator.default.wrap(function _callee$(_context) {
       while (1) {
@@ -72,15 +74,15 @@ function () {
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
             delete options.createLinkInHead;
-            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, output = _defaultOptions$optio.output, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping; // const saved = path.join(publicPath, output)
-
+            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, output = _defaultOptions$optio.output, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping;
+            saved = _path.default.join(publicPath, output);
             manager = new _SiteMapManager.default(); // Paths we're excluding...
 
             excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
-            _context.next = 9;
+            _context.next = 10;
             return (0, _internals.runQuery)(graphql, query, excludeOptions, pathPrefix);
 
-          case 9:
+          case 10:
             queryRecords = _context.sent;
             serialize(queryRecords, mapping).forEach(function (source) {
               var _loop2 = function _loop2(type) {
@@ -92,16 +94,30 @@ function () {
               for (var type in source) {
                 _loop2(type);
               }
-            }); // return await writeFile(saved, map.toString())
+            });
+            indexSiteMap = manager.getIndexXml();
+            _context.prev = 13;
+            _context.next = 16;
+            return _fsExtra.default.writeFile(saved, indexSiteMap);
 
+          case 16:
+            _context.next = 21;
+            break;
+
+          case 18:
+            _context.prev = 18;
+            _context.t0 = _context["catch"](13);
+            console.error(_context.t0);
+
+          case 21:
             return _context.abrupt("return");
 
-          case 12:
+          case 22:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this);
+    }, _callee, this, [[13, 18]]);
   }));
 
   return function onPostBuild(_x, _x2) {
