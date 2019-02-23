@@ -40,6 +40,7 @@ export const defaultOptions = {
       ) {
         edges {
             node {
+                id
                 slug
                 updated_at
                 created_at
@@ -53,6 +54,7 @@ export const defaultOptions = {
       ) {
         edges {
             node {
+                id
                 slug
                 updated_at
                 created_at
@@ -66,6 +68,7 @@ export const defaultOptions = {
       ) {
         edges {
             node {
+                id
                 slug
                 feature_image
             }
@@ -77,6 +80,7 @@ export const defaultOptions = {
       ) {
         edges {
             node {
+                id
                 slug
                 profile_image
             }

@@ -37,26 +37,28 @@ function () {
   var _proto = BaseSiteMapGenerator.prototype;
 
   _proto.generateXmlFromNodes = function generateXmlFromNodes() {
-    var self = this,
-        // Get a mapping of node to timestamp
-    timedNodes = _lodash.default.map(this.nodeLookup, function (node, id) {
+    var self = this; // Get a mapping of node to timestamp
+
+    var timedNodes = _lodash.default.map(this.nodeLookup, function (node, id) {
       return {
         id: id,
         // Using negative here to sort newest to oldest
         ts: -(self.nodeTimeLookup[id] || 0),
         node: node
       };
-    }, []),
-        // Sort nodes by timestamp
-    sortedNodes = _lodash.default.sortBy(timedNodes, "ts"),
-        // Grab just the nodes
-    urlElements = _lodash.default.map(sortedNodes, "node"),
-        data = {
+    }, []); // Sort nodes by timestamp
+
+
+    var sortedNodes = _lodash.default.sortBy(timedNodes, "ts"); // Grab just the nodes
+
+
+    var urlElements = _lodash.default.map(sortedNodes, "node");
+
+    var data = {
       // Concat the elements to the _attr declaration
       urlset: [XMLNS_DECLS].concat(urlElements) // Return the xml
 
     };
-
     return _utils.default.getDeclarations() + (0, _xml.default)(data);
   };
 

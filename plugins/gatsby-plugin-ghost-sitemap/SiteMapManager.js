@@ -66,7 +66,7 @@ function () {
   // like we do in Ghost core
   ;
 
-  _proto.addUrl = function addUrl(type, _ref) {
+  _proto.addUrls = function addUrls(type, _ref) {
     var url = _ref.url,
         node = _ref.node;
     return this[type].addUrl(url, node);

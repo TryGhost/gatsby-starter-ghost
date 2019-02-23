@@ -90,7 +90,7 @@ function () {
             serialize(queryRecords, mapping).forEach(function (source) {
               var _loop2 = function _loop2(type) {
                 source[type].forEach(function (node) {
-                  manager.addUrl(type, node);
+                  manager.addUrls(type, node);
                 });
               };
 
@@ -124,14 +124,14 @@ function () {
                 type: type,
                 xml: manager.getSiteMapXml(type)
               });
-            }
+            } // Save the generated xml files in the public folder
 
-            console.log("TCL: resourcesSiteMapsArray", resourcesSiteMapsArray);
-            _context2.prev = 26;
-            _context2.next = 29;
+
+            _context2.prev = 25;
+            _context2.next = 28;
             return _fsExtra.default.writeFile(indexSitemapFile, indexSiteMap);
 
-          case 29:
+          case 28:
             resourcesSiteMapsArray.forEach(
             /*#__PURE__*/
             function () {
@@ -160,23 +160,23 @@ function () {
               };
             }());
             console.log("All sitemaps created!");
-            _context2.next = 36;
+            _context2.next = 35;
             break;
 
-          case 33:
-            _context2.prev = 33;
-            _context2.t1 = _context2["catch"](26);
+          case 32:
+            _context2.prev = 32;
+            _context2.t1 = _context2["catch"](25);
             console.error(_context2.t1);
 
-          case 36:
+          case 35:
             return _context2.abrupt("return");
 
-          case 37:
+          case 36:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, this, [[13, 19], [26, 33]]);
+    }, _callee2, this, [[13, 19], [25, 32]]);
   }));
 
   return function onPostBuild(_x, _x2) {

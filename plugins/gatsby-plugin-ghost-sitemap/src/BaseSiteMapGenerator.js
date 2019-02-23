@@ -22,24 +22,24 @@ export default class BaseSiteMapGenerator {
     }
 
     generateXmlFromNodes() {
-        var self = this,
-            // Get a mapping of node to timestamp
-            timedNodes = _.map(this.nodeLookup, function (node, id) {
-                return {
-                    id: id,
-                    // Using negative here to sort newest to oldest
-                    ts: -(self.nodeTimeLookup[id] || 0),
-                    node: node,
-                }
-            }, []),
-            // Sort nodes by timestamp
-            sortedNodes = _.sortBy(timedNodes, `ts`),
-            // Grab just the nodes
-            urlElements = _.map(sortedNodes, `node`),
-            data = {
-                // Concat the elements to the _attr declaration
-                urlset: [XMLNS_DECLS].concat(urlElements),
+        const self = this
+        // Get a mapping of node to timestamp
+        const timedNodes = _.map(this.nodeLookup, function (node, id) {
+            return {
+                id: id,
+                // Using negative here to sort newest to oldest
+                ts: -(self.nodeTimeLookup[id] || 0),
+                node: node,
             }
+        }, [])
+        // Sort nodes by timestamp
+        const sortedNodes = _.sortBy(timedNodes, `ts`)
+        // Grab just the nodes
+        const urlElements = _.map(sortedNodes, `node`)
+        const data = {
+            // Concat the elements to the _attr declaration
+            urlset: [XMLNS_DECLS].concat(urlElements),
+        }
 
         // Return the xml
         return localUtils.getDeclarations() + xml(data)

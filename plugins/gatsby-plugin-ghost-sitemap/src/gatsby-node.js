@@ -62,7 +62,7 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
     serialize(queryRecords, mapping).forEach((source) => {
         for (let type in source) {
             source[type].forEach((node) => {
-                manager.addUrl(type, node)
+                manager.addUrls(type, node)
             })
         }
     })
@@ -86,8 +86,8 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
             xml: manager.getSiteMapXml(type),
         })
     }
-    console.log(`TCL: resourcesSiteMapsArray`, resourcesSiteMapsArray)
 
+    // Save the generated xml files in the public folder
     try {
         await fs.writeFile(indexSitemapFile, indexSiteMap)
 
