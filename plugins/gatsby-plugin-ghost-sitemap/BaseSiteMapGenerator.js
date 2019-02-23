@@ -79,7 +79,7 @@ function () {
   };
 
   _proto.getLastModifiedForDatum = function getLastModifiedForDatum(datum) {
-    return datum.updated_at || datum.published_at || datum.created_at;
+    return datum.updated_at || datum.published_at || datum.created_at || Date.now();
   };
 
   _proto.updateLastModified = function updateLastModified(datum) {
@@ -110,27 +110,24 @@ function () {
 
   _proto.createImageNodeFromDatum = function createImageNodeFromDatum(datum) {
     // Check for cover first because user has cover but the rest only have image
-    var image = datum.cover_image || datum.profile_image || datum.feature_image,
-        imageUrl,
-        imageEl;
+    var image = datum.cover_image || datum.profile_image || datum.feature_image;
+    var imageEl;
 
     if (!image) {
       return;
     } // Grab the image url
-    // TODO: get the image URL
     // imageUrl = urlService.utils.urlFor(`image`, { image: image }, true)
     // Verify the url structure
-
-
-    if (!this.validateImageUrl(imageUrl)) {
-      return;
-    } // Create the weird xml node syntax structure that is expected
+    // if (!this.validateImageUrl(imageUrl)) {
+    //     return
+    // }
+    // Create the weird xml node syntax structure that is expected
 
 
     imageEl = [{
-      'image:loc': imageUrl
+      'image:loc': image
     }, {
-      'image:caption': _path.default.basename(imageUrl)
+      'image:caption': _path.default.basename(image)
     }]; // Return the node to be added to the url xml node
 
     return {

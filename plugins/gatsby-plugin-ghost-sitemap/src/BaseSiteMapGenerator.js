@@ -65,7 +65,7 @@ export default class BaseSiteMapGenerator {
     }
 
     getLastModifiedForDatum(datum) {
-        return datum.updated_at || datum.published_at || datum.created_at
+        return datum.updated_at || datum.published_at || datum.created_at || Date.now()
     }
 
     updateLastModified(datum) {
@@ -97,27 +97,25 @@ export default class BaseSiteMapGenerator {
 
     createImageNodeFromDatum(datum) {
         // Check for cover first because user has cover but the rest only have image
-        var image = datum.cover_image || datum.profile_image || datum.feature_image,
-            imageUrl,
-            imageEl
+        const image = datum.cover_image || datum.profile_image || datum.feature_image
+        let imageEl
 
         if (!image) {
             return
         }
 
         // Grab the image url
-        // TODO: get the image URL
         // imageUrl = urlService.utils.urlFor(`image`, { image: image }, true)
 
         // Verify the url structure
-        if (!this.validateImageUrl(imageUrl)) {
-            return
-        }
+        // if (!this.validateImageUrl(imageUrl)) {
+        //     return
+        // }
 
         // Create the weird xml node syntax structure that is expected
         imageEl = [
-            { 'image:loc': imageUrl },
-            { 'image:caption': path.basename(imageUrl) },
+            { 'image:loc': image },
+            { 'image:caption': path.basename(image) },
         ]
 
         // Return the node to be added to the url xml node
