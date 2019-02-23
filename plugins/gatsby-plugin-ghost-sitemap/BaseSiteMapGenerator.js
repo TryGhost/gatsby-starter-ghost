@@ -10,10 +10,9 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _path = _interopRequireDefault(require("path"));
 
-var _url = _interopRequireDefault(require("../../../services/url"));
-
 var _utils = _interopRequireDefault(require("./utils"));
 
+// import urlService from '../../../services/url'
 // Sitemap specific xml namespace declarations that should not change
 var XMLNS_DECLS = {
   _attr: {
@@ -115,11 +114,10 @@ function () {
     if (!image) {
       return;
     } // Grab the image url
+    // TODO: get the image URL
+    // imageUrl = urlService.utils.urlFor(`image`, { image: image }, true)
+    // Verify the url structure
 
-
-    imageUrl = _url.default.utils.urlFor("image", {
-      image: image
-    }, true); // Verify the url structure
 
     if (!this.validateImageUrl(imageUrl)) {
       return;

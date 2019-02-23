@@ -7,8 +7,8 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _ = require("lodash"),
-    validator = require("validator"),
-    BaseMapGenerator = require("./base-generator");
+    // validator = require(`validator`),
+BaseMapGenerator = require("./BaseSiteMapGenerator");
 
 var UserMapGenerator =
 /*#__PURE__*/
@@ -29,10 +29,8 @@ function (_BaseMapGenerator) {
   var _proto = UserMapGenerator.prototype;
 
   _proto.validateImageUrl = function validateImageUrl(imageUrl) {
-    return imageUrl && validator.isURL(imageUrl, {
-      protocols: ["http", "https"],
-      require_protocol: true
-    });
+    // && validator.isURL(imageUrl, { protocols: [`http`, `https`], require_protocol: true })
+    return imageUrl;
   };
 
   return UserMapGenerator;

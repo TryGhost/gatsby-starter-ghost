@@ -7,7 +7,7 @@ var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/hel
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
 var _ = require("lodash"),
-    BaseMapGenerator = require("./base-generator");
+    BaseMapGenerator = require("./BaseSiteMapGenerator");
 
 var PostMapGenerator =
 /*#__PURE__*/

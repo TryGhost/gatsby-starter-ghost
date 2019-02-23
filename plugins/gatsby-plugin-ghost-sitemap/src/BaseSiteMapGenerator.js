@@ -2,7 +2,7 @@ import _ from 'lodash'
 import xml from 'xml'
 import moment from 'moment'
 import path from 'path'
-import urlService from '../../../services/url'
+// import urlService from '../../../services/url'
 import localUtils from './utils'
 
 // Sitemap specific xml namespace declarations that should not change
@@ -106,7 +106,8 @@ class BaseSiteMapGenerator {
         }
 
         // Grab the image url
-        imageUrl = urlService.utils.urlFor(`image`, { image: image }, true)
+        // TODO: get the image URL
+        // imageUrl = urlService.utils.urlFor(`image`, { image: image }, true)
 
         // Verify the url structure
         if (!this.validateImageUrl(imageUrl)) {

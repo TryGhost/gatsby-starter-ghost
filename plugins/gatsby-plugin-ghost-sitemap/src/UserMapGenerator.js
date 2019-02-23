@@ -1,6 +1,6 @@
 const _ = require(`lodash`),
-    validator = require(`validator`),
-    BaseMapGenerator = require(`./base-generator`)
+    // validator = require(`validator`),
+    BaseMapGenerator = require(`./BaseSiteMapGenerator`)
 
 class UserMapGenerator extends BaseMapGenerator {
     constructor(opts) {
@@ -11,7 +11,8 @@ class UserMapGenerator extends BaseMapGenerator {
     }
 
     validateImageUrl(imageUrl) {
-        return imageUrl && validator.isURL(imageUrl, { protocols: [`http`, `https`], require_protocol: true })
+        // && validator.isURL(imageUrl, { protocols: [`http`, `https`], require_protocol: true })
+        return imageUrl
     }
 }
 
