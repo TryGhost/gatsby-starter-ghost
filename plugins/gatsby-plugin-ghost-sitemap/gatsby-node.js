@@ -25,6 +25,8 @@ var _SiteMapManager = _interopRequireDefault(require("./SiteMapManager"));
 
 var publicPath = "./public";
 
+var xslFile = _path.default.resolve(__dirname, "./static/sitemap.xsl");
+
 var serialize = function serialize(_ref, mapping) {
   var site = _ref.site,
       sources = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["site"]);
@@ -73,16 +75,32 @@ function () {
             graphql = _ref2.graphql, pathPrefix = _ref2.pathPrefix;
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
-            delete options.createLinkInHead;
+            delete options.createLinkInHead; // copy our template stylesheet to the public folder, so it will be available for the
+            // xml files
+
+            _context.prev = 4;
+            _context.next = 7;
+            return _fsExtra.default.copyFile(xslFile, _path.default.join(publicPath, "sitemap.xsl"));
+
+          case 7:
+            _context.next = 12;
+            break;
+
+          case 9:
+            _context.prev = 9;
+            _context.t0 = _context["catch"](4);
+            console.error(_context.t0);
+
+          case 12:
             _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, output = _defaultOptions$optio.output, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping;
             saved = _path.default.join(publicPath, output);
             manager = new _SiteMapManager.default(); // Paths we're excluding...
 
             excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
-            _context.next = 10;
+            _context.next = 18;
             return (0, _internals.runQuery)(graphql, query, excludeOptions, pathPrefix);
 
-          case 10:
+          case 18:
             queryRecords = _context.sent;
             serialize(queryRecords, mapping).forEach(function (source) {
               var _loop2 = function _loop2(type) {
@@ -96,28 +114,28 @@ function () {
               }
             });
             indexSiteMap = manager.getIndexXml();
-            _context.prev = 13;
-            _context.next = 16;
+            _context.prev = 21;
+            _context.next = 24;
             return _fsExtra.default.writeFile(saved, indexSiteMap);
 
-          case 16:
-            _context.next = 21;
+          case 24:
+            _context.next = 29;
             break;
 
-          case 18:
-            _context.prev = 18;
-            _context.t0 = _context["catch"](13);
-            console.error(_context.t0);
+          case 26:
+            _context.prev = 26;
+            _context.t1 = _context["catch"](21);
+            console.error(_context.t1);
 
-          case 21:
+          case 29:
             return _context.abrupt("return");
 
-          case 22:
+          case 30:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, this, [[13, 18]]);
+    }, _callee, this, [[4, 9], [21, 26]]);
   }));
 
   return function onPostBuild(_x, _x2) {

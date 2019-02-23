@@ -5,6 +5,7 @@ import { defaultOptions, runQuery } from './internals'
 import Manager from './SiteMapManager'
 
 const publicPath = `./public`
+const xslFile = path.resolve(__dirname, `./static/sitemap.xsl`)
 
 const serialize = ({ site, ...sources }, mapping) => {
     const siteUrl = site.siteMetadata.siteUrl
@@ -37,6 +38,14 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
     const options = { ...pluginOptions }
     delete options.plugins
     delete options.createLinkInHead
+
+    // copy our template stylesheet to the public folder, so it will be available for the
+    // xml files
+    try {
+        await fs.copyFile(xslFile, path.join(publicPath, `sitemap.xsl`))
+    } catch (err) {
+        console.error(err)
+    }
 
     const { query, output, exclude, mapping } = {
         ...defaultOptions,
