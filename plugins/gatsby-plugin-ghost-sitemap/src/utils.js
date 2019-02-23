@@ -1,4 +1,4 @@
-exports.sitemapsUtils = {
+const sitemapsUtils = {
     // TODO: serve file from static folder -> copy?
     getDeclarations: function () {
         var baseUrl = `http://localhost:9000/sitemap.xsl`
@@ -7,3 +7,5 @@ exports.sitemapsUtils = {
             `<?xml-stylesheet type="text/xsl" href="` + baseUrl + `"?>`
     },
 }
+
+export default sitemapsUtils
