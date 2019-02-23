@@ -2,6 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+exports.__esModule = true;
+exports.default = void 0;
+
 var _lodash = _interopRequireDefault(require("lodash"));
 
 var _xml = _interopRequireDefault(require("xml"));
@@ -176,4 +179,4 @@ function () {
   return BaseSiteMapGenerator;
 }();
 
-module.exports = BaseSiteMapGenerator;
+exports.default = BaseSiteMapGenerator;

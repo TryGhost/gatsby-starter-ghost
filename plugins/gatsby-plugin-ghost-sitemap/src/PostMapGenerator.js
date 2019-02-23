@@ -1,7 +1,7 @@
-const _ = require(`lodash`),
-    BaseMapGenerator = require(`./BaseSiteMapGenerator`)
+import _ from 'lodash'
+import BaseMapGenerator from './BaseSiteMapGenerator'
 
-class PostMapGenerator extends BaseMapGenerator {
+export default class PostMapGenerator extends BaseMapGenerator {
     constructor(opts) {
         super()
 
@@ -10,5 +10,3 @@ class PostMapGenerator extends BaseMapGenerator {
         _.extend(this, opts)
     }
 }
-
-module.exports = PostMapGenerator

@@ -13,7 +13,7 @@ const XMLNS_DECLS = {
     },
 }
 
-class BaseSiteMapGenerator {
+export default class BaseSiteMapGenerator {
     constructor() {
         this.nodeLookup = {}
         this.nodeTimeLookup = {}
@@ -160,5 +160,3 @@ class BaseSiteMapGenerator {
         this.siteMapContent = null
     }
 }
-
-module.exports = BaseSiteMapGenerator

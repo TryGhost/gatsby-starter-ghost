@@ -2,13 +2,16 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+exports.__esModule = true;
+exports.default = void 0;
+
 var _assertThisInitialized2 = _interopRequireDefault(require("@babel/runtime/helpers/assertThisInitialized"));
 
 var _inheritsLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/inheritsLoose"));
 
-var _ = require("lodash");
+var _lodash = _interopRequireDefault(require("lodash"));
 
-var BaseSiteMapGenerator = require("./BaseSiteMapGenerator");
+var _BaseSiteMapGenerator2 = _interopRequireDefault(require("./BaseSiteMapGenerator"));
 
 var SiteMapPageGenerator =
 /*#__PURE__*/
@@ -21,12 +24,12 @@ function (_BaseSiteMapGenerator) {
     _this = _BaseSiteMapGenerator.call(this) || this;
     _this.name = "pages";
 
-    _.extend((0, _assertThisInitialized2.default)(_this), opts);
+    _lodash.default.extend((0, _assertThisInitialized2.default)(_this), opts);
 
     return _this;
   }
 
   return SiteMapPageGenerator;
-}(BaseSiteMapGenerator);
+}(_BaseSiteMapGenerator2.default);
 
-module.exports = SiteMapPageGenerator;
+exports.default = SiteMapPageGenerator;

@@ -1,51 +1,36 @@
 "use strict";
 
-var SiteMapIndexGenerator = require("./SiteMapIndexGenerator");
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
-var PagesMapGenerator = require("./SiteMapPageGenerator");
+exports.__esModule = true;
+exports.default = void 0;
 
-var PostsMapGenerator = require("./PostMapGenerator");
+var _SiteMapIndexGenerator = _interopRequireDefault(require("./SiteMapIndexGenerator"));
 
-var UsersMapGenerator = require("./UserMapGenerator");
+var _SiteMapPageGenerator = _interopRequireDefault(require("./SiteMapPageGenerator"));
 
-var TagsMapGenerator = require("./TagsMapGenerator");
+var _PostMapGenerator = _interopRequireDefault(require("./PostMapGenerator"));
+
+var _UserMapGenerator = _interopRequireDefault(require("./UserMapGenerator"));
+
+var _TagsMapGenerator = _interopRequireDefault(require("./TagsMapGenerator"));
 
 var SiteMapManager =
 /*#__PURE__*/
 function () {
   function SiteMapManager(options) {
-    console.log("TCL: SiteMapManager -> constructor -> options", options);
     options = options || {};
     this.pages = options.pages || this.createPagesGenerator(options);
     this.posts = options.posts || this.createPostsGenerator(options);
     this.users = this.authors = options.authors || this.createUsersGenerator(options);
     this.tags = options.tags || this.createTagsGenerator(options);
-    this.index = options.index || this.createIndexGenerator(options); // common.events.on(`router.created`, (router) => {
-    //     if (router.name === `StaticRoutesRouter`) {
-    //         this.pages.addUrl(router.getRoute({ absolute: true }), { id: router.identifier, staticRoute: true })
-    //     }
-    //     if (router.name === `CollectionRouter`) {
-    //         this.pages.addUrl(router.getRoute({ absolute: true }), { id: router.identifier, staticRoute: false })
-    //     }
-    // })
-    // common.events.on(`url.added`, (obj) => {
-    //     this[obj.resource.config.type].addUrl(obj.url.absolute, obj.resource.data)
-    // })
-    // common.events.on(`url.removed`, (obj) => {
-    //     this[obj.resource.config.type].removeUrl(obj.url.absolute, obj.resource.data)
-    // })
-    // common.events.on(`routers.reset`, () => {
-    //     this.pages && this.pages.reset()
-    //     this.posts && this.posts.reset()
-    //     this.users && this.users.reset()
-    //     this.tags && this.tags.reset()
-    // })
+    this.index = options.index || this.createIndexGenerator(options);
   }
 
   var _proto = SiteMapManager.prototype;
 
   _proto.createIndexGenerator = function createIndexGenerator() {
-    return new SiteMapIndexGenerator({
+    return new _SiteMapIndexGenerator.default({
       types: {
         pages: this.pages,
         posts: this.posts,
@@ -56,19 +41,19 @@ function () {
   };
 
   _proto.createPagesGenerator = function createPagesGenerator(options) {
-    return new PagesMapGenerator(options);
+    return new _SiteMapPageGenerator.default(options);
   };
 
   _proto.createPostsGenerator = function createPostsGenerator(options) {
-    return new PostsMapGenerator(options);
+    return new _PostMapGenerator.default(options);
   };
 
   _proto.createUsersGenerator = function createUsersGenerator(options) {
-    return new UsersMapGenerator(options);
+    return new _UserMapGenerator.default(options);
   };
 
   _proto.createTagsGenerator = function createTagsGenerator(options) {
-    return new TagsMapGenerator(options);
+    return new _TagsMapGenerator.default(options);
   };
 
   _proto.getIndexXml = function getIndexXml() {
@@ -82,4 +67,4 @@ function () {
   return SiteMapManager;
 }();
 
-module.exports = SiteMapManager;
+exports.default = SiteMapManager;
