@@ -1,15 +1,9 @@
-import fs from "fs"
-import pify from "pify"
-import minimatch from "minimatch"
-
 const withoutTrailingSlash = (path) => {
     if (path === `/`) {
         return path
     }
     return path.replace(/\/$/, ``)
 }
-
-export const writeFile = pify(fs.writeFile)
 
 export const runQuery = (handler, query, excludes, pathPrefix) => handler(query).then((r) => {
     if (r.errors) {
@@ -47,6 +41,9 @@ export const defaultOptions = {
         edges {
             node {
                 slug
+                updated_at
+                created_at
+                feature_image
             }
         }
       }
@@ -57,6 +54,9 @@ export const defaultOptions = {
         edges {
             node {
                 slug
+                updated_at
+                created_at
+                feature_image
             }
         }
       }
@@ -67,6 +67,7 @@ export const defaultOptions = {
         edges {
             node {
                 slug
+                feature_image
             }
         }
       }
@@ -77,6 +78,7 @@ export const defaultOptions = {
         edges {
             node {
                 slug
+                profile_image
             }
         }
       }
