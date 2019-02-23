@@ -1,6 +1,6 @@
-import React from "react"
-import { withPrefix } from "gatsby"
-import { defaultOptions } from "./internals"
+import React from 'react'
+import { withPrefix } from 'gatsby'
+import { defaultOptions } from './internals'
 
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
     let { output, createLinkInHead } = { ...defaultOptions, ...pluginOptions }
