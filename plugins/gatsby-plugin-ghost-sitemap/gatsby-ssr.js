@@ -16,22 +16,22 @@ exports.onRenderBody = function (_ref, pluginOptions) {
   var setHeadComponents = _ref.setHeadComponents;
 
   var _defaultOptions$plugi = (0, _extends2.default)({}, _internals.defaultOptions, pluginOptions),
-      output = _defaultOptions$plugi.output,
+      indexOutput = _defaultOptions$plugi.indexOutput,
       createLinkInHead = _defaultOptions$plugi.createLinkInHead;
 
   if (!createLinkInHead) {
     return;
   }
 
-  if (output.charAt(0) !== "/") {
-    output = "/" + output;
+  if (indexOutput.charAt(0) !== "/") {
+    indexOutput = "/" + indexOutput;
   }
 
   setHeadComponents([_react.default.createElement("link", {
     key: "gatsby-plugin-ghost-sitemap",
     rel: "sitemap",
     type: "application/xml",
-    href: (0, _gatsby.withPrefix)(output),
+    href: (0, _gatsby.withPrefix)(indexOutput),
     __source: {
       fileName: _jsxFileName,
       lineNumber: 17

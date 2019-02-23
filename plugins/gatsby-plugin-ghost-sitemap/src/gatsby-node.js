@@ -39,22 +39,13 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
     delete options.plugins
     delete options.createLinkInHead
 
-    // copy our template stylesheet to the public folder, so it will be available for the
-    // xml files
-    try {
-        await fs.copyFile(xslFile, path.join(publicPath, `sitemap.xsl`))
-    } catch (err) {
-        console.error(err)
-    }
-
-    const { query, output, exclude, mapping } = {
+    const { query, indexOutput, resourcesOutput, exclude, mapping } = {
         ...defaultOptions,
         ...options,
     }
 
-    const saved = path.join(publicPath, output)
-
-    const manager = new Manager()
+    const indexSitemapFile = path.join(publicPath, indexOutput)
+    const resourcesSitemapFile = path.join(publicPath, resourcesOutput)
 
     // Paths we're excluding...
     const excludeOptions = exclude.concat(defaultOptions.exclude)
@@ -66,6 +57,8 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         pathPrefix
     )
 
+    const manager = new Manager()
+
     serialize(queryRecords, mapping).forEach((source) => {
         for (let type in source) {
             source[type].forEach((node) => {
@@ -74,10 +67,35 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         }
     })
 
+    // copy our template stylesheet to the public folder, so it will be available for the
+    // xml files
+    try {
+        await fs.copyFile(xslFile, path.join(publicPath, `sitemap.xsl`))
+        console.log(`Sitemap stylesheet copied!`)
+    } catch (err) {
+        console.error(err)
+    }
+
     const indexSiteMap = manager.getIndexXml()
+    const resourcesSiteMapsArray = []
+
+    for (let resourceType in mapping) {
+        const type = mapping[resourceType].name
+        resourcesSiteMapsArray.push({
+            type: type,
+            xml: manager.getSiteMapXml(type),
+        })
+    }
+    console.log(`TCL: resourcesSiteMapsArray`, resourcesSiteMapsArray)
 
     try {
-        await fs.writeFile(saved, indexSiteMap)
+        await fs.writeFile(indexSitemapFile, indexSiteMap)
+
+        resourcesSiteMapsArray.forEach(async (sitemap) => {
+            const filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type)
+            await fs.writeFile(filePath, sitemap.xml)
+        })
+        console.log(`All sitemaps created!`)
     } catch (err) {
         console.error(err)
     }

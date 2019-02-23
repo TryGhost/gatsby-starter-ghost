@@ -65,43 +65,28 @@ var onPostBuild =
 function () {
   var _ref3 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee(_ref2, pluginOptions) {
-    var graphql, pathPrefix, options, _defaultOptions$optio, query, output, exclude, mapping, saved, manager, excludeOptions, queryRecords, indexSiteMap;
+  _regenerator.default.mark(function _callee2(_ref2, pluginOptions) {
+    var graphql, pathPrefix, options, _defaultOptions$optio, query, indexOutput, resourcesOutput, exclude, mapping, indexSitemapFile, resourcesSitemapFile, excludeOptions, queryRecords, manager, indexSiteMap, resourcesSiteMapsArray, resourceType, type;
 
-    return _regenerator.default.wrap(function _callee$(_context) {
+    return _regenerator.default.wrap(function _callee2$(_context2) {
       while (1) {
-        switch (_context.prev = _context.next) {
+        switch (_context2.prev = _context2.next) {
           case 0:
             graphql = _ref2.graphql, pathPrefix = _ref2.pathPrefix;
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
-            delete options.createLinkInHead; // copy our template stylesheet to the public folder, so it will be available for the
-            // xml files
-
-            _context.prev = 4;
-            _context.next = 7;
-            return _fsExtra.default.copyFile(xslFile, _path.default.join(publicPath, "sitemap.xsl"));
-
-          case 7:
-            _context.next = 12;
-            break;
-
-          case 9:
-            _context.prev = 9;
-            _context.t0 = _context["catch"](4);
-            console.error(_context.t0);
-
-          case 12:
-            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, output = _defaultOptions$optio.output, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping;
-            saved = _path.default.join(publicPath, output);
-            manager = new _SiteMapManager.default(); // Paths we're excluding...
+            delete options.createLinkInHead;
+            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, indexOutput = _defaultOptions$optio.indexOutput, resourcesOutput = _defaultOptions$optio.resourcesOutput, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping;
+            indexSitemapFile = _path.default.join(publicPath, indexOutput);
+            resourcesSitemapFile = _path.default.join(publicPath, resourcesOutput); // Paths we're excluding...
 
             excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
-            _context.next = 18;
+            _context2.next = 10;
             return (0, _internals.runQuery)(graphql, query, excludeOptions, pathPrefix);
 
-          case 18:
-            queryRecords = _context.sent;
+          case 10:
+            queryRecords = _context2.sent;
+            manager = new _SiteMapManager.default();
             serialize(queryRecords, mapping).forEach(function (source) {
               var _loop2 = function _loop2(type) {
                 source[type].forEach(function (node) {
@@ -112,30 +97,86 @@ function () {
               for (var type in source) {
                 _loop2(type);
               }
-            });
-            indexSiteMap = manager.getIndexXml();
-            _context.prev = 21;
-            _context.next = 24;
-            return _fsExtra.default.writeFile(saved, indexSiteMap);
+            }); // copy our template stylesheet to the public folder, so it will be available for the
+            // xml files
 
-          case 24:
-            _context.next = 29;
+            _context2.prev = 13;
+            _context2.next = 16;
+            return _fsExtra.default.copyFile(xslFile, _path.default.join(publicPath, "sitemap.xsl"));
+
+          case 16:
+            console.log("Sitemap stylesheet copied!");
+            _context2.next = 22;
             break;
 
-          case 26:
-            _context.prev = 26;
-            _context.t1 = _context["catch"](21);
-            console.error(_context.t1);
+          case 19:
+            _context2.prev = 19;
+            _context2.t0 = _context2["catch"](13);
+            console.error(_context2.t0);
+
+          case 22:
+            indexSiteMap = manager.getIndexXml();
+            resourcesSiteMapsArray = [];
+
+            for (resourceType in mapping) {
+              type = mapping[resourceType].name;
+              resourcesSiteMapsArray.push({
+                type: type,
+                xml: manager.getSiteMapXml(type)
+              });
+            }
+
+            console.log("TCL: resourcesSiteMapsArray", resourcesSiteMapsArray);
+            _context2.prev = 26;
+            _context2.next = 29;
+            return _fsExtra.default.writeFile(indexSitemapFile, indexSiteMap);
 
           case 29:
-            return _context.abrupt("return");
+            resourcesSiteMapsArray.forEach(
+            /*#__PURE__*/
+            function () {
+              var _ref4 = (0, _asyncToGenerator2.default)(
+              /*#__PURE__*/
+              _regenerator.default.mark(function _callee(sitemap) {
+                var filePath;
+                return _regenerator.default.wrap(function _callee$(_context) {
+                  while (1) {
+                    switch (_context.prev = _context.next) {
+                      case 0:
+                        filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type);
+                        _context.next = 3;
+                        return _fsExtra.default.writeFile(filePath, sitemap.xml);
 
-          case 30:
+                      case 3:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }
+                }, _callee, this);
+              }));
+
+              return function (_x3) {
+                return _ref4.apply(this, arguments);
+              };
+            }());
+            console.log("All sitemaps created!");
+            _context2.next = 36;
+            break;
+
+          case 33:
+            _context2.prev = 33;
+            _context2.t1 = _context2["catch"](26);
+            console.error(_context2.t1);
+
+          case 36:
+            return _context2.abrupt("return");
+
+          case 37:
           case "end":
-            return _context.stop();
+            return _context2.stop();
         }
       }
-    }, _callee, this, [[4, 9], [21, 26]]);
+    }, _callee2, this, [[13, 19], [26, 33]]);
   }));
 
   return function onPostBuild(_x, _x2) {

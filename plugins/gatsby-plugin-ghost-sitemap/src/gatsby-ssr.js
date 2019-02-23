@@ -3,14 +3,14 @@ import { withPrefix } from 'gatsby'
 import { defaultOptions } from './internals'
 
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
-    let { output, createLinkInHead } = { ...defaultOptions, ...pluginOptions }
+    let { indexOutput, createLinkInHead } = { ...defaultOptions, ...pluginOptions }
 
     if (!createLinkInHead) {
         return
     }
 
-    if (output.charAt(0) !== `/`) {
-        output = `/` + output
+    if (indexOutput.charAt(0) !== `/`) {
+        indexOutput = `/` + indexOutput
     }
 
     setHeadComponents([
@@ -18,7 +18,7 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
             key={`gatsby-plugin-ghost-sitemap`}
             rel="sitemap"
             type="application/xml"
-            href={withPrefix(output)}
+            href={withPrefix(indexOutput)}
         />,
     ])
 }

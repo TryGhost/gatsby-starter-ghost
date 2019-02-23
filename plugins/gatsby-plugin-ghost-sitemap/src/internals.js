@@ -83,7 +83,8 @@ export const defaultOptions = {
         }
       }
   }`,
-    output: `/sitemap.xml`,
+    indexOutput: `/sitemap.xml`,
+    resourcesOutput: `/sitemap-:resource.xml`,
     mapping: {
         allGhostPost: {
             name: `posts`,
