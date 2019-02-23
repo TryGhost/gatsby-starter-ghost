@@ -41,7 +41,7 @@ function () {
 
   _proto.generateSiteMapUrlElements = function generateSiteMapUrlElements() {
     return _lodash.default.map(this.types, function (resourceType) {
-      var url = "http://localhost:9000/sitemap-" + resourceType + ".xml";
+      var url = "http://localhost:9000/sitemap-" + resourceType.name + ".xml";
       var lastModified = resourceType.lastModified;
       return {
         sitemap: [{

@@ -28,7 +28,7 @@ export default class SiteMapIndexGenerator {
 
     generateSiteMapUrlElements() {
         return _.map(this.types, (resourceType) => {
-            const url = `http://localhost:9000/sitemap-${resourceType}.xml`
+            const url = `http://localhost:9000/sitemap-${resourceType.name}.xml`
             const lastModified = resourceType.lastModified
 
             return {
