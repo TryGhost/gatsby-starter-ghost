@@ -60,7 +60,7 @@ var defaultOptions = {
       name: "authors",
       prefix: "author"
     },
-    allGhosPage: {
+    allGhostPage: {
       name: "pages",
       prefix: "/"
     }
