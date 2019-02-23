@@ -2,6 +2,9 @@
 
 var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
 
+exports.__esModule = true;
+exports.onPostBuild = void 0;
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
@@ -14,11 +17,10 @@ var _path = _interopRequireDefault(require("path"));
 
 var _url = _interopRequireDefault(require("url"));
 
-var _sitemap = _interopRequireDefault(require("sitemap"));
-
 var _internals = require("./internals");
 
-// import Manager from "./SiteMapManager"
+var _SiteMapManager = _interopRequireDefault(require("./SiteMapManager"));
+
 var publicPath = "./public";
 
 var serialize = function serialize(_ref, mapping) {
@@ -35,9 +37,11 @@ var serialize = function serialize(_ref, mapping) {
       if (currentSource) {
         sourceObject[mapping[source].name] = [];
         currentSource.edges.map(function (edge) {
+          var nodePath = _path.default.join(mapping[source].prefix, edge.node.slug);
+
           sourceObject[mapping[source].name].push({
-            url: _url.default.resolve(siteUrl, mapping[source].prefix, edge.node.slug),
-            datum: edge.node
+            url: _url.default.resolve(siteUrl, nodePath),
+            node: edge.node
           });
         });
       }
@@ -52,13 +56,13 @@ var serialize = function serialize(_ref, mapping) {
   return nodes;
 };
 
-exports.onPostBuild =
+var onPostBuild =
 /*#__PURE__*/
 function () {
   var _ref3 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee(_ref2, pluginOptions) {
-    var graphql, pathPrefix, options, _defaultOptions$optio, query, output, exclude, mapping, rest, map, saved, excludeOptions, queryRecords;
+    var graphql, pathPrefix, options, _defaultOptions$optio, query, output, exclude, mapping, manager, excludeOptions, queryRecords;
 
     return _regenerator.default.wrap(function _callee$(_context) {
       while (1) {
@@ -68,27 +72,31 @@ function () {
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
             delete options.createLinkInHead;
-            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, output = _defaultOptions$optio.output, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping, rest = (0, _objectWithoutPropertiesLoose2.default)(_defaultOptions$optio, ["query", "output", "exclude", "mapping"]);
-            map = _sitemap.default.createSitemap(rest);
-            saved = _path.default.join(publicPath, output); // Manager = new Manager()
-            // Paths we're excluding...
+            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, output = _defaultOptions$optio.output, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping; // const saved = path.join(publicPath, output)
+
+            manager = new _SiteMapManager.default(); // Paths we're excluding...
 
             excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
-            _context.next = 10;
+            _context.next = 9;
             return (0, _internals.runQuery)(graphql, query, excludeOptions, pathPrefix);
 
-          case 10:
+          case 9:
             queryRecords = _context.sent;
-            serialize(queryRecords, mapping).forEach(function (u) {
-              return map.add(u);
-            });
-            _context.next = 14;
-            return (0, _internals.writeFile)(saved, map.toString());
+            serialize(queryRecords, mapping).forEach(function (source) {
+              var _loop2 = function _loop2(type) {
+                source[type].forEach(function (node) {
+                  manager.addUrl(type, node);
+                });
+              };
 
-          case 14:
-            return _context.abrupt("return", _context.sent);
+              for (var type in source) {
+                _loop2(type);
+              }
+            }); // return await writeFile(saved, map.toString())
 
-          case 15:
+            return _context.abrupt("return");
+
+          case 12:
           case "end":
             return _context.stop();
         }
@@ -96,7 +104,9 @@ function () {
     }, _callee, this);
   }));
 
-  return function (_x, _x2) {
+  return function onPostBuild(_x, _x2) {
     return _ref3.apply(this, arguments);
   };
 }();
+
+exports.onPostBuild = onPostBuild;

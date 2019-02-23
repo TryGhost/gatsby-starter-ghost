@@ -1,8 +1,7 @@
-import path from "path"
-import url from "url"
-import sitemap from "sitemap"
-import { defaultOptions, runQuery, writeFile } from "./internals"
-// import Manager from "./SiteMapManager"
+import path from 'path'
+import url from 'url'
+import { defaultOptions, runQuery, writeFile } from './internals'
+import Manager from './SiteMapManager'
 
 const publicPath = `./public`
 
@@ -18,9 +17,11 @@ const serialize = ({ site, ...sources }, mapping) => {
             if (currentSource) {
                 sourceObject[mapping[source].name] = []
                 currentSource.edges.map((edge) => {
+                    const nodePath = path.join(mapping[source].prefix, edge.node.slug)
+
                     sourceObject[mapping[source].name].push({
-                        url: url.resolve(siteUrl, mapping[source].prefix ,edge.node.slug),
-                        datum: edge.node,
+                        url: url.resolve(siteUrl, nodePath),
+                        node: edge.node,
                     })
                 })
             }
@@ -31,20 +32,19 @@ const serialize = ({ site, ...sources }, mapping) => {
     return nodes
 }
 
-exports.onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
+export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
     const options = { ...pluginOptions }
     delete options.plugins
     delete options.createLinkInHead
 
-    const { query, output, exclude, mapping, ...rest } = {
+    const { query, output, exclude, mapping } = {
         ...defaultOptions,
         ...options,
     }
 
-    const map = sitemap.createSitemap(rest)
-    const saved = path.join(publicPath, output)
+    // const saved = path.join(publicPath, output)
 
-    // Manager = new Manager()
+    const manager = new Manager()
 
     // Paths we're excluding...
     const excludeOptions = exclude.concat(defaultOptions.exclude)
@@ -56,7 +56,14 @@ exports.onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         pathPrefix
     )
 
-    serialize(queryRecords, mapping).forEach(u => map.add(u))
+    serialize(queryRecords, mapping).forEach((source) => {
+        for (let type in source) {
+            source[type].forEach((node) => {
+                manager.addUrl(type, node)
+            })
+        }
+    })
 
-    return await writeFile(saved, map.toString())
+    // return await writeFile(saved, map.toString())
+    return
 }
