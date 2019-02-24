@@ -65,13 +65,17 @@ export default class BaseSiteMapGenerator {
     }
 
     getLastModifiedForDatum(datum) {
-        return datum.updated_at || datum.published_at || datum.created_at || Date.now()
+        if (datum.updated_at || datum.published_at || datum.created_at) {
+            return new Date(datum.updated_at) || new Date(datum.published_at) || new Date(datum.created_at)
+        } else {
+            return moment(new Date(), moment.ISO_8601).toISOString()
+        }
     }
 
     updateLastModified(datum) {
         const lastModified = this.getLastModifiedForDatum(datum)
 
-        if (lastModified > this.lastModified) {
+        if (!this.lastModified || lastModified > this.lastModified) {
             this.lastModified = lastModified
         }
     }

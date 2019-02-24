@@ -45,7 +45,7 @@ function () {
     return _lodash.default.map(this.types, function (resourceType) {
       var siteMapUrl = _url.default.resolve(siteUrl, "sitemap-" + resourceType.name + ".xml");
 
-      var lastModified = resourceType.lastModified;
+      var lastModified = resourceType.lastModified || (0, _moment.default)(new Date(), _moment.default.ISO_8601).toISOString();
       return {
         sitemap: [{
           loc: siteMapUrl
