@@ -5,15 +5,15 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.default = void 0;
 
-var _SiteMapIndexGenerator = _interopRequireDefault(require("./SiteMapIndexGenerator"));
+var _IndexMapGenerator = _interopRequireDefault(require("./IndexMapGenerator"));
 
-var _SiteMapPageGenerator = _interopRequireDefault(require("./SiteMapPageGenerator"));
+var _PageMapGenerator = _interopRequireDefault(require("./PageMapGenerator"));
 
 var _PostMapGenerator = _interopRequireDefault(require("./PostMapGenerator"));
 
 var _UserMapGenerator = _interopRequireDefault(require("./UserMapGenerator"));
 
-var _TagsMapGenerator = _interopRequireDefault(require("./TagsMapGenerator"));
+var _TagMapGenerator = _interopRequireDefault(require("./TagMapGenerator"));
 
 var SiteMapManager =
 /*#__PURE__*/
@@ -31,7 +31,7 @@ function () {
   var _proto = SiteMapManager.prototype;
 
   _proto.createIndexGenerator = function createIndexGenerator() {
-    return new _SiteMapIndexGenerator.default({
+    return new _IndexMapGenerator.default({
       types: {
         pages: this.pages,
         posts: this.posts,
@@ -42,7 +42,7 @@ function () {
   };
 
   _proto.createPagesGenerator = function createPagesGenerator(options) {
-    return new _SiteMapPageGenerator.default(options);
+    return new _PageMapGenerator.default(options);
   };
 
   _proto.createPostsGenerator = function createPostsGenerator(options) {
@@ -54,7 +54,7 @@ function () {
   };
 
   _proto.createTagsGenerator = function createTagsGenerator(options) {
-    return new _TagsMapGenerator.default(options);
+    return new _TagMapGenerator.default(options);
   };
 
   _proto.getIndexXml = function getIndexXml() {

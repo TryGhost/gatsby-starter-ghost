@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import BaseMapGenerator from './BaseSiteMapGenerator'
 
-export default class TagsMapGenerator extends BaseMapGenerator {
+export default class TagMapGenerator extends BaseMapGenerator {
     constructor(opts) {
         super()
 

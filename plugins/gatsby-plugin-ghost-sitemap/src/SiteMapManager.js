@@ -1,8 +1,8 @@
-import SiteMapIndexGenerator from "./SiteMapIndexGenerator"
-import PagesMapGenerator from "./SiteMapPageGenerator"
-import PostsMapGenerator from "./PostMapGenerator"
+import SiteMapIndexGenerator from "./IndexMapGenerator"
+import PageMapGenerator from "./PageMapGenerator"
+import PostMapGenerator from "./PostMapGenerator"
 import UsersMapGenerator from "./UserMapGenerator"
-import TagsMapGenerator from "./TagsMapGenerator"
+import TagMapGenerator from "./TagMapGenerator"
 
 export default class SiteMapManager {
     constructor(options) {
@@ -29,11 +29,11 @@ export default class SiteMapManager {
     }
 
     createPagesGenerator(options) {
-        return new PagesMapGenerator(options)
+        return new PageMapGenerator(options)
     }
 
     createPostsGenerator(options) {
-        return new PostsMapGenerator(options)
+        return new PostMapGenerator(options)
     }
 
     createUsersGenerator(options) {
@@ -41,7 +41,7 @@ export default class SiteMapManager {
     }
 
     createTagsGenerator(options) {
-        return new TagsMapGenerator(options)
+        return new TagMapGenerator(options)
     }
 
     getIndexXml() {
