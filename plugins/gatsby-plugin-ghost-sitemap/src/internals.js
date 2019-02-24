@@ -1,20 +1,19 @@
-const withoutTrailingSlash = (path) => {
-    if (path === `/`) {
-        return path
-    }
-    return path.replace(/\/$/, ``)
-}
-
 export const runQuery = (handler, query, excludes, pathPrefix) => handler(query).then((r) => {
     if (r.errors) {
         throw new Error(r.errors.join(`, `))
     }
 
-    // // Removing excluded paths
-    // r.data.allSitePage.edges = r.data.allSitePage.edges.filter(
-    //     page => !excludes.some(excludedRoute => minimatch(withoutTrailingSlash(page.node.path), excludedRoute)
-    //     )
-    // )
+    // Removing excluded paths
+    for (let source in r.data) {
+        if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
+            r.data[source].edges = r.data[source].edges.filter(({ node }) => !excludes.some((excludedRoute) => {
+                const slug = node.slug.replace(/^\/|\/$/, ``)
+                excludedRoute = excludedRoute.replace(/^\/|\/$/, ``)
+
+                return slug.indexOf(excludedRoute) >= 0
+            }))
+        }
+    }
 
     // // Add path prefix
     // r.data.allSitePage.edges = r.data.allSitePage.edges.map((page) => {

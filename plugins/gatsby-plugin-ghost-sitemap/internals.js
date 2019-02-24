@@ -3,24 +3,25 @@
 exports.__esModule = true;
 exports.defaultOptions = exports.runQuery = void 0;
 
-var withoutTrailingSlash = function withoutTrailingSlash(path) {
-  if (path === "/") {
-    return path;
-  }
-
-  return path.replace(/\/$/, "");
-};
-
 var runQuery = function runQuery(handler, query, excludes, pathPrefix) {
   return handler(query).then(function (r) {
     if (r.errors) {
       throw new Error(r.errors.join(", "));
-    } // // Removing excluded paths
-    // r.data.allSitePage.edges = r.data.allSitePage.edges.filter(
-    //     page => !excludes.some(excludedRoute => minimatch(withoutTrailingSlash(page.node.path), excludedRoute)
-    //     )
-    // )
-    // // Add path prefix
+    } // Removing excluded paths
+
+
+    for (var source in r.data) {
+      if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
+        r.data[source].edges = r.data[source].edges.filter(function (_ref) {
+          var node = _ref.node;
+          return !excludes.some(function (excludedRoute) {
+            var slug = node.slug.replace(/^\/|\/$/, "");
+            excludedRoute = excludedRoute.replace(/^\/|\/$/, "");
+            return slug.indexOf(excludedRoute) >= 0;
+          });
+        });
+      }
+    } // // Add path prefix
     // r.data.allSitePage.edges = r.data.allSitePage.edges.map((page) => {
     //     // uses `normalizePath` logic from `gatsby-link`
     //     page.node.path = (pathPrefix + page.node.path).replace(/^\/\//g, `/`)
