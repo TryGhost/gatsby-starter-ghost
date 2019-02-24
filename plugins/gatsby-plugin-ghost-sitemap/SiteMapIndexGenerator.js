@@ -11,6 +11,8 @@ var _xml = _interopRequireDefault(require("xml"));
 
 var _moment = _interopRequireDefault(require("moment"));
 
+var _url = _interopRequireDefault(require("url"));
+
 var _utils = _interopRequireDefault(require("./utils"));
 
 var XMLNS_DECLS = {
@@ -29,23 +31,24 @@ function () {
 
   var _proto = SiteMapIndexGenerator.prototype;
 
-  _proto.getXml = function getXml() {
-    var urlElements = this.generateSiteMapUrlElements(),
+  _proto.getXml = function getXml(siteUrl) {
+    var urlElements = this.generateSiteMapUrlElements(siteUrl),
         data = {
       // Concat the elements to the _attr declaration
       sitemapindex: [XMLNS_DECLS].concat(urlElements) // Return the xml
 
     };
-    return _utils.default.getDeclarations() + (0, _xml.default)(data);
+    return _utils.default.getDeclarations(siteUrl) + (0, _xml.default)(data);
   };
 
-  _proto.generateSiteMapUrlElements = function generateSiteMapUrlElements() {
+  _proto.generateSiteMapUrlElements = function generateSiteMapUrlElements(siteUrl) {
     return _lodash.default.map(this.types, function (resourceType) {
-      var url = "http://localhost:9000/sitemap-" + resourceType.name + ".xml";
+      var siteMapUrl = _url.default.resolve(siteUrl, "sitemap-" + resourceType.name + ".xml");
+
       var lastModified = resourceType.lastModified;
       return {
         sitemap: [{
-          loc: url
+          loc: siteMapUrl
         }, {
           lastmod: (0, _moment.default)(lastModified).toISOString()
         }]

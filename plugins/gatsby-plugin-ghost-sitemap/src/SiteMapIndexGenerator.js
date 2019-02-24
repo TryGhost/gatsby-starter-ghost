@@ -1,6 +1,7 @@
 import _ from 'lodash'
 import xml from 'xml'
 import moment from 'moment'
+import url from 'url'
 import localUtils from './utils'
 
 const XMLNS_DECLS = {
@@ -15,25 +16,25 @@ export default class SiteMapIndexGenerator {
         this.types = options.types
     }
 
-    getXml() {
-        const urlElements = this.generateSiteMapUrlElements(),
+    getXml(siteUrl) {
+        const urlElements = this.generateSiteMapUrlElements(siteUrl),
             data = {
                 // Concat the elements to the _attr declaration
                 sitemapindex: [XMLNS_DECLS].concat(urlElements),
             }
 
         // Return the xml
-        return localUtils.getDeclarations() + xml(data)
+        return localUtils.getDeclarations(siteUrl) + xml(data)
     }
 
-    generateSiteMapUrlElements() {
+    generateSiteMapUrlElements(siteUrl) {
         return _.map(this.types, (resourceType) => {
-            const url = `http://localhost:9000/sitemap-${resourceType.name}.xml`
+            const siteMapUrl = url.resolve(siteUrl, `sitemap-${resourceType.name}.xml`)
             const lastModified = resourceType.lastModified
 
             return {
                 sitemap: [
-                    { loc: url },
+                    { loc: siteMapUrl },
                     { lastmod: moment(lastModified).toISOString() },
                 ],
             }

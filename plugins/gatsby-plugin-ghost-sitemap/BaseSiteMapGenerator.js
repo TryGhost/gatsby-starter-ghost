@@ -36,7 +36,7 @@ function () {
 
   var _proto = BaseSiteMapGenerator.prototype;
 
-  _proto.generateXmlFromNodes = function generateXmlFromNodes() {
+  _proto.generateXmlFromNodes = function generateXmlFromNodes(siteUrl) {
     var self = this; // Get a mapping of node to timestamp
 
     var timedNodes = _lodash.default.map(this.nodeLookup, function (node, id) {
@@ -59,7 +59,7 @@ function () {
       urlset: [XMLNS_DECLS].concat(urlElements) // Return the xml
 
     };
-    return _utils.default.getDeclarations() + (0, _xml.default)(data);
+    return _utils.default.getDeclarations(siteUrl) + (0, _xml.default)(data);
   };
 
   _proto.addUrl = function addUrl(url, datum) {
@@ -142,12 +142,12 @@ function () {
     return !!imageUrl;
   };
 
-  _proto.getXml = function getXml() {
+  _proto.getXml = function getXml(siteUrl) {
     if (this.siteMapContent) {
       return this.siteMapContent;
     }
 
-    var content = this.generateXmlFromNodes();
+    var content = this.generateXmlFromNodes(siteUrl);
     this.siteMapContent = content;
     return content;
   }

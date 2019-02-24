@@ -1,11 +1,16 @@
 "use strict";
 
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+
 exports.__esModule = true;
 exports.default = void 0;
+
+var _url = _interopRequireDefault(require("url"));
+
 var sitemapsUtils = {
-  // TODO: serve file from static folder -> copy?
-  getDeclarations: function getDeclarations() {
-    var baseUrl = "http://localhost:9000/sitemap.xsl";
+  getDeclarations: function getDeclarations(siteUrl) {
+    var baseUrl = _url.default.resolve(siteUrl, "/sitemap.xsl");
+
     baseUrl = baseUrl.replace(/^(http:|https:)/, "");
     return "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" + "<?xml-stylesheet type=\"text/xsl\" href=\"" + baseUrl + "\"?>";
   }
