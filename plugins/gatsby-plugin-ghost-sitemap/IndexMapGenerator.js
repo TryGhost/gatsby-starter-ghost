@@ -31,19 +31,23 @@ function () {
 
   var _proto = SiteMapIndexGenerator.prototype;
 
-  _proto.getXml = function getXml(siteUrl) {
-    var urlElements = this.generateSiteMapUrlElements(siteUrl),
+  _proto.getXml = function getXml(options) {
+    var urlElements = this.generateSiteMapUrlElements(options),
         data = {
       // Concat the elements to the _attr declaration
       sitemapindex: [XMLNS_DECLS].concat(urlElements) // Return the xml
 
     };
-    return _utils.default.getDeclarations(siteUrl) + (0, _xml.default)(data);
+    return _utils.default.getDeclarations(options) + (0, _xml.default)(data);
   };
 
-  _proto.generateSiteMapUrlElements = function generateSiteMapUrlElements(siteUrl) {
+  _proto.generateSiteMapUrlElements = function generateSiteMapUrlElements(_ref) {
+    var siteUrl = _ref.siteUrl,
+        resourcesOutput = _ref.resourcesOutput;
     return _lodash.default.map(this.types, function (resourceType) {
-      var siteMapUrl = _url.default.resolve(siteUrl, "sitemap-" + resourceType.name + ".xml");
+      var filePath = resourcesOutput.replace(/:resource/, resourceType.name);
+
+      var siteMapUrl = _url.default.resolve(siteUrl, filePath);
 
       var lastModified = resourceType.lastModified || (0, _moment.default)(new Date(), _moment.default.ISO_8601).toISOString();
       return {

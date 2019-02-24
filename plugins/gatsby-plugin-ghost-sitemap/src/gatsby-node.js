@@ -1,6 +1,7 @@
 import path from 'path'
 import url from 'url'
 import fs from 'fs-extra'
+import _ from 'lodash'
 
 import defaultOptions from './defaults'
 import Manager from './SiteMapManager'
@@ -9,7 +10,7 @@ const PUBLICPATH = `./public`
 const XSLFILE = path.resolve(__dirname, `./static/sitemap.xsl`)
 let siteUrl
 
-const runQuery = (handler, query, excludes) => handler(query).then((r) => {
+const runQuery = (handler, { query, exclude }) => handler(query).then((r) => {
     if (r.errors) {
         throw new Error(r.errors.join(`, `))
     }
@@ -17,7 +18,7 @@ const runQuery = (handler, query, excludes) => handler(query).then((r) => {
     for (let source in r.data) {
         // Removing excluded paths
         if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
-            r.data[source].edges = r.data[source].edges.filter(({ node }) => !excludes.some((excludedRoute) => {
+            r.data[source].edges = r.data[source].edges.filter(({ node }) => !exclude.some((excludedRoute) => {
                 const slug = node.slug.replace(/^\/|\/$/, ``)
                 excludedRoute = excludedRoute.replace(/^\/|\/$/, ``)
 
@@ -29,14 +30,14 @@ const runQuery = (handler, query, excludes) => handler(query).then((r) => {
     return r.data
 })
 
-const copyStylesheet = async () => {
+const copyStylesheet = async ({ siteUrl, indexOutput }) => {
     const siteRegex = /(\{\{blog-url\}\})/g
 
     // Get our stylesheet template
     const data = await fs.readFile(XSLFILE)
 
     // Replace the `{{blog-url}}` variable with our real site URL
-    const sitemapStylesheet = data.toString().replace(siteRegex, siteUrl)
+    const sitemapStylesheet = data.toString().replace(siteRegex, url.resolve(siteUrl, indexOutput))
 
     // Save the updated stylesheet to the public folder, so it will be
     // available for the xml sitemap files
@@ -81,29 +82,23 @@ const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
 }
 
 export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
-    const options = { ...pluginOptions }
+    const options = _.merge(defaultOptions, options, pluginOptions)
+
     delete options.plugins
     delete options.createLinkInHead
 
-    const { query, indexOutput, resourcesOutput, exclude, mapping } = {
-        ...defaultOptions,
-        ...options,
-    }
+    const { indexOutput, resourcesOutput, mapping } = options
 
     const indexSitemapFile = path.join(PUBLICPATH, indexOutput)
     const resourcesSitemapFile = path.join(PUBLICPATH, resourcesOutput)
 
-    // Paths we're excluding...
-    const excludeOptions = exclude.concat(defaultOptions.exclude)
-
     const queryRecords = await runQuery(
         graphql,
-        query,
-        excludeOptions,
+        options
     )
 
     // Instanciate the Ghost Sitemaps Manager
-    const manager = new Manager()
+    const manager = new Manager(options)
 
     serialize(queryRecords, mapping, pathPrefix).forEach((source) => {
         for (let type in source) {
@@ -114,16 +109,19 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         }
     })
 
-    await copyStylesheet()
+    // The siteUrl is only available after we have the returned query results
+    options.siteUrl = siteUrl
 
-    const indexSiteMap = manager.getIndexXml()
+    await copyStylesheet(options)
+
+    const indexSiteMap = manager.getIndexXml(options)
     const resourcesSiteMapsArray = []
 
     for (let resourceType in mapping) {
         const type = mapping[resourceType].name
         resourcesSiteMapsArray.push({
             type: type,
-            xml: manager.getSiteMapXml(type),
+            xml: manager.getSiteMapXml(type, options),
         })
     }
 

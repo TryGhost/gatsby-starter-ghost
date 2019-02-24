@@ -8,7 +8,9 @@ exports.default = void 0;
 var _url = _interopRequireDefault(require("url"));
 
 var sitemapsUtils = {
-  getDeclarations: function getDeclarations(siteUrl) {
+  getDeclarations: function getDeclarations(_ref) {
+    var siteUrl = _ref.siteUrl;
+
     var baseUrl = _url.default.resolve(siteUrl, "/sitemap.xsl");
 
     baseUrl = baseUrl.replace(/^(http:|https:)/, "");

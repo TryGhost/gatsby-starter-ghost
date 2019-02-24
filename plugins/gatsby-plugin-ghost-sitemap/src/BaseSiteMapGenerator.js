@@ -21,7 +21,7 @@ export default class BaseSiteMapGenerator {
         this.lastModified = 0
     }
 
-    generateXmlFromNodes(siteUrl) {
+    generateXmlFromNodes(options) {
         const self = this
         // Get a mapping of node to timestamp
         const timedNodes = _.map(this.nodeLookup, function (node, id) {
@@ -42,7 +42,7 @@ export default class BaseSiteMapGenerator {
         }
 
         // Return the xml
-        return localUtils.getDeclarations(siteUrl) + xml(data)
+        return localUtils.getDeclarations(options) + xml(data)
     }
 
     addUrl(url, datum) {
@@ -130,12 +130,12 @@ export default class BaseSiteMapGenerator {
         return !!imageUrl
     }
 
-    getXml(siteUrl) {
+    getXml(options) {
         if (this.siteMapContent) {
             return this.siteMapContent
         }
 
-        const content = this.generateXmlFromNodes(siteUrl)
+        const content = this.generateXmlFromNodes(options)
         this.siteMapContent = content
         return content
     }

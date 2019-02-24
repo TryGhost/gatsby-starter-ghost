@@ -92,7 +92,7 @@
                         </table>
                     </xsl:if>
                     <xsl:if test="count(sitemap:sitemapindex/sitemap:sitemap) &lt; 1">
-                        <p class="desc"><a href="{{blog-url}}/sitemap.xml" class="back-link">&#8592; Back to index</a></p>
+                        <p class="desc"><a href="{{blog-url}}" class="back-link">&#8592; Back to index</a></p>
                         <table id="sitemap" cellpadding="3">
                             <thead>
                                 <tr>
@@ -124,7 +124,7 @@
                                 </xsl:for-each>
                             </tbody>
                         </table>
-                        <p class="desc"><a href="{{blog-url}}/sitemap.xml" class="back-link">&#8592; Back to index</a></p>
+                        <p class="desc"><a href="{{blog-url}}" class="back-link">&#8592; Back to index</a></p>
                     </xsl:if>
                 </div>
             </body>

@@ -8,6 +8,7 @@ export default class SiteMapManager {
     constructor(options) {
         options = options || {}
 
+        this.options = options
         this.siteUrl = ``
 
         this.pages = options.pages || this.createPagesGenerator(options)
@@ -44,12 +45,12 @@ export default class SiteMapManager {
         return new TagMapGenerator(options)
     }
 
-    getIndexXml() {
-        return this.index.getXml(this.siteUrl)
+    getIndexXml(options) {
+        return this.index.getXml(options)
     }
 
-    getSiteMapXml(type) {
-        return this[type].getXml(this.siteUrl)
+    getSiteMapXml(type, options) {
+        return this[type].getXml(options)
     }
 
     // This is the equivalent of adding the URLs on bootstrap by listening to the events

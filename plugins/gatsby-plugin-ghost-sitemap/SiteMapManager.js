@@ -20,6 +20,7 @@ var SiteMapManager =
 function () {
   function SiteMapManager(options) {
     options = options || {};
+    this.options = options;
     this.siteUrl = "";
     this.pages = options.pages || this.createPagesGenerator(options);
     this.posts = options.posts || this.createPostsGenerator(options);
@@ -57,12 +58,12 @@ function () {
     return new _TagMapGenerator.default(options);
   };
 
-  _proto.getIndexXml = function getIndexXml() {
-    return this.index.getXml(this.siteUrl);
+  _proto.getIndexXml = function getIndexXml(options) {
+    return this.index.getXml(options);
   };
 
-  _proto.getSiteMapXml = function getSiteMapXml(type) {
-    return this[type].getXml(this.siteUrl);
+  _proto.getSiteMapXml = function getSiteMapXml(type, options) {
+    return this[type].getXml(options);
   } // This is the equivalent of adding the URLs on bootstrap by listening to the events
   // like we do in Ghost core
   ;

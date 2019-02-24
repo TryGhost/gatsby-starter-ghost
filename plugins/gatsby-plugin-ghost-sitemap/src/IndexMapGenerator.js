@@ -17,20 +17,21 @@ export default class SiteMapIndexGenerator {
         this.types = options.types
     }
 
-    getXml(siteUrl) {
-        const urlElements = this.generateSiteMapUrlElements(siteUrl),
+    getXml(options) {
+        const urlElements = this.generateSiteMapUrlElements(options),
             data = {
                 // Concat the elements to the _attr declaration
                 sitemapindex: [XMLNS_DECLS].concat(urlElements),
             }
 
         // Return the xml
-        return localUtils.getDeclarations(siteUrl) + xml(data)
+        return localUtils.getDeclarations(options) + xml(data)
     }
 
-    generateSiteMapUrlElements(siteUrl) {
+    generateSiteMapUrlElements({ siteUrl, resourcesOutput }) {
         return _.map(this.types, (resourceType) => {
-            const siteMapUrl = url.resolve(siteUrl, `sitemap-${resourceType.name}.xml`)
+            const filePath = resourcesOutput.replace(/:resource/, resourceType.name)
+            const siteMapUrl = url.resolve(siteUrl, filePath)
             const lastModified = resourceType.lastModified || moment(new Date(), moment.ISO_8601).toISOString()
 
             return {
