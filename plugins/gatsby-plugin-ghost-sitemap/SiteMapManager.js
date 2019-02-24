@@ -21,7 +21,6 @@ function () {
   function SiteMapManager(options) {
     options = options || {};
     this.options = options;
-    this.siteUrl = "";
     this.pages = options.pages || this.createPagesGenerator(options);
     this.posts = options.posts || this.createPostsGenerator(options);
     this.users = this.authors = options.authors || this.createUsersGenerator(options);
@@ -70,15 +69,7 @@ function () {
 
   _proto.addUrls = function addUrls(type, _ref) {
     var url = _ref.url,
-        node = _ref.node,
-        siteUrl = _ref.siteUrl;
-
-    // Save the siteUrl, so we can pass it to functions where we normally
-    // use the Ghost URL service
-    if (type === "site") {
-      return this.siteUrl = siteUrl;
-    }
-
+        node = _ref.node;
     return this[type].addUrl(url, node);
   };
 

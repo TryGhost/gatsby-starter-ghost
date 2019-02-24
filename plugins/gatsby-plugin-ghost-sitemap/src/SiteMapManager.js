@@ -9,7 +9,6 @@ export default class SiteMapManager {
         options = options || {}
 
         this.options = options
-        this.siteUrl = ``
 
         this.pages = options.pages || this.createPagesGenerator(options)
         this.posts = options.posts || this.createPostsGenerator(options)
@@ -55,12 +54,7 @@ export default class SiteMapManager {
 
     // This is the equivalent of adding the URLs on bootstrap by listening to the events
     // like we do in Ghost core
-    addUrls(type, { url, node, siteUrl }) {
-        // Save the siteUrl, so we can pass it to functions where we normally
-        // use the Ghost URL service
-        if (type === `site`) {
-            return this.siteUrl = siteUrl
-        }
+    addUrls(type, { url, node }) {
         return this[type].addUrl(url, node)
     }
 }

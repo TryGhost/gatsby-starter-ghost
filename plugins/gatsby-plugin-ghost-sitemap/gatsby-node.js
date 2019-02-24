@@ -130,14 +130,7 @@ var serialize = function serialize(_ref5, mapping, pathPrefix) {
     _loop(source);
   }
 
-  nodes.push(sourceObject); // Add the siteUrl as setup in Gatsby config of the app, so we can create the
-  // correct back links in the sitemap
-
-  nodes.push({
-    site: [{
-      siteUrl: siteUrl
-    }]
-  });
+  nodes.push(sourceObject);
   return nodes;
 };
 
