@@ -20,10 +20,9 @@ const copyStylesheet = async () => {
     // Save the updated stylesheet to the public folder, so it will be
     // available for the xml sitemap files
     await fs.writeFile(path.join(publicPath, `sitemap.xsl`), sitemapStylesheet)
-    console.log(`Sitemap stylesheet copied!`)
 }
 
-const serialize = ({ site, ...sources }, mapping) => {
+const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
     const nodes = []
     const sourceObject = {}
 
@@ -35,12 +34,17 @@ const serialize = ({ site, ...sources }, mapping) => {
 
             if (currentSource) {
                 sourceObject[mapping[source].name] = []
-                currentSource.edges.map((edge) => {
-                    const nodePath = path.join(mapping[source].prefix, edge.node.slug)
+                currentSource.edges.map(({ node }) => {
+                    if (!node) {
+                        return
+                    }
+
+                    // Add site path prefix and resources prefix to create the correct absolute URL
+                    const nodePath = path.join(pathPrefix, mapping[source].prefix, node.slug)
 
                     sourceObject[mapping[source].name].push({
                         url: url.resolve(siteUrl, nodePath),
-                        node: edge.node,
+                        node: node,
                     })
                 })
             }
@@ -75,14 +79,15 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         graphql,
         query,
         excludeOptions,
-        pathPrefix
     )
 
+    // Instanciate the Ghost Sitemaps Manager
     const manager = new Manager()
 
-    serialize(queryRecords, mapping).forEach((source) => {
+    serialize(queryRecords, mapping, pathPrefix).forEach((source) => {
         for (let type in source) {
             source[type].forEach((node) => {
+                // "feed" the sitemaps manager with our serialized records
                 manager.addUrls(type, node)
             })
         }
@@ -109,7 +114,6 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
             const filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type)
             await fs.writeFile(filePath, sitemap.xml)
         })
-        console.log(`All sitemaps created!`)
     } catch (err) {
         console.error(err)
     }

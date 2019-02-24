@@ -3,7 +3,7 @@
 exports.__esModule = true;
 exports.defaultOptions = exports.runQuery = void 0;
 
-var runQuery = function runQuery(handler, query, excludes, pathPrefix) {
+var runQuery = function runQuery(handler, query, excludes) {
   return handler(query).then(function (r) {
     if (r.errors) {
       throw new Error(r.errors.join(", "));
@@ -19,13 +19,6 @@ var runQuery = function runQuery(handler, query, excludes, pathPrefix) {
             excludedRoute = excludedRoute.replace(/^\/|\/$/, "");
             return slug.indexOf(excludedRoute) >= 0;
           });
-        }); // Add path prefix
-
-        r.data[source].edges = r.data[source].edges.map(function (_ref2) {
-          var node = _ref2.node;
-          // uses `normalizePath` logic from `gatsby-link`
-          node.path = (pathPrefix + node.slug).replace(/^\/\//g, "/");
-          return node;
         });
       }
     }

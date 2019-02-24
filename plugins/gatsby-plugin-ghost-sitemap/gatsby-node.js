@@ -55,9 +55,6 @@ function () {
             return _fsExtra.default.writeFile(_path.default.join(publicPath, "sitemap.xsl"), sitemapStylesheet);
 
           case 7:
-            console.log("Sitemap stylesheet copied!");
-
-          case 8:
           case "end":
             return _context.stop();
         }
@@ -70,7 +67,7 @@ function () {
   };
 }();
 
-var serialize = function serialize(_ref2, mapping) {
+var serialize = function serialize(_ref2, mapping, pathPrefix) {
   var site = _ref2.site,
       sources = (0, _objectWithoutPropertiesLoose2.default)(_ref2, ["site"]);
   var nodes = [];
@@ -83,12 +80,19 @@ var serialize = function serialize(_ref2, mapping) {
 
       if (currentSource) {
         sourceObject[mapping[source].name] = [];
-        currentSource.edges.map(function (edge) {
-          var nodePath = _path.default.join(mapping[source].prefix, edge.node.slug);
+        currentSource.edges.map(function (_ref3) {
+          var node = _ref3.node;
+
+          if (!node) {
+            return;
+          } // Add site path prefix and resources prefix to create the correct absolute URL
+
+
+          var nodePath = _path.default.join(pathPrefix, mapping[source].prefix, node.slug);
 
           sourceObject[mapping[source].name].push({
             url: _url.default.resolve(siteUrl, nodePath),
-            node: edge.node
+            node: node
           });
         });
       }
@@ -113,16 +117,16 @@ var serialize = function serialize(_ref2, mapping) {
 var onPostBuild =
 /*#__PURE__*/
 function () {
-  var _ref4 = (0, _asyncToGenerator2.default)(
+  var _ref5 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(_ref3, pluginOptions) {
+  _regenerator.default.mark(function _callee3(_ref4, pluginOptions) {
     var graphql, pathPrefix, options, _defaultOptions$optio, query, indexOutput, resourcesOutput, exclude, mapping, indexSitemapFile, resourcesSitemapFile, excludeOptions, queryRecords, manager, indexSiteMap, resourcesSiteMapsArray, resourceType, type;
 
     return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            graphql = _ref3.graphql, pathPrefix = _ref3.pathPrefix;
+            graphql = _ref4.graphql, pathPrefix = _ref4.pathPrefix;
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
             delete options.createLinkInHead;
@@ -132,14 +136,16 @@ function () {
 
             excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
             _context3.next = 10;
-            return (0, _internals.runQuery)(graphql, query, excludeOptions, pathPrefix);
+            return (0, _internals.runQuery)(graphql, query, excludeOptions);
 
           case 10:
             queryRecords = _context3.sent;
+            // Instanciate the Ghost Sitemaps Manager
             manager = new _SiteMapManager.default();
-            serialize(queryRecords, mapping).forEach(function (source) {
+            serialize(queryRecords, mapping, pathPrefix).forEach(function (source) {
               var _loop2 = function _loop2(type) {
                 source[type].forEach(function (node) {
+                  // "feed" the sitemaps manager with our serialized records
                   manager.addUrls(type, node);
                 });
               };
@@ -172,7 +178,7 @@ function () {
             resourcesSiteMapsArray.forEach(
             /*#__PURE__*/
             function () {
-              var _ref5 = (0, _asyncToGenerator2.default)(
+              var _ref6 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
               _regenerator.default.mark(function _callee2(sitemap) {
                 var filePath;
@@ -193,31 +199,30 @@ function () {
               }));
 
               return function (_x3) {
-                return _ref5.apply(this, arguments);
+                return _ref6.apply(this, arguments);
               };
             }());
-            console.log("All sitemaps created!");
-            _context3.next = 28;
+            _context3.next = 27;
             break;
 
-          case 25:
-            _context3.prev = 25;
+          case 24:
+            _context3.prev = 24;
             _context3.t0 = _context3["catch"](18);
             console.error(_context3.t0);
 
-          case 28:
+          case 27:
             return _context3.abrupt("return");
 
-          case 29:
+          case 28:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, this, [[18, 25]]);
+    }, _callee3, this, [[18, 24]]);
   }));
 
   return function onPostBuild(_x, _x2) {
-    return _ref4.apply(this, arguments);
+    return _ref5.apply(this, arguments);
   };
 }();
 

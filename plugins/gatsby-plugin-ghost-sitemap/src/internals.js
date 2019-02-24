@@ -1,4 +1,4 @@
-export const runQuery = (handler, query, excludes, pathPrefix) => handler(query).then((r) => {
+export const runQuery = (handler, query, excludes) => handler(query).then((r) => {
     if (r.errors) {
         throw new Error(r.errors.join(`, `))
     }
@@ -12,13 +12,6 @@ export const runQuery = (handler, query, excludes, pathPrefix) => handler(query)
 
                 return slug.indexOf(excludedRoute) >= 0
             }))
-
-            // Add path prefix
-            r.data[source].edges = r.data[source].edges.map(({ node }) => {
-                // uses `normalizePath` logic from `gatsby-link`
-                node.path = (pathPrefix + node.slug).replace(/^\/\//g, `/`)
-                return node
-            })
         }
     }
 
