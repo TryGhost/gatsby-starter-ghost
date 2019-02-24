@@ -26,10 +26,7 @@ export const defaultOptions = {
           siteUrl
         }
       }
-      allGhostPost(
-        sort: {order: ASC, fields: published_at},
-        filter: {slug: {ne: "data-schema"}}
-      ) {
+      allGhostPost(sort: {order: ASC, fields: published_at}) {
         edges {
             node {
                 id
@@ -40,10 +37,7 @@ export const defaultOptions = {
             }
         }
       }
-      allGhostPage(
-        sort: {order: ASC, fields: published_at},
-        filter: {slug: {ne: "data-schema-page"}}
-      ) {
+      allGhostPage(sort: {order: ASC, fields: published_at}) {
         edges {
             node {
                 id
@@ -54,10 +48,7 @@ export const defaultOptions = {
             }
         }
       }
-      allGhostTag(
-        sort: {order: ASC, fields: name},
-        filter: {slug: {ne: "data-schema"}}
-      ) {
+      allGhostTag(sort: {order: ASC, fields: name}) {
         edges {
             node {
                 id
@@ -66,10 +57,7 @@ export const defaultOptions = {
             }
         }
       }
-      allGhostAuthor(
-        sort: {order: ASC, fields: name},
-        filter: {slug: {ne: "data-schema-author"}}
-      ) {
+      allGhostAuthor(sort: {order: ASC, fields: name}) {
         edges {
             node {
                 id
@@ -104,6 +92,9 @@ export const defaultOptions = {
         `/404`,
         `/404.html`,
         `/offline-plugin-app-shell-fallback`,
+        `/data-schema`,
+        `/data-schema-author`,
+        `/data-schema-page`,
     ],
     createLinkInHead: true,
 }
