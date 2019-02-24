@@ -1,6 +1,5 @@
 import path from 'path'
 import url from 'url'
-import fs from 'fs-extra'
 
 import defaultOptions from './defaults'
 import Manager from './SiteMapManager'

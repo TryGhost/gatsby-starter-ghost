@@ -17,8 +17,6 @@ var _path = _interopRequireDefault(require("path"));
 
 var _url = _interopRequireDefault(require("url"));
 
-var _fsExtra = _interopRequireDefault(require("fs-extra"));
-
 var _defaults = _interopRequireDefault(require("./defaults"));
 
 var _SiteMapManager = _interopRequireDefault(require("./SiteMapManager"));
@@ -67,7 +65,7 @@ function () {
             siteRegex = /(\{\{blog-url\}\})/g; // Get our stylesheet template
 
             _context.next = 3;
-            return _fsExtra.default.readFile(XSLFILE);
+            return fs.readFile(XSLFILE);
 
           case 3:
             data = _context.sent;
@@ -76,7 +74,7 @@ function () {
             // available for the xml sitemap files
 
             _context.next = 7;
-            return _fsExtra.default.writeFile(_path.default.join(PUBLICPATH, "sitemap.xsl"), sitemapStylesheet);
+            return fs.writeFile(_path.default.join(PUBLICPATH, "sitemap.xsl"), sitemapStylesheet);
 
           case 7:
           case "end":
@@ -196,7 +194,7 @@ function () {
 
             _context3.prev = 18;
             _context3.next = 21;
-            return _fsExtra.default.writeFile(indexSitemapFile, indexSiteMap);
+            return fs.writeFile(indexSitemapFile, indexSiteMap);
 
           case 21:
             resourcesSiteMapsArray.forEach(
@@ -212,7 +210,7 @@ function () {
                       case 0:
                         filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type);
                         _context2.next = 3;
-                        return _fsExtra.default.writeFile(filePath, sitemap.xml);
+                        return fs.writeFile(filePath, sitemap.xml);
 
                       case 3:
                       case "end":
