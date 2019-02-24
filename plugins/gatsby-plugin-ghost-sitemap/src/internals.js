@@ -3,8 +3,8 @@ export const runQuery = (handler, query, excludes, pathPrefix) => handler(query)
         throw new Error(r.errors.join(`, `))
     }
 
-    // Removing excluded paths
     for (let source in r.data) {
+        // Removing excluded paths
         if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
             r.data[source].edges = r.data[source].edges.filter(({ node }) => !excludes.some((excludedRoute) => {
                 const slug = node.slug.replace(/^\/|\/$/, ``)
@@ -12,15 +12,15 @@ export const runQuery = (handler, query, excludes, pathPrefix) => handler(query)
 
                 return slug.indexOf(excludedRoute) >= 0
             }))
+
+            // Add path prefix
+            r.data[source].edges = r.data[source].edges.map(({ node }) => {
+                // uses `normalizePath` logic from `gatsby-link`
+                node.path = (pathPrefix + node.slug).replace(/^\/\//g, `/`)
+                return node
+            })
         }
     }
-
-    // // Add path prefix
-    // r.data.allSitePage.edges = r.data.allSitePage.edges.map((page) => {
-    //     // uses `normalizePath` logic from `gatsby-link`
-    //     page.node.path = (pathPrefix + page.node.path).replace(/^\/\//g, `/`)
-    //     return page
-    // })
 
     return r.data
 })

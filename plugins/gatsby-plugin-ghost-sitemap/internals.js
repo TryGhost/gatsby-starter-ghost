@@ -7,10 +7,10 @@ var runQuery = function runQuery(handler, query, excludes, pathPrefix) {
   return handler(query).then(function (r) {
     if (r.errors) {
       throw new Error(r.errors.join(", "));
-    } // Removing excluded paths
-
+    }
 
     for (var source in r.data) {
+      // Removing excluded paths
       if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
         r.data[source].edges = r.data[source].edges.filter(function (_ref) {
           var node = _ref.node;
@@ -19,15 +19,16 @@ var runQuery = function runQuery(handler, query, excludes, pathPrefix) {
             excludedRoute = excludedRoute.replace(/^\/|\/$/, "");
             return slug.indexOf(excludedRoute) >= 0;
           });
+        }); // Add path prefix
+
+        r.data[source].edges = r.data[source].edges.map(function (_ref2) {
+          var node = _ref2.node;
+          // uses `normalizePath` logic from `gatsby-link`
+          node.path = (pathPrefix + node.slug).replace(/^\/\//g, "/");
+          return node;
         });
       }
-    } // // Add path prefix
-    // r.data.allSitePage.edges = r.data.allSitePage.edges.map((page) => {
-    //     // uses `normalizePath` logic from `gatsby-link`
-    //     page.node.path = (pathPrefix + page.node.path).replace(/^\/\//g, `/`)
-    //     return page
-    // })
-
+    }
 
     return r.data;
   });
