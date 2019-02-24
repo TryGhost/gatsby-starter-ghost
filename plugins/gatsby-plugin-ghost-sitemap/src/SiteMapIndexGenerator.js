@@ -2,6 +2,7 @@ import _ from 'lodash'
 import xml from 'xml'
 import moment from 'moment'
 import url from 'url'
+
 import localUtils from './utils'
 
 const XMLNS_DECLS = {

@@ -10,8 +10,6 @@ var _gatsby = require("gatsby");
 
 var _internals = require("./internals");
 
-var _jsxFileName = "/Users/aileen/code/gatsby-starter-ghost/plugins/gatsby-plugin-ghost-sitemap/src/gatsby-ssr.js";
-
 exports.onRenderBody = function (_ref, pluginOptions) {
   var setHeadComponents = _ref.setHeadComponents;
 
@@ -31,11 +29,6 @@ exports.onRenderBody = function (_ref, pluginOptions) {
     key: "gatsby-plugin-ghost-sitemap",
     rel: "sitemap",
     type: "application/xml",
-    href: (0, _gatsby.withPrefix)(indexOutput),
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: this
+    href: (0, _gatsby.withPrefix)(indexOutput)
   })]);
 };

@@ -15,7 +15,6 @@ var _path = _interopRequireDefault(require("path"));
 
 var _utils = _interopRequireDefault(require("./utils"));
 
-// import urlService from '../../../services/url'
 // Sitemap specific xml namespace declarations that should not change
 var XMLNS_DECLS = {
   _attr: {

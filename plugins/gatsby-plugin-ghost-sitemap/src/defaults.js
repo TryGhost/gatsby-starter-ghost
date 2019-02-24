@@ -1,4 +1,4 @@
-export const defaultOptions = {
+const defaultOptions = {
     query: `
     {
       site {
@@ -78,3 +78,5 @@ export const defaultOptions = {
     ],
     createLinkInHead: true,
 }
+
+export default defaultOptions

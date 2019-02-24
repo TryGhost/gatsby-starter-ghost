@@ -2,7 +2,7 @@ import _ from 'lodash'
 import xml from 'xml'
 import moment from 'moment'
 import path from 'path'
-// import urlService from '../../../services/url'
+
 import localUtils from './utils'
 
 // Sitemap specific xml namespace declarations that should not change

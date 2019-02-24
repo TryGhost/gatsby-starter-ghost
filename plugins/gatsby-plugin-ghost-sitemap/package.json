@@ -5,6 +5,7 @@
   "author": "Ghost Foundation",
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "fs-extra": "^7.0.1",
     "moment": "^2.24.0",
     "xml": "^1.0.1"
   },
