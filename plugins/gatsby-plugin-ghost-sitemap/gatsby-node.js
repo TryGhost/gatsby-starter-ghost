@@ -5,13 +5,13 @@ var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefau
 exports.__esModule = true;
 exports.onPostBuild = void 0;
 
-var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
-
 var _extends2 = _interopRequireDefault(require("@babel/runtime/helpers/extends"));
 
-var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
-
 var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runtime/helpers/objectWithoutPropertiesLoose"));
+
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
 var _path = _interopRequireDefault(require("path"));
 
@@ -27,12 +27,55 @@ var publicPath = "./public";
 
 var xslFile = _path.default.resolve(__dirname, "./static/sitemap.xsl");
 
-var serialize = function serialize(_ref, mapping) {
-  var site = _ref.site,
-      sources = (0, _objectWithoutPropertiesLoose2.default)(_ref, ["site"]);
-  var siteUrl = site.siteMetadata.siteUrl;
+var siteUrl;
+
+var copyStylesheet =
+/*#__PURE__*/
+function () {
+  var _ref = (0, _asyncToGenerator2.default)(
+  /*#__PURE__*/
+  _regenerator.default.mark(function _callee() {
+    var siteRegex, data, sitemapStylesheet;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            siteRegex = /(\{\{blog-url\}\})/g; // Get our stylesheet template
+
+            _context.next = 3;
+            return _fsExtra.default.readFile(xslFile);
+
+          case 3:
+            data = _context.sent;
+            // Replace the `{{blog-url}}` variable with our real site URL
+            sitemapStylesheet = data.toString().replace(siteRegex, siteUrl); // Save the updated stylesheet to the public folder, so it will be
+            // available for the xml sitemap files
+
+            _context.next = 7;
+            return _fsExtra.default.writeFile(_path.default.join(publicPath, "sitemap.xsl"), sitemapStylesheet);
+
+          case 7:
+            console.log("Sitemap stylesheet copied!");
+
+          case 8:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, this);
+  }));
+
+  return function copyStylesheet() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+var serialize = function serialize(_ref2, mapping) {
+  var site = _ref2.site,
+      sources = (0, _objectWithoutPropertiesLoose2.default)(_ref2, ["site"]);
   var nodes = [];
   var sourceObject = {};
+  siteUrl = site.siteMetadata.siteUrl;
 
   var _loop = function _loop(source) {
     if (mapping[source].name) {
@@ -56,23 +99,30 @@ var serialize = function serialize(_ref, mapping) {
     _loop(source);
   }
 
-  nodes.push(sourceObject);
+  nodes.push(sourceObject); // Add the siteUrl as setup in Gatsby config of the app, so we can create the
+  // correct back links in the sitemap
+
+  nodes.push({
+    site: [{
+      siteUrl: siteUrl
+    }]
+  });
   return nodes;
 };
 
 var onPostBuild =
 /*#__PURE__*/
 function () {
-  var _ref3 = (0, _asyncToGenerator2.default)(
+  var _ref4 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee2(_ref2, pluginOptions) {
+  _regenerator.default.mark(function _callee3(_ref3, pluginOptions) {
     var graphql, pathPrefix, options, _defaultOptions$optio, query, indexOutput, resourcesOutput, exclude, mapping, indexSitemapFile, resourcesSitemapFile, excludeOptions, queryRecords, manager, indexSiteMap, resourcesSiteMapsArray, resourceType, type;
 
-    return _regenerator.default.wrap(function _callee2$(_context2) {
+    return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
-        switch (_context2.prev = _context2.next) {
+        switch (_context3.prev = _context3.next) {
           case 0:
-            graphql = _ref2.graphql, pathPrefix = _ref2.pathPrefix;
+            graphql = _ref3.graphql, pathPrefix = _ref3.pathPrefix;
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
             delete options.createLinkInHead;
@@ -81,11 +131,11 @@ function () {
             resourcesSitemapFile = _path.default.join(publicPath, resourcesOutput); // Paths we're excluding...
 
             excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
-            _context2.next = 10;
+            _context3.next = 10;
             return (0, _internals.runQuery)(graphql, query, excludeOptions, pathPrefix);
 
           case 10:
-            queryRecords = _context2.sent;
+            queryRecords = _context3.sent;
             manager = new _SiteMapManager.default();
             serialize(queryRecords, mapping).forEach(function (source) {
               var _loop2 = function _loop2(type) {
@@ -97,24 +147,11 @@ function () {
               for (var type in source) {
                 _loop2(type);
               }
-            }); // copy our template stylesheet to the public folder, so it will be available for the
-            // xml files
+            });
+            _context3.next = 15;
+            return copyStylesheet();
 
-            _context2.prev = 13;
-            _context2.next = 16;
-            return _fsExtra.default.copyFile(xslFile, _path.default.join(publicPath, "sitemap.xsl"));
-
-          case 16:
-            console.log("Sitemap stylesheet copied!");
-            _context2.next = 22;
-            break;
-
-          case 19:
-            _context2.prev = 19;
-            _context2.t0 = _context2["catch"](13);
-            console.error(_context2.t0);
-
-          case 22:
+          case 15:
             indexSiteMap = manager.getIndexXml();
             resourcesSiteMapsArray = [];
 
@@ -127,60 +164,60 @@ function () {
             } // Save the generated xml files in the public folder
 
 
-            _context2.prev = 25;
-            _context2.next = 28;
+            _context3.prev = 18;
+            _context3.next = 21;
             return _fsExtra.default.writeFile(indexSitemapFile, indexSiteMap);
 
-          case 28:
+          case 21:
             resourcesSiteMapsArray.forEach(
             /*#__PURE__*/
             function () {
-              var _ref4 = (0, _asyncToGenerator2.default)(
+              var _ref5 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
-              _regenerator.default.mark(function _callee(sitemap) {
+              _regenerator.default.mark(function _callee2(sitemap) {
                 var filePath;
-                return _regenerator.default.wrap(function _callee$(_context) {
+                return _regenerator.default.wrap(function _callee2$(_context2) {
                   while (1) {
-                    switch (_context.prev = _context.next) {
+                    switch (_context2.prev = _context2.next) {
                       case 0:
                         filePath = resourcesSitemapFile.replace(/:resource/, sitemap.type);
-                        _context.next = 3;
+                        _context2.next = 3;
                         return _fsExtra.default.writeFile(filePath, sitemap.xml);
 
                       case 3:
                       case "end":
-                        return _context.stop();
+                        return _context2.stop();
                     }
                   }
-                }, _callee, this);
+                }, _callee2, this);
               }));
 
               return function (_x3) {
-                return _ref4.apply(this, arguments);
+                return _ref5.apply(this, arguments);
               };
             }());
             console.log("All sitemaps created!");
-            _context2.next = 35;
+            _context3.next = 28;
             break;
 
-          case 32:
-            _context2.prev = 32;
-            _context2.t1 = _context2["catch"](25);
-            console.error(_context2.t1);
+          case 25:
+            _context3.prev = 25;
+            _context3.t0 = _context3["catch"](18);
+            console.error(_context3.t0);
 
-          case 35:
-            return _context2.abrupt("return");
+          case 28:
+            return _context3.abrupt("return");
 
-          case 36:
+          case 29:
           case "end":
-            return _context2.stop();
+            return _context3.stop();
         }
       }
-    }, _callee2, this, [[13, 19], [25, 32]]);
+    }, _callee3, this, [[18, 25]]);
   }));
 
   return function onPostBuild(_x, _x2) {
-    return _ref3.apply(this, arguments);
+    return _ref4.apply(this, arguments);
   };
 }();
 

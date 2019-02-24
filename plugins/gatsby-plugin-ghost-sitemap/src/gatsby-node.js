@@ -6,11 +6,28 @@ import Manager from './SiteMapManager'
 
 const publicPath = `./public`
 const xslFile = path.resolve(__dirname, `./static/sitemap.xsl`)
+let siteUrl
+
+const copyStylesheet = async () => {
+    const siteRegex = /(\{\{blog-url\}\})/g
+
+    // Get our stylesheet template
+    const data = await fs.readFile(xslFile)
+
+    // Replace the `{{blog-url}}` variable with our real site URL
+    const sitemapStylesheet = data.toString().replace(siteRegex, siteUrl)
+
+    // Save the updated stylesheet to the public folder, so it will be
+    // available for the xml sitemap files
+    await fs.writeFile(path.join(publicPath, `sitemap.xsl`), sitemapStylesheet)
+    console.log(`Sitemap stylesheet copied!`)
+}
 
 const serialize = ({ site, ...sources }, mapping) => {
-    const siteUrl = site.siteMetadata.siteUrl
     const nodes = []
     const sourceObject = {}
+
+    siteUrl = site.siteMetadata.siteUrl
 
     for (let source in sources) {
         if (mapping[source].name) {
@@ -30,6 +47,10 @@ const serialize = ({ site, ...sources }, mapping) => {
         }
     }
     nodes.push(sourceObject)
+
+    // Add the siteUrl as setup in Gatsby config of the app, so we can create the
+    // correct back links in the sitemap
+    nodes.push({ site: [{ siteUrl: siteUrl }] })
 
     return nodes
 }
@@ -67,14 +88,7 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         }
     })
 
-    // copy our template stylesheet to the public folder, so it will be available for the
-    // xml files
-    try {
-        await fs.copyFile(xslFile, path.join(publicPath, `sitemap.xsl`))
-        console.log(`Sitemap stylesheet copied!`)
-    } catch (err) {
-        console.error(err)
-    }
+    await copyStylesheet()
 
     const indexSiteMap = manager.getIndexXml()
     const resourcesSiteMapsArray = []
