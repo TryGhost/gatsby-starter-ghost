@@ -1,25 +1,46 @@
 import path from 'path'
 import url from 'url'
 import fs from 'fs-extra'
-import { defaultOptions, runQuery } from './internals'
+
+import defaultOptions from './defaults'
 import Manager from './SiteMapManager'
 
-const publicPath = `./public`
-const xslFile = path.resolve(__dirname, `./static/sitemap.xsl`)
+const PUBLICPATH = `./public`
+const XSLFILE = path.resolve(__dirname, `./static/sitemap.xsl`)
 let siteUrl
+
+const runQuery = (handler, query, excludes) => handler(query).then((r) => {
+    if (r.errors) {
+        throw new Error(r.errors.join(`, `))
+    }
+
+    for (let source in r.data) {
+        // Removing excluded paths
+        if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
+            r.data[source].edges = r.data[source].edges.filter(({ node }) => !excludes.some((excludedRoute) => {
+                const slug = node.slug.replace(/^\/|\/$/, ``)
+                excludedRoute = excludedRoute.replace(/^\/|\/$/, ``)
+
+                return slug.indexOf(excludedRoute) >= 0
+            }))
+        }
+    }
+
+    return r.data
+})
 
 const copyStylesheet = async () => {
     const siteRegex = /(\{\{blog-url\}\})/g
 
     // Get our stylesheet template
-    const data = await fs.readFile(xslFile)
+    const data = await fs.readFile(XSLFILE)
 
     // Replace the `{{blog-url}}` variable with our real site URL
     const sitemapStylesheet = data.toString().replace(siteRegex, siteUrl)
 
     // Save the updated stylesheet to the public folder, so it will be
     // available for the xml sitemap files
-    await fs.writeFile(path.join(publicPath, `sitemap.xsl`), sitemapStylesheet)
+    await fs.writeFile(path.join(PUBLICPATH, `sitemap.xsl`), sitemapStylesheet)
 }
 
 const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
@@ -69,8 +90,8 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
         ...options,
     }
 
-    const indexSitemapFile = path.join(publicPath, indexOutput)
-    const resourcesSitemapFile = path.join(publicPath, resourcesOutput)
+    const indexSitemapFile = path.join(PUBLICPATH, indexOutput)
+    const resourcesSitemapFile = path.join(PUBLICPATH, resourcesOutput)
 
     // Paths we're excluding...
     const excludeOptions = exclude.concat(defaultOptions.exclude)

@@ -19,20 +19,44 @@ var _url = _interopRequireDefault(require("url"));
 
 var _fsExtra = _interopRequireDefault(require("fs-extra"));
 
-var _internals = require("./internals");
+var _defaults = _interopRequireDefault(require("./defaults"));
 
 var _SiteMapManager = _interopRequireDefault(require("./SiteMapManager"));
 
-var publicPath = "./public";
+var PUBLICPATH = "./public";
 
-var xslFile = _path.default.resolve(__dirname, "./static/sitemap.xsl");
+var XSLFILE = _path.default.resolve(__dirname, "./static/sitemap.xsl");
 
 var siteUrl;
+
+var runQuery = function runQuery(handler, query, excludes) {
+  return handler(query).then(function (r) {
+    if (r.errors) {
+      throw new Error(r.errors.join(", "));
+    }
+
+    for (var source in r.data) {
+      // Removing excluded paths
+      if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
+        r.data[source].edges = r.data[source].edges.filter(function (_ref) {
+          var node = _ref.node;
+          return !excludes.some(function (excludedRoute) {
+            var slug = node.slug.replace(/^\/|\/$/, "");
+            excludedRoute = excludedRoute.replace(/^\/|\/$/, "");
+            return slug.indexOf(excludedRoute) >= 0;
+          });
+        });
+      }
+    }
+
+    return r.data;
+  });
+};
 
 var copyStylesheet =
 /*#__PURE__*/
 function () {
-  var _ref = (0, _asyncToGenerator2.default)(
+  var _ref2 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee() {
     var siteRegex, data, sitemapStylesheet;
@@ -43,7 +67,7 @@ function () {
             siteRegex = /(\{\{blog-url\}\})/g; // Get our stylesheet template
 
             _context.next = 3;
-            return _fsExtra.default.readFile(xslFile);
+            return _fsExtra.default.readFile(XSLFILE);
 
           case 3:
             data = _context.sent;
@@ -52,7 +76,7 @@ function () {
             // available for the xml sitemap files
 
             _context.next = 7;
-            return _fsExtra.default.writeFile(_path.default.join(publicPath, "sitemap.xsl"), sitemapStylesheet);
+            return _fsExtra.default.writeFile(_path.default.join(PUBLICPATH, "sitemap.xsl"), sitemapStylesheet);
 
           case 7:
           case "end":
@@ -63,13 +87,13 @@ function () {
   }));
 
   return function copyStylesheet() {
-    return _ref.apply(this, arguments);
+    return _ref2.apply(this, arguments);
   };
 }();
 
-var serialize = function serialize(_ref2, mapping, pathPrefix) {
-  var site = _ref2.site,
-      sources = (0, _objectWithoutPropertiesLoose2.default)(_ref2, ["site"]);
+var serialize = function serialize(_ref3, mapping, pathPrefix) {
+  var site = _ref3.site,
+      sources = (0, _objectWithoutPropertiesLoose2.default)(_ref3, ["site"]);
   var nodes = [];
   var sourceObject = {};
   siteUrl = site.siteMetadata.siteUrl;
@@ -80,8 +104,8 @@ var serialize = function serialize(_ref2, mapping, pathPrefix) {
 
       if (currentSource) {
         sourceObject[mapping[source].name] = [];
-        currentSource.edges.map(function (_ref3) {
-          var node = _ref3.node;
+        currentSource.edges.map(function (_ref4) {
+          var node = _ref4.node;
 
           if (!node) {
             return;
@@ -117,26 +141,26 @@ var serialize = function serialize(_ref2, mapping, pathPrefix) {
 var onPostBuild =
 /*#__PURE__*/
 function () {
-  var _ref5 = (0, _asyncToGenerator2.default)(
+  var _ref6 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
-  _regenerator.default.mark(function _callee3(_ref4, pluginOptions) {
+  _regenerator.default.mark(function _callee3(_ref5, pluginOptions) {
     var graphql, pathPrefix, options, _defaultOptions$optio, query, indexOutput, resourcesOutput, exclude, mapping, indexSitemapFile, resourcesSitemapFile, excludeOptions, queryRecords, manager, indexSiteMap, resourcesSiteMapsArray, resourceType, type;
 
     return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
           case 0:
-            graphql = _ref4.graphql, pathPrefix = _ref4.pathPrefix;
+            graphql = _ref5.graphql, pathPrefix = _ref5.pathPrefix;
             options = (0, _extends2.default)({}, pluginOptions);
             delete options.plugins;
             delete options.createLinkInHead;
-            _defaultOptions$optio = (0, _extends2.default)({}, _internals.defaultOptions, options), query = _defaultOptions$optio.query, indexOutput = _defaultOptions$optio.indexOutput, resourcesOutput = _defaultOptions$optio.resourcesOutput, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping;
-            indexSitemapFile = _path.default.join(publicPath, indexOutput);
-            resourcesSitemapFile = _path.default.join(publicPath, resourcesOutput); // Paths we're excluding...
+            _defaultOptions$optio = (0, _extends2.default)({}, _defaults.default, options), query = _defaultOptions$optio.query, indexOutput = _defaultOptions$optio.indexOutput, resourcesOutput = _defaultOptions$optio.resourcesOutput, exclude = _defaultOptions$optio.exclude, mapping = _defaultOptions$optio.mapping;
+            indexSitemapFile = _path.default.join(PUBLICPATH, indexOutput);
+            resourcesSitemapFile = _path.default.join(PUBLICPATH, resourcesOutput); // Paths we're excluding...
 
-            excludeOptions = exclude.concat(_internals.defaultOptions.exclude);
+            excludeOptions = exclude.concat(_defaults.default.exclude);
             _context3.next = 10;
-            return (0, _internals.runQuery)(graphql, query, excludeOptions);
+            return runQuery(graphql, query, excludeOptions);
 
           case 10:
             queryRecords = _context3.sent;
@@ -178,7 +202,7 @@ function () {
             resourcesSiteMapsArray.forEach(
             /*#__PURE__*/
             function () {
-              var _ref6 = (0, _asyncToGenerator2.default)(
+              var _ref7 = (0, _asyncToGenerator2.default)(
               /*#__PURE__*/
               _regenerator.default.mark(function _callee2(sitemap) {
                 var filePath;
@@ -199,7 +223,7 @@ function () {
               }));
 
               return function (_x3) {
-                return _ref6.apply(this, arguments);
+                return _ref7.apply(this, arguments);
               };
             }());
             _context3.next = 27;
@@ -222,7 +246,7 @@ function () {
   }));
 
   return function onPostBuild(_x, _x2) {
-    return _ref5.apply(this, arguments);
+    return _ref6.apply(this, arguments);
   };
 }();
 

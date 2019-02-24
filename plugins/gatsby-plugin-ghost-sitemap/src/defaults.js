@@ -1,23 +1,3 @@
-export const runQuery = (handler, query, excludes) => handler(query).then((r) => {
-    if (r.errors) {
-        throw new Error(r.errors.join(`, `))
-    }
-
-    for (let source in r.data) {
-        // Removing excluded paths
-        if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
-            r.data[source].edges = r.data[source].edges.filter(({ node }) => !excludes.some((excludedRoute) => {
-                const slug = node.slug.replace(/^\/|\/$/, ``)
-                excludedRoute = excludedRoute.replace(/^\/|\/$/, ``)
-
-                return slug.indexOf(excludedRoute) >= 0
-            }))
-        }
-    }
-
-    return r.data
-})
-
 export const defaultOptions = {
     query: `
     {
