@@ -106,7 +106,7 @@ var serialize = function serialize(_ref5, mapping, pathPrefix) {
       var currentSource = sources.hasOwnProperty(source) ? sources[source] : [];
 
       if (currentSource) {
-        sourceObject[mapping[source].name] = [];
+        sourceObject[mapping[source].source] = [];
         currentSource.edges.map(function (_ref6) {
           var node = _ref6.node;
 
@@ -117,7 +117,7 @@ var serialize = function serialize(_ref5, mapping, pathPrefix) {
 
           var nodePath = _path.default.join(pathPrefix, mapping[source].prefix, node.slug);
 
-          sourceObject[mapping[source].name].push({
+          sourceObject[mapping[source].source].push({
             url: _url.default.resolve(siteUrl, nodePath),
             node: node
           });
@@ -147,7 +147,7 @@ function () {
   var _ref8 = (0, _asyncToGenerator2.default)(
   /*#__PURE__*/
   _regenerator.default.mark(function _callee3(_ref7, pluginOptions) {
-    var graphql, pathPrefix, options, indexOutput, resourcesOutput, mapping, indexSitemapFile, resourcesSitemapFile, queryRecords, manager, indexSiteMap, resourcesSiteMapsArray, resourceType, type;
+    var graphql, pathPrefix, options, indexOutput, resourcesOutput, mapping, indexSitemapFile, resourcesSitemapFile, queryRecords, manager, indexSiteMap, resourcesSiteMapsArray, resourceType, source;
     return _regenerator.default.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -188,10 +188,10 @@ function () {
             resourcesSiteMapsArray = [];
 
             for (resourceType in mapping) {
-              type = mapping[resourceType].name;
+              source = mapping[resourceType].source;
               resourcesSiteMapsArray.push({
-                type: type,
-                xml: manager.getSiteMapXml(type, options)
+                type: mapping[resourceType].name,
+                xml: manager.getSiteMapXml(source, options)
               });
             } // Save the generated xml files in the public folder
 

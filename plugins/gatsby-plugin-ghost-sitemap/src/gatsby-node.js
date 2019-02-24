@@ -55,7 +55,7 @@ const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
             const currentSource = sources.hasOwnProperty(source) ? sources[source] : []
 
             if (currentSource) {
-                sourceObject[mapping[source].name] = []
+                sourceObject[mapping[source].source] = []
                 currentSource.edges.map(({ node }) => {
                     if (!node) {
                         return
@@ -64,7 +64,7 @@ const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
                     // Add site path prefix and resources prefix to create the correct absolute URL
                     const nodePath = path.join(pathPrefix, mapping[source].prefix, node.slug)
 
-                    sourceObject[mapping[source].name].push({
+                    sourceObject[mapping[source].source].push({
                         url: url.resolve(siteUrl, nodePath),
                         node: node,
                     })
@@ -118,10 +118,10 @@ export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
     const resourcesSiteMapsArray = []
 
     for (let resourceType in mapping) {
-        const type = mapping[resourceType].name
+        const source = mapping[resourceType].source
         resourcesSiteMapsArray.push({
-            type: type,
-            xml: manager.getSiteMapXml(type, options),
+            type: mapping[resourceType].name,
+            xml: manager.getSiteMapXml(source, options),
         })
     }
 

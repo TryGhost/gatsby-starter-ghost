@@ -18,18 +18,18 @@ export default class SiteMapIndexGenerator {
     }
 
     getXml(options) {
-        const urlElements = this.generateSiteMapUrlElements(options),
-            data = {
-                // Concat the elements to the _attr declaration
-                sitemapindex: [XMLNS_DECLS].concat(urlElements),
-            }
+        const urlElements = this.generateSiteMapUrlElements(options)
+        const data = {
+            // Concat the elements to the _attr declaration
+            sitemapindex: [XMLNS_DECLS].concat(urlElements),
+        }
 
         // Return the xml
         return localUtils.getDeclarations(options) + xml(data)
     }
 
-    generateSiteMapUrlElements({ siteUrl, resourcesOutput }) {
-        return _.map(this.types, (resourceType) => {
+    generateSiteMapUrlElements({ siteUrl, resourcesOutput, mapping }) {
+        return _.map(mapping, (resourceType) => {
             const filePath = resourcesOutput.replace(/:resource/, resourceType.name)
             const siteMapUrl = url.resolve(siteUrl, filePath)
             const lastModified = resourceType.lastModified || moment(new Date(), moment.ISO_8601).toISOString()

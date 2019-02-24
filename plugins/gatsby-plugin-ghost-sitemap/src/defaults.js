@@ -53,18 +53,22 @@ const defaultOptions = {
         allGhostPost: {
             name: `posts`,
             prefix: `/`,
+            source: `posts`,
         },
         allGhostTag: {
             name: `tags`,
             prefix: `tag`,
+            source: `tags`,
         },
         allGhostAuthor: {
             name: `authors`,
             prefix: `author`,
+            source: `authors`,
         },
         allGhostPage: {
             name: `pages`,
             prefix: `/`,
+            source: `pages`,
         },
     },
     exclude: [

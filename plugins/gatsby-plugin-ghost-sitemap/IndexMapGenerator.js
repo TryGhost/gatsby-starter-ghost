@@ -32,8 +32,8 @@ function () {
   var _proto = SiteMapIndexGenerator.prototype;
 
   _proto.getXml = function getXml(options) {
-    var urlElements = this.generateSiteMapUrlElements(options),
-        data = {
+    var urlElements = this.generateSiteMapUrlElements(options);
+    var data = {
       // Concat the elements to the _attr declaration
       sitemapindex: [XMLNS_DECLS].concat(urlElements) // Return the xml
 
@@ -43,8 +43,9 @@ function () {
 
   _proto.generateSiteMapUrlElements = function generateSiteMapUrlElements(_ref) {
     var siteUrl = _ref.siteUrl,
-        resourcesOutput = _ref.resourcesOutput;
-    return _lodash.default.map(this.types, function (resourceType) {
+        resourcesOutput = _ref.resourcesOutput,
+        mapping = _ref.mapping;
+    return _lodash.default.map(mapping, function (resourceType) {
       var filePath = resourcesOutput.replace(/:resource/, resourceType.name);
 
       var siteMapUrl = _url.default.resolve(siteUrl, filePath);

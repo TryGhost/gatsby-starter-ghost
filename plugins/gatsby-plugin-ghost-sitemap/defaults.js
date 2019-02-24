@@ -9,19 +9,23 @@ var defaultOptions = {
   mapping: {
     allGhostPost: {
       name: "posts",
-      prefix: "/"
+      prefix: "/",
+      source: "posts"
     },
     allGhostTag: {
       name: "tags",
-      prefix: "tag"
+      prefix: "tag",
+      source: "tags"
     },
     allGhostAuthor: {
       name: "authors",
-      prefix: "author"
+      prefix: "author",
+      source: "authors"
     },
     allGhostPage: {
       name: "pages",
-      prefix: "/"
+      prefix: "/",
+      source: "pages"
     }
   },
   exclude: ["/dev-404-page", "/404", "/404.html", "/offline-plugin-app-shell-fallback", "/data-schema", "/data-schema-author", "/data-schema-page"],
