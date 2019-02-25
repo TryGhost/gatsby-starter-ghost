@@ -18,7 +18,7 @@ const runQuery = (handler, { query, exclude }) => handler(query).then((r) => {
         // Removing excluded paths
         if (r.data[source] && r.data[source].edges && r.data[source].edges.length) {
             r.data[source].edges = r.data[source].edges.filter(({ node }) => !exclude.some((excludedRoute) => {
-                const slug = node.slug.replace(/^\/|\/$/, ``)
+                const slug = source === `allMarkdownRemark` ? node.fields.slug.replace(/^\/|\/$/, ``) : node.slug.replace(/^\/|\/$/, ``)
                 excludedRoute = excludedRoute.replace(/^\/|\/$/, ``)
 
                 return slug.indexOf(excludedRoute) >= 0
@@ -43,6 +43,29 @@ const copyStylesheet = async ({ siteUrl, indexOutput }) => {
     await fs.writeFile(path.join(PUBLICPATH, `sitemap.xsl`), sitemapStylesheet)
 }
 
+const serializeMarkdownNodes = (node) => {
+    if (!node.fields.slug) {
+        throw Error(`\`slug\` is a required field`)
+    }
+
+    node.slug = node.fields.slug
+
+    delete node.fields.slug
+
+    if (node.frontmatter) {
+        if (node.frontmatter.published_at) {
+            node.published_at = node.frontmatter.published_at
+            delete node.frontmatter.published_at
+        }
+        if (node.frontmatter.feature_image) {
+            node.feature_image = node.frontmatter.feature_image
+            delete node.frontmatter.feature_image
+        }
+    }
+
+    return node
+}
+
 const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
     const nodes = []
     const sourceObject = {}
@@ -59,7 +82,9 @@ const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
                     if (!node) {
                         return
                     }
-
+                    if (source === `allMarkdownRemark`) {
+                        node = serializeMarkdownNodes(node)
+                    }
                     // Add site path prefix and resources prefix to create the correct absolute URL
                     const nodePath = path.join(pathPrefix, mapping[source].prefix, node.slug)
 
