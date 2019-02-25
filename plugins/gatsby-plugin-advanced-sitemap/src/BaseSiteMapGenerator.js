@@ -108,14 +108,6 @@ export default class BaseSiteMapGenerator {
             return
         }
 
-        // Grab the image url
-        // imageUrl = urlService.utils.urlFor(`image`, { image: image }, true)
-
-        // Verify the url structure
-        // if (!this.validateImageUrl(imageUrl)) {
-        //     return
-        // }
-
         // Create the weird xml node syntax structure that is expected
         imageEl = [
             { 'image:loc': image },
