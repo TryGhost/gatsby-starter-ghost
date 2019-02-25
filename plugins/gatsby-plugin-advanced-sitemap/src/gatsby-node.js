@@ -1,7 +1,6 @@
 import path from 'path'
 import url from 'url'
 import fs from 'fs-extra'
-import _ from 'lodash'
 
 import defaultOptions from './defaults'
 import Manager from './SiteMapManager'
@@ -78,7 +77,7 @@ const serialize = ({ site, ...sources }, mapping, pathPrefix) => {
 }
 
 export const onPostBuild = async ({ graphql, pathPrefix }, pluginOptions) => {
-    const options = _.merge(defaultOptions, options, pluginOptions)
+    const options = Object.assign(defaultOptions, options, pluginOptions)
 
     delete options.plugins
     delete options.createLinkInHead
