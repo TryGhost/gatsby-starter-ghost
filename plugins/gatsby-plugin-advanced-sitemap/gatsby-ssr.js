@@ -10,7 +10,7 @@ var _gatsby = require("gatsby");
 
 var _internals = require("./internals");
 
-var _jsxFileName = "/Users/aileen/code/gatsby-starter-ghost/plugins/gatsby-plugin-ghost-sitemap/src/gatsby-ssr.js";
+var _jsxFileName = "/Users/aileen/code/gatsby-starter-ghost/plugins/gatsby-plugin-advanced-sitemap/src/gatsby-ssr.js";
 
 exports.onRenderBody = function (_ref, pluginOptions) {
   var setHeadComponents = _ref.setHeadComponents;
@@ -28,7 +28,7 @@ exports.onRenderBody = function (_ref, pluginOptions) {
   }
 
   setHeadComponents([_react.default.createElement("link", {
-    key: "gatsby-plugin-ghost-sitemap",
+    key: "gatsby-plugin-advanced-sitemap",
     rel: "sitemap",
     type: "application/xml",
     href: (0, _gatsby.withPrefix)(indexOutput),

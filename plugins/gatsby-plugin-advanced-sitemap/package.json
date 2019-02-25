@@ -1,5 +1,5 @@
 {
-  "name": "gatsby-plugin-ghost-sitemap",
+  "name": "gatsby-plugin-advanced-sitemap",
   "description": "Gatsby plugin that automatically creates a sitemap for your site",
   "version": "0.0.1",
   "author": "Ghost Foundation",

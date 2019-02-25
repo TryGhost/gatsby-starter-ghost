@@ -15,7 +15,7 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 
     setHeadComponents([
         <link
-            key={`gatsby-plugin-ghost-sitemap`}
+            key={`gatsby-plugin-advanced-sitemap`}
             rel="sitemap"
             type="application/xml"
             href={withPrefix(indexOutput)}
