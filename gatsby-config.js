@@ -113,7 +113,7 @@ module.exports = {
             options: {
                 query: `
                 {
-                    allGhostPost(sort: {order: ASC, fields: published_at}) {
+                    allGhostPost {
                         edges {
                             node {
                                 id
@@ -124,7 +124,7 @@ module.exports = {
                             }
                         }
                     }
-                    allGhostPage(sort: {order: ASC, fields: published_at}) {
+                    allGhostPage {
                         edges {
                             node {
                                 id
@@ -135,7 +135,7 @@ module.exports = {
                             }
                         }
                     }
-                    allGhostTag(sort: {order: ASC, fields: name}) {
+                    allGhostTag {
                         edges {
                             node {
                                 id
@@ -144,7 +144,7 @@ module.exports = {
                             }
                         }
                     }
-                    allGhostAuthor(sort: {order: ASC, fields: name}) {
+                    allGhostAuthor {
                         edges {
                             node {
                                 id
@@ -156,24 +156,16 @@ module.exports = {
                 }`,
                 mapping: {
                     allGhostPost: {
-                        name: `posts`,
-                        path: `/`,
-                        source: `posts`,
+                        sitemap: `posts`,
                     },
                     allGhostTag: {
-                        name: `tags`,
-                        path: `tag`,
-                        source: `tags`,
+                        sitemap: `tags`,
                     },
                     allGhostAuthor: {
-                        name: `authors`,
-                        path: `author`,
-                        source: `authors`,
+                        sitemap: `authors`,
                     },
                     allGhostPage: {
-                        name: `pages`,
-                        path: `/`,
-                        source: `pages`,
+                        sitemap: `pages`,
                     },
                 },
                 exclude: [
@@ -181,9 +173,6 @@ module.exports = {
                     `/404`,
                     `/404.html`,
                     `/offline-plugin-app-shell-fallback`,
-                    `/data-schema`,
-                    `/data-schema-author`,
-                    `/data-schema-page`,
                 ],
                 createLinkInHead: true,
             },

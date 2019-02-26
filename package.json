@@ -28,30 +28,30 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "eslint": "5.13.0",
+    "eslint": "5.14.1",
     "eslint-plugin-ghost": "0.1.0",
-    "eslint-plugin-react": "7.12.4",
-    "gatsby-plugin-advanced-sitemap": "^1.0.0"
+    "eslint-plugin-react": "7.12.4"
   },
   "dependencies": {
     "@tryghost/helpers": "1.0.1",
     "@tryghost/helpers-gatsby": "1.0.1",
     "cheerio": "^1.0.0-rc.2",
-    "gatsby": "2.0.115",
+    "gatsby": "2.1.18",
     "gatsby-awesome-pagination": "0.3.3",
-    "gatsby-image": "2.0.29",
-    "gatsby-plugin-feed": "2.0.13",
+    "gatsby-image": "2.0.30",
+    "gatsby-plugin-advanced-sitemap": "1.0.2",
+    "gatsby-plugin-feed": "2.0.14",
     "gatsby-plugin-force-trailing-slashes": "1.0.4",
-    "gatsby-plugin-manifest": "2.0.17",
-    "gatsby-plugin-offline": "2.0.22",
-    "gatsby-plugin-react-helmet": "3.0.6",
-    "gatsby-plugin-sharp": "2.0.20",
-    "gatsby-source-filesystem": "2.0.20",
+    "gatsby-plugin-manifest": "2.0.19",
+    "gatsby-plugin-offline": "2.0.24",
+    "gatsby-plugin-react-helmet": "3.0.7",
+    "gatsby-plugin-sharp": "2.0.22",
+    "gatsby-source-filesystem": "2.0.23",
     "gatsby-source-ghost": "3.3.0",
-    "gatsby-transformer-sharp": "2.1.13",
+    "gatsby-transformer-sharp": "2.1.14",
     "lodash": "4.17.11",
-    "react": "16.8.0",
-    "react-dom": "16.8.0",
+    "react": "16.8.3",
+    "react-dom": "16.8.3",
     "react-helmet": "5.2.0"
   }
 }
