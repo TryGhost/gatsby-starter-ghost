@@ -30,7 +30,8 @@
   "devDependencies": {
     "eslint": "5.13.0",
     "eslint-plugin-ghost": "0.1.0",
-    "eslint-plugin-react": "7.12.4"
+    "eslint-plugin-react": "7.12.4",
+    "gatsby-plugin-advanced-sitemap": "^1.0.0"
   },
   "dependencies": {
     "@tryghost/helpers": "1.0.1",
