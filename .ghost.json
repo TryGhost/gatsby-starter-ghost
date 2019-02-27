@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://diabetictribe.com.au",
+    "contentApiKey": "a48af3e15bd982375d753915e2"
   },
   "production": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://diabetictribe.com.au",
+    "contentApiKey": "a48af3e15bd982375d753915e2"
   }
 }
