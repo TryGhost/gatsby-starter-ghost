@@ -34,7 +34,7 @@ const AuthorMeta = ({ data, settings, canonical }) => {
                 <script type="application/ld+json">{`
                     {
                         "@context": "https://schema.org/",
-                        "@type": "Person,
+                        "@type": "Person",
                         "name": "${data.name}",
                         ${author.sameAsArray ? `"sameAs": ${author.sameAsArray},` : ``}
                         "url": "${canonical}",
