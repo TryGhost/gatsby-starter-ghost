@@ -13,7 +13,7 @@ import '../../styles/app.css'
 /**
 * Main layout component
 *
-* The Layout component wraps around each page and tmeplate.
+* The Layout component wraps around each page and template.
 * It also provides the header, footer as well as the main
 * styles, and meta data for each page.
 *
