@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from "react-helmet"
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 import { StaticQuery, graphql } from 'gatsby'
 import url from 'url'
 
@@ -11,7 +12,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     settings = settings.allGhostSettings.edges[0].node
 
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
-    const shareImage = url.resolve(config.siteUrl, image || data.feature_image || config.shareImage)
+    const shareImage = url.resolve(config.siteUrl, image || data.feature_image || _.get(settings, `cover_image`, null))
 
     description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
     title = `${title || data.meta_title || data.name || data.title} - ${settings.title}`
@@ -37,12 +38,14 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                         "@context": "https://schema.org/",
                         "@type": "${type}",
                         "url": "${canonical}",
-                        "image": {
-                            "@type": "ImageObject",
-                            "url": "${shareImage}",
-                            "width": "${config.shareImageWidth}",
-                            "height": "${config.shareImageHeight}"
-                        },
+                        ${shareImage &&
+                            `"image": {
+                                "@type": "ImageObject",
+                                "url": "${shareImage}",
+                                "width": "${config.shareImageWidth}",
+                                "height": "${config.shareImageHeight}"
+                            },`
+                        }
                         "publisher": {
                             "@type": "Organization",
                             "name": "${settings.title}",

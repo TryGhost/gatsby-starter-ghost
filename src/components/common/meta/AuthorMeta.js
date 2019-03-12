@@ -1,6 +1,7 @@
 import React from 'react'
 import Helmet from 'react-helmet'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
 import { StaticQuery, graphql } from 'gatsby'
 
 import ImageMeta from './ImageMeta'
@@ -11,7 +12,7 @@ const AuthorMeta = ({ data, settings, canonical }) => {
     settings = settings.allGhostSettings.edges[0].node
 
     const author = getAuthorProperties(data)
-    const shareImage = author.image || config.shareImage
+    const shareImage = author.image || _.get(settings, `cover_image`, null)
     const title = `${data.name} - ${settings.title}`
     const description = data.bio || config.siteDescriptionMeta || settings.description
 
@@ -36,14 +37,16 @@ const AuthorMeta = ({ data, settings, canonical }) => {
                         "@context": "https://schema.org/",
                         "@type": "Person",
                         "name": "${data.name}",
-                        ${author.sameAsArray ? `"sameAs": ${author.sameAsArray},` : ``}
+                        ${author.sameAsArray && `"sameAs": ${author.sameAsArray},`}
                         "url": "${canonical}",
-                        "image": {
-                            "@type": "ImageObject",
-                            "url": "${shareImage}",
-                            "width": "${config.shareImageWidth}",
-                            "height": "${config.shareImageHeight}"
-                        },
+                        ${shareImage &&
+                            `"image": {
+                                "@type": "ImageObject",
+                                "url": "${shareImage}",
+                                "width": "${config.shareImageWidth}",
+                                "height": "${config.shareImageHeight}"
+                            },`
+                        }
                         "mainEntityOfPage": {
                             "@type": "WebPage",
                             "@id": "${config.siteUrl}"

@@ -18,7 +18,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }), `name`)
     const primaryTag = publicTags[0] || ``
-    const shareImage = ghostPost.feature_image ? ghostPost.feature_image : config.shareImage
+    const shareImage = ghostPost.feature_image ? ghostPost.feature_image : _.get(settings, `cover_image`, null)
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
 
     return (
@@ -80,19 +80,21 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
                             "@type": "Person",
                             "name": "${author.name}",
                             ${author.image ? author.sameAsArray ? `"image": "${author.image}",` : `"image": "${author.image}"` : ``}
-                            ${author.sameAsArray ? `"sameAs": ${author.sameAsArray}` : ``}
+                            ${author.sameAsArray && `"sameAs": ${author.sameAsArray}`}
                         },
-                        ${publicTags.length ? `"keywords": "${_.join(publicTags, `, `)}",` : ``}
+                        ${publicTags.length && `"keywords": "${_.join(publicTags, `, `)}",`}
                         "headline": "${ghostPost.meta_title || ghostPost.title}",
                         "url": "${canonical}",
                         "datePublished": "${ghostPost.published_at}",
                         "dateModified": "${ghostPost.updated_at}",
-                        "image": {
-                            "@type": "ImageObject",
-                            "url": "${shareImage}",
-                            "width": "${config.shareImageWidth}",
-                            "height": "${config.shareImageHeight}"
-                        },
+                        ${shareImage &&
+                            `"image": {
+                                "@type": "ImageObject",
+                                "url": "${shareImage}",
+                                "width": "${config.shareImageWidth}",
+                                "height": "${config.shareImageHeight}"
+                            },`
+                        }
                         "publisher": {
                             "@type": "Organization",
                             "name": "${settings.title}",
