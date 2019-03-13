@@ -12,7 +12,9 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     settings = settings.allGhostSettings.edges[0].node
 
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
-    const shareImage = url.resolve(config.siteUrl, image || data.feature_image || _.get(settings, `cover_image`, null))
+    let shareImage = image || data.feature_image || _.get(settings, `cover_image`, null)
+
+    shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null
 
     description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
     title = `${title || data.meta_title || data.name || data.title} - ${settings.title}`
@@ -38,14 +40,12 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                         "@context": "https://schema.org/",
                         "@type": "${type}",
                         "url": "${canonical}",
-                        ${shareImage &&
-                            `"image": {
+                        ${shareImage ? `"image": {
                                 "@type": "ImageObject",
                                 "url": "${shareImage}",
                                 "width": "${config.shareImageWidth}",
                                 "height": "${config.shareImageHeight}"
-                            },`
-                        }
+                            },` : ``}
                         "publisher": {
                             "@type": "Organization",
                             "name": "${settings.title}",

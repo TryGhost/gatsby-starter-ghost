@@ -37,16 +37,14 @@ const AuthorMeta = ({ data, settings, canonical }) => {
                         "@context": "https://schema.org/",
                         "@type": "Person",
                         "name": "${data.name}",
-                        ${author.sameAsArray && `"sameAs": ${author.sameAsArray},`}
+                        ${author.sameAsArray ? `"sameAs": ${author.sameAsArray},` : ``}
                         "url": "${canonical}",
-                        ${shareImage &&
-                            `"image": {
+                        ${shareImage ? `"image": {
                                 "@type": "ImageObject",
                                 "url": "${shareImage}",
                                 "width": "${config.shareImageWidth}",
                                 "height": "${config.shareImageHeight}"
-                            },`
-                        }
+                            },` : ``}
                         "mainEntityOfPage": {
                             "@type": "WebPage",
                             "@id": "${config.siteUrl}"
