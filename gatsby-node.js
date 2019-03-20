@@ -1,4 +1,3 @@
-const _ = require(`lodash`)
 const Promise = require(`bluebird`)
 const path = require(`path`)
 const config = require(`./src/utils/siteConfig`)
@@ -41,7 +40,7 @@ exports.createPages = ({ graphql, actions }) => {
 
                 const items = result.data.allGhostPost.edges
 
-                _.forEach(items, ({ node }) => {
+                items.forEach(({ node }) => {
                     // This part here defines, that our posts will use
                     // a `/:slug/` permalink.
                     node.url = `/${node.slug}/`
@@ -109,7 +108,7 @@ exports.createPages = ({ graphql, actions }) => {
                 const items = result.data.allGhostTag.edges
                 const postsPerPage = config.postsPerPage
 
-                _.forEach(items, ({ node }) => {
+                items.forEach(({ node }) => {
                     const totalPosts = node.postCount !== null ? node.postCount : 0
                     const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
@@ -181,7 +180,7 @@ exports.createPages = ({ graphql, actions }) => {
                 const items = result.data.allGhostAuthor.edges
                 const postsPerPage = config.postsPerPage
 
-                _.forEach(items, ({ node }) => {
+                items.forEach(({ node }) => {
                     const totalPosts = node.postCount !== null ? node.postCount : 0
                     const numberOfPages = Math.ceil(totalPosts / postsPerPage)
 
@@ -250,7 +249,7 @@ exports.createPages = ({ graphql, actions }) => {
 
                 const items = result.data.allGhostPage.edges
 
-                _.forEach(items, ({ node }) => {
+                items.forEach(({ node }) => {
                     // This part here defines, that our pages will use
                     // a `/:slug/` permalink.
                     node.url = `/${node.slug}/`
