@@ -1,4 +1,3 @@
-const Promise = require(`bluebird`)
 const path = require(`path`)
 const config = require(`./src/utils/siteConfig`)
 const { paginate } = require(`gatsby-awesome-pagination`)
