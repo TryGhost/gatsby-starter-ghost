@@ -52,8 +52,7 @@ export const pageQuery = graphql`
     allGhostPost(
         sort: { order: DESC, fields: [published_at] },
         limit: $limit,
-        skip: $skip,
-        filter: { slug: {ne: "data-schema"}}
+        skip: $skip
     ) {
       edges {
         node {

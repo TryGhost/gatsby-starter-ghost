@@ -21,10 +21,7 @@ exports.createPages = ({ graphql, actions }) => {
             graphql(`
                 {
                     allGhostPost(
-                        sort: {order: ASC, fields: published_at},
-                        filter: {
-                            slug: {ne: "data-schema"}
-                        }
+                        sort: {order: ASC, fields: published_at}
                     ) {
                         edges {
                             node {
@@ -89,10 +86,7 @@ exports.createPages = ({ graphql, actions }) => {
             graphql(`
                 {
                     allGhostTag(
-                        sort: {order: ASC, fields: name},
-                        filter: {
-                            slug: {ne: "data-schema"}
-                        }
+                        sort: {order: ASC, fields: name}
                     ) {
                         edges {
                             node {
@@ -164,10 +158,7 @@ exports.createPages = ({ graphql, actions }) => {
             graphql(`
                 {
                     allGhostAuthor(
-                        sort: {order: ASC, fields: name},
-                        filter: {
-                            slug: {ne: "data-schema-author"}
-                        }
+                        sort: {order: ASC, fields: name}
                     ) {
                         edges {
                             node {
@@ -238,10 +229,7 @@ exports.createPages = ({ graphql, actions }) => {
             graphql(`
                 {
                     allGhostPage(
-                        sort: {order: ASC, fields: published_at},
-                        filter: {
-                            slug: {ne: "data-schema-page"}
-                        }
+                        sort: {order: ASC, fields: published_at}
                     ) {
                         edges {
                             node {
