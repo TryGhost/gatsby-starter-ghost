@@ -20,7 +20,7 @@ gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost
 
 ```bash
 # From Source
-git clone git@github.com:TryGhost/gatsby-starter-ghost.git
+git clone https://github.com/TryGhost/gatsby-starter-ghost.git
 cd gatsby-starter-ghost
 ```
 
