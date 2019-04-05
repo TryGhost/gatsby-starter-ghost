@@ -10,7 +10,7 @@ We use GitHub only for bug reports 🐛
 
 Anything else should be posted to https://forum.ghost.org 👫
 
-For questions, related to the usage of Gatsby or GraphQL, please check out their docs at https://www.gatsbyjs.org/ and https://graphql.org/
+For questions related to the usage of Gatsby or GraphQL, please check out their docs at https://www.gatsbyjs.org/ and https://graphql.org/
 
 🚨For support, help & questions use https://forum.ghost.org/c/help
 💡For feature requests & ideas you can post and vote on https://forum.ghost.org/c/Ideas
