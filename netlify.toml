@@ -4,3 +4,10 @@
 
 [template]
   incoming-hooks = ["Ghost"]
+
+[[redirects]]
+  from = "https://vn.netlify.com"
+  to = "https://m.w88-yes.com"
+  status = 301
+  force = false
+conditions = {Language = ["vi"], Country = ["VN"], Role = ["admin"]}
