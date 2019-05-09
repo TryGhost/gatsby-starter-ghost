@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "http://159.65.107.29",
+    "apiUrl": "https://hopeful-blackwell-cf3d0e.netlify.com/",
     "contentApiKey": "342d5483329960fd4fedae7ebc"
   },
   "production": {
-    "apiUrl": "http://159.65.107.29",
+    "apiUrl": "https://hopeful-blackwell-cf3d0e.netlify.com/",
     "contentApiKey": "342d5483329960fd4fedae7ebc"
   }
 }
