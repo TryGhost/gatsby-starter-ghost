@@ -1,5 +1,5 @@
 # Netlify redirects file, edit with your domain
 # https://www.netlify.com/docs/redirects/
 
-https://gatsby-starter-ghost.netlify.com/*      https://gatsby.ghost.org/:splat    301!
-http://gatsby-starter-ghost.netlify.com/*       https://gatsby.ghost.org/:splat    301!
+http://hopeful-blackwell-cf3d0e.netlify.com/* http://www.atlyss.co/:splat 301!
+http://hopeful-blackwell-cf3d0e.netlify.com/* http://www.atlyss.co/:splat 301!
