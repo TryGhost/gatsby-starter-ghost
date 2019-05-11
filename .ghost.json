@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "http://159.65.107.29",
-    "contentApiKey": "342d5483329960fd4fedae7ebc"
+    "apiUrl": "https://atlyss.co",
+    "contentApiKey": "c4dd355fd3242bdb88354c291d"
   },
   "production": {
-    "apiUrl": "http://159.65.107.29",
-    "contentApiKey": "342d5483329960fd4fedae7ebc"
+    "apiUrl": "https://atlyss.co",
+    "contentApiKey": "c4dd355fd3242bdb88354c291d"
   }
 }
