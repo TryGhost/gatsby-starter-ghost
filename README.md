@@ -42,7 +42,7 @@ gatsby develop
 
 By default, the starter will populate content from a default Ghost install located at https://gatsby.ghost.io.
 
-To use your own install, edit the `.ghost.json` config file with your credentials. You can find your `contentApiKey` in the "Integrations" screen in Ghost Admin. The minimum required version for Ghost is `2.22.0` in order to use this starter without issues.
+To use your own install, edit the `.ghost.json` config file with your credentials. You can find your `contentApiKey` in the "Integrations" screen in Ghost Admin. The minimum required version for Ghost is `2.10.0` in order to use this starter without issues.
 
 &nbsp;
 
