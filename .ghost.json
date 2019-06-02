@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://www.w88-yes.com",
+    "contentApiKey": "e50fcf838ddaaa8f6be49f1fa2"
   },
   "production": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://www.w88-yes.com",
+    "contentApiKey": "e50fcf838ddaaa8f6be49f1fa2"
   }
 }
