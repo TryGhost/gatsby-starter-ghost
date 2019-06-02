@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "63228accdd22b5c9e89f64deb8"
+    "apiUrl": "https://cms.judicialdomicide.org",
+    "contentApiKey": "a03442c65ddb3f9d1d4568da0b"
   },
   "production": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "63228accdd22b5c9e89f64deb8"
+    "apiUrl": "https://cms.judicialdomicide.org",
+    "contentApiKey": "a03442c65ddb3f9d1d4568da0b"
   }
 }
