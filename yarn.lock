@@ -4871,10 +4871,10 @@ gatsby-node-helpers@^0.3.0:
     lodash "^4.17.4"
     p-is-promise "^1.1.0"
 
-gatsby-plugin-advanced-sitemap@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.1.0.tgz#1b9c0549968b8f5d52ef47fdeaafa8ac9d787d93"
-  integrity sha512-a/Ctspcysm/MmLVVGN+OoL7AMbZ1K0p2OfuP4JZSv3BtFW1IBfmaZLwN3ZCqbDkIKTmXOJGl8T1S7lIjCX8w6Q==
+gatsby-plugin-advanced-sitemap@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.1.1.tgz#8067f6875db10caa11f688ac2e4f318cc5c13485"
+  integrity sha512-yEg+UOLmYTzXQ9whZas5oObebx67HnWi/9WZ000GcXBGqmGxMPX43Hqam6CpBhpr/N28KOYvk46selw7Ed3EEw==
   dependencies:
     "@babel/runtime" "7.4.5"
     fs-extra "8.0.1"
