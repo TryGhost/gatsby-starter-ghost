@@ -46,7 +46,7 @@ exports.createPages = ({ graphql, actions }) => {
 
                     createPage({
                         path: node.url,
-                        component: path.resolve(postTemplate),
+                        component: postTemplate,
                         context: {
                             // Data passed to context is available
                             // in page queries as GraphQL variables.
@@ -124,7 +124,7 @@ exports.createPages = ({ graphql, actions }) => {
 
                         createPage({
                             path: i === 0 ? node.url : `${node.url}page/${i + 1}/`,
-                            component: path.resolve(tagsTemplate),
+                            component: tagsTemplate,
                             context: {
                                 // Data passed to context is available
                                 // in page queries as GraphQL variables.
@@ -196,7 +196,7 @@ exports.createPages = ({ graphql, actions }) => {
 
                         createPage({
                             path: i === 0 ? node.url : `${node.url}page/${i + 1}/`,
-                            component: path.resolve(authorTemplate),
+                            component: authorTemplate,
                             context: {
                                 // Data passed to context is available
                                 // in page queries as GraphQL variables.
@@ -255,7 +255,7 @@ exports.createPages = ({ graphql, actions }) => {
 
                     createPage({
                         path: node.url,
-                        component: path.resolve(pageTemplate),
+                        component: pageTemplate,
                         context: {
                             // Data passed to context is available
                             // in page queries as GraphQL variables.
