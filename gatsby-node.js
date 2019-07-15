@@ -60,51 +60,20 @@ exports.createPages = async ({ graphql, actions }) => {
         throw new Error(result.errors)
     }
 
-    /**
-     * Posts
-     */
-    const postTemplate = path.resolve(`./src/templates/post.js`)
-    const indexTemplate = path.resolve(`./src/templates/index.js`)
-    const posts = result.data.allGhostPost.edges
-    posts.forEach(({ node }) => {
-        // This part here defines, that our posts will use
-        // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
-
-        createPage({
-            path: node.url,
-            component: postTemplate,
-            context: {
-                // Data passed to context is available
-                // in page queries as GraphQL variables.
-                slug: node.slug,
-            },
-        })
-    })
-
-    /**
-     * Pagination
-     * post next/previous links, e.g., /, /page/2, /page/3
-     */
-    paginate({
-        createPage,
-        items: posts,
-        itemsPerPage: postsPerPage,
-        component: indexTemplate,
-        pathPrefix: ({ pageNumber }) => {
-            if (pageNumber === 0) {
-                return `/`
-            } else {
-                return `/page`
-            }
-        },
-    })
-
-    /**
-     * Tags
-     */
-    const tagsTemplate = path.resolve(`./src/templates/tag.js`)
+    // Extract query results
     const tags = result.data.allGhostTag.edges
+    const authors = result.data.allGhostAuthor.edges
+    const pages = result.data.allGhostPage.edges
+    const posts = result.data.allGhostPost.edges
+
+    // Load templates
+    const indexTemplate = path.resolve(`./src/templates/index.js`)
+    const tagsTemplate = path.resolve(`./src/templates/tag.js`)
+    const authorTemplate = path.resolve(`./src/templates/author.js`)
+    const pageTemplate = path.resolve(`./src/templates/page.js`)
+    const postTemplate = path.resolve(`./src/templates/post.js`)
+
+    // Create tag pages
     tags.forEach(({ node }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
@@ -147,11 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
         })
     })
 
-    /**
-     * Authors
-     */
-    const authorTemplate = path.resolve(`./src/templates/author.js`)
-    const authors = result.data.allGhostAuthor.edges
+    // Create author pages
     authors.forEach(({ node }) => {
         const totalPosts = node.postCount !== null ? node.postCount : 0
         const numberOfPages = Math.ceil(totalPosts / postsPerPage)
@@ -194,11 +159,7 @@ exports.createPages = async ({ graphql, actions }) => {
         })
     })
 
-    /**
-     * Pages
-     */
-    const pageTemplate = path.resolve(`./src/templates/page.js`)
-    const pages = result.data.allGhostPage.edges
+    // Create pages
     pages.forEach(({ node }) => {
         // This part here defines, that our pages will use
         // a `/:slug/` permalink.
@@ -213,5 +174,37 @@ exports.createPages = async ({ graphql, actions }) => {
                 slug: node.slug,
             },
         })
+    })
+
+    // Create post pages
+    posts.forEach(({ node }) => {
+        // This part here defines, that our posts will use
+        // a `/:slug/` permalink.
+        node.url = `/${node.slug}/`
+
+        createPage({
+            path: node.url,
+            component: postTemplate,
+            context: {
+                // Data passed to context is available
+                // in page queries as GraphQL variables.
+                slug: node.slug,
+            },
+        })
+    })
+
+    // Create pagination
+    paginate({
+        createPage,
+        items: posts,
+        itemsPerPage: postsPerPage,
+        component: indexTemplate,
+        pathPrefix: ({ pageNumber }) => {
+            if (pageNumber === 0) {
+                return `/`
+            } else {
+                return `/page`
+            }
+        },
     })
 }
