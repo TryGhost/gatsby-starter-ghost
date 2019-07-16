@@ -5114,10 +5114,10 @@ gatsby-source-filesystem@2.1.5:
     valid-url "^1.0.9"
     xstate "^3.1.0"
 
-gatsby-source-ghost@3.4.3:
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.4.3.tgz#7fbb016cbb67df40faf0c984a421d7c71fa63dbd"
-  integrity sha512-gz5q+GPC5NtjoCeUT5zj03dZthfKafJTSZ7ztXY2rWPvuORDX4WsHtRedC5Q4c03qKmrO4U5ke8SEEtnrnd7qA==
+gatsby-source-ghost@3.4.4:
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.4.4.tgz#0bde5384652b3f59b2bcdf35ddaa9949e749f1bc"
+  integrity sha512-+qhbLfpPCIGWAK9TO2AXorEQ2zHZSNwnl1Rb6v7inDsljTCtOrv43mdUIYRkp9+ojjnqflzKg0YeL0id2WphAw==
   dependencies:
     "@tryghost/content-api" "1.2.5"
     bluebird "3.5.5"
