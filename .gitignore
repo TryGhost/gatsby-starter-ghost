@@ -72,3 +72,4 @@ typings/
 .cache/
 public
 yarn-error.log
+.netlify/
