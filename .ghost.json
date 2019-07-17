@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://cms.judicialdomicide.org",
-    "contentApiKey": "a03442c65ddb3f9d1d4568da0b"
+    "apiUrl": "https://blog.judicialdomicide.org",
+    "contentApiKey": "1b5b305b322cf7e4b1011048a6"
   },
   "production": {
-    "apiUrl": "https://cms.judicialdomicide.org",
-    "contentApiKey": "a03442c65ddb3f9d1d4568da0b"
+    "apiUrl": "https://blog.judicialdomicide.org",
+    "contentApiKey": "1b5b305b322cf7e4b1011048a6"
   }
 }
