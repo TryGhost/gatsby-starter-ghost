@@ -175,6 +175,7 @@ module.exports = {
                     `/offline-plugin-app-shell-fallback`,
                 ],
                 createLinkInHead: true,
+                addUncaughtPages: true,
             },
         },
         `gatsby-plugin-react-helmet`,
