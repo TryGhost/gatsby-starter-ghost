@@ -74,6 +74,7 @@ module.exports = {
                 theme_color: config.themeColor,
                 display: `minimal-ui`,
                 icon: `static/${config.siteIcon}`,
+                legacy: true,
                 query: `
                 {
                     allGhostSettings {
