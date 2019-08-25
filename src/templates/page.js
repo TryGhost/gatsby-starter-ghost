@@ -45,6 +45,7 @@ const Page = ({ data, location }) => {
 Page.propTypes = {
     data: PropTypes.shape({
         ghostPage: PropTypes.shape({
+            codeinjection_styles: PropTypes.object,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,

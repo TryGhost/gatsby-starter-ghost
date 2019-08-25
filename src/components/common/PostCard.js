@@ -40,6 +40,7 @@ const PostCard = ({ post }) => {
 
 PostCard.propTypes = {
     post: PropTypes.shape({
+        slug: PropTypes.string.isRequired,
         title: PropTypes.string.isRequired,
         feature_image: PropTypes.string,
         featured: PropTypes.bool,

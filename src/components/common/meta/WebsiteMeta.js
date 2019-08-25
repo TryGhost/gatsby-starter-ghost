@@ -72,12 +72,19 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
 WebsiteMeta.propTypes = {
     data: PropTypes.shape({
         title: PropTypes.string,
+        meta_title: PropTypes.string,
+        meta_description: PropTypes.string,
+        name: PropTypes.string,
         feature_image: PropTypes.string,
         description: PropTypes.string,
         bio: PropTypes.string,
         profile_image: PropTypes.string,
     }).isRequired,
     settings: PropTypes.shape({
+        logo: PropTypes.object,
+        description: PropTypes.string,
+        title: PropTypes.string,
+        twitter: PropTypes.string,
         allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
