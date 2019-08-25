@@ -51,6 +51,7 @@ const Post = ({ data, location }) => {
 Post.propTypes = {
     data: PropTypes.shape({
         ghostPost: PropTypes.shape({
+            codeinjection_styles: PropTypes.object,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,
