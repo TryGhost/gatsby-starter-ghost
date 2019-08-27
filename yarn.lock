@@ -1147,10 +1147,10 @@
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
   integrity sha512-ONhaKPIufzzrlNbqtWFFd+jlnemX6lJAgq9ZeiZtS7I1PIf/la7CW4m83rTXRnVnsMbW2k56pGYu7AUFJD9Pow==
 
-"@tryghost/content-api@1.2.5":
-  version "1.2.5"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.2.5.tgz#b6222d5890cf10a5e97b708891ecac92c14c45e3"
-  integrity sha512-JvZdLrQpG9PtJy7X1YEzTMGdhqvAvBMcOgYDq7RLaCZO3Lt16Qcxgpx+obVq1pERjJV4YLKhdik1hSOGbE3Www==
+"@tryghost/content-api@1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.2.7.tgz#9f2a37a6e5403de14c566c28cd2de1bdfb618798"
+  integrity sha512-09EYGNczyPcpTXgw7wHD/GU1YhLIQ3KFdHwPHkHywm2a5ZEHKP/SMOSuAP/CG+HlwbiFQ5Bs600pLn1U4VeT4A==
   dependencies:
     axios "0.19.0"
     ghost-ignition "^3.0.0"
@@ -5336,10 +5336,10 @@ gatsby-page-utils@^0.0.12:
     micromatch "^3.1.10"
     slash "^3.0.0"
 
-gatsby-plugin-advanced-sitemap@1.4.0:
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.4.0.tgz#db1c2518da0f07f86505cbbc34439e403f576a1a"
-  integrity sha512-T3l9QOax7v2eNQjhsUDx5psfXDDgSJlDsBOo+KxdtWlB2p927TgqakehQrTe7J2dTwHAQijxh44Dx+kGpDznZg==
+gatsby-plugin-advanced-sitemap@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.4.1.tgz#3ee5b216b976bf74a67c725e11717bf13e7e5e5f"
+  integrity sha512-P9/abiBQ7ch0eASol2ZsbfKKzlGbqiqSXy1XMod/2F/axj2ClXk9t59ESBHbRyJ/6czSi0Y+ctBoiCqa750u4Q==
   dependencies:
     "@babel/runtime" "7.5.5"
     fs-extra "8.1.0"
@@ -5469,16 +5469,16 @@ gatsby-source-filesystem@2.1.18:
     valid-url "^1.0.9"
     xstate "^3.3.3"
 
-gatsby-source-ghost@3.4.4:
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.4.4.tgz#0bde5384652b3f59b2bcdf35ddaa9949e749f1bc"
-  integrity sha512-+qhbLfpPCIGWAK9TO2AXorEQ2zHZSNwnl1Rb6v7inDsljTCtOrv43mdUIYRkp9+ojjnqflzKg0YeL0id2WphAw==
+gatsby-source-ghost@3.4.5:
+  version "3.4.5"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-3.4.5.tgz#9dd164216ba80bbeda01fc65fe61d4d23b056284"
+  integrity sha512-6qG1hCkw2HezwbvP3oMsokRQgz5dcTnxAQWw7znO0c/aQ3zoiNgnyUyAtU4q/hrCqT4kQPaCaK0PIAnoCv1DCQ==
   dependencies:
-    "@tryghost/content-api" "1.2.5"
+    "@tryghost/content-api" "1.2.7"
     bluebird "3.5.5"
     cheerio "1.0.0-rc.3"
     gatsby-node-helpers "^0.3.0"
-    qs "6.7.0"
+    qs "6.8.0"
 
 gatsby-telemetry@^1.1.19:
   version "1.1.19"
@@ -9720,6 +9720,11 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
+
+qs@6.8.0:
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.8.0.tgz#87b763f0d37ca54200334cd57bb2ef8f68a1d081"
+  integrity sha512-tPSkj8y92PfZVbinY1n84i1Qdx75lZjMQYx9WZhnkofyxzw2r7Ho39G3/aEvSUdebxpnnM4LZJCtvE/Aq3+s9w==
 
 qs@~6.5.2:
   version "6.5.2"
