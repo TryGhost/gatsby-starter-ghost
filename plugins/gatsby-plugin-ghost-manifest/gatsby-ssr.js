@@ -8,7 +8,7 @@ var _gatsby = require("gatsby");
 
 var _common = require("./common.js");
 
-var _jsxFileName = "/Users/rish/Code/Ghost-Master/gatsby-starter-ghost/plugins/gatsby-plugin-ghost-manifest/src/gatsby-ssr.js";
+var _jsxFileName = "/Users/aileen/code/gatsby-starter-ghost/plugins/gatsby-plugin-ghost-manifest/src/gatsby-ssr.js";
 
 exports.onRenderBody = function (_ref, pluginOptions) {
   var setHeadComponents = _ref.setHeadComponents;

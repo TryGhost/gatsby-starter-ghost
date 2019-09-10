@@ -123,6 +123,7 @@ export const ghostPostFields = graphql`
         page
         codeinjection_foot
         codeinjection_head
+        codeinjection_styles
         comment_id
     }
 `
@@ -210,6 +211,7 @@ export const ghostPageFields = graphql`
         page
         codeinjection_foot
         codeinjection_head
+        codeinjection_styles
         comment_id
     }
 `
@@ -228,6 +230,7 @@ export const ghostSettingsFields = graphql`
         timezone
         codeinjection_head
         codeinjection_foot
+        codeinjection_styles
         navigation {
             label
             url

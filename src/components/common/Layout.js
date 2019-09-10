@@ -27,6 +27,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
     <>
         <Helmet>
             <html lang={site.lang} />
+            <style type="text/css">{`${site.codeinjection_styles}`}</style>
             <body className={bodyClass} />
         </Helmet>
 
@@ -34,7 +35,7 @@ const DefaultLayout = ({ data, children, bodyClass, isHome }) => {
 
             <div className="viewport-top">
                 {/* The main header section on top of the screen */}
-                <header className="site-head">
+                <header className="site-head" style={{ ...site.cover_image && { backgroundImage: `url(${site.cover_image})` } }}>
                     <div className="container">
                         <div className="site-mast">
                             <div className="site-mast-left">
@@ -101,6 +102,7 @@ DefaultLayout.propTypes = {
     bodyClass: PropTypes.string,
     isHome: PropTypes.bool,
     data: PropTypes.shape({
+        file: PropTypes.object,
         allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
 }

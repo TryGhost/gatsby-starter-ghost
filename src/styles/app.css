@@ -666,6 +666,8 @@ h6 {
     padding-bottom: 20px;
     color: #fff;
     background: var(--color-base);
+    background-position: center;
+    background-size: cover;
 }
 
 .site-nav-item {
@@ -698,7 +700,6 @@ h6 {
 .site-mast-right {
     display: flex;
     align-items: center;
-    margin: 0 -10px 0 20px;
 }
 
 .site-mast-right .site-nav-item:last-child {
@@ -737,10 +738,6 @@ h6 {
 
 .site-nav-left {
     margin: 0 20px 0 -10px;
-}
-
-.site-nav-right {
-    margin: 0 -10px 0 20px;
 }
 
 .site-nav-button {

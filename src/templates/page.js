@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
+import Helmet from 'react-helmet'
 
 import { Layout } from '../components/common'
 import { MetaData } from '../components/common/meta'
@@ -21,6 +22,9 @@ const Page = ({ data, location }) => {
                 location={location}
                 type="website"
             />
+            <Helmet>
+                <style type="text/css">{`${page.codeinjection_styles}`}</style>
+            </Helmet>
             <Layout>
                 <div className="container">
                     <article className="content">
@@ -41,6 +45,7 @@ const Page = ({ data, location }) => {
 Page.propTypes = {
     data: PropTypes.shape({
         ghostPage: PropTypes.shape({
+            codeinjection_styles: PropTypes.object,
             title: PropTypes.string.isRequired,
             html: PropTypes.string.isRequired,
             feature_image: PropTypes.string,

@@ -21,7 +21,7 @@ const MetaData = ({
     image,
     location,
 }) => {
-    const canonical = url.resolve(config.siteUrl, location.pathname, `/`)
+    const canonical = url.resolve(config.siteUrl, location.pathname)
     const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data
     settings = settings.allGhostSettings.edges[0].node
 

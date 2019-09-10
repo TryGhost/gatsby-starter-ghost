@@ -74,6 +74,7 @@ module.exports = {
                 theme_color: config.themeColor,
                 display: `minimal-ui`,
                 icon: `static/${config.siteIcon}`,
+                legacy: true,
                 query: `
                 {
                     allGhostSettings {
@@ -175,8 +176,10 @@ module.exports = {
                     `/offline-plugin-app-shell-fallback`,
                 ],
                 createLinkInHead: true,
+                addUncaughtPages: true,
             },
         },
+        `gatsby-plugin-catch-links`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-force-trailing-slashes`,
         `gatsby-plugin-offline`,
