@@ -54,9 +54,9 @@ function () {
             data = _ref3.data;
             siteTitle = data.allGhostSettings.edges[0].node.title || "No Title";
             manifest = (0, _extends2.default)({}, manifest, {
-              name: siteTitle // Delete options we won't pass to the manifest.webmanifest.
+              name: siteTitle
+            }); // Delete options we won't pass to the manifest.webmanifest.
 
-            });
             delete manifest.plugins;
             delete manifest.legacy;
             delete manifest.theme_color_in_head;

@@ -4,15 +4,15 @@
     "version": "0.0.1",
     "author": "Ghost Foundation",
     "dependencies": {
-        "@babel/runtime": "7.5.5",
+        "@babel/runtime": "7.6.0",
         "bluebird": "3.5.5",
         "sharp": "0.22.1"
     },
     "devDependencies": {
-        "@babel/cli": "7.5.5",
-        "@babel/core": "7.5.5",
-        "babel-preset-gatsby-package": "0.2.3",
-        "cross-env": "5.2.0"
+        "@babel/cli": "7.6.0",
+        "@babel/core": "7.6.0",
+        "babel-preset-gatsby-package": "0.2.4",
+        "cross-env": "6.0.0"
     },
     "keywords": [
         "gatsby",
@@ -23,6 +23,9 @@
         "progressive-web-app",
         "pwa"
     ],
+    "resolutions": {
+      "sharp": "0.22.1"
+    },
     "license": "MIT",
     "main": "index.js",
     "peerDependencies": {
