@@ -5373,10 +5373,10 @@ gatsby-page-utils@^0.0.19:
     micromatch "^3.1.10"
     slash "^3.0.0"
 
-gatsby-plugin-advanced-sitemap@1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.4.2.tgz#fda89b80360b4d39f45eed608ccee30cb4bbc200"
-  integrity sha512-dy1g1rC/nXwUV94pSTXG+gvdbvJQg+c5rG3alXC5yv94VyGHXefDghdClzM6msdEwTmJ1lpIldr7gktIuuaPXQ==
+gatsby-plugin-advanced-sitemap@1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.4.3.tgz#b21eb3d507b2112343c1181a15ab35f165da2c25"
+  integrity sha512-S33rvSeV0yNQ1xHcIORQFHKa35rrYouHWO14/msXorqvrQ/geqxfD/HTtBn7Q6hbRIdjFLF5Xi5/tCZPGqyZzg==
   dependencies:
     "@babel/runtime" "7.6.0"
     fs-extra "8.1.0"
