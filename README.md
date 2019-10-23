@@ -59,7 +59,7 @@ The default Ghost version that is used for this starter is `3.x`. If your Ghost 
 }
 ```
 
-**Ghost <+3.0.0**
+**Ghost <=3.0.0**
 ```json
 {
     "apiUrl": "https://gatsby.ghost.io",
