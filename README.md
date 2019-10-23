@@ -42,7 +42,30 @@ gatsby develop
 
 By default, the starter will populate content from a default Ghost install located at https://gatsby.ghost.io.
 
-To use your own install, you need to create a custom `contentApiKey` from the "Integrations" screen in Ghost Admin. Edit the `.ghost.json` config file with your newly created credentials. The minimum required version for Ghost is `2.10.0` in order to use this starter without issues.
+To use your own install, you will need to edit the `.ghost.json` config file with your credentials. Change the `apiUrl` value to the URL of your Ghost site. For Ghost(Pro) customers, this is the Ghost URL ending in `.ghost.io`, and for people using the self-hosted version of Ghost, it's the same URL used to access your site.
+
+Next, update the `contentApiKey` value to a key associated with the Ghost site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
+
+To use this starter without issues, your Ghost installation needs to be at least on version `2.10.0`.
+
+The default Ghost version that is used for this starter is `3.x`. If your Ghost installation is on a lower version, you will need to pass in a `version` property in your `.ghost.json` settings:
+
+**Ghost >=2.10.0 <3.0.0**
+```json
+{
+    "apiUrl": "https://gatsby.ghost.io",
+    "contentApiKey": "9cc5c67c358edfdd81455149d0",
+    "version": "v2"
+}
+```
+
+**Ghost <+3.0.0**
+```json
+{
+    "apiUrl": "https://gatsby.ghost.io",
+    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+}
+```
 
 &nbsp;
 
