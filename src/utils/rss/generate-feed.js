@@ -3,7 +3,7 @@ const tagsHelper = require(`@tryghost/helpers`).tags
 const _ = require(`lodash`)
 
 const generateItem = function generateItem(post) {
-    const itemUrl = post.url
+    const itemUrl = post.canonical_url || post.url
     const html = post.html
     const htmlContent = cheerio.load(html, { decodeEntities: false, xmlMode: true })
     const item = {
@@ -109,6 +109,7 @@ const generateRSSFeed = function generateRSSFeed(siteConfig) {
 
                         # Additional fields
                         url
+                        canonical_url
                     }
                 }
             }
