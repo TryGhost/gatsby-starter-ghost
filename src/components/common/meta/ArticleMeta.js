@@ -21,6 +21,43 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
     const shareImage = ghostPost.feature_image ? ghostPost.feature_image : _.get(settings, `cover_image`, null)
     const publisherLogo = (settings.logo || config.siteIcon) ? url.resolve(config.siteUrl, (settings.logo || config.siteIcon)) : null
 
+    const jsonLd = {
+        "@context": `https://schema.org/`,
+        "@type": `Article`,
+        author: {
+            "@type": `Person`,
+            name: author.name,
+            image: author.image ? author.image : undefined,
+            sameAs: author.sameAsArray ? author.sameAsArray : undefined,
+        },
+        keywords: publicTags.length ? publicTags.join(`, `) : undefined,
+        headline: ghostPost.meta_title || ghostPost.title,
+        url: canonical,
+        datePublished: ghostPost.published_at,
+        dateModified: ghostPost.updated_at,
+        image: shareImage ? {
+            "@type": `ImageObject`,
+            url: shareImage,
+            width: config.shareImageWidth,
+            height: config.shareImageHeight,
+        } : undefined,
+        publisher: {
+            "@type": `Organization`,
+            name: settings.title,
+            logo: {
+                "@type": `ImageObject`,
+                url: publisherLogo,
+                width: 60,
+                height: 60,
+            },
+        },
+        description: ghostPost.meta_description || ghostPost.excerpt,
+        mainEntityOfPage: {
+            "@type": `WebPage`,
+            "@id": config.siteUrl,
+        },
+    }
+
     return (
         <>
             <Helmet>
@@ -72,44 +109,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
 
                 {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
                 {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
-                <script type="application/ld+json">{`
-                    {
-                        "@context": "https://schema.org/",
-                        "@type": "Article",
-                        "author": {
-                            "@type": "Person",
-                            "name": "${author.name}",
-                            ${author.image ? author.sameAsArray ? `"image": "${author.image}",` : `"image": "${author.image}"` : ``}
-                            ${author.sameAsArray ? `"sameAs": ${author.sameAsArray}` : ``}
-                        },
-                        ${publicTags.length ? `"keywords": "${_.join(publicTags, `, `)}",` : ``}
-                        "headline": "${ghostPost.meta_title || ghostPost.title}",
-                        "url": "${canonical}",
-                        "datePublished": "${ghostPost.published_at}",
-                        "dateModified": "${ghostPost.updated_at}",
-                        ${shareImage ? `"image": {
-                                "@type": "ImageObject",
-                                "url": "${shareImage}",
-                                "width": "${config.shareImageWidth}",
-                                "height": "${config.shareImageHeight}"
-                            },` : ``}
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "${settings.title}",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": "${publisherLogo}",
-                                "width": 60,
-                                "height": 60
-                            }
-                        },
-                        "description": "${ghostPost.meta_description || ghostPost.excerpt}",
-                        "mainEntityOfPage": {
-                            "@type": "WebPage",
-                            "@id": "${config.siteUrl}"
-                        }
-                    }
-                `}</script>
+                <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
         </>

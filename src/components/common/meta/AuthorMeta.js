@@ -16,6 +16,25 @@ const AuthorMeta = ({ data, settings, canonical }) => {
     const title = `${data.name} - ${settings.title}`
     const description = data.bio || config.siteDescriptionMeta || settings.description
 
+    const jsonLd = {
+        "@context": `https://schema.org/`,
+        "@type": `Person`,
+        name: data.name,
+        sameAs: author.sameAsArray ? author.sameAsArray : undefined,
+        url: canonical,
+        image: shareImage ? {
+            "@type": `ImageObject`,
+            url: shareImage,
+            width: config.shareImageWidth,
+            height: config.shareImageHeight,
+        } : undefined,
+        mainEntityOfPage: {
+            "@type": `WebPage`,
+            "@id": config.siteUrl,
+        },
+        description,
+    }
+
     return (
         <>
             <Helmet>
@@ -32,26 +51,7 @@ const AuthorMeta = ({ data, settings, canonical }) => {
                 <meta name="twitter:url" content={canonical} />
                 {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
                 {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
-                <script type="application/ld+json">{`
-                    {
-                        "@context": "https://schema.org/",
-                        "@type": "Person",
-                        "name": "${data.name}",
-                        ${author.sameAsArray ? `"sameAs": ${author.sameAsArray},` : ``}
-                        "url": "${canonical}",
-                        ${shareImage ? `"image": {
-                                "@type": "ImageObject",
-                                "url": "${shareImage}",
-                                "width": "${config.shareImageWidth}",
-                                "height": "${config.shareImageHeight}"
-                            },` : ``}
-                        "mainEntityOfPage": {
-                            "@type": "WebPage",
-                            "@id": "${config.siteUrl}"
-                        },
-                        "description": "${description}"
-                    }
-                `}</script>
+                <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
         </>
