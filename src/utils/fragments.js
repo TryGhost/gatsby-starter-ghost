@@ -50,6 +50,7 @@ export const ghostPostFields = graphql`
         feature_image
         excerpt
         custom_excerpt
+        visibility
 
         # Dates formatted
         created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
@@ -119,12 +120,14 @@ export const ghostPostFields = graphql`
 
         # Additional fields
         url
+        canonical_url
         uuid
         page
         codeinjection_foot
         codeinjection_head
         codeinjection_styles
         comment_id
+        reading_time
     }
 `
 
@@ -138,6 +141,7 @@ export const ghostPageFields = graphql`
         feature_image
         excerpt
         custom_excerpt
+        visibility
 
         # Dates formatted
         created_at_pretty: created_at(formatString: "DD MMMM, YYYY")
@@ -207,12 +211,14 @@ export const ghostPageFields = graphql`
 
         # Additional fields
         url
+        canonical_url
         uuid
         page
         codeinjection_foot
         codeinjection_head
         codeinjection_styles
         comment_id
+        reading_time
     }
 `
 
