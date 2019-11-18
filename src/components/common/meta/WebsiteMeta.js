@@ -19,6 +19,34 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
     description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
     title = `${title || data.meta_title || data.name || data.title} - ${settings.title}`
 
+    const jsonLd = {
+        "@context": `https://schema.org/`,
+        "@type": type,
+        url: canonical,
+        image: shareImage ?
+            {
+                "@type": `ImageObject`,
+                url: shareImage,
+                width: config.shareImageWidth,
+                height: config.shareImageHeight,
+            } : undefined,
+        publisher: {
+            "@type": `Organization`,
+            name: settings.title,
+            logo: {
+                "@type": `ImageObject`,
+                url: publisherLogo,
+                width: 60,
+                height: 60,
+            },
+        },
+        mainEntityOfPage: {
+            "@type": `WebPage`,
+            "@id": config.siteUrl,
+        },
+        description,
+    }
+
     return (
         <>
             <Helmet>
@@ -35,34 +63,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                 <meta name="twitter:url" content={canonical} />
                 {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
                 {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
-                <script type="application/ld+json">{`
-                    {
-                        "@context": "https://schema.org/",
-                        "@type": "${type}",
-                        "url": "${canonical}",
-                        ${shareImage ? `"image": {
-                                "@type": "ImageObject",
-                                "url": "${shareImage}",
-                                "width": "${config.shareImageWidth}",
-                                "height": "${config.shareImageHeight}"
-                            },` : ``}
-                        "publisher": {
-                            "@type": "Organization",
-                            "name": "${settings.title}",
-                            "logo": {
-                                "@type": "ImageObject",
-                                "url": "${publisherLogo}",
-                                "width": 60,
-                                "height": 60
-                            }
-                        },
-                        "mainEntityOfPage": {
-                            "@type": "WebPage",
-                            "@id": "${config.siteUrl}"
-                        },
-                        "description": "${description}"
-                    }
-                `}</script>
+                <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
         </>
