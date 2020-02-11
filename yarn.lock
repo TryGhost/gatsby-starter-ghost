@@ -833,10 +833,10 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.11.1"
 
-"@babel/runtime@7.6.3":
-  version "7.6.3"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.3.tgz#935122c74c73d2240cafd32ddb5fc2a6cd35cf1f"
-  integrity sha512-kq6anf9JGjW8Nt5rYfEuGRaEAaH1mkv3Bbu6rYvLOpPh/RusSJXuKPEAoZ7L7gybZkchE8+NV5g9vKF4AGAtsA==
+"@babel/runtime@7.8.4", "@babel/runtime@^7.7.6":
+  version "7.8.4"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
+  integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -844,13 +844,6 @@
   version "7.7.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.7.2.tgz#111a78002a5c25fc8e3361bedc9529c696b85a6a"
   integrity sha512-JONRbXbTXc9WQE2mAZd1p0Z3DZ/6vaQIkgYMSTP3KjRCyd7rCZCcfhCyX+YjwcKxcZ82UrxbRD358bpExNgrjw==
-  dependencies:
-    regenerator-runtime "^0.13.2"
-
-"@babel/runtime@^7.7.6":
-  version "7.8.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.8.4.tgz#d79f5a2040f7caa24d53e563aad49cbc05581308"
-  integrity sha512-neAp3zt80trRVBI1x0azq6c57aNBqYZH8KhMm3TaB7wEI5Q4A2SHfBHE8w9gOhI/lrqxtEbXZgQIrHP+wvSGwQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -5594,12 +5587,12 @@ gatsby-page-utils@^0.0.39:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-advanced-sitemap@1.4.5:
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.4.5.tgz#70ee69ec7ab5d992d5299cb679eefa6e14a1dc23"
-  integrity sha512-fTTFddbKLtoVYOfJl8z5HPcIyJYbRQCUXtFDpoj2x+uPfzyTrJ26nNdwMGBhFgsRKho/eyHVQ7hMzELzE00nnw==
+gatsby-plugin-advanced-sitemap@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.5.0.tgz#2470a81b7346208512b3447623a5205f09a16b64"
+  integrity sha512-it3phI1mGWVhjCQ9B4FaWhEA51md0jVPO9LSZ2YAzKBCf1YLdWBz3sQgfih8AKsZwHxJ8bTIhTvbtVAjAvv7Gg==
   dependencies:
-    "@babel/runtime" "7.6.3"
+    "@babel/runtime" "7.8.4"
     fs-extra "8.1.0"
     lodash "4.17.15"
     moment "^2.24.0"
