@@ -177,17 +177,6 @@ module.exports = {
                 ],
                 createLinkInHead: true,
                 addUncaughtPages: true,
-                additionalSitemaps: [
-                    {
-                        url: `/blog/sitemap-posts.xml`,
-                    },
-                    {
-                        url: `https://ghost.org/blog/sitemap-tags.xml`,
-                    },
-                    {
-                        url: `https://ghost.org/blog/sitemap-authors.xml`,
-                    },
-                ],
             },
         },
         `gatsby-plugin-catch-links`,
