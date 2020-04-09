@@ -1,108 +1,64 @@
-# Gatsby Starter Ghost
+# Gatsby Starter - Recipes
 
-A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
+A starter template to build recipes site with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
 
-**Demo:** https://gatsby.ghost.org
-
-&nbsp;
-
-![gatsby-starter-ghost](https://user-images.githubusercontent.com/120485/50913567-8ab8e380-142c-11e9-9e78-de02ded12fc6.jpg)
-
-&nbsp;
+Live Demo: https://flotiq-starter-recipes.herokuapp.com
 
 
-# Installing
 
-```bash
-# With Gatsby CLI
-gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost.git
-```
 
-```bash
-# From Source
-git clone https://github.com/TryGhost/gatsby-starter-ghost.git
-cd gatsby-starter-ghost
-```
+# Quick start
 
-Then install dependencies
+1. **Start project from template using Gatsby CLI**
+    
+    ```bash
+    gatsby new gatsby-starter-recipes https://github.com/flotiq/gatsby-starter-recipes.git
+    ```
+1. **Setup "Recipe" Content Type in Flotiq**
 
-```bash
-yarn
-```
+   Create your [Flotiq.com](https://flotiq.com) account. Next, create the `Recipe` Content Type:
 
-&nbsp;
+   ![Recipe content type in flotiq](docs/create-definition-recipe.png)
+    
+   _Note: You can also create `Recipe` using [Flotiq REST API](https://flotiq.com/docs/API/)._ 
 
-# Running
+1. **Configure application**
 
-Start the development server. You now have a Gatsby site pulling content from headless Ghost.
+    The next step is to configure our application to know from where it has to fetch the data.
+       
+    You need to create a file called `.env` inside the root of the directory, with the following structure:
 
-```bash
-gatsby develop
-```
+    ```
+    GATSBY_FLOTIQ_BASE_URL="https://api.flotiq.com"
+    FLOTIQ_API_KEY="YOUR FLOTIQ API KEY"
+    ```
 
-By default, the starter will populate content from a default Ghost install located at https://gatsby.ghost.io.
+1.  **Start developing**
 
-To use your own install, you will need to edit the `.ghost.json` config file with your credentials. Change the `apiUrl` value to the URL of your Ghost site. For Ghost(Pro) customers, this is the Ghost URL ending in `.ghost.io`, and for people using the self-hosted version of Ghost, it's the same URL used to access your site.
+    Navigate into your new site’s directory and start it up.
 
-Next, update the `contentApiKey` value to a key associated with the Ghost site. A key can be provided by creating an integration within Ghost Admin. Navigate to Integrations and click "Add new integration". Name the integration appropriately and click create.
+    ```sh
+    cd gatsby-starter-recipes
+    npm install
+    gatsby develop
+    ```
+   
+1.  **Open the source code and start editing!**
+    
+    Your site is now running at `http://localhost:8000`!
+    
+    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+    
+    Open a project directory in your code editor of choice and edit `src/templates/index.js`. Save your changes and the browser will update in real time!
 
-To use this starter without issues, your Ghost installation needs to be at least on version `2.10.0`.
+1. **Manage your recipes using Flotiq editor**
+      
+    You can easily manage your recipes using Flotiq editor
+    
+    ![](docs/manage-recipes.png)
 
-The default Ghost version that is used for this starter is `3.x`. If your Ghost installation is on a lower version, you will need to pass in a `version` property in your `.ghost.json` settings:
+  ## Deploy
 
-**Ghost >=2.10.0 <3.0.0**
-```json
-{
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0",
-    "version": "v2"
-}
-```
+  You can deploy this project to Heroku in 3 minutes:
 
-**Ghost <=3.0.0**
-```json
-{
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
-}
-```
-
-&nbsp;
-
-# Deploying with Netlify
-
-The starter contains three config files specifically for deploying with Netlify. A `netlify.toml` file for build settings, a `/static/_headers` file with default security headers set for all routes, and `/static/_redirects` to set Netlify custom domain redirects.
-
-To deploy to your Netlify account, hit the button below.
-
-[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/TryGhost/gatsby-starter-ghost)
-
-Content API Keys are generally not considered to be sensitive information, they exist so that they can be changed in the event of abuse; so most people commit it directly to their `.ghost.json` config file. If you prefer to keep this information out of your repository you can remove this config and set [Netlify ENV variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) for production builds instead.
-
-Once deployed, you can set up a [Ghost + Netlify Integration](https://docs.ghost.org/integrations/netlify/) to use deploy hooks from Ghost to trigger Netlify rebuilds. That way, any time data changes in Ghost, your site will rebuild on Netlify.
-
-&nbsp;
-
-# Optimising
-
-You can disable the default Ghost Handlebars Theme front-end by enabling the `Make this site private` flag within your Ghost settings. This enables password protection in front of the Ghost install and sets `<meta name="robots" content="noindex" />` so your Gatsby front-end becomes the source of truth for SEO.
-
-&nbsp;
-
-# Extra options
-
-```bash
-# Run a production build, locally
-gatsby build
-
-# Serve a production build, locally
-gatsby serve
-```
-
-Gatsby `develop` uses the `development` config in `.ghost.json` - while Gatsby `build` uses the `production` config.
-
-&nbsp;
-
-# Copyright & License
-
-Copyright (c) 2013-2020 Ghost Foundation - Released under the [MIT license](LICENSE).
+  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/flotiq/gatsby-starter-recipes)
