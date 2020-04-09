@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
+    "dotenv": "^8.2.0",
     "eslint": "6.8.0",
     "eslint-plugin-ghost": "1.0.0",
     "eslint-plugin-react": "7.18.3"
@@ -52,6 +53,7 @@
     "gatsby-plugin-react-helmet": "3.1.22",
     "gatsby-plugin-sharp": "2.4.5",
     "gatsby-source-filesystem": "2.1.48",
+    "gatsby-source-flotiq": "git+https://github.com/flotiq/gatsby-source-flotiq.git",
     "gatsby-source-ghost": "4.0.4",
     "gatsby-transformer-sharp": "2.3.16",
     "lodash": "4.17.15",

@@ -1,0 +1,20 @@
+{
+  "name": "Flotiq Gatsby Examlple: Recipes",
+  "env":{
+    "GATSBY_FLOTIQ_BASE_URL":{
+      "description": "Base URL for Flotiq API access, defaults to https://api.flotiq.com",
+      "value": "https://api.flotiq.com"
+    },
+    "FLOTIQ_API_KEY": {
+      "description": "Flotiq API key"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-static"
+    }
+  ]
+}

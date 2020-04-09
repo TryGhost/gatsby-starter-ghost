@@ -1,10 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
 
 import { Layout } from '../components/common'
-import { MetaData } from '../components/common/meta'
 
 /**
 * Single post view (/:slug)
@@ -12,33 +10,38 @@ import { MetaData } from '../components/common/meta'
 * This file renders a single post and loads all the content.
 *
 */
-const Post = ({ data, location }) => {
-    const post = data.ghostPost
+const Post = ({ data }) => {
+    const post = data.recipe
 
     return (
         <>
-            <MetaData
-                data={data}
-                location={location}
-                type="article"
-            />
             <Helmet>
                 <style type="text/css">{`${post.codeinjection_styles}`}</style>
             </Helmet>
             <Layout>
                 <div className="container">
                     <article className="content">
-                        { post.feature_image ?
+                        { post.image ?
                             <figure className="post-feature-image">
-                                <img src={ post.feature_image } alt={ post.title } />
+                                <img src={ `${process.env.GATSBY_FLOTIQ_BASE_URL}/image/1280x0/${post.image[0].id}.${post.image[0].extension}` }
+                                     alt={ post.name } />
                             </figure> : null }
                         <section className="post-full-content">
-                            <h1 className="content-title">{post.title}</h1>
-
-                            {/* The main post content */ }
+                            <h1 className="content-title">{post.name}</h1>
                             <section
                                 className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: post.html }}
+                                dangerouslySetInnerHTML={{ __html: post.description }}
+                            />
+                            <h2 className="content-title">Ingredients</h2>
+                            <section
+                                className="content-body load-external-scripts"
+                                dangerouslySetInnerHTML={{ __html: post.ingredients }}
+                            />
+
+                            <h2 className="content-title">Steps</h2>
+                            <section
+                                className="content-body load-external-scripts"
+                                dangerouslySetInnerHTML={{ __html: post.steps }}
                             />
                         </section>
                     </article>
@@ -48,24 +51,23 @@ const Post = ({ data, location }) => {
     )
 }
 
-Post.propTypes = {
-    data: PropTypes.shape({
-        ghostPost: PropTypes.shape({
-            codeinjection_styles: PropTypes.object,
-            title: PropTypes.string.isRequired,
-            html: PropTypes.string.isRequired,
-            feature_image: PropTypes.string,
-        }).isRequired,
-    }).isRequired,
-    location: PropTypes.object.isRequired,
-}
-
 export default Post
 
-export const postQuery = graphql`
-    query($slug: String!) {
-        ghostPost(slug: { eq: $slug }) {
-            ...GhostPostFields
+export const recipeQuery = graphql`
+    query RecipeBySlug($slug: String!) {
+        recipe(slug: { eq: $slug }) {
+          id
+          name
+          slug
+          description
+          ingredients
+          steps
+          cookingTime
+          servings
+          image {
+            extension
+            id
+          }
         }
     }
 `
