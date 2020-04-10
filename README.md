@@ -1,6 +1,6 @@
 # Gatsby Starter - Recipes
 
-A starter template to build recipes site with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
+A starter template to build recipes site with [Flotiq](https://flotiq.com) & [Gatsby](https://gatsbyjs.org)
 
 Live Demo: https://flotiq-starter-recipes.herokuapp.com
 
