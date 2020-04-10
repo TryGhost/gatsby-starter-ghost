@@ -62,3 +62,4 @@ Live Demo: https://flotiq-starter-recipes.herokuapp.com
   You can deploy this project to Heroku in 3 minutes:
 
   [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/flotiq/gatsby-starter-recipes)
+  
