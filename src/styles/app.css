@@ -1145,3 +1145,48 @@ h6 {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+/* Recipe Styles
+/* ---------------------------------------------------------- */
+.recipe-step {
+    display: flex;
+    align-content: flex-start;
+    margin-bottom: 30px;
+}
+.recipe-step .recipe-step-index {
+    flex-grow: 0;
+    padding: 10px;
+}
+.recipe-step .recipe-step-index > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-accent);
+    color: var(--color-bg);
+    margin: 0 auto;
+}
+.recipe-step .recipe-step-data {
+    flex-grow: 2;
+    padding: 10px;
+}
+
+@media (max-width: 500px) {
+    .recipe-step {
+        display: block;
+    }
+    .recipe-step .recipe-step-index {
+        text-align: center;
+    }
+}
+
+.recipe-ingredients {
+    border-bottom: 1px solid #ededed;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}

@@ -36,20 +36,47 @@ const Post = ({ data }) => {
                             <hr/>
 
                             <section
-                                className="content-body load-external-scripts"
+                                className="content-body"
                                 dangerouslySetInnerHTML={{ __html: post.description }}
                             />
                             <h2 className="content-title">Ingredients</h2>
-                            <section
-                                className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: post.ingredients }}
-                            />
+
+                            <section className="content-body">
+                                { post.ingredients.map((ingredient, index) => (
+                                    <label key="index" className="recipe-ingredients">
+                                        <span>
+                                            <strong> {ingredient.product} </strong>
+                                            ({`${ingredient.amount} ${ingredient.unit}`})
+                                        </span>
+                                        <input type="checkbox"/>
+                                    </label>
+                                ))}
+                                <p/>
+                            </section>
 
                             <h2 className="content-title">Steps</h2>
-                            <section
-                                className="content-body load-external-scripts"
-                                dangerouslySetInnerHTML={{ __html: post.steps }}
-                            />
+                            <section className="content-body">
+                                { post.steps.map((step, index) => (
+                                    <div className="recipe-step" key={index}>
+                                        <div className="recipe-step-index">
+                                            <div>{index + 1}</div>
+                                        </div>
+                                        <div className="recipe-step-data">
+                                            <p>
+                                                {step.step}</p>
+
+                                            {
+                                                step.image ?
+                                                    <img
+                                                        src={`${process.env.GATSBY_FLOTIQ_BASE_URL}/image/1280x0/${step.image[0].id}.${step.image[0].extension}`}
+                                                        alt={post.name}/> : ''
+                                            }
+
+                                        </div>
+                                    </div>
+                                ))}
+
+                            </section>
                         </section>
                     </article>
                 </div>
@@ -67,8 +94,18 @@ export const recipeQuery = graphql`
           name
           slug
           description
-          ingredients
-          steps
+          ingredients {
+            amount
+            unit
+            product
+          }
+          steps {
+            step
+            image {
+              extension
+              id
+            }
+          }
           cookingTime
           servings
           image {
