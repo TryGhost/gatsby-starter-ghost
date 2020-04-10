@@ -28,6 +28,13 @@ const Post = ({ data }) => {
                             </figure> : null }
                         <section className="post-full-content">
                             <h1 className="content-title">{post.name}</h1>
+                            <h4>
+                                <div>Servings: {post.servings} meals</div>
+                                <div>Cooking time: {post.cookingTime} minutes</div>
+                            </h4>
+
+                            <hr/>
+
                             <section
                                 className="content-body load-external-scripts"
                                 dangerouslySetInnerHTML={{ __html: post.description }}
