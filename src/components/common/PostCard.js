@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'gatsby'
-import CookingTime from "../../images/clock-regular.svg";
-import Servings from "../../images/user-solid.svg";
+import CookingTime from "../../images/clock-regular.svg"
+import Servings from "../../images/user-solid.svg"
 
 const PostCard = ({ post }) => {
     const url = `/${post.slug}/`
