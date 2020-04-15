@@ -41,8 +41,18 @@ export const pageQuery = graphql`
           name
           slug
           description
-          ingredients
-          steps
+          ingredients {
+            amount
+            unit
+            product
+          }
+          steps {
+            step
+            image {
+              extension
+              id
+            }
+          }
           cookingTime
           servings
           image {
