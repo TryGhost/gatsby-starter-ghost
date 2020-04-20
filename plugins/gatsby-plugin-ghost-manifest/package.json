@@ -12,7 +12,7 @@
         "@babel/cli": "7.8.4",
         "@babel/core": "7.9.0",
         "babel-preset-gatsby-package": "0.3.1",
-        "cross-env": "7.0.0"
+        "cross-env": "7.0.2"
     },
     "keywords": [
         "gatsby",
