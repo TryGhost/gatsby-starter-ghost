@@ -1601,20 +1601,20 @@
     axios "0.19.1"
     ghost-ignition "^3.0.0"
 
-"@tryghost/helpers-gatsby@1.0.25":
-  version "1.0.25"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-1.0.25.tgz#a46b5b07cb916037533efcfb76132fbfe23a3c2b"
-  integrity sha512-kFkv+5Z4P8vdTv0DtknxBARniZWh3qOEkQdNilkJQO7qIVIUufayEf4E7T0bfer55ZRAe1pO0wEQuvFihRUozg==
+"@tryghost/helpers-gatsby@1.0.31":
+  version "1.0.31"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-1.0.31.tgz#01478d70540afb3b627986788d9812f6fb68183c"
+  integrity sha512-zx3pYNHX/T+iq+ag3cMuyLH5b0HfRvM6SaTkLReS1Me8+pKYWD++HOVhH+h1XuNF9OHIodQzF8j6MmC3qvU4HQ==
   dependencies:
     "@reach/router" "^1.2.1"
-    "@tryghost/helpers" "^1.1.22"
+    "@tryghost/helpers" "^1.1.27"
     gatsby-link "^2.0.7"
     prop-types "^15.6.2"
 
-"@tryghost/helpers@1.1.22", "@tryghost/helpers@^1.1.22":
-  version "1.1.22"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-1.1.22.tgz#92b6309237065a50c551f9d17546fa57df993627"
-  integrity sha512-+cjdjRrJTFwIe7eF9pRsMZUlUJSAVZLAAydtIC50G4/ytXi2x0ig+kX4DvwLfzrSQhJhWGEmb0Abm6cAAne/xQ==
+"@tryghost/helpers@1.1.27", "@tryghost/helpers@^1.1.27":
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers/-/helpers-1.1.27.tgz#4686e709971df432f08cf52db787f671ad182e3b"
+  integrity sha512-5DkGcbJHJopVk1S3zvEzPgy8WAHWysQHhUqVSL0dhfvUITcrQuwcqVERi72r/rT/gixqyb2lNBVIsSo1wevERA==
   dependencies:
     lodash-es "^4.17.11"
 
@@ -5083,14 +5083,14 @@ eslint-module-utils@^2.4.1:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-eslint-plugin-ember@7.7.2:
-  version "7.7.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-7.7.2.tgz#ba4afe59e7b2efdfbb85bc16484c95aaa45b8392"
-  integrity sha512-Ua7+xePz8m0BrqSHfYibkRXWQMMb5RBsH9ohZy2a7ri+s6+UQre9x3BxPpawCLZMzQzIG4vQh93YiVGCSv3XYA==
+eslint-plugin-ember@7.10.1:
+  version "7.10.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-7.10.1.tgz#9ec731f158fc76a293bfb8055eaceb6b978ae0e7"
+  integrity sha512-3iOrcUsqZXsri6krYw+8fEH20Es8A2QEkog8fCw/Ldr54SR2/IEO41F7ldOrr0X3h8w9z1W1/v97IlMiGJhXkg==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     ember-rfc176-data "^0.3.12"
-    snake-case "^3.0.2"
+    snake-case "^3.0.3"
 
 eslint-plugin-flowtype@^3.13.0:
   version "3.13.0"
@@ -5099,13 +5099,13 @@ eslint-plugin-flowtype@^3.13.0:
   dependencies:
     lodash "^4.17.15"
 
-eslint-plugin-ghost@1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ghost/-/eslint-plugin-ghost-1.0.0.tgz#71bd8fb204e3614fd5e9d19fadd618a80f8444c4"
-  integrity sha512-oeI0Sq9RwEvfmlQmT9iJuxwDhEBWKvscgixkgDQhk1YCoMNCE5a+p8cRbUmCwRShtdiHH3mB8LUUZ4s5k6GwKw==
+eslint-plugin-ghost@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ghost/-/eslint-plugin-ghost-1.2.0.tgz#fdb69f16ffba72e1f5f3a0a7b1c6719cbaea0491"
+  integrity sha512-Oeqo5SwflgGv9JkbsBwqCJTuvbnl2wSNW4FdfDMJ7b4JR+xpNo0tm+2wIDhQarzc5wXMTZd5IfaBCEySYF1+Ng==
   dependencies:
-    eslint-plugin-ember "7.7.2"
-    eslint-plugin-mocha "6.2.2"
+    eslint-plugin-ember "7.10.1"
+    eslint-plugin-mocha "6.3.0"
     eslint-plugin-sort-imports-es6-autofix "0.5.0"
 
 eslint-plugin-graphql@^3.1.1:
@@ -5149,35 +5149,20 @@ eslint-plugin-jsx-a11y@^6.2.3:
     has "^1.0.3"
     jsx-ast-utils "^2.2.1"
 
-eslint-plugin-mocha@6.2.2:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-6.2.2.tgz#6ef4b78bd12d744beb08a06e8209de330985100d"
-  integrity sha512-oNhPzfkT6Q6CJ0HMVJ2KLxEWG97VWGTmuHOoRcDLE0U88ugUyFNV9wrT2XIt5cGtqc5W9k38m4xTN34L09KhBA==
+eslint-plugin-mocha@6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-mocha/-/eslint-plugin-mocha-6.3.0.tgz#72bfd06a5c4323e17e30ef41cd726030e8cdb8fd"
+  integrity sha512-Cd2roo8caAyG21oKaaNTj7cqeYRWW1I2B5SfpKRp0Ip1gkfwoR1Ow0IGlPWnNjzywdF4n+kHL8/9vM6zCJUxdg==
   dependencies:
-    ramda "^0.26.1"
+    eslint-utils "^2.0.0"
+    ramda "^0.27.0"
 
 eslint-plugin-react-hooks@^1.7.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react-hooks/-/eslint-plugin-react-hooks-1.7.0.tgz#6210b6d5a37205f0b92858f895a4e827020a7d04"
   integrity sha512-iXTCFcOmlWvw4+TOE8CLWj6yX1GwzT0Y6cUfHHZqWnSk144VmVIRcVGtUAzrLES7C798lmvnt02C7rxaOX1HNA==
 
-eslint-plugin-react@7.18.3:
-  version "7.18.3"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.18.3.tgz#8be671b7f6be095098e79d27ac32f9580f599bc8"
-  integrity sha512-Bt56LNHAQCoou88s8ViKRjMB2+36XRejCQ1VoLj716KI1MoE99HpTVvIThJ0rvFmG4E4Gsq+UgToEjn+j044Bg==
-  dependencies:
-    array-includes "^3.1.1"
-    doctrine "^2.1.0"
-    has "^1.0.3"
-    jsx-ast-utils "^2.2.3"
-    object.entries "^1.1.1"
-    object.fromentries "^2.0.2"
-    object.values "^1.1.1"
-    prop-types "^15.7.2"
-    resolve "^1.14.2"
-    string.prototype.matchall "^4.0.2"
-
-eslint-plugin-react@^7.19.0:
+eslint-plugin-react@7.19.0, eslint-plugin-react@^7.19.0:
   version "7.19.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-7.19.0.tgz#6d08f9673628aa69c5559d33489e855d83551666"
   integrity sha512-SPT8j72CGuAP+JFbT0sJHOB80TX/pu44gQ4vXH/cq+hQTiY2PuZ6IHkqXJV6x1b28GDdo1lbInjKUrrdUf0LOQ==
@@ -6261,10 +6246,10 @@ gatsby-page-utils@^0.1.3:
     lodash "^4.17.15"
     micromatch "^3.1.10"
 
-gatsby-plugin-advanced-sitemap@1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.5.3.tgz#2cc26b5caa00de19ced13f9dd02bfc344b74ffe8"
-  integrity sha512-oD+sCdzQhRVs/EaCRBVgMk1to4YFtIRvbq0d+bPIHoF+SEKT+E/sN15G+trSi8FS3rg90PkAuYlP2mIrA/wYsQ==
+gatsby-plugin-advanced-sitemap@1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-1.5.4.tgz#7ee3ca191c0c626da90986ad7a6e612883dabdac"
+  integrity sha512-xTReXWHEVQbFTGwFSRh4RJ/ZP4zlcevX2xTh8bNkODulF9EpEjVmbo+x9IV/hnRVSE0OA5oTHv+IPljUVF1Exg==
   dependencies:
     "@babel/runtime" "7.9.2"
     fs-extra "9.0.0"
@@ -11451,10 +11436,10 @@ querystringify@^2.1.1:
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.1.1.tgz#60e5a5fd64a7f8bfa4d2ab2ed6fdf4c85bad154e"
   integrity sha512-w7fLxIRCRT7U8Qu53jQnJyPkYZIaR4n5151KMfcJlO/A9397Wxb1amJvROTK6TOnp7PfoAmg/qXiNHI+08jRfA==
 
-ramda@^0.26.1:
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.26.1.tgz#8d41351eb8111c55353617fc3bbffad8e4d35d06"
-  integrity sha512-hLWjpy7EnsDBb0p+Z3B7rPi3GDeRG5ZtiI33kJhTt+ORCd38AbAIjB/9zRIUoeTbE/AVX5ZkU7m6bznsvrf8eQ==
+ramda@^0.27.0:
+  version "0.27.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.27.0.tgz#915dc29865c0800bf3f69b8fd6c279898b59de43"
+  integrity sha512-pVzZdDpWwWqEVVLshWUHjNwuVP7SfcmPraYuqocJp1yo2U1R7P+5QAfDhdItkuoGqIBnBYrtPp7rEPqDn9HlZA==
 
 randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
   version "2.1.0"
@@ -11566,15 +11551,15 @@ react-dev-utils@^9.1.0:
     strip-ansi "5.2.0"
     text-table "0.2.0"
 
-react-dom@16.13.0:
-  version "16.13.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.0.tgz#cdde54b48eb9e8a0ca1b3dc9943d9bb409b81866"
-  integrity sha512-y09d2c4cG220DzdlFkPTnVvGTszVvNpC73v+AaLGLHbkpy3SSgvYq8x0rNwPJ/Rk/CicTNgk0hbHNw1gMEZAXg==
+react-dom@16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.13.1.tgz#c1bd37331a0486c078ee54c4740720993b2e0e7f"
+  integrity sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.2"
-    scheduler "^0.19.0"
+    scheduler "^0.19.1"
 
 react-error-overlay@^3.0.0:
   version "3.0.0"
@@ -11652,7 +11637,16 @@ react-side-effect@^1.1.0:
   dependencies:
     shallowequal "^1.0.1"
 
-react@16.13.0, react@^16.8.0:
+react@16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.13.1.tgz#2e818822f1a9743122c063d6410d85c1e3afe48e"
+  integrity sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+
+react@^16.8.0:
   version "16.13.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.13.0.tgz#d046eabcdf64e457bbeed1e792e235e1b9934cf7"
   integrity sha512-TSavZz2iSLkq5/oiE7gnFzmURKZMltmi193rm5HEoUDAXpzT9Kzw6oNZnGoai/4+fUnm7FqS5dwgUL34TujcWQ==
@@ -12129,13 +12123,6 @@ resolve@^1.10.0, resolve@^1.12.0, resolve@^1.3.2, resolve@^1.5.0, resolve@^1.8.1
   dependencies:
     path-parse "^1.0.6"
 
-resolve@^1.14.2:
-  version "1.15.1"
-  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.15.1.tgz#27bdcdeffeaf2d6244b95bb0f9f4b4653451f3e8"
-  integrity sha512-84oo6ZTtoTUpjgNEr5SJyzQhzL72gaRodsSfyxC/AXRvwu0Yse9H8eF9IpGo7b8YetZhlI6v7ZQ6bKBFV/6S7w==
-  dependencies:
-    path-parse "^1.0.6"
-
 resolve@^1.15.1:
   version "1.16.1"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.16.1.tgz#49fac5d8bacf1fd53f200fa51247ae736175832c"
@@ -12313,10 +12300,10 @@ scheduler@^0.18.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
 
-scheduler@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.0.tgz#a715d56302de403df742f4a9be11975b32f5698d"
-  integrity sha512-xowbVaTPe9r7y7RUejcK73/j8tt2jfiyTednOvHbA8JoClvMYCp+r8QegLwK/n8zWQAtZb1fFnER4XLBZXrCxA==
+scheduler@^0.19.1:
+  version "0.19.1"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.19.1.tgz#4f3e2ed2c1a7d65681f4c854fa8c5a1ccb40f196"
+  integrity sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
@@ -12637,7 +12624,7 @@ slugify@^1.4.0:
   resolved "https://registry.yarnpkg.com/slugify/-/slugify-1.4.0.tgz#c9557c653c54b0c7f7a8e786ef3431add676d2cb"
   integrity sha512-FtLNsMGBSRB/0JOE2A0fxlqjI6fJsgHGS13iTuVT28kViI4JjUiNqp/vyis0ZXYcMnpR3fzGNkv+6vRlI2GwdQ==
 
-snake-case@^3.0.2:
+snake-case@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/snake-case/-/snake-case-3.0.3.tgz#c598b822ab443fcbb145ae8a82c5e43526d5bbee"
   integrity sha512-WM1sIXEO+rsAHBKjGf/6R1HBBcgbncKS08d2Aqec/mrDSpU80SiOU41hO7ny6DToHSyrlwTYzQBIK1FPSx4Y3Q==
