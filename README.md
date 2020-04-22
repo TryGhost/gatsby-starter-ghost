@@ -5,7 +5,7 @@
 Gatsby Starter - Recipes
 ========================
 
-A starter template to build recipes site with [Flotiq](https://flotiq.com) & [Gatsby](https://gatsbyjs.org)
+This is a [Gatsby](https://gatsbyjs.org) starter project for a recipes website. It's configured to pull recipe data from [Flotiq](https://flotiq.com) and can be easily deployed to your cloud hosting - Heroku, Netlify, Gatsby Cloud, etc.
 
 Live Demo: https://flotiq-starter-recipes.herokuapp.com
 
@@ -13,7 +13,7 @@ Screenshot
 
 <img src="https://github.com/flotiq/gatsby-starter-recipes/raw/master/docs/flotiq-starter-recipes.png" width=480 />
 
-# Quick start
+## Quick start
 
 1. **Start project from template using Gatsby CLI**
     
@@ -61,19 +61,19 @@ Screenshot
    
 1.  **Open the source code and start editing!**
     
-    Your site is now running at `http://localhost:8000`!
+    Your site is now running at [http://localhost:8000](http://localhost:8000)!
     
-    _Note: You'll also see a second link: _`http://localhost:8000/___graphql`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
+    _Note: You'll also see a second link: _[http://localhost:8000/___graphql](http://localhost:8000/___graphql)`_. This is a tool you can use to experiment with querying your data. Learn more about using this tool in the [Gatsby tutorial](https://www.gatsbyjs.org/tutorial/part-five/#introducing-graphiql)._
     
     Open a project directory in your code editor of choice and edit `src/templates/index.js`. Save your changes and the browser will update in real time!
 
 1. **Manage your recipes using Flotiq editor**
       
-    You can easily manage your recipes using Flotiq editor
+    You can now easily manage your recipes using [Flotiq editor](https://editor.flotiq.com)
     
-    ![](docs/manage-recipes.png)
+    ![Managing recipes using Flotiq](docs/manage-recipes.png)
 
-  ## Deploy
+## Deploy
 
   You can deploy this project to Heroku in 3 minutes:
 
