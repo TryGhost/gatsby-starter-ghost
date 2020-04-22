@@ -26,7 +26,7 @@ exports.importExamples = async () => {
 
     if (!contentTypeDefinitionResponse.ok) {
         if (contentTypeDefinitionResponse.status === 404) {
-            let contentDefinition = require(directoryPath + `/contentDefinition.json`)
+            let contentDefinition = require(directoryPath + `/ContentTypeDefinition.json`)
             let res = await fetch(apiUrl + `/api/v1/internal/contenttype`, {
                 method: `POST`,
                 body: JSON.stringify(contentDefinition),
