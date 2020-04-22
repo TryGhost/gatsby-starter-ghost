@@ -1,0 +1,55 @@
+
+{
+  "id": "recipe-2",
+  "name": "Scrambled eggs",
+  "slug": "scrambled-eggs",
+  "image": [
+    {
+      "type": "internal",
+      "dataUrl": "/api/v1/content/_media/_media-5e9706041d7de"
+    }
+  ],
+  "steps": [
+    {
+      "step": "Beat\u00a0eggs, pepper and salt in bowl until blended.",
+      "image": [
+        {
+          "type": "internal",
+          "dataUrl": "/api/v1/content/_media/_media-5e9706644fa81"
+        }
+      ]
+    },
+    {
+      "step": "Heat butter in skillet. Pour in eggs. As eggs begin to set\u00a0move spatula across bottom and side of skillet.",
+      "image": [
+        {
+          "type": "internal",
+          "dataUrl": "/api/v1/content/_media/_media-5e97076893d7c"
+        }
+      ]
+    },
+    {
+      "step": "Cook until\u00a0no visible liquid egg remains."
+    }
+  ],
+  "servings": 2,
+  "cookingTime": "10",
+  "description": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus pharetra justo, id ultricies felis luctus ultricies. Mauris convallis diam eget faucibus tempor. Integer ac magna dignissim, eleifend magna vel, mollis nulla. Nam luctus tellus ullamcorper, fringilla ante at, consequat odio. Vestibulum sed turpis eu sem bibendum dictum.</p>\n",
+  "ingredients": [
+    {
+      "unit": "pcs",
+      "amount": 3,
+      "product": "egg"
+    },
+    {
+      "unit": "pinch",
+      "amount": 1,
+      "product": "salt"
+    },
+    {
+      "unit": "teaspoon",
+      "amount": 2,
+      "product": "butter"
+    }
+  ]
+}
