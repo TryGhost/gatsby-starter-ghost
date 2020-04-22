@@ -1,8 +1,17 @@
-# Gatsby Starter - Recipes
+<a href="https://flotiq.com/">
+    <img src="https://editor.flotiq.com/fonts/fq-logo.svg" alt="Flotiq logo" title="Flotiq" align="right" height="40" />
+</a>
+
+Gatsby Starter - Recipes
+========================
 
 A starter template to build recipes site with [Flotiq](https://flotiq.com) & [Gatsby](https://gatsbyjs.org)
 
 Live Demo: https://flotiq-starter-recipes.herokuapp.com
+
+Screenshot
+
+<img src="https://github.com/flotiq/gatsby-starter-recipes/raw/master/docs/flotiq-starter-recipes.png" width=480 />
 
 # Quick start
 
