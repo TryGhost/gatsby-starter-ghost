@@ -1,6 +1,6 @@
 const path = require(`path`)
-const dotenv = require(`dotenv`);
-dotenv.config();
+const dotenv = require(`dotenv`)
+dotenv.config()
 
 /**
 * This is the place where you can tell Gatsby which plugins to use
@@ -33,12 +33,12 @@ module.exports = {
         `gatsby-plugin-sharp`,
         `gatsby-transformer-sharp`,
         {
-            "resolve": "gatsby-source-flotiq",
-            "options": {
-                "baseUrl": process.env.GATSBY_FLOTIQ_BASE_URL,
-                "authToken": process.env.FLOTIQ_API_KEY,
-                "forceReload": false, //(optional)
-                "includeTypes": ['recipe']
+            resolve: `gatsby-source-flotiq`,
+            options: {
+                baseUrl: process.env.GATSBY_FLOTIQ_BASE_URL,
+                authToken: process.env.FLOTIQ_API_KEY,
+                forceReload: false, //(optional)
+                includeTypes: [`recipe`],
             },
         },
         /**

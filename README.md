@@ -4,9 +4,6 @@ A starter template to build recipes site with [Flotiq](https://flotiq.com) & [Ga
 
 Live Demo: https://flotiq-starter-recipes.herokuapp.com
 
-
-
-
 # Quick start
 
 1. **Start project from template using Gatsby CLI**
@@ -29,8 +26,8 @@ Live Demo: https://flotiq-starter-recipes.herokuapp.com
     You need to create a file called `.env` inside the root of the directory, with the following structure:
 
     ```
-    GATSBY_FLOTIQ_BASE_URL="https://api.flotiq.com"
-    FLOTIQ_API_KEY="YOUR FLOTIQ API KEY"
+    GATSBY_FLOTIQ_BASE_URL=https://api.flotiq.com
+    FLOTIQ_API_KEY=YOUR FLOTIQ API KEY
     ```
 
 1.  **Start developing**
@@ -42,6 +39,16 @@ Live Demo: https://flotiq-starter-recipes.herokuapp.com
     npm install
     gatsby develop
     ```
+    
+    If you wish to import example recipes to your account, before running `gatsby develop` run:
+    
+    ```sh
+    node ./example/importExample.js
+    ```
+    
+    It will add 4 images and 2 recipes to your Flotiq account.
+    
+    _Note: You need to put your Read and write API key in `.env` for import to work. You don't need Recipe content type in your account. If you already have recipes with ids `recipe-1` and `recipe-2` they will be overwritten._
    
 1.  **Open the source code and start editing!**
     
