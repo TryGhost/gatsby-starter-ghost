@@ -2,5 +2,6 @@
   command = "gatsby build"
   publish = "public/"
 
-[template]
-  incoming-hooks = ["Ghost"]
+[template.environment]
+    GATSBY_FLOTIQ_BASE_URL="https://api.flotiq.com" 
+    FLOTIQ_API_KEY="YOUR FLOTIQ API KEY"
