@@ -21,7 +21,7 @@ const Post = ({ data }) => {
             <Layout>
                 <div className="container">
                     <article className="content">
-                        { post.image ?
+                        { post.image && post.image[0] ?
                             <figure className="post-feature-image">
                                 <img src={ `${process.env.GATSBY_FLOTIQ_BASE_URL}/image/1280x0/${post.image[0].id}.${post.image[0].extension}` }
                                      alt={ post.name } />
@@ -41,7 +41,7 @@ const Post = ({ data }) => {
                             />
                             <h2 className="content-title">Ingredients</h2>
 
-                            <section className="content-body">
+                            { post.ingredients !== null ? <section className="content-body">
                                 { post.ingredients.map((ingredient, index) => (
                                     <label key="index" className="recipe-ingredients">
                                         <span>
@@ -52,10 +52,10 @@ const Post = ({ data }) => {
                                     </label>
                                 ))}
                                 <p/>
-                            </section>
+                            </section> : <section className="content-body" />}
 
                             <h2 className="content-title">Steps</h2>
-                            <section className="content-body">
+                            {post.steps !== null ? <section className="content-body">
                                 { post.steps.map((step, index) => (
                                     <div className="recipe-step" key={index}>
                                         <div className="recipe-step-index">
@@ -66,7 +66,7 @@ const Post = ({ data }) => {
                                                 {step.step}</p>
 
                                             {
-                                                step.image ?
+                                                step.image && step.image[0] ?
                                                     <img
                                                         src={`${process.env.GATSBY_FLOTIQ_BASE_URL}/image/1280x0/${step.image[0].id}.${step.image[0].extension}`}
                                                         alt={post.name}/> : ''
@@ -76,7 +76,7 @@ const Post = ({ data }) => {
                                     </div>
                                 ))}
 
-                            </section>
+                            </section> : <section className="content-body" />}
                         </section>
                     </article>
                 </div>
