@@ -79,3 +79,12 @@ Screenshot
 
   [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/flotiq/gatsby-starter-recipes)
   
+  Or to Netlify:
+  
+  [![Deploy](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/flotiq/gatsby-starter-recipes)
+  
+## Collaborating
+
+   If you wish to to talk with us about this project, feel free to hop on our [discord server](https://discord.gg/FwXcHnX).
+   
+   If you found a bug, please report it in [issues](https://github.com/flotiq/gatsby-starter-recipes/issues).
