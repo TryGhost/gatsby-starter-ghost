@@ -36,7 +36,7 @@ module.exports = {
             resolve: `gatsby-source-flotiq`,
             options: {
                 baseUrl: process.env.GATSBY_FLOTIQ_BASE_URL,
-                authToken: process.env.FLOTIQ_API_KEY,
+                authToken: process.env.GATSBY_FLOTIQ_API_KEY,
                 forceReload: false, //(optional)
                 includeTypes: [`recipe`],
             },

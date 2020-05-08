@@ -36,7 +36,7 @@ Screenshot
 
     ```
     GATSBY_FLOTIQ_BASE_URL=https://api.flotiq.com
-    FLOTIQ_API_KEY=YOUR FLOTIQ API KEY
+    GATSBY_FLOTIQ_API_KEY=YOUR FLOTIQ API KEY
     ```
 
 1.  **Start developing**
