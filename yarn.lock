@@ -3641,6 +3641,15 @@ cliui@^5.0.0:
     strip-ansi "^5.2.0"
     wrap-ansi "^5.1.0"
 
+cliui@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/cliui/-/cliui-6.0.0.tgz#511d702c0c4e41ca156d7d0e96021f23e13225b1"
+  integrity sha512-t6wbgtoCXvAzst7QgXxJYqPt0usEfbgQdftEPbLL/cvv6HPE5VgvqCuAIDR0NgU52ds6rFwqrgakNLrHEjCbrQ==
+  dependencies:
+    string-width "^4.2.0"
+    strip-ansi "^6.0.0"
+    wrap-ansi "^6.2.0"
+
 clone-response@1.0.2, clone-response@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/clone-response/-/clone-response-1.0.2.tgz#d1dc973920314df67fbeb94223b4ee350239e96b"
@@ -6025,7 +6034,7 @@ find-up@^2.0.0, find-up@^2.1.0:
   dependencies:
     locate-path "^2.0.0"
 
-find-up@^4.0.0:
+find-up@^4.0.0, find-up@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/find-up/-/find-up-4.1.0.tgz#97afe7d6cdc0bc5928584b7c8d7b16e8a9aa5d19"
   integrity sha512-PpOwAdQ/YlXQ2vj8a3h8IipDuYRi3wceVQQGYWxNINccq40Anw7BlsEXCMbt1Zt+OLA6Fq9suIpIWD0OsnISlw==
@@ -6248,10 +6257,10 @@ gatsby-awesome-pagination@0.3.5:
   dependencies:
     lodash "^4.17.15"
 
-gatsby-cli@^2.12.13:
-  version "2.12.13"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.13.tgz#452f1aab55222da6d53bf122018b39bec32a6a00"
-  integrity sha512-05NF9jfvHl/n/mZbviP65/5z+Kk3JpSN7HYmduBY3iRIkhnt8wgfgUHONwGlNN5klSKnW54vNkf2Ar1rTx1hew==
+gatsby-cli@^2.12.14:
+  version "2.12.14"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.14.tgz#e058967e695fb5f44fe7d0589cb730de86b13be0"
+  integrity sha512-g+GthKDND9558TbELa5fvkGMJWrQPc2JmB77m2h6+XryfqnQFvDKE7kc1m2LSy4JaajTAm3vFUwkcj7Lb5Epgg==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.9.6"
@@ -6269,7 +6278,7 @@ gatsby-cli@^2.12.13:
     fs-exists-cached "^1.0.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.2.1"
-    gatsby-recipes "^0.1.12"
+    gatsby-recipes "^0.1.13"
     gatsby-telemetry "^1.3.2"
     hosted-git-info "^3.0.4"
     is-valid-path "^0.1.1"
@@ -6291,7 +6300,7 @@ gatsby-cli@^2.12.13:
     strip-ansi "^5.2.0"
     update-notifier "^3.0.1"
     uuid "3.4.0"
-    yargs "^12.0.5"
+    yargs "^15.3.1"
     yurnalist "^1.1.2"
   optionalDependencies:
     ink "^2.7.1"
@@ -6331,10 +6340,10 @@ gatsby-link@^2.0.7:
     "@types/reach__router" "^1.2.6"
     prop-types "^15.7.2"
 
-gatsby-link@^2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.4.1.tgz#b134c5a6478ca221ef930df76748d210faa62853"
-  integrity sha512-1T45o87vC7dllYI7atnxg7E3M9idC63aP6t0UuzMcpCZH8owYVDTj1M7L7W6tW6gk8mXh0YXBTl0cd8a/7QfEQ==
+gatsby-link@^2.4.2:
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/gatsby-link/-/gatsby-link-2.4.2.tgz#d0ddf227d86cc6e82e1183fe3254291772af9863"
+  integrity sha512-AmSBam4pgtw2YRzkg7noVS6WF9EE73CNjfBiGCS65kQm/sP9caLuLOqrI0l0JAUwEeCqREH1bjg47S0w9chW7w==
   dependencies:
     "@babel/runtime" "^7.9.6"
     "@types/reach__router" "^1.3.3"
@@ -6490,10 +6499,10 @@ gatsby-react-router-scroll@^3.0.0:
     scroll-behavior "^0.9.12"
     warning "^3.0.0"
 
-gatsby-recipes@^0.1.12:
-  version "0.1.12"
-  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.12.tgz#b3041c893781fef21d460db2c8a787d9d929d8ef"
-  integrity sha512-QMmxOB6oXarZ7l4/p3h0AninCe/rmSsqG2uZOt+K2o+IERBGMIPD/6s8y9sljiXptx3QL2c+K8zK7IVXbHQMJg==
+gatsby-recipes@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.13.tgz#32b9927cb3b819169f5dfe334ab13d8063c2ac76"
+  integrity sha512-5bE3ZTOu74t8NdnvmeLqclwxs+i2+pYRJh/LUkWzH3xe7KmSZI6GGUoYca9oW2DTGWwJXu9T/1ZY/7zMKE7eHw==
   dependencies:
     "@babel/core" "^7.9.6"
     "@babel/generator" "^7.9.6"
@@ -6626,10 +6635,10 @@ gatsby-transformer-sharp@2.5.2:
     semver "^5.7.1"
     sharp "^0.25.1"
 
-gatsby@2.21.19:
-  version "2.21.19"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.21.19.tgz#e5e9611ded4c795f52db357c557e02aaa8c86a6e"
-  integrity sha512-LSDx5TiqEOL6ZAYa7WiN9Mv2ciEt94JmrB96QPG2FEfxfA3QlHBNQiBlY0VfREOR6xj++1MyTjMHXcww3cRBCQ==
+gatsby@2.21.20:
+  version "2.21.20"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.21.20.tgz#f00a12a34f46263b0a47723d5a1a82940e6f2b7f"
+  integrity sha512-0K4ZQXzkhOVfIEeQGrhUWLYHScVPKCvF/kJiW6TLeZFq4pr4KWdh+Hq899cmzLh5Ma+AWo1cvnb33Ksu8JKGbA==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.9.6"
@@ -6692,10 +6701,10 @@ gatsby@2.21.19:
     flat "^4.1.0"
     fs-exists-cached "1.0.0"
     fs-extra "^8.1.0"
-    gatsby-cli "^2.12.13"
+    gatsby-cli "^2.12.14"
     gatsby-core-utils "^1.2.1"
     gatsby-graphiql-explorer "^0.4.1"
-    gatsby-link "^2.4.1"
+    gatsby-link "^2.4.2"
     gatsby-plugin-page-creator "^2.3.1"
     gatsby-plugin-typescript "^2.4.2"
     gatsby-react-router-scroll "^3.0.0"
@@ -14950,7 +14959,15 @@ yargs-parser@^13.1.1:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs@12.0.5, yargs@^12.0.5:
+yargs-parser@^18.1.1:
+  version "18.1.3"
+  resolved "https://registry.yarnpkg.com/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
+  integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
+  dependencies:
+    camelcase "^5.0.0"
+    decamelize "^1.2.0"
+
+yargs@12.0.5:
   version "12.0.5"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-12.0.5.tgz#05f5997b609647b64f66b81e3b4b10a368e7ad13"
   integrity sha512-Lhz8TLaYnxq/2ObqHDql8dX8CJi97oHxrjUcYtzKbbykPtVW9WB+poxI+NM2UIzsMgNCZTIf0AQwsjK5yMAqZw==
@@ -14983,6 +15000,23 @@ yargs@^13.2.4:
     which-module "^2.0.0"
     y18n "^4.0.0"
     yargs-parser "^13.1.1"
+
+yargs@^15.3.1:
+  version "15.3.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-15.3.1.tgz#9505b472763963e54afe60148ad27a330818e98b"
+  integrity sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
+  dependencies:
+    cliui "^6.0.0"
+    decamelize "^1.2.0"
+    find-up "^4.1.0"
+    get-caller-file "^2.0.1"
+    require-directory "^2.1.1"
+    require-main-filename "^2.0.0"
+    set-blocking "^2.0.0"
+    string-width "^4.2.0"
+    which-module "^2.0.0"
+    y18n "^4.0.0"
+    yargs-parser "^18.1.1"
 
 yargs@^3.19.0:
   version "3.32.0"
