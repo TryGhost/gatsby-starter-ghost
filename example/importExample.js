@@ -17,8 +17,8 @@ const directoryPath = path.join(__dirname, ``)
 exports.importExamples = async () => {
     apiUrl = process.env.GATSBY_FLOTIQ_BASE_URL
     assert.ok(apiUrl,`You must specify API url (in most cases it is "https://api.flotiq.com")`)
-    headers[`X-AUTH-TOKEN`] = process.env.FLOTIQ_API_KEY
-    assert.ok(process.env.FLOTIQ_API_KEY,`You must specify API token, preferably Read and write Application API key (if you don't know what it is check: https://flotiq.com/docs/API/)`)
+    headers[`X-AUTH-TOKEN`] = process.env.GATSBY_FLOTIQ_API_KEY
+    assert.ok(process.env.GATSBY_FLOTIQ_API_KEY,`You must specify API token, preferably Read and write Application API key (if you don't know what it is check: https://flotiq.com/docs/API/)`)
 
     let contentTypeDefinitionResponse = await fetch(apiUrl + `/api/v1/internal/contenttype/recipe`, { headers: headers })
     let imageToReplace = []

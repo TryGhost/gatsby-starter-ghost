@@ -5,7 +5,7 @@
       "description": "Base URL for Flotiq API access, defaults to https://api.flotiq.com",
       "value": "https://api.flotiq.com"
     },
-    "FLOTIQ_API_KEY": {
+    "GATSBY_FLOTIQ_API_KEY": {
       "description": "Flotiq API key"
     }
   },
