@@ -6250,10 +6250,10 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-awesome-pagination@0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.5.tgz#e1d0d39a5350565e0e30af23979f76c89695a96a"
-  integrity sha512-rYBaGDgNtG6/+dHlM6XS2HtKodv/Y32AuysJMsZ39xIhn48UtRuYd8fmqJYc99V1dQFCPIJElNhg8fp1eOj05g==
+gatsby-awesome-pagination@0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.6.tgz#e7e2d0af0cebd53a51957414e1e9749f2e0e2c02"
+  integrity sha512-gVt5tnDP8Va+Y02OrG8k/HocGx7NKTnvGGKFzz2E+ChHObBbac6PXeOEOUseFrCqO/zKLhF8JWTfWofGsy7oQA==
   dependencies:
     lodash "^4.17.15"
 
