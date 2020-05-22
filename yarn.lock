@@ -6236,10 +6236,10 @@ gatsby-awesome-pagination@0.3.6:
   dependencies:
     lodash "^4.17.15"
 
-gatsby-cli@^2.12.30:
-  version "2.12.30"
-  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.30.tgz#a50980d7e74a4aa3e8353e0841966825cead6808"
-  integrity sha512-FUgysbcGJNagft2Y5uXTFbiQs6TSl2aoPygxCMtZfogvvM6j/GPgqo43SdevWVMqdsocJrju/Qj8be6mw1DOoQ==
+gatsby-cli@^2.12.31:
+  version "2.12.31"
+  resolved "https://registry.yarnpkg.com/gatsby-cli/-/gatsby-cli-2.12.31.tgz#09e6a18c5ec7514983b1dd7670649c6d410c158d"
+  integrity sha512-TVwLrA9xpCtm5xdfEyDZmMlCfB0v6Fk7jt4862amWlNMdQVJGKmUulheSebcBJGv7QO2PehyWla/SE0lSCMt4g==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/runtime" "^7.9.6"
@@ -6257,7 +6257,7 @@ gatsby-cli@^2.12.30:
     fs-exists-cached "^1.0.0"
     fs-extra "^8.1.0"
     gatsby-core-utils "^1.3.2"
-    gatsby-recipes "^0.1.24"
+    gatsby-recipes "^0.1.25"
     gatsby-telemetry "^1.3.8"
     hosted-git-info "^3.0.4"
     is-valid-path "^0.1.1"
@@ -6481,13 +6481,14 @@ gatsby-react-router-scroll@^3.0.1:
     scroll-behavior "^0.9.12"
     warning "^3.0.0"
 
-gatsby-recipes@^0.1.24:
-  version "0.1.24"
-  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.24.tgz#be0215b8f2b78941661ca7566dbb3472d7391d86"
-  integrity sha512-GDEmmqecOv28TgiVJJ5AG1bLVjz3FgQZ3wosTel6BOUBvOomcAqRpDTmFOSf1vSeLREW3oVH2BZJ/1/9jNx0qg==
+gatsby-recipes@^0.1.25:
+  version "0.1.25"
+  resolved "https://registry.yarnpkg.com/gatsby-recipes/-/gatsby-recipes-0.1.25.tgz#ebc92f8b4cc62b624901db9dd4423d4e2dc88921"
+  integrity sha512-X8AzstXs6ed/MaQV4xKMnCsPAFGQo9OmAILIFklpvnnXo3mD7qKTtjkQZNL1GNNSK0NclC7kzhsrscWpf6dBEA==
   dependencies:
     "@babel/core" "^7.9.6"
     "@babel/generator" "^7.9.6"
+    "@babel/plugin-transform-react-jsx" "^7.9.4"
     "@babel/standalone" "^7.9.6"
     "@babel/template" "^7.8.6"
     "@babel/types" "^7.9.6"
@@ -6497,16 +6498,8 @@ gatsby-recipes@^0.1.24:
     "@mdx-js/runtime" "^1.6.1"
     acorn "^7.2.0"
     acorn-jsx "^5.2.0"
-    babel-core "7.0.0-bridge.0"
-    babel-eslint "^10.1.0"
-    babel-loader "^8.1.0"
-    babel-plugin-add-module-exports "^0.3.3"
-    babel-plugin-dynamic-import-node "^2.3.3"
-    babel-plugin-remove-graphql-queries "^2.9.2"
-    babel-preset-gatsby "^0.4.6"
     cors "^2.8.5"
-    detect-port "^1.3.0"
-    event-source-polyfill "^1.0.14"
+    debug "^4.1.1"
     execa "^4.0.1"
     express "^4.17.1"
     express-graphql "^0.9.0"
@@ -6520,7 +6513,6 @@ gatsby-recipes@^0.1.24:
     graphql-type-json "^0.3.1"
     hicat "^0.7.0"
     html-tag-names "^1.1.5"
-    humanize-list "^1.0.1"
     import-jsx "^4.0.0"
     ink-box "^1.0.0"
     ink-link "^1.1.0"
@@ -6528,8 +6520,6 @@ gatsby-recipes@^0.1.24:
     ink-spinner "^3.0.1"
     is-binary-path "^2.1.0"
     is-blank "^2.1.0"
-    is-newline "^1.0.0"
-    is-relative "^1.0.0"
     is-string "^1.0.5"
     is-url "^1.2.4"
     jest-diff "^25.5.0"
@@ -6537,15 +6527,14 @@ gatsby-recipes@^0.1.24:
     mkdirp "^0.5.1"
     pkg-dir "^4.2.0"
     prettier "^2.0.5"
+    react-reconciler "^0.25.1"
     remark-stringify "^8.0.0"
     semver "^7.3.2"
     single-trailing-newline "^1.0.0"
     style-to-object "^0.3.0"
     subscriptions-transport-ws "^0.9.16"
     svg-tag-names "^2.0.1"
-    unist-util-remove "^2.0.0"
     unist-util-visit "^2.0.2"
-    url-loader "^1.1.2"
     urql "^1.9.7"
     ws "^7.3.0"
     xstate "^4.9.1"
@@ -6618,10 +6607,10 @@ gatsby-transformer-sharp@2.5.3:
     semver "^5.7.1"
     sharp "^0.25.1"
 
-gatsby@2.22.5:
-  version "2.22.5"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.22.5.tgz#db52608539318a4f74935237d91c3951278085a2"
-  integrity sha512-iVkPcA9MeAD3OfhVxGoKUxdt5+Z+mg0cjHMkZYEvF/X+0V9Tq4yKSyWCAaC3ntwKPw7tHqrb4oQZIAPofiKuqg==
+gatsby@2.22.6:
+  version "2.22.6"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.22.6.tgz#b3769ae56c3e92a6eb1139eb02953e76467d8143"
+  integrity sha512-4cM6ohpAO109jX+VUZ8FLlII+Ceks1wsYHmkuzvCS2ZOE+3s8s34Z6q0CiKoxNjIr83VtTHy1bE61w30Vkms3A==
   dependencies:
     "@babel/code-frame" "^7.8.3"
     "@babel/core" "^7.9.6"
@@ -6685,7 +6674,7 @@ gatsby@2.22.5:
     flat "^4.1.0"
     fs-exists-cached "1.0.0"
     fs-extra "^8.1.0"
-    gatsby-cli "^2.12.30"
+    gatsby-cli "^2.12.31"
     gatsby-core-utils "^1.3.2"
     gatsby-graphiql-explorer "^0.4.2"
     gatsby-link "^2.4.3"
@@ -7590,11 +7579,6 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
-humanize-list@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/humanize-list/-/humanize-list-1.0.1.tgz#e7e719c60a5d5848e8e0a5ed5f0a885496c239fd"
-  integrity sha1-5+cZxgpdWEjo4KXtXwqIVJbCOf0=
-
 iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   version "0.4.24"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
@@ -8263,13 +8247,6 @@ is-natural-number@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/is-natural-number/-/is-natural-number-4.0.1.tgz#ab9d76e1db4ced51e35de0c72ebecf09f734cde8"
   integrity sha1-q5124dtM7VHjXeDHLr7PCfc0zeg=
-
-is-newline@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/is-newline/-/is-newline-1.0.0.tgz#f0aac97cc9ac0b4b94af8c55a01cf3690f436e38"
-  integrity sha1-8KrJfMmsC0uUr4xVoBzzaQ9Dbjg=
-  dependencies:
-    newline-regex "^0.2.0"
 
 is-npm@^3.0.0:
   version "3.0.0"
@@ -9744,11 +9721,6 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
-
-newline-regex@^0.2.0:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/newline-regex/-/newline-regex-0.2.1.tgz#4696d869045ee1509b83aac3a58d4a93bbed926e"
-  integrity sha1-RpbYaQRe4VCbg6rDpY1Kk7vtkm4=
 
 next-tick@^1.0.0:
   version "1.0.0"
@@ -11686,6 +11658,16 @@ react-reconciler@^0.24.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
     scheduler "^0.18.0"
+
+react-reconciler@^0.25.1:
+  version "0.25.1"
+  resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.25.1.tgz#f9814d59d115e1210762287ce987801529363aaa"
+  integrity sha512-R5UwsIvRcSs3w8n9k3tBoTtUHdVhu9u84EG7E5M0Jk9F5i6DA1pQzPfUZd6opYWGy56MJOtV3VADzy6DRwYDjw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.19.1"
 
 react-refresh@^0.7.0:
   version "0.7.2"
