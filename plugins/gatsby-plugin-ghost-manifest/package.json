@@ -11,7 +11,7 @@
     "devDependencies": {
         "@babel/cli": "7.10.1",
         "@babel/core": "7.10.2",
-        "babel-preset-gatsby-package": "0.4.2",
+        "babel-preset-gatsby-package": "0.4.3",
         "cross-env": "7.0.2"
     },
     "keywords": [
