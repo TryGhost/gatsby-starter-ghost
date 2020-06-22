@@ -1,6 +1,6 @@
 {
-  "name": "gatsby-starter-ghost",
-  "description": "A starter template to build lightning fast websites with Ghost and Gatsby",
+  "name": "kyanpu-frontend",
+  "description": "",
   "version": "1.0.0",
   "license": "MIT",
   "author": "Ghost Foundation",
@@ -19,8 +19,7 @@
     "url": "https://github.com/tryghost/gatsby-starter-ghost/issues"
   },
   "keywords": [
-    "gatsby",
-    "ghost"
+    "gatsby, ghost, react, javascript"
   ],
   "main": "n/a",
   "scripts": {

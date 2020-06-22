@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://admin.kyanpu.app",
+    "contentApiKey": "ebc88f941039a18e2fd96313eb"
   },
   "production": {
-    "apiUrl": "https://gatsby.ghost.io",
-    "contentApiKey": "9cc5c67c358edfdd81455149d0"
+    "apiUrl": "https://admin.kyanpu.app",
+    "contentApiKey": "ebc88f941039a18e2fd96313eb"
   }
 }
