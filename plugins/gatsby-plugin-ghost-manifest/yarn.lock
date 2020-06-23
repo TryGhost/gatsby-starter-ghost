@@ -1203,10 +1203,10 @@ babel-plugin-dynamic-import-node@^2.3.3:
   dependencies:
     object.assign "^4.1.0"
 
-babel-preset-gatsby-package@0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/babel-preset-gatsby-package/-/babel-preset-gatsby-package-0.4.4.tgz#88499e284aaee4043b8c9c282c0fea2f0f117eec"
-  integrity sha512-gsqhrwS3uWzmOW1SwtdLN5ggRIkVau5TotFfIv1rZ+CGy8aOOQFy873HQzE38uf7bqDsDvRvfXTdFyZbJLT+CQ==
+babel-preset-gatsby-package@0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/babel-preset-gatsby-package/-/babel-preset-gatsby-package-0.4.5.tgz#9eedc11b5349ffc1ae3445fdc89a58ff3559587d"
+  integrity sha512-BxKBxUr7+sAaEcbS/N85fFgikJ/adyKQ/JDOqn90Zn+6kWT6Nywgp5CYAD7DfvkpjABIyw6n/1QXDSD/M5RkdA==
   dependencies:
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.10.1"
     "@babel/plugin-proposal-optional-chaining" "^7.10.1"
