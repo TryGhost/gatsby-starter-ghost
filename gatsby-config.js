@@ -118,7 +118,7 @@ module.exports = {
             options: {
                 query: `
                 {
-                    allGhostPost {
+                    allGhostPost(filter: {slug: {ne: "data-schema"}}) {
                         edges {
                             node {
                                 id
@@ -129,7 +129,7 @@ module.exports = {
                             }
                         }
                     }
-                    allGhostPage {
+                    allGhostPage(filter: {slug: {ne: "data-schema"}}) {
                         edges {
                             node {
                                 id
@@ -140,7 +140,7 @@ module.exports = {
                             }
                         }
                     }
-                    allGhostTag {
+                    allGhostTag(filter: {slug: {ne: "data-schema"}}) {
                         edges {
                             node {
                                 id
@@ -149,7 +149,7 @@ module.exports = {
                             }
                         }
                     }
-                    allGhostAuthor {
+                    allGhostAuthor(filter: {slug: {ne: "data-schema"}}) {
                         edges {
                             node {
                                 id
@@ -178,6 +178,7 @@ module.exports = {
                     `/404`,
                     `/404.html`,
                     `/offline-plugin-app-shell-fallback`,
+                    `/data-schema`,
                 ],
                 createLinkInHead: true,
                 addUncaughtPages: true,
