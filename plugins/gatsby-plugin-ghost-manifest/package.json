@@ -24,7 +24,7 @@
         "pwa"
     ],
     "resolutions": {
-        "sharp": "0.25.4"
+        "sharp": "0.26.0"
     },
     "license": "MIT",
     "main": "index.js",
