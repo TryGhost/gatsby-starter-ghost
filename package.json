@@ -34,7 +34,7 @@
     "babel-eslint": "10.1.0",
     "eslint": "7.10.0",
     "eslint-plugin-ghost": "1.5.0",
-    "eslint-plugin-react": "7.21.2"
+    "eslint-plugin-react": "7.21.3"
   },
   "dependencies": {
     "@tryghost/helpers": "1.1.31",
