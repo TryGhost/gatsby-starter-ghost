@@ -1,6 +1,64 @@
 AWSTemplateFormatVersion: 2010-09-09
 Transform: AWS::Serverless-2016-10-31
 Resources:
+  # ghostFSRole:
+  #   Type: AWS::IAM::Role
+  #   Properties:
+  #     RoleName: !Sub ${AWS::StackName}-ghostFS
+  #     AssumeRolePolicyDocument:
+  #       Version: 2012-10-17
+  #       Statement:
+  #         Effect: Allow
+  #         Principal:
+  #           Service: ecs-tasks.amazonaws.com
+  #         Action:
+  #           - elasticfilesystem:ClientMount
+  #           - elasticfilesystem:ClientWrite
+  #           - elasticfilesystem:ClientRootAccess
+  ghostFS:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      PerformanceMode: generalPurpose
+      Encrypted: false
+      # FileSystemPolicy:
+      #   Version: "2012-10-17"
+      #   Statement:
+      #     - Effect: Allow
+      #       Action:
+      #         - elasticfilesystem:ClientMount
+      #         - elasticfilesystem:ClientWrite
+      #         - elasticfilesystem:ClientRootAccess
+      #     - Principal: 'arn:aws:iam::111122223333:root'
+      #     #   Service: ecs-tasks.amazonaws.com
+      #     # - Resource: '*'
+  ghostMount0:
+    Type: AWS::EFS::MountTarget
+    Properties: 
+      FileSystemId: !GetAtt ghostFS.FileSystemId
+      SecurityGroups: 
+        - !GetAtt ghostEFSSecurityGroup.GroupId
+      SubnetId: 'subnet-ce0be084' #!Ref DefaultVPCSubnets
+  ghostMount1:
+    Type: AWS::EFS::MountTarget
+    Properties: 
+      FileSystemId: !GetAtt ghostFS.FileSystemId
+      SecurityGroups: 
+        - !GetAtt ghostEFSSecurityGroup.GroupId
+      SubnetId: 'subnet-e407dfb9' #!Ref DefaultVPCSubnets
+  ghostMount2:
+    Type: AWS::EFS::MountTarget
+    Properties: 
+      FileSystemId: !GetAtt ghostFS.FileSystemId
+      SecurityGroups: 
+        - !GetAtt ghostEFSSecurityGroup.GroupId
+      SubnetId: 'subnet-b4f6a69f' #!Ref DefaultVPCSubnets
+  ghostMount3:
+    Type: AWS::EFS::MountTarget
+    Properties: 
+      FileSystemId: !GetAtt ghostFS.FileSystemId
+      SecurityGroups: 
+        - !GetAtt ghostEFSSecurityGroup.GroupId
+      SubnetId: 'subnet-5bbf7623' #!Ref DefaultVPCSubnets
   ghostAPI:
     Type: AWS::ECS::TaskDefinition
     Properties:
@@ -14,33 +72,41 @@ Resources:
               awslogs-group: !Ref ghostAPILogGroup
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: logs
+          MountPoints:
+            - 
+              ContainerPath: /var/lib/ghost/content/data
+              SourceVolume: ghostVolume
           Name: 0
           Environment:
             - Name: url
               Value: !Join [ '', [ 'http://', !GetAtt Loadbalancer.DNSName ] ]
-            - Name: DB_ARN
-              Value: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
-            - Name: DB_ROOT_USER_SECRET_ARN
-              Value: !Ref ghostDBRootUserSecret
-            - Name: database__connection__host
-              Value: !GetAtt ghostDB.Endpoint.Address              
-            - Name: database__connection__user
-              Value: root              
-            - Name: database__connection__password
-              Value: !Join ['', ['{{resolve:secretsmanager:', !Ref ghostDBRootUserSecret, ':SecretString:password}}' ]]
             - Name: database__client
-              Value: mysql
-            - Name: database__pool__min
-              Value: '0'
-            - Name: database__connection__port
-              Value: '3306'
-            - Name: database__connection__database
-              Value: !Ref ghostDB
+              Value: sqlite3
+            - Name: database__connection__filename
+              Value: '/var/lib/ghost/content/data/ghost-efs.db'
+            # - Name: DB_ARN
+            #   Value: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
+            # - Name: DB_ROOT_USER_SECRET_ARN
+            #   Value: !Ref ghostDBRootUserSecret
+            # - Name: database__connection__host
+            #   Value: !GetAtt ghostDB.Endpoint.Address              
+            # - Name: database__connection__user
+            #   Value: root              
+            # - Name: database__connection__password
+            #   Value: !Join ['', ['{{resolve:secretsmanager:', !Ref ghostDBRootUserSecret, ':SecretString:password}}' ]]
+            # - Name: database__client
+            #   Value: mysql
+            # - Name: database__pool__min
+            #   Value: '0'
+            # - Name: database__connection__port
+            #   Value: '3306'
+            # - Name: database__connection__database
+            #   Value: !Ref ghostDB
             # string version of the Amazon Root CA 1 trust store which Ghost uses for SSL to Aurora MySQL
             # https://www.amazontrust.com/repository/AmazonRootCA1.pem
             # https://ghost.org/docs/concepts/config/
-            - Name: database__connection__ssl__ca
-              Value: "-----BEGIN CERTIFICATE-----\nMIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF\nADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\nb24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\nb3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj\nca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\nIFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\nVOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\njgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC\nAYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA\nA4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI\nU5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs\nN+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv\no/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU\n5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy\nrqXRfboQnoZsG4q5WTP468SQvvG5\n-----END CERTIFICATE-----\n"
+            # - Name: database__connection__ssl__ca
+            #   Value: "-----BEGIN CERTIFICATE-----\nMIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF\nADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\nb24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\nb3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj\nca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\nIFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\nVOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\njgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC\nAYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA\nA4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI\nU5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs\nN+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv\no/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU\n5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy\nrqXRfboQnoZsG4q5WTP468SQvvG5\n-----END CERTIFICATE-----\n"
       Cpu: 256
       ExecutionRoleArn: !GetAtt ghostAPIExecutionRole.Arn
       Memory: 512
@@ -48,12 +114,18 @@ Resources:
       RequiresCompatibilities:
         - FARGATE
       TaskRoleArn: !GetAtt ghostAPITaskRole.Arn
-      Volumes: []
+      Volumes: 
+        - Name: ghostVolume
+          EFSVolumeConfiguration:
+            FilesystemId: !GetAtt ghostFS.FileSystemId
+            AuthorizationConfig:
+              IAM: "DISABLED"
     DependsOn: ghostAPILogGroup
   Service:
     Type: AWS::ECS::Service
     Properties:
       ServiceName: ghostAPIservice
+      PlatformVersion: 1.4.0
       Cluster: default
       TaskDefinition: !Ref ghostAPI
       DesiredCount: 2
@@ -67,6 +139,7 @@ Resources:
           Subnets: !Ref DefaultVPCSubnets
           SecurityGroups:
             - !GetAtt ghostAPISecurityGroup.GroupId
+            - !GetAtt ghostEFSSecurityGroup.GroupId
       LoadBalancers:
         - TargetGroupArn: !Ref TargetGroup
           ContainerPort: 2368
@@ -124,6 +197,19 @@ Resources:
                   - ecr:BatchCheckLayerAvailability
                   - ecr:GetDownloadUrlForLayer
                   - ecr:BatchGetImage
+                  - elasticfilesystem:ClientMount
+                  - elasticfilesystem:ClientWrite
+                  - elasticfilesystem:ClientRootAccess
+                Resource: '*'
+        - PolicyName: MountEFS
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - elasticfilesystem:ClientMount
+                  - elasticfilesystem:ClientWrite
+                  - elasticfilesystem:ClientRootAccess
                 Resource: '*'
   ghostAPITaskRole:
     Type: AWS::IAM::Role
@@ -137,28 +223,28 @@ Resources:
             Service: ecs-tasks.amazonaws.com
           Action: sts:AssumeRole
       Policies:
-        - PolicyName: SecretPolicy
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - secretsmanager:GetSecretValue
-                Resource:
-                  - !Ref ghostDBRootUserSecret
-        - PolicyName: StackeryPolicy
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - rds-data:BatchExecuteStatement
-                  - rds-data:BeginTransaction
-                  - rds-data:CommitTransaction
-                  - rds-data:ExecuteStatement
-                  - rds-data:RollbackTransaction
-                Resource:
-                  - !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
+        # - PolicyName: SecretPolicy
+        #   PolicyDocument:
+        #     Version: 2012-10-17
+        #     Statement:
+        #       - Effect: Allow
+        #         Action:
+        #           - secretsmanager:GetSecretValue
+        #         Resource:
+        #           - !Ref ghostDBRootUserSecret
+        # - PolicyName: StackeryPolicy
+        #   PolicyDocument:
+        #     Version: 2012-10-17
+        #     Statement:
+        #       - Effect: Allow
+        #         Action:
+        #           - rds-data:BatchExecuteStatement
+        #           - rds-data:BeginTransaction
+        #           - rds-data:CommitTransaction
+        #           - rds-data:ExecuteStatement
+        #           - rds-data:RollbackTransaction
+        #         Resource:
+        #           - !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
         - PolicyName: AccessSecrets
           PolicyDocument:
             Version: 2012-10-17
@@ -171,83 +257,97 @@ Resources:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /stackery/task/${AWS::StackName}-ghostAPI/logs
-  ghostDB:
-    Type: AWS::RDS::DBCluster
-    Properties:
-      BackupRetentionPeriod: 1
-      DBSubnetGroupName: !Ref ghostDBSubnetGroup
-      Engine: aurora
-      EngineMode: serverless
-      MasterUsername: !Sub '{{resolve:secretsmanager:${ghostDBRootUserSecret}:SecretString:username}}'
-      MasterUserPassword: !Sub '{{resolve:secretsmanager:${ghostDBRootUserSecret}:SecretString:password}}'
-      EnableHttpEndpoint: true
-      ScalingConfiguration:
-        AutoPause: true
-        MinCapacity: 1
-        MaxCapacity: 2
-      StorageEncrypted: true
-      VpcSecurityGroupIds:
-        - !Ref ghostDBSecurityGroup
-  ghostDBRootUserSecretAttachment:
-    Type: AWS::SecretsManager::SecretTargetAttachment
-    Properties:
-      SecretId: !Ref ghostDBRootUserSecret
-      TargetId: !Ref ghostDB
-      TargetType: AWS::RDS::DBCluster
-  ghostDBSubnetGroup:
-    Type: AWS::RDS::DBSubnetGroup
-    Properties:
-      DBSubnetGroupDescription: !Sub
-        - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
-        - ResourceName: ghostDB
-      SubnetIds: !Ref DefaultVPCSubnets
-      Tags:
-        - Key: Name
-          Value: !Sub
-            - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
-            - ResourceName: ghostDB
-  ghostDBRootUserSecret:
-    Type: AWS::SecretsManager::Secret
-    Properties:
-      Description: !Sub
-        - Root user login info for Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName}
-        - ResourceName: ghostDB
-      GenerateSecretString:
-        SecretStringTemplate: '{"username": "root"}'
-        GenerateStringKey: password
-        PasswordLength: 16
-        ExcludeCharacters: '"@/\'
-      Name: !Sub /${EnvironmentTagName}/${StackTagName}/ghostDB/RootUser
-  ghostDBSecurityGroup:
-    Type: AWS::EC2::SecurityGroup
-    Properties:
-      GroupDescription: Database Security Group
-      SecurityGroupIngress:
-        # CidrIp: 0.0.0.0/0
-        SourceSecurityGroupId: !Ref ghostAPISecurityGroup        
-        FromPort: 3306
-        IpProtocol: tcp
-        ToPort: 3306
-      Tags:
-        - Key: Name
-          Value: !Sub
-            - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Security Group
-            - ResourceName: ghostDB
-      VpcId: !Ref DefaultVPCId
+  # ghostDB:
+  #   Type: AWS::RDS::DBCluster
+  #   Properties:
+  #     BackupRetentionPeriod: 1
+  #     DBSubnetGroupName: !Ref ghostDBSubnetGroup
+  #     Engine: aurora
+  #     EngineMode: serverless
+  #     MasterUsername: !Sub '{{resolve:secretsmanager:${ghostDBRootUserSecret}:SecretString:username}}'
+  #     MasterUserPassword: !Sub '{{resolve:secretsmanager:${ghostDBRootUserSecret}:SecretString:password}}'
+  #     EnableHttpEndpoint: true
+  #     ScalingConfiguration:
+  #       AutoPause: true
+  #       MinCapacity: 1
+  #       MaxCapacity: 2
+  #     StorageEncrypted: true
+  #     VpcSecurityGroupIds:
+  #       - !Ref ghostDBSecurityGroup
+  # ghostDBRootUserSecretAttachment:
+  #   Type: AWS::SecretsManager::SecretTargetAttachment
+  #   Properties:
+  #     SecretId: !Ref ghostDBRootUserSecret
+  #     TargetId: !Ref ghostDB
+  #     TargetType: AWS::RDS::DBCluster
+  # ghostDBSubnetGroup:
+  #   Type: AWS::RDS::DBSubnetGroup
+  #   Properties:
+  #     DBSubnetGroupDescription: !Sub
+  #       - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
+  #       - ResourceName: ghostDB
+  #     SubnetIds: !Ref DefaultVPCSubnets
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub
+  #           - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
+  #           - ResourceName: ghostDB
+  # ghostDBRootUserSecret:
+  #   Type: AWS::SecretsManager::Secret
+  #   Properties:
+  #     Description: !Sub
+  #       - Root user login info for Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName}
+  #       - ResourceName: ghostDB
+  #     GenerateSecretString:
+  #       SecretStringTemplate: '{"username": "root"}'
+  #       GenerateStringKey: password
+  #       PasswordLength: 16
+  #       ExcludeCharacters: '"@/\'
+  #     Name: !Sub /${EnvironmentTagName}/${StackTagName}/ghostDB/RootUser
+  # ghostDBSecurityGroup:
+  #   Type: AWS::EC2::SecurityGroup
+  #   Properties:
+  #     GroupDescription: Database Security Group
+  #     SecurityGroupIngress:
+  #       # CidrIp: 0.0.0.0/0
+  #       SourceSecurityGroupId: !Ref ghostAPISecurityGroup        
+  #       FromPort: 3306
+  #       IpProtocol: tcp
+  #       ToPort: 3306
+  #     Tags:
+  #       - Key: Name
+  #         Value: !Sub
+  #           - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Security Group
+  #           - ResourceName: ghostDB
+  #     VpcId: !Ref DefaultVPCId
   ghostAPISecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: API Security Group
       SecurityGroupIngress:
-        # CidrIp: 0.0.0.0/0
+        IpProtocol: tcp
         SourceSecurityGroupId: !Ref ghostLBSecurityGroup        
         FromPort: 2368
-        IpProtocol: tcp
         ToPort: 2368
       Tags:
         - Key: Name
           Value: !Sub
             - Stack ${StackTagName} Environment ${EnvironmentTagName} API ${ResourceName} VPC Security Group
+            - ResourceName: ghostAPI
+      VpcId: !Ref DefaultVPCId
+  ghostEFSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: EFS Security Group
+      SecurityGroupIngress:
+        IpProtocol: tcp
+        CidrIp: 0.0.0.0/0
+        FromPort: 2049
+        ToPort: 2049
+      Tags:
+        - Key: Name
+          Value: !Sub
+            - Stack ${StackTagName} Environment ${EnvironmentTagName} EFS ${ResourceName} VPC Security Group
             - ResourceName: ghostAPI
       VpcId: !Ref DefaultVPCId
   ghostLBSecurityGroup:
@@ -289,4 +389,4 @@ Outputs:
     Description: "Ghost Load Balancer DNS Address"
     Value: !GetAtt Loadbalancer.DNSName
     Export:
-      Name: GHOST-API-URL    
+      Name: GHOST-API-URL
