@@ -27,6 +27,8 @@ Resources:
             Value: !Ref EnvConfigghostContentApiKeyAsString
           - Name: SITEURL
             Value: !GetAtt gatsbyCDN.DomainName
+          - Name: NODE_ENV
+            Value: 'production'
       ServiceRole: !GetAtt gatsbyBuildRole.Arn
       Source:
         Type: NO_SOURCE
