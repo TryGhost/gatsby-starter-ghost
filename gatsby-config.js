@@ -22,9 +22,9 @@ let ghostConfig
 //     }
 // }
 
-// if (process.env.NODE_ENV === `production` && config.siteUrl === `http://localhost:8000` && !process.env.SITEURL) {
-//     throw new Error(`siteUrl can't be localhost and needs to be configured in siteConfig. Check the README.`) // eslint-disable-line
-// }
+if (process.env.NODE_ENV === `production` && config.siteUrl === `http://localhost:8000` && !process.env.SITEURL) {
+    throw new Error(`siteUrl can't be localhost and needs to be configured in siteConfig. Check the README.`) // eslint-disable-line
+}
 
 /**
 * This is the place where you can tell Gatsby which plugins to use
@@ -35,7 +35,7 @@ let ghostConfig
 */
 module.exports = {
     siteMetadata: {
-        siteUrl: process.env.SITEURL || config.siteUrl,
+        siteUrl: process.env.SITEURL,
     },
     plugins: [
         /**
@@ -94,26 +94,26 @@ module.exports = {
               `,
             },
         },
-        {
-            resolve: `gatsby-plugin-feed`,
-            options: {
-                query: `
-                {
-                    allGhostSettings {
-                        edges {
-                            node {
-                                title
-                                description
-                            }
-                        }
-                    }
-                }
-              `,
-                feeds: [
-                    generateRSSFeed(config),
-                ],
-            },
-        },
+        // {
+        //     resolve: `gatsby-plugin-feed`,
+        //     options: {
+        //         query: `
+        //         {
+        //             allGhostSettings {
+        //                 edges {
+        //                     node {
+        //                         title
+        //                         description
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //       `,
+        //         feeds: [
+        //             generateRSSFeed(config),
+        //         ],
+        //     },
+        // },
         {
             resolve: `gatsby-plugin-advanced-sitemap`,
             options: {
