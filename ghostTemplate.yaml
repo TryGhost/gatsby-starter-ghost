@@ -39,8 +39,7 @@ Resources:
               awslogs-region: !Ref AWS::Region
               awslogs-stream-prefix: logs
           MountPoints:
-            - 
-              ContainerPath: /var/lib/ghost/content
+            - ContainerPath: /var/lib/ghost/content
               SourceVolume: ghostVolume
           Environment:
             - Name: url
