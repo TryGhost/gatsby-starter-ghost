@@ -24,24 +24,6 @@ Resources:
       SubnetId: !Select 
         - 1 
         - !Ref DefaultVPCSubnets
-  ghostMount2:
-    Type: AWS::EFS::MountTarget
-    Properties: 
-      FileSystemId: !GetAtt ghostFS.FileSystemId
-      SecurityGroups: 
-        - !GetAtt ghostEFSSecurityGroup.GroupId
-      SubnetId: !Select 
-        - 2 
-        - !Ref DefaultVPCSubnets
-  ghostMount3:
-    Type: AWS::EFS::MountTarget
-    Properties: 
-      FileSystemId: !GetAtt ghostFS.FileSystemId
-      SecurityGroups: 
-        - !GetAtt ghostEFSSecurityGroup.GroupId
-      SubnetId: !Select 
-        - 3 
-        - !Ref DefaultVPCSubnets
   ghostAPI:
     Type: AWS::ECS::TaskDefinition
     Properties:
