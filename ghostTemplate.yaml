@@ -28,7 +28,8 @@ Resources:
     Type: AWS::ECS::TaskDefinition
     Properties:
       ContainerDefinitions:
-        - Image: registry.hub.docker.com/library/ghost
+        - Name: 'ghost'     
+          Image: registry.hub.docker.com/library/ghost
           PortMappings:
             - ContainerPort: 2368
           LogConfiguration:
@@ -41,7 +42,6 @@ Resources:
             - 
               ContainerPath: /var/lib/ghost/content
               SourceVolume: ghostVolume
-          Name: 0
           Environment:
             - Name: url
               Value: !Join [ '', [ 'http://', !GetAtt Loadbalancer.DNSName ] ]
@@ -110,7 +110,7 @@ Resources:
       LoadBalancers:
         - TargetGroupArn: !Ref TargetGroup
           ContainerPort: 2368
-          ContainerName: 0    
+          ContainerName: 'ghost'    
   Loadbalancer:
     Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties: 
