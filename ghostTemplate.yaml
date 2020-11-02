@@ -47,14 +47,9 @@ Resources:
             - Name: database__client
               Value: !If [GhostAuroraDB, mysql, sqlite3]
             - Name: database__connection__filename
-              # Value: '/var/lib/ghost/content/data/ghost-efs.db'
               Value: !If [GhostAuroraDB, !Ref "AWS::NoValue", '/var/lib/ghost/content/data/ghost-efs.db']
             - Name: paths__contentPath
               Value: /var/lib/ghost/content
-            - Name: DB_ARN
-              Value: !If [GhostAuroraDB, !Sub "arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}", !Ref "AWS::NoValue"]
-            - Name: DB_ROOT_USER_SECRET_ARN
-              Value: !If [GhostAuroraDB, !Ref ghostDBRootUserSecret, !Ref "AWS::NoValue"]
             - Name: database__connection__host
               Value: !If [GhostAuroraDB, !GetAtt ghostDB.Endpoint.Address, !Ref "AWS::NoValue"]
             - Name: database__connection__user
