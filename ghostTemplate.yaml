@@ -44,42 +44,41 @@ Resources:
           Environment:
             - Name: url
               Value: !Join [ '', [ 'http://', !GetAtt Loadbalancer.DNSName ] ]
-            # - Name: database__client
-            #   Value: sqlite3
-            # - Name: database__connection__filename
-            #   Value: '/var/lib/ghost/content/data/ghost-efs.db'
+            - Name: database__client
+              Value: !If [GhostAuroraDB, mysql, sqlite3]
+            - Name: database__connection__filename
+              # Value: '/var/lib/ghost/content/data/ghost-efs.db'
+              Value: !If [GhostAuroraDB, !Ref "AWS::NoValue", '/var/lib/ghost/content/data/ghost-efs.db']
             - Name: paths__contentPath
               Value: /var/lib/ghost/content
             - Name: DB_ARN
-              Value: !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
+              Value: !If [GhostAuroraDB, !Sub "arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}", !Ref "AWS::NoValue"]
             - Name: DB_ROOT_USER_SECRET_ARN
-              Value: !Ref ghostDBRootUserSecret
+              Value: !If [GhostAuroraDB, !Ref ghostDBRootUserSecret, !Ref "AWS::NoValue"]
             - Name: database__connection__host
-              Value: !GetAtt ghostDB.Endpoint.Address              
+              Value: !If [GhostAuroraDB, !GetAtt ghostDB.Endpoint.Address, !Ref "AWS::NoValue"]
             - Name: database__connection__user
-              Value: root              
+              Value: !If [GhostAuroraDB, 'root', !Ref "AWS::NoValue"]
             - Name: database__connection__password
-              Value: !Join ['', ['{{resolve:secretsmanager:', !Ref ghostDBRootUserSecret, ':SecretString:password}}' ]]
-            - Name: database__client
-              Value: mysql
+              Value: !If [GhostAuroraDB, !Join ['', ['{{resolve:secretsmanager:', !Ref ghostDBRootUserSecret, ':SecretString:password}}' ]], !Ref "AWS::NoValue"]
             - Name: database__pool__min
-              Value: '0'
+              Value: !If [GhostAuroraDB, '0', !Ref "AWS::NoValue"]
             - Name: database__connection__port
-              Value: '3306'
+              Value: !If [GhostAuroraDB, '3306', !Ref "AWS::NoValue"]
             - Name: database__connection__database
-              Value: !Ref ghostDB
+              Value: !If [GhostAuroraDB, !Ref ghostDB, !Ref "AWS::NoValue"]
             # string version of the Amazon Root CA 1 trust store which Ghost uses for SSL to Aurora MySQL
             # https://www.amazontrust.com/repository/AmazonRootCA1.pem
             # https://ghost.org/docs/concepts/config/
             - Name: database__connection__ssl__ca
-              Value: "-----BEGIN CERTIFICATE-----\nMIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF\nADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\nb24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\nb3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj\nca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\nIFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\nVOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\njgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC\nAYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA\nA4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI\nU5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs\nN+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv\no/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU\n5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy\nrqXRfboQnoZsG4q5WTP468SQvvG5\n-----END CERTIFICATE-----\n"
+              Value: !If [GhostAuroraDB, "-----BEGIN CERTIFICATE-----\nMIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF\nADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6\nb24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL\nMAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv\nb3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj\nca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM\n9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw\nIFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6\nVOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L\n93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm\njgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC\nAYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA\nA4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI\nU5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs\nN+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv\no/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU\n5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy\nrqXRfboQnoZsG4q5WTP468SQvvG5\n-----END CERTIFICATE-----\n", !Ref "AWS::NoValue"]
       Cpu: 256
       ExecutionRoleArn: !GetAtt ghostAPIExecutionRole.Arn
       Memory: 512
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
-      TaskRoleArn: !GetAtt ghostAPITaskRole.Arn
+      TaskRoleArn: !If [GhostAuroraDB, !GetAtt ghostAPITaskRole.Arn, !Ref "AWS::NoValue"]
       Volumes: 
         - Name: ghostVolume
           EFSVolumeConfiguration:
@@ -179,6 +178,7 @@ Resources:
                 Resource: '*'
   ghostAPITaskRole:
     Type: AWS::IAM::Role
+    Condition: GhostAuroraDB
     Properties:
       RoleName: !Sub ${AWS::StackName}-ghostAPI-task
       AssumeRolePolicyDocument:
@@ -210,7 +210,7 @@ Resources:
                   - rds-data:ExecuteStatement
                   - rds-data:RollbackTransaction
                 Resource:
-                  - !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
+                  - !Sub "arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}"
         - PolicyName: AccessSecrets
           PolicyDocument:
             Version: 2012-10-17
@@ -218,13 +218,14 @@ Resources:
               - Effect: Allow
                 Action:
                   - secretsManager:GetSecretValue
-                Resource: !Sub arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:/${EnvironmentTagName}/*
+                Resource: !Sub "arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:/${EnvironmentTagName}/*"
   ghostAPILogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
       LogGroupName: !Sub /stackery/task/${AWS::StackName}-ghostAPI/logs
   ghostDB:
     Type: AWS::RDS::DBCluster
+    Condition: GhostAuroraDB
     Properties:
       BackupRetentionPeriod: 1
       DBSubnetGroupName: !Ref ghostDBSubnetGroup
@@ -242,12 +243,14 @@ Resources:
         - !Ref ghostDBSecurityGroup
   ghostDBRootUserSecretAttachment:
     Type: AWS::SecretsManager::SecretTargetAttachment
+    Condition: GhostAuroraDB
     Properties:
       SecretId: !Ref ghostDBRootUserSecret
       TargetId: !Ref ghostDB
       TargetType: AWS::RDS::DBCluster
   ghostDBSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
+    Condition: GhostAuroraDB
     Properties:
       DBSubnetGroupDescription: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
@@ -260,6 +263,7 @@ Resources:
             - ResourceName: ghostDB
   ghostDBRootUserSecret:
     Type: AWS::SecretsManager::Secret
+    Condition: GhostAuroraDB
     Properties:
       Description: !Sub
         - Root user login info for Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName}
@@ -272,6 +276,7 @@ Resources:
       Name: !Sub /${EnvironmentTagName}/${StackTagName}/ghostDB/RootUser
   ghostDBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
+    Condition: GhostAuroraDB
     Properties:
       GroupDescription: Database Security Group
       SecurityGroupIngress:
@@ -350,6 +355,8 @@ Parameters:
   SourceVersion:
     Type: String
     Description: Source version for deployment (injected by Stackery at deployment time)
+Conditions:
+  GhostAuroraDB: !Equals [!Ref EnvironmentTagName, 'prod']
 Outputs:
   GhostBlog:
     Description: "Ghost Load Balancer DNS Address"
