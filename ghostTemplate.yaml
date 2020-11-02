@@ -5,7 +5,7 @@ Resources:
     Type: AWS::EFS::FileSystem
     Properties:
       PerformanceMode: generalPurpose
-      Encrypted: false
+      Encrypted: true
       LifecyclePolicies:
         - TransitionToIA: 'AFTER_14_DAYS'
   ghostMount0:
@@ -75,13 +75,14 @@ Resources:
       NetworkMode: awsvpc
       RequiresCompatibilities:
         - FARGATE
-      TaskRoleArn: !If [GhostAuroraDB, !GetAtt ghostAPITaskRole.Arn, !Ref "AWS::NoValue"]
+      TaskRoleArn: !If [GhostAuroraDB, !GetAtt ghostAPITaskRoleAurora.Arn, !GetAtt ghostAPITaskRoleEFS.Arn]
       Volumes: 
         - Name: ghostVolume
           EFSVolumeConfiguration:
             FilesystemId: !GetAtt ghostFS.FileSystemId
             AuthorizationConfig:
-              IAM: "DISABLED"
+              IAM: "ENABLED"
+            TransitEncryption: 'ENABLED'
     DependsOn: ghostAPILogGroup
   Service:
     Type: AWS::ECS::Service
@@ -181,7 +182,18 @@ Resources:
                   - elasticfilesystem:ClientWrite
                   - elasticfilesystem:ClientRootAccess
                 Resource: '*'
-  ghostAPITaskRole:
+  ghostAPITaskRoleEFS:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-ghostAPI-task
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: ecs-tasks.amazonaws.com
+          Action: sts:AssumeRole
+  ghostAPITaskRoleAurora:
     Type: AWS::IAM::Role
     Condition: GhostAuroraDB
     Properties:
