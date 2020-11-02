@@ -130,6 +130,11 @@ Resources:
       Name: !Sub ghostAPILBTG-${EnvironmentTagName}
       Port: 80
       Protocol: HTTP
+      HealthCheckProtocol: HTTP
+      HealthCheckPath: '/ghost/api/v3/admin/site'
+      HealthCheckIntervalSeconds: 15
+      Matcher:
+        HttpCode: '200,301'
       VpcId: !Ref DefaultVPCId               
   ghostAPIExecutionRole:
     Type: AWS::IAM::Role
