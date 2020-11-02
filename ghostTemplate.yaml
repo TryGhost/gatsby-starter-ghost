@@ -99,7 +99,6 @@ Resources:
           Subnets: !Ref DefaultVPCSubnets
           SecurityGroups:
             - !GetAtt ghostAPISecurityGroup.GroupId
-            - !GetAtt ghostEFSSecurityGroup.GroupId
       LoadBalancers:
         - TargetGroupArn: !Ref TargetGroup
           ContainerPort: 2368
@@ -157,9 +156,6 @@ Resources:
                   - ecr:BatchCheckLayerAvailability
                   - ecr:GetDownloadUrlForLayer
                   - ecr:BatchGetImage
-                  - elasticfilesystem:ClientMount
-                  - elasticfilesystem:ClientWrite
-                  - elasticfilesystem:ClientRootAccess
                 Resource: '*'
         - PolicyName: MountEFS
           PolicyDocument:
@@ -275,10 +271,9 @@ Resources:
     Properties:
       GroupDescription: Database Security Group
       SecurityGroupIngress:
-        # CidrIp: 0.0.0.0/0
         SourceSecurityGroupId: !Ref ghostAPISecurityGroup        
-        FromPort: 3306
         IpProtocol: tcp
+        FromPort: 3306
         ToPort: 3306
       Tags:
         - Key: Name
@@ -306,8 +301,8 @@ Resources:
     Properties:
       GroupDescription: EFS Security Group
       SecurityGroupIngress:
+        SourceSecurityGroupId: !Ref ghostAPISecurityGroup 
         IpProtocol: tcp
-        CidrIp: 0.0.0.0/0
         FromPort: 2049
         ToPort: 2049
       Tags:
