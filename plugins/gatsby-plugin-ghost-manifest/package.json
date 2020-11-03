@@ -4,7 +4,7 @@
     "version": "0.0.1",
     "author": "Ghost Foundation",
     "dependencies": {
-        "@babel/runtime": "7.12.1",
+        "@babel/runtime": "7.12.5",
         "bluebird": "3.7.2",
         "sharp": "0.26.2"
     },
