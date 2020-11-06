@@ -1619,10 +1619,10 @@
   dependencies:
     axios "0.20.0"
 
-"@tryghost/helpers-gatsby@1.0.38":
-  version "1.0.38"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-1.0.38.tgz#243d3f9a4ac989887ea30e01c770b2a5bb4353fa"
-  integrity sha512-zx7DkohyFxCCU1dcB3Gv7RI6Om/Gs4+wF8Hax03LnvOV5xbKMbx+WjjP+kEGl64o11TXF3qNpkFuUGvkbD+ySQ==
+"@tryghost/helpers-gatsby@1.0.39":
+  version "1.0.39"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-1.0.39.tgz#2db380b9595611e9172647bb4f3dc56b7921bf85"
+  integrity sha512-ZCsmDtMTt9WzaUN39r8avRjVhfKd7BMmu7o2zkB9n3Sa3GDHtJ41tZaFGnt0URaeiso1GCBsv1gul3DAXZqcHw==
   dependencies:
     "@reach/router" "^1.2.1"
     "@tryghost/helpers" "^1.1.34"
