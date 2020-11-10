@@ -264,14 +264,6 @@ Resources:
                   - rds-data:RollbackTransaction
                 Resource:
                   - !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
-        - PolicyName: AccessSecrets
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action:
-                  - secretsManager:GetSecretValue
-                Resource: !Sub arn:${AWS::Partition}:secretsmanager:${AWS::Region}:${AWS::AccountId}:secret:/${EnvironmentTagName}/*
   ghostAPILogGroup:
     Type: AWS::Logs::LogGroup
     Properties:
@@ -348,7 +340,7 @@ Resources:
     Properties:
       GroupDescription: API Security Group
       SecurityGroupIngress:
-        - SourceSecurityGroupId: !Ref ghostLBSecurityGroup
+        - SourceSecurityGroupId: !Ref ghostGWSecurityGroup
           IpProtocol: tcp
           FromPort: 2368
           ToPort: 2368
@@ -373,15 +365,10 @@ Resources:
             - Stack ${StackTagName} Environment ${EnvironmentTagName} EFS ${ResourceName} VPC Security Group
             - ResourceName: ghostAPI
       VpcId: !Ref DefaultVPCId
-  ghostLBSecurityGroup:
+  ghostGWSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: Load Balancer Security Group
-      SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
-          FromPort: 80
-          IpProtocol: tcp
-          ToPort: 80
+      GroupDescription: HTTP Gateway Security Group
       Tags:
         - Key: Name
           Value: !Sub
@@ -406,8 +393,8 @@ Resources:
     Properties: 
       Name: ghostVpcLink
       SecurityGroupIds:
-        - !GetAtt ghostAPISecurityGroup.GroupId
-        - !GetAtt ghostLBSecurityGroup.GroupId
+        # - !GetAtt ghostAPISecurityGroup.GroupId
+        - !GetAtt ghostGWSecurityGroup.GroupId
       SubnetIds: !Ref DefaultVPCSubnets
   ghostProxyIntegration:
     Type: 'AWS::ApiGatewayV2::Integration'
