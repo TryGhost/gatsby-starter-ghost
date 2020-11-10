@@ -146,8 +146,6 @@ Resources:
             Type: A
           - TTL: 60
             Type: SRV
-      HealthCheckCustomConfig: 
-        FailureThreshold: 1
       Name: 'ghost-cms'
       NamespaceId: !Ref CloudMapNamespace
   CloudMapNamespace:
@@ -170,7 +168,13 @@ Resources:
       NetworkConfiguration:
         AwsvpcConfiguration:
           AssignPublicIp: ENABLED
-          Subnets: !Ref DefaultVPCSubnets
+          Subnets: 
+            - !Select
+              - 0
+              - !Ref DefaultVPCSubnets
+            - !Select
+              - 1
+              - !Ref DefaultVPCSubnets
           SecurityGroups:
             - !GetAtt ghostAPISecurityGroup.GroupId
       ServiceRegistries:
@@ -380,8 +384,10 @@ Resources:
         info:
           title: !Sub ${AWS::StackName}-HttpApi
           version: '1.0'
+        # This is a bit of a hack to satisfy the SAM source with a benign route
+        # ghostProxyRoute provides the real configuration which enables the CloudMap/ECS integration
         paths:
-          /{proxy+}:
+          /ghost:
             x-amazon-apigateway-any-method:
               responses: {}
       FailOnWarnings: true
@@ -390,7 +396,6 @@ Resources:
     Properties: 
       Name: ghostVpcLink
       SecurityGroupIds:
-        # - !GetAtt ghostAPISecurityGroup.GroupId
         - !GetAtt ghostGWSecurityGroup.GroupId
       SubnetIds: !Ref DefaultVPCSubnets
   ghostProxyIntegration:
@@ -403,6 +408,15 @@ Resources:
       PayloadFormatVersion: '1.0'
       ConnectionType: 'VPC_LINK'
       ConnectionId: !Ref ghostVpcLink
+  ghostProxyRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref ghostProxy
+      RouteKey: 'Any /{proxy+}'
+      Target: !Join
+        - /
+        - - integrations
+          - !Ref ghostProxyIntegration
 Parameters:
   StackTagName:
     Type: String
