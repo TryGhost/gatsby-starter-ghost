@@ -44,11 +44,8 @@ Resources:
             - ContainerPath: /var/lib/ghost/content
               SourceVolume: ghostVolume
           Environment:
-            # - Name: url
-            #   Value: !Join
-            #     - ''
-            #     - - http://
-            #       - !GetAtt Loadbalancer.DNSName
+            # url provides admin interface site previews, but has a known issue where
+            # when pointed at the API proxy, generates a 301 redirect loop that crashes the container
             # - Name: url
             #   Value: !GetAtt ghostProxy.ApiEndpoint
             - Name: database__client
@@ -156,7 +153,7 @@ Resources:
   CloudMapNamespace:
     Type: AWS::ServiceDiscovery::PrivateDnsNamespace
     Properties: 
-      Name: 'ghost.io'
+      Name: !Sub ${AWS::StackName}-${AWS::Region}-jamstackery.io
       Vpc: !Ref DefaultVPCId  
   Service:
     Type: AWS::ECS::Service
