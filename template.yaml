@@ -413,10 +413,7 @@ Resources:
     Properties:
       ApiId: !Ref ghostProxy
       RouteKey: 'Any /{proxy+}'
-      Target: !Join
-        - /
-        - - integrations
-          - !Ref ghostProxyIntegration
+      Target: !Sub integrations/${ghostProxyIntegration}
 Parameters:
   StackTagName:
     Type: String
