@@ -2,27 +2,6 @@
 
 A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
 
-# Installing
-
-```bash
-# With Gatsby CLI
-gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost.git
-```
-
-```bash
-# From Source
-git clone https://github.com/TryGhost/gatsby-starter-ghost.git
-cd gatsby-starter-ghost
-```
-
-Then install dependencies
-
-```bash
-yarn
-```
-
-&nbsp;
-
 # Running
 
 Start the development server. You now have a Gatsby site pulling content from headless Ghost.
