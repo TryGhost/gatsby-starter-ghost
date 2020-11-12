@@ -2,15 +2,6 @@
 
 A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
 
-**Demo:** https://gatsby.ghost.org
-
-&nbsp;
-
-![gatsby-starter-ghost](https://user-images.githubusercontent.com/120485/50913567-8ab8e380-142c-11e9-9e78-de02ded12fc6.jpg)
-
-&nbsp;
-
-
 # Installing
 
 ```bash
