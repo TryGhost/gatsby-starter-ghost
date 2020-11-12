@@ -1,0 +1,433 @@
+AWSTemplateFormatVersion: 2010-09-09
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  ghostFS:
+    Type: AWS::EFS::FileSystem
+    Properties:
+      PerformanceMode: generalPurpose
+      Encrypted: true
+      LifecyclePolicies:
+        - TransitionToIA: AFTER_14_DAYS
+  ghostMount0:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !GetAtt ghostFS.FileSystemId
+      SecurityGroups:
+        - !GetAtt ghostEFSSecurityGroup.GroupId
+      SubnetId: !Select
+        - 0
+        - !Ref DefaultVPCSubnets
+  ghostMount1:
+    Type: AWS::EFS::MountTarget
+    Properties:
+      FileSystemId: !GetAtt ghostFS.FileSystemId
+      SecurityGroups:
+        - !GetAtt ghostEFSSecurityGroup.GroupId
+      SubnetId: !Select
+        - 1
+        - !Ref DefaultVPCSubnets
+  ghostAPI:
+    Type: AWS::ECS::TaskDefinition
+    Properties:
+      ContainerDefinitions:
+        - Name: ghost
+          Image: registry.hub.docker.com/library/ghost
+          PortMappings:
+            - ContainerPort: 2368
+          LogConfiguration:
+            LogDriver: awslogs
+            Options:
+              awslogs-group: !Ref ghostAPILogGroup
+              awslogs-region: !Ref AWS::Region
+              awslogs-stream-prefix: logs
+          MountPoints:
+            - ContainerPath: /var/lib/ghost/content
+              SourceVolume: ghostVolume
+          Environment:
+            # url provides admin interface site previews, but has a known issue where
+            # when pointed at the API proxy, generates a 301 redirect loop that crashes the container
+            # - Name: url
+            #   Value: !GetAtt ghostProxy.ApiEndpoint
+            - Name: database__client
+              Value: !If
+                - GhostAuroraDB
+                - mysql
+                - sqlite3
+            - Name: database__connection__filename
+              Value: !If
+                - GhostAuroraDB
+                - !Ref AWS::NoValue
+                - /var/lib/ghost/content/data/ghost-efs.db
+            - Name: paths__contentPath
+              Value: /var/lib/ghost/content
+            - Name: database__connection__host
+              Value: !If
+                - GhostAuroraDB
+                - !GetAtt ghostDB.Endpoint.Address
+                - !Ref AWS::NoValue
+            - Name: database__connection__user
+              Value: !If
+                - GhostAuroraDB
+                - root
+                - !Ref AWS::NoValue
+            - Name: database__connection__password
+              Value: !If
+                - GhostAuroraDB
+                - !Join
+                  - ''
+                  - - '{{resolve:secretsmanager:'
+                    - !Ref ghostDBRootUserSecret
+                    - ':SecretString:password}}'
+                - !Ref AWS::NoValue
+            - Name: database__pool__min
+              Value: !If
+                - GhostAuroraDB
+                - '0'
+                - !Ref AWS::NoValue
+            - Name: database__connection__port
+              Value: !If
+                - GhostAuroraDB
+                - '3306'
+                - !Ref AWS::NoValue
+            - Name: database__connection__database
+              Value: !If
+                - GhostAuroraDB
+                - !Ref ghostDB
+                - !Ref AWS::NoValue
+            - Name: database__connection__ssl__ca
+              Value: !If
+                - GhostAuroraDB
+                - |
+                  -----BEGIN CERTIFICATE-----
+                  MIIDQTCCAimgAwIBAgITBmyfz5m/jAo54vB4ikPmljZbyjANBgkqhkiG9w0BAQsF
+                  ADA5MQswCQYDVQQGEwJVUzEPMA0GA1UEChMGQW1hem9uMRkwFwYDVQQDExBBbWF6
+                  b24gUm9vdCBDQSAxMB4XDTE1MDUyNjAwMDAwMFoXDTM4MDExNzAwMDAwMFowOTEL
+                  MAkGA1UEBhMCVVMxDzANBgNVBAoTBkFtYXpvbjEZMBcGA1UEAxMQQW1hem9uIFJv
+                  b3QgQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALJ4gHHKeNXj
+                  ca9HgFB0fW7Y14h29Jlo91ghYPl0hAEvrAIthtOgQ3pOsqTQNroBvo3bSMgHFzZM
+                  9O6II8c+6zf1tRn4SWiw3te5djgdYZ6k/oI2peVKVuRF4fn9tBb6dNqcmzU5L/qw
+                  IFAGbHrQgLKm+a/sRxmPUDgH3KKHOVj4utWp+UhnMJbulHheb4mjUcAwhmahRWa6
+                  VOujw5H5SNz/0egwLX0tdHA114gk957EWW67c4cX8jJGKLhD+rcdqsq08p8kDi1L
+                  93FcXmn/6pUCyziKrlA4b9v7LWIbxcceVOF34GfID5yHI9Y/QCB/IIDEgEw+OyQm
+                  jgSubJrIqg0CAwEAAaNCMEAwDwYDVR0TAQH/BAUwAwEB/zAOBgNVHQ8BAf8EBAMC
+                  AYYwHQYDVR0OBBYEFIQYzIU07LwMlJQuCFmcx7IQTgoIMA0GCSqGSIb3DQEBCwUA
+                  A4IBAQCY8jdaQZChGsV2USggNiMOruYou6r4lK5IpDB/G/wkjUu0yKGX9rbxenDI
+                  U5PMCCjjmCXPI6T53iHTfIUJrU6adTrCC2qJeHZERxhlbI1Bjjt/msv0tadQ1wUs
+                  N+gDS63pYaACbvXy8MWy7Vu33PqUXHeeE6V/Uq2V8viTO96LXFvKWlJbYK8U90vv
+                  o/ufQJVtMVT8QtPHRh8jrdkPSHCa2XV4cdFyQzR1bldZwgJcJmApzyMZFo6IQ6XU
+                  5MsI+yMRQ+hDKXJioaldXgjUkK642M4UwtBV8ob2xJNDd2ZhwLnoQdeXeGADbkpy
+                  rqXRfboQnoZsG4q5WTP468SQvvG5
+                  -----END CERTIFICATE-----
+                - !Ref AWS::NoValue
+      Cpu: '256'
+      ExecutionRoleArn: !GetAtt ghostAPIExecutionRole.Arn
+      Memory: '512'
+      NetworkMode: awsvpc
+      RequiresCompatibilities:
+        - FARGATE
+      TaskRoleArn: !If
+        - GhostAuroraDB
+        - !GetAtt ghostAPITaskRoleAurora.Arn
+        - !GetAtt ghostAPITaskRoleEFS.Arn
+      Volumes:
+        - Name: ghostVolume
+          EFSVolumeConfiguration:
+            FilesystemId: !GetAtt ghostFS.FileSystemId
+            AuthorizationConfig:
+              IAM: ENABLED
+            TransitEncryption: ENABLED
+  CloudMap:
+    Type: AWS::ServiceDiscovery::Service
+    Properties:
+      DnsConfig:
+        RoutingPolicy: MULTIVALUE
+        DnsRecords:
+          - TTL: 60
+            Type: A
+          - TTL: 60
+            Type: SRV
+      Name: 'ghost-cms'
+      NamespaceId: !Ref CloudMapNamespace
+  CloudMapNamespace:
+    Type: AWS::ServiceDiscovery::PrivateDnsNamespace
+    Properties: 
+      Name: !Sub ${AWS::StackName}-${AWS::Region}-jamstackery.io
+      Vpc: !Ref DefaultVPCId  
+  Service:
+    Type: AWS::ECS::Service
+    Properties:
+      ServiceName: !Sub ghostAPIservice-${EnvironmentTagName}
+      PlatformVersion: 1.4.0
+      Cluster: default
+      TaskDefinition: !Ref ghostAPI
+      DesiredCount: 2
+      DeploymentConfiguration:
+        MaximumPercent: 200
+        MinimumHealthyPercent: 100
+      LaunchType: FARGATE
+      NetworkConfiguration:
+        AwsvpcConfiguration:
+          AssignPublicIp: ENABLED
+          Subnets: 
+            - !Select
+              - 0
+              - !Ref DefaultVPCSubnets
+            - !Select
+              - 1
+              - !Ref DefaultVPCSubnets
+          SecurityGroups:
+            - !GetAtt ghostAPISecurityGroup.GroupId
+      ServiceRegistries:
+        - ContainerName: ghost
+          ContainerPort: 2368
+          RegistryArn: !GetAtt CloudMap.Arn 
+  ghostAPIExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-ghostAPI-execution
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: ecs-tasks.amazonaws.com
+          Action: sts:AssumeRole
+      Policies:
+        - PolicyName: DownloadDockerImagesFromECR
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                Resource: !Sub arn:aws:logs:*:*:log-group:/stackery/task/${AWS::StackName}-*
+              - Effect: Allow
+                Action:
+                  - ecr:GetAuthorizationToken
+                  - ecr:BatchCheckLayerAvailability
+                  - ecr:GetDownloadUrlForLayer
+                  - ecr:BatchGetImage
+                Resource: '*'
+        - PolicyName: MountEFS
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - elasticfilesystem:ClientMount
+                  - elasticfilesystem:ClientWrite
+                  - elasticfilesystem:ClientRootAccess
+                Resource: '*'
+  ghostAPITaskRoleEFS:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-ghostAPI-task
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: ecs-tasks.amazonaws.com
+          Action: sts:AssumeRole
+  ghostAPITaskRoleAurora:
+    Type: AWS::IAM::Role
+    Condition: GhostAuroraDB
+    Properties:
+      RoleName: !Sub ${AWS::StackName}-ghostAPI-task
+      AssumeRolePolicyDocument:
+        Version: 2012-10-17
+        Statement:
+          Effect: Allow
+          Principal:
+            Service: ecs-tasks.amazonaws.com
+          Action: sts:AssumeRole
+      Policies:
+        - PolicyName: SecretPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - secretsmanager:GetSecretValue
+                Resource:
+                  - !Ref ghostDBRootUserSecret
+        - PolicyName: StackeryPolicy
+          PolicyDocument:
+            Version: 2012-10-17
+            Statement:
+              - Effect: Allow
+                Action:
+                  - rds-data:BatchExecuteStatement
+                  - rds-data:BeginTransaction
+                  - rds-data:CommitTransaction
+                  - rds-data:ExecuteStatement
+                  - rds-data:RollbackTransaction
+                Resource:
+                  - !Sub arn:aws:rds:${AWS::Region}:${AWS::AccountId}:cluster:${ghostDB}
+  ghostAPILogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Sub /stackery/task/${AWS::StackName}-ghostAPI/logs
+  ghostDB:
+    Type: AWS::RDS::DBCluster
+    Condition: GhostAuroraDB
+    Properties:
+      BackupRetentionPeriod: 1
+      DBSubnetGroupName: !Ref ghostDBSubnetGroup
+      Engine: aurora
+      EngineMode: serverless
+      MasterUsername: !Sub '{{resolve:secretsmanager:${ghostDBRootUserSecret}:SecretString:username}}'
+      MasterUserPassword: !Sub '{{resolve:secretsmanager:${ghostDBRootUserSecret}:SecretString:password}}'
+      EnableHttpEndpoint: true
+      ScalingConfiguration:
+        AutoPause: true
+        MinCapacity: 1
+        MaxCapacity: 2
+      StorageEncrypted: true
+      VpcSecurityGroupIds:
+        - !Ref ghostDBSecurityGroup
+  ghostDBRootUserSecretAttachment:
+    Type: AWS::SecretsManager::SecretTargetAttachment
+    Condition: GhostAuroraDB
+    Properties:
+      SecretId: !Ref ghostDBRootUserSecret
+      TargetId: !Ref ghostDB
+      TargetType: AWS::RDS::DBCluster
+  ghostDBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Condition: GhostAuroraDB
+    Properties:
+      DBSubnetGroupDescription: !Sub
+        - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
+        - ResourceName: ghostDB
+      SubnetIds: !Ref DefaultVPCSubnets
+      Tags:
+        - Key: Name
+          Value: !Sub
+            - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Subnets
+            - ResourceName: ghostDB
+  ghostDBRootUserSecret:
+    Type: AWS::SecretsManager::Secret
+    Condition: GhostAuroraDB
+    Properties:
+      Description: !Sub
+        - Root user login info for Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName}
+        - ResourceName: ghostDB
+      GenerateSecretString:
+        SecretStringTemplate: '{"username": "root"}'
+        GenerateStringKey: password
+        PasswordLength: 16
+        ExcludeCharacters: '"@/\'
+      Name: !Sub /${EnvironmentTagName}/${StackTagName}/ghostDB/RootUser
+  ghostDBSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Condition: GhostAuroraDB
+    Properties:
+      GroupDescription: Database Security Group
+      SecurityGroupIngress:
+        - SourceSecurityGroupId: !Ref ghostAPISecurityGroup
+          IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+      Tags:
+        - Key: Name
+          Value: !Sub
+            - Stack ${StackTagName} Environment ${EnvironmentTagName} Database ${ResourceName} VPC Security Group
+            - ResourceName: ghostDB
+      VpcId: !Ref DefaultVPCId
+  ghostAPISecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: API Security Group
+      SecurityGroupIngress:
+        - SourceSecurityGroupId: !Ref ghostGWSecurityGroup
+          IpProtocol: tcp
+          FromPort: 2368
+          ToPort: 2368
+      Tags:
+        - Key: Name
+          Value: !Sub
+            - Stack ${StackTagName} Environment ${EnvironmentTagName} API ${ResourceName} VPC Security Group
+            - ResourceName: ghostAPI
+      VpcId: !Ref DefaultVPCId
+  ghostEFSSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: EFS Security Group
+      SecurityGroupIngress:
+        - SourceSecurityGroupId: !Ref ghostAPISecurityGroup
+          IpProtocol: tcp
+          FromPort: 2049
+          ToPort: 2049
+      Tags:
+        - Key: Name
+          Value: !Sub
+            - Stack ${StackTagName} Environment ${EnvironmentTagName} EFS ${ResourceName} VPC Security Group
+            - ResourceName: ghostAPI
+      VpcId: !Ref DefaultVPCId
+  ghostGWSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: HTTP Gateway Security Group
+      Tags:
+        - Key: Name
+          Value: !Sub
+            - Stack ${StackTagName} Environment ${EnvironmentTagName} API ${ResourceName} VPC Security Group
+            - ResourceName: ghostLB
+      VpcId: !Ref DefaultVPCId
+  ghostProxy:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      DefinitionBody:
+        openapi: '3.0'
+        info:
+          title: !Sub ${AWS::StackName}-HttpApi
+          version: '1.0'
+        # This is a bit of a hack to satisfy the SAM source with a benign route
+        # ghostProxyRoute provides the real configuration which enables the CloudMap/ECS integration
+        paths:
+          /ghost:
+            x-amazon-apigateway-any-method:
+              responses: {}
+      FailOnWarnings: true
+  ghostVpcLink:
+    Type: AWS::ApiGatewayV2::VpcLink
+    Properties: 
+      Name: ghostVpcLink
+      SecurityGroupIds:
+        - !GetAtt ghostGWSecurityGroup.GroupId
+      SubnetIds: !Ref DefaultVPCSubnets
+  ghostProxyIntegration:
+    Type: 'AWS::ApiGatewayV2::Integration'
+    Properties:
+      ApiId: !Ref ghostProxy
+      IntegrationType: HTTP_PROXY
+      IntegrationUri: !GetAtt CloudMap.Arn
+      IntegrationMethod: 'Any'
+      PayloadFormatVersion: '1.0'
+      ConnectionType: 'VPC_LINK'
+      ConnectionId: !Ref ghostVpcLink
+  ghostProxyRoute:
+    Type: AWS::ApiGatewayV2::Route
+    Properties:
+      ApiId: !Ref ghostProxy
+      RouteKey: 'Any /{proxy+}'
+      Target: !Sub integrations/${ghostProxyIntegration}
+Parameters:
+  StackTagName:
+    Type: String
+    Description: Stack Name (injected by Stackery at deployment time)
+  EnvironmentTagName:
+    Type: String
+    Description: Environment Name (injected by Stackery at deployment time)
+  DefaultVPCId:
+    Type: AWS::EC2::VPC::Id
+    Description: AWS account-specific default VPC ID (injected by Stackery at deployment time)
+  DefaultVPCSubnets:
+    Type: List<AWS::EC2::Subnet::Id>
+    Description: AWS account-specific default VPC subnets (injected by Stackery at deployment time)
+Conditions:
+  GhostAuroraDB: !Equals
+    - !Ref EnvironmentTagName
+    - prod
