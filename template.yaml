@@ -222,7 +222,7 @@ Resources:
   ghostAPITaskRoleEFS:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: !Sub ${AWS::StackName}-ghostAPI-task
+      RoleName: !Sub ${AWS::StackName}-ghostAPI-task-EFS
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -234,7 +234,7 @@ Resources:
     Type: AWS::IAM::Role
     Condition: GhostAuroraDB
     Properties:
-      RoleName: !Sub ${AWS::StackName}-ghostAPI-task
+      RoleName: !Sub ${AWS::StackName}-ghostAPI-task-Aurora
       AssumeRolePolicyDocument:
         Version: 2012-10-17
         Statement:
@@ -384,12 +384,24 @@ Resources:
         info:
           title: !Sub ${AWS::StackName}-HttpApi
           version: '1.0'
-        # This is a bit of a hack to satisfy the SAM source with a benign route
-        # ghostProxyRoute provides the real configuration which enables the CloudMap/ECS integration
         paths:
           /ghost:
             x-amazon-apigateway-any-method:
-              responses: {}
+              responses:
+                default:
+                  description: "Admin interface for Ghost CMS at /ghost"
+          /{proxy+}:
+            x-amazon-apigateway-any-method:
+              responses:
+                default:
+                  description: "Default response for ANY /{proxy+}"
+              x-amazon-apigateway-integration:
+                payloadFormatVersion: "1.0"
+                connectionId: !Ref ghostVpcLink
+                type: "http_proxy"
+                httpMethod: "ANY"
+                uri: !GetAtt CloudMap.Arn
+                connectionType: "VPC_LINK"
       FailOnWarnings: true
   ghostVpcLink:
     Type: AWS::ApiGatewayV2::VpcLink
@@ -398,22 +410,6 @@ Resources:
       SecurityGroupIds:
         - !GetAtt ghostGWSecurityGroup.GroupId
       SubnetIds: !Ref DefaultVPCSubnets
-  ghostProxyIntegration:
-    Type: 'AWS::ApiGatewayV2::Integration'
-    Properties:
-      ApiId: !Ref ghostProxy
-      IntegrationType: HTTP_PROXY
-      IntegrationUri: !GetAtt CloudMap.Arn
-      IntegrationMethod: 'Any'
-      PayloadFormatVersion: '1.0'
-      ConnectionType: 'VPC_LINK'
-      ConnectionId: !Ref ghostVpcLink
-  ghostProxyRoute:
-    Type: AWS::ApiGatewayV2::Route
-    Properties:
-      ApiId: !Ref ghostProxy
-      RouteKey: 'Any /{proxy+}'
-      Target: !Sub integrations/${ghostProxyIntegration}
 Parameters:
   StackTagName:
     Type: String
