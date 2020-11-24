@@ -44,10 +44,8 @@ Resources:
             - ContainerPath: /var/lib/ghost/content
               SourceVolume: ghostVolume
           Environment:
-            # url provides admin interface site previews, but has a known issue where
-            # when pointed at the API proxy, generates a 301 redirect loop that crashes the container
-            # - Name: url
-            #   Value: !GetAtt ghostProxy.ApiEndpoint
+            - Name: url
+              Value: !Join [ '', [ 'http://', !GetAtt Loadbalancer.DNSName ] ]
             - Name: database__client
               Value: !If
                 - GhostAuroraDB
@@ -156,7 +154,6 @@ Resources:
   Service:
     Type: AWS::ECS::Service
     Properties:
-      ServiceName: !Sub ghostAPIservice-${EnvironmentTagName}
       PlatformVersion: 1.4.0
       Cluster: default
       TaskDefinition: !Ref ghostAPI
@@ -177,10 +174,36 @@ Resources:
               - !Ref DefaultVPCSubnets
           SecurityGroups:
             - !GetAtt ghostAPISecurityGroup.GroupId
-      ServiceRegistries:
-        - ContainerName: ghost
+      LoadBalancers:
+        - TargetGroupArn: !Ref TargetGroup
           ContainerPort: 2368
-          RegistryArn: !GetAtt CloudMap.Arn 
+          ContainerName: ghost
+  Loadbalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties: 
+      IpAddressType: ipv4
+      Name: ghostAPILB
+      SecurityGroups: 
+        - !GetAtt ghostLBSecurityGroup.GroupId
+      Subnets: !Ref DefaultVPCSubnets
+      Type: application
+  LoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      LoadBalancerArn: !Ref Loadbalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+  TargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      TargetType: ip
+      Name: ghostAPILBTG
+      Port: 80
+      Protocol: HTTP
+      VpcId: !Ref DefaultVPCId
   ghostAPIExecutionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -341,7 +364,7 @@ Resources:
     Properties:
       GroupDescription: API Security Group
       SecurityGroupIngress:
-        - SourceSecurityGroupId: !Ref ghostGWSecurityGroup
+        - SourceSecurityGroupId: !Ref ghostLBSecurityGroup
           IpProtocol: tcp
           FromPort: 2368
           ToPort: 2368
@@ -366,50 +389,21 @@ Resources:
             - Stack ${StackTagName} Environment ${EnvironmentTagName} EFS ${ResourceName} VPC Security Group
             - ResourceName: ghostAPI
       VpcId: !Ref DefaultVPCId
-  ghostGWSecurityGroup:
+  ghostLBSecurityGroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: HTTP Gateway Security Group
+      GroupDescription: Load Balancer Security Group
+      SecurityGroupIngress:
+        CidrIp: 0.0.0.0/0
+        FromPort: 80
+        IpProtocol: tcp
+        ToPort: 80
       Tags:
         - Key: Name
           Value: !Sub
             - Stack ${StackTagName} Environment ${EnvironmentTagName} API ${ResourceName} VPC Security Group
             - ResourceName: ghostLB
-      VpcId: !Ref DefaultVPCId
-  ghostProxy:
-    Type: AWS::Serverless::HttpApi
-    Properties:
-      DefinitionBody:
-        openapi: '3.0'
-        info:
-          title: !Sub ${AWS::StackName}-HttpApi
-          version: '1.0'
-        paths:
-          /ghost:
-            x-amazon-apigateway-any-method:
-              responses:
-                default:
-                  description: "Admin interface for Ghost CMS at /ghost"
-          /{proxy+}:
-            x-amazon-apigateway-any-method:
-              responses:
-                default:
-                  description: "Default response for ANY /{proxy+}"
-              x-amazon-apigateway-integration:
-                payloadFormatVersion: "1.0"
-                connectionId: !Ref ghostVpcLink
-                type: "http_proxy"
-                httpMethod: "ANY"
-                uri: !GetAtt CloudMap.Arn
-                connectionType: "VPC_LINK"
-      FailOnWarnings: true
-  ghostVpcLink:
-    Type: AWS::ApiGatewayV2::VpcLink
-    Properties: 
-      Name: ghostVpcLink
-      SecurityGroupIds:
-        - !GetAtt ghostGWSecurityGroup.GroupId
-      SubnetIds: !Ref DefaultVPCSubnets
+      VpcId: !Ref DefaultVPCId  
 Parameters:
   StackTagName:
     Type: String
