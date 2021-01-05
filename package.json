@@ -10,7 +10,7 @@
     "url": "git+https://github.com/tryghost/gatsby-starter-ghost.git"
   },
   "resolutions": {
-    "sharp": "0.26.0"
+    "sharp": "0.27.0"
   },
   "engines": {
     "node": ">= 10.13.0"
