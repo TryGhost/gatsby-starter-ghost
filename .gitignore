@@ -58,6 +58,8 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.development
+.env.production
 
 # IDE
 .idea/*
@@ -73,3 +75,6 @@ typings/
 public
 yarn-error.log
 .netlify/
+
+# Local Netlify folder
+.netlify
