@@ -11823,10 +11823,10 @@ shallowequal@^1.1.0:
   resolved "https://registry.yarnpkg.com/shallowequal/-/shallowequal-1.1.0.tgz#188d521de95b9087404fd4dcb68b13df0ae4e7f8"
   integrity sha512-y0m1JoUZSlPAjXVtPPW70aZWfIL/dSP7AFkRnniLCrK/8MDKog3TySTBmckD+RObVxH0v4Tox67+F14PdED2oQ==
 
-sharp@0.27.0, sharp@^0.27.0:
-  version "0.27.0"
-  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.27.0.tgz#523fba913ba674985dcc688a6a5237384079d80f"
-  integrity sha512-II+YBCW3JuVWQZdpTEA2IBjJcYXPuoKo3AUqYuW+FK9Um93v2gPE2ihICCsN5nHTUoP8WCjqA83c096e8n//Rw==
+sharp@0.27.1, sharp@^0.27.0:
+  version "0.27.1"
+  resolved "https://registry.yarnpkg.com/sharp/-/sharp-0.27.1.tgz#cd04926406a697b58dfc5fb62e3c7a3a2d68389a"
+  integrity sha512-IQNXWdspb4nZcJemXa6cfgz+JvKONsuqP8Mwi1Oti23Uo7+J+UF2jihJDf6I1BQbrmhcZ0lagH/1WYG+ReAzyQ==
   dependencies:
     array-flatten "^3.0.0"
     color "^3.1.3"
