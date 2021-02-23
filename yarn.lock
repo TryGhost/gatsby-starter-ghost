@@ -6306,10 +6306,10 @@ gatsby-plugin-manifest@2.12.0:
     semver "^7.3.2"
     sharp "^0.27.0"
 
-gatsby-plugin-offline@3.10.0:
-  version "3.10.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.10.0.tgz#b860ff5d630122b1603d7477f7962161622e0bc4"
-  integrity sha512-+Rsyw/N5MhpkuMc7G5BlD27KnhcuzBOrBw/bjSjE+VsnrKP4byQjGVB2bwH326Sdt3Ci15lMY1sQAi0IMEo9/w==
+gatsby-plugin-offline@3.10.1:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.10.1.tgz#fac57c17017358ea72b31d3ad116dbc8208eeeee"
+  integrity sha512-Bqtru0P1x/1dtHyiwwds9RLFWAZPmM04L18k2LHfugGKuYIWbyXjT511oWzqEGPpgHzOuBTXCyTIapVXC8ZkYg==
   dependencies:
     "@babel/runtime" "^7.12.5"
     cheerio "^1.0.0-rc.3"
@@ -6520,10 +6520,10 @@ gatsby-transformer-sharp@2.12.0:
     semver "^7.3.4"
     sharp "^0.27.0"
 
-gatsby@2.32.3:
-  version "2.32.3"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.3.tgz#af4c12e676c9e0cdbc69c29508af2384da462c11"
-  integrity sha512-6l1ktlIbj6dRDnAPi+dh/tAEx7FdEYm55RwM3aiFEpwNIHeevG+Jw1RZhIpwUmhkGBwaOjr559KJYf7dYuXk3w==
+gatsby@2.32.4:
+  version "2.32.4"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.4.tgz#2bfb7cc587c1ec7fda70e57ca2893ce5bbc6a4e9"
+  integrity sha512-Jpqp8pwQJab6fpGdB3OmJk3UXqPvmYHH6YugF9CYfsTyJXy3yoOSxJ6hMzZeZxEnxeJ5RnJlGRyMEZJtpmy3ZQ==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/core" "^7.12.3"
@@ -6662,7 +6662,6 @@ gatsby@2.32.3:
     string-similarity "^1.2.2"
     strip-ansi "^5.2.0"
     style-loader "^0.23.1"
-    terminal-link "^2.1.1"
     terser-webpack-plugin "^2.3.8"
     tmp "^0.2.1"
     "true-case-path" "^2.2.1"
@@ -12746,14 +12745,6 @@ supports-color@^7.0.0, supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-supports-hyperlinks@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/supports-hyperlinks/-/supports-hyperlinks-2.1.0.tgz#f663df252af5f37c5d49bbd7eeefa9e0b9e59e47"
-  integrity sha512-zoE5/e+dnEijk6ASB6/qrK+oYdm2do1hjoLWrqUC/8WEIW1gbxFcKuBof7sW8ArN6e+AYvsE8HBGiVRWL/F5CA==
-  dependencies:
-    has-flag "^4.0.0"
-    supports-color "^7.0.0"
-
 svgo@1.3.2, svgo@^1.0.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/svgo/-/svgo-1.3.2.tgz#b6dc511c063346c9e415b81e43401145b96d4167"
@@ -12862,14 +12853,6 @@ term-size@^2.1.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/term-size/-/term-size-2.2.1.tgz#2a6a54840432c2fb6320fea0f415531e90189f54"
   integrity sha512-wK0Ri4fOGjv/XPy8SBHZChl8CM7uMc5VML7SqiQ0zG7+J5Vr+RMQDoHa2CNT6KHUnTGIXH34UDMkPzAUyapBZg==
-
-terminal-link@^2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/terminal-link/-/terminal-link-2.1.1.tgz#14a64a27ab3c0df933ea546fba55f2d078edc994"
-  integrity sha512-un0FmiRUQNr5PJqy9kP7c40F5BOfpGlYTrxonDChEZB7pzZxRNp/bt+ymiy9/npwXya9KH99nJ/GXFIiUkYGFQ==
-  dependencies:
-    ansi-escapes "^4.2.1"
-    supports-hyperlinks "^2.0.0"
 
 terser-webpack-plugin@^1.4.3:
   version "1.4.5"
