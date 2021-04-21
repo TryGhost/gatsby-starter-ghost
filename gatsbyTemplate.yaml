@@ -259,7 +259,7 @@ Resources:
       Description: !Sub
         - Stack ${StackTagName} Environment ${EnvironmentTagName} Function ${ResourceName}
         - ResourceName: triggerGatsbyBuild
-      CodeUri: src/Function
+      CodeUri: src/triggerGatsbyBuild
       Handler: index.handler
       Runtime: nodejs14.x
       MemorySize: 3008
