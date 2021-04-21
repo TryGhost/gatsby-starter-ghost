@@ -1,0 +1,2 @@
+function-id: triggerGatsbyBuild
+template-path: ../../template.yaml
