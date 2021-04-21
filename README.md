@@ -1,5 +1,6 @@
 # Gatsby Starter Ghost
 
+
 A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org), based on [TryGhost/gatsby-starter-ghost](https://github.com/TryGhost/gatsby-starter-ghost).
 
 This tutorial will guide you through the process of deploying and hosting a [Ghost CMS](https://ghost.org/) with [Gatsby](https://www.gatsbyjs.org/) front-end using the serverless approach.
