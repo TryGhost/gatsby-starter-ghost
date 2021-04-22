@@ -1,2 +1,2 @@
 function-id: incrementLike
-template-path: ../../template.yaml
+template-path: ../../gatsbyTemplate.yaml
