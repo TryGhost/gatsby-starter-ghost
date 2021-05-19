@@ -6408,12 +6408,12 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-gatsby-awesome-pagination@0.3.6:
-  version "0.3.6"
-  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.6.tgz#e7e2d0af0cebd53a51957414e1e9749f2e0e2c02"
-  integrity sha512-gVt5tnDP8Va+Y02OrG8k/HocGx7NKTnvGGKFzz2E+ChHObBbac6PXeOEOUseFrCqO/zKLhF8JWTfWofGsy7oQA==
+gatsby-awesome-pagination@0.3.8:
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/gatsby-awesome-pagination/-/gatsby-awesome-pagination-0.3.8.tgz#e50f048ed9b25aecf5e2cd7269cdbd77f168301f"
+  integrity sha512-Bnf2rncqjyhQeye8w+OVK8wmgu/Y77HI8Po05oEqbCSd+fMd0uGDv6ZhKH7UU/xcTv2cbJm7ie+Px9t41ngAxg==
   dependencies:
-    lodash "^4.17.15"
+    lodash "^4.17.21"
 
 gatsby-cli@^2.19.3:
   version "2.19.3"
