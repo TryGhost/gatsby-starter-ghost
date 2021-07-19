@@ -29,8 +29,8 @@
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "7.30.0",
-    "eslint-plugin-ghost": "2.5.0",
+    "eslint": "7.31.0",
+    "eslint-plugin-ghost": "2.6.0",
     "eslint-plugin-react": "7.24.0"
   },
   "dependencies": {
