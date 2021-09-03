@@ -1,35 +1,55 @@
-import * as React from 'react''
-import { Helmet } from 'react-helmet'
-import PropTypes from 'prop-types'
-import _ from 'lodash'
-import { StaticQuery, graphql } from 'gatsby'
-import url from 'url'
+import * as React from "react";
+import { Helmet } from "react-helmet";
+import PropTypes from "prop-types";
+import _ from "lodash";
+import { StaticQuery, graphql } from "gatsby";
+import url from "url";
 
-import ImageMeta from './ImageMeta'
-import config from '../../../utils/siteConfig'
+import ImageMeta from "./ImageMeta";
+import config from "../../../utils/siteConfig";
 
-const WebsiteMeta = ({ data, settings, canonical, title, description, image, type }) => {
-    settings = settings.allGhostSettings.edges[0].node
+const WebsiteMeta = ({
+    data,
+    settings,
+    canonical,
+    title,
+    description,
+    image,
+    type,
+}) => {
+    settings = settings.allGhostSettings.edges[0].node;
 
-    const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
-    let shareImage = image || data.feature_image || _.get(settings, `cover_image`, null)
+    const publisherLogo = url.resolve(
+        config.siteUrl,
+        settings.logo || config.siteIcon
+    );
+    let shareImage =
+        image || data.feature_image || _.get(settings, `cover_image`, null);
 
-    shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null
+    shareImage = shareImage ? url.resolve(config.siteUrl, shareImage) : null;
 
-    description = description || data.meta_description || data.description || config.siteDescriptionMeta || settings.description
-    title = `${title || data.meta_title || data.name || data.title} - ${settings.title}`
+    description =
+        description ||
+        data.meta_description ||
+        data.description ||
+        config.siteDescriptionMeta ||
+        settings.description;
+    title = `${title || data.meta_title || data.name || data.title} - ${
+        settings.title
+    }`;
 
     const jsonLd = {
         "@context": `https://schema.org/`,
         "@type": type,
         url: canonical,
-        image: shareImage ?
-            {
-                "@type": `ImageObject`,
-                url: shareImage,
-                width: config.shareImageWidth,
-                height: config.shareImageHeight,
-            } : undefined,
+        image: shareImage
+            ? {
+                  "@type": `ImageObject`,
+                  url: shareImage,
+                  width: config.shareImageWidth,
+                  height: config.shareImageHeight,
+              }
+            : undefined,
         publisher: {
             "@type": `Organization`,
             name: settings.title,
@@ -45,7 +65,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
             "@id": config.siteUrl,
         },
         description,
-    }
+    };
 
     return (
         <>
@@ -61,14 +81,26 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                 <meta name="twitter:title" content={title} />
                 <meta name="twitter:description" content={description} />
                 <meta name="twitter:url" content={canonical} />
-                {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
-                {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
-                <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
+                {settings.twitter && (
+                    <meta
+                        name="twitter:site"
+                        content={`https://twitter.com/${settings.twitter.replace(
+                            /^@/,
+                            ``
+                        )}/`}
+                    />
+                )}
+                {settings.twitter && (
+                    <meta name="twitter:creator" content={settings.twitter} />
+                )}
+                <script type="application/ld+json">
+                    {JSON.stringify(jsonLd, undefined, 4)}
+                </script>
             </Helmet>
             <ImageMeta image={shareImage} />
         </>
-    )
-}
+    );
+};
 
 WebsiteMeta.propTypes = {
     data: PropTypes.shape({
@@ -93,9 +125,9 @@ WebsiteMeta.propTypes = {
     description: PropTypes.string,
     image: PropTypes.string,
     type: PropTypes.oneOf([`WebSite`, `Series`]).isRequired,
-}
+};
 
-const WebsiteMetaQuery = props => (
+const WebsiteMetaQuery = (props) => (
     <StaticQuery
         query={graphql`
             query GhostSettingsWebsiteMeta {
@@ -108,8 +140,8 @@ const WebsiteMetaQuery = props => (
                 }
             }
         `}
-        render={data => <WebsiteMeta settings={data} {...props} />}
+        render={(data) => <WebsiteMeta settings={data} {...props} />}
     />
-)
+);
 
-export default WebsiteMetaQuery
+export default WebsiteMetaQuery;
