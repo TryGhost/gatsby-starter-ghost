@@ -44,6 +44,7 @@
     "gatsby": "alpha-9689ff",
     "gatsby-awesome-pagination": "0.3.8",
     "gatsby-image": "3.11.0",
+    "gatsby-plugin-image": "alpha-9689ff",
     "gatsby-plugin-advanced-sitemap": "2.0.0",
     "gatsby-plugin-catch-links": "alpha-9689ff",
     "gatsby-plugin-feed": "alpha-9689ff",
