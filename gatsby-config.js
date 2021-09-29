@@ -1,3 +1,6 @@
+/* eslint-disable semi */
+/* eslint-disable no-unsafe-finally */
+/* eslint-disable no-restricted-syntax */
 const path = require(`path`);
 
 const config = require(`./src/utils/siteConfig`);
@@ -46,7 +49,7 @@ if (
  */
 module.exports = {
     siteMetadata: {
-        siteUrl: process.env.SITEURL || config.siteUrl,
+        siteUrl: process.env.SITE_URL || config.siteUrl,
     },
     plugins: [
         /**
