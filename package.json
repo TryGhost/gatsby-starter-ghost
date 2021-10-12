@@ -33,14 +33,14 @@
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "7.32.0",
+    "eslint": "8.0.0",
     "eslint-plugin-ghost": "2.6.0",
-    "eslint-plugin-react": "7.25.1"
+    "eslint-plugin-react": "7.26.1"
   },
   "dependencies": {
     "@tryghost/helpers": "1.1.52",
     "@tryghost/helpers-gatsby": "1.0.57",
-    "cheerio": "1.0.0-rc.9",
+    "cheerio": "1.0.0-rc.10",
     "gatsby": "^4.0.0-zz-next.1",
     "gatsby-awesome-pagination": "0.3.8",
     "gatsby-plugin-advanced-sitemap": "2.0.0",
