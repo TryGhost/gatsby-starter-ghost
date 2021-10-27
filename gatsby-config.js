@@ -49,7 +49,7 @@ if (
  */
 module.exports = {
     siteMetadata: {
-        siteUrl: process.env.SITE_URL || config.siteUrl,
+        siteUrl: process.env.SITEURL || config.siteUrl,
     },
     plugins: [
         /**
