@@ -31,13 +31,14 @@
     "babel-eslint": "10.1.0",
     "eslint": "8.5.0",
     "eslint-plugin-ghost": "2.11.0",
-    "eslint-plugin-react": "7.28.0"
+    "eslint-plugin-react": "7.28.0",
+    "webpack": "^4.29.6"
   },
   "dependencies": {
     "@tryghost/helpers": "1.1.54",
     "@tryghost/helpers-gatsby": "1.0.61",
     "cheerio": "1.0.0-rc.10",
-    "gatsby": "3.12.1",
+    "gatsby": "3.13.1",
     "gatsby-awesome-pagination": "0.3.8",
     "gatsby-image": "3.11.0",
     "gatsby-plugin-advanced-sitemap": "2.0.0",
