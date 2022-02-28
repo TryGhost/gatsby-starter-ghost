@@ -29,9 +29,9 @@
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "8.9.0",
+    "eslint": "8.10.0",
     "eslint-plugin-ghost": "2.13.0",
-    "eslint-plugin-react": "7.28.0"
+    "eslint-plugin-react": "7.29.2"
   },
   "dependencies": {
     "@tryghost/helpers": "1.1.57",
