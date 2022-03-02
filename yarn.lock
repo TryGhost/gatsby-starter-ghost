@@ -6240,10 +6240,10 @@ gatsby-plugin-feed@3.12.0:
     lodash.merge "^4.6.2"
     rss "^1.2.2"
 
-gatsby-plugin-force-trailing-slashes@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-force-trailing-slashes/-/gatsby-plugin-force-trailing-slashes-1.0.5.tgz#22d2f16bf4dea4fca79c129cf9cbd29d9229d888"
-  integrity sha512-RxRdW++bvSHv4Mho999W0LLNdiQX1OMOvY0v1TlafcaYqJ93fYV/Jp3DDD6PKS0PAKNS8Q8DRsD67cipFmZCFA==
+gatsby-plugin-force-trailing-slashes@1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-force-trailing-slashes/-/gatsby-plugin-force-trailing-slashes-1.0.6.tgz#f170b5919e16e2dca52689b5430688e92bf1895e"
+  integrity sha512-fFkgLqcu0AvFiwLe/Do/pZB+k2jYx6FfHFUgPvoD2PpxSDwyUR8CONZKlhmtuJ6foaaFSsD+vvmRWhfLqpAECQ==
   dependencies:
     "@babel/runtime" "7.12.5"
 
