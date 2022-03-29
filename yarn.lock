@@ -5909,10 +5909,10 @@ fs-exists-cached@1.0.0, fs-exists-cached@^1.0.0:
   resolved "https://registry.yarnpkg.com/fs-exists-cached/-/fs-exists-cached-1.0.0.tgz#cf25554ca050dc49ae6656b41de42258989dcbce"
   integrity sha1-zyVVTKBQ3EmuZla0HeQiWJidy84=
 
-fs-extra@10.0.0:
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.0.tgz#9ff61b655dde53fb34a82df84bb214ce802e17c1"
-  integrity sha512-C5owb14u9eJwizKGdchcDUQeFtlSHHthBk8pbX9Vc1PFZrLombudjDnNns88aYslCyF6IY5SUw3Roz6xShcEIQ==
+fs-extra@10.0.1:
+  version "10.0.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.0.1.tgz#27de43b4320e833f6867cc044bfce29fdf0ef3b8"
+  integrity sha512-NbdoVMZso2Lsrn/QwLXOy6rm0ufY2zEOKCDzJR/0kBsb0E6qed0P3iYK+Ath3BfvXEeu4JhEtXLgILx5psUfag==
   dependencies:
     graceful-fs "^4.2.0"
     jsonfile "^6.0.1"
@@ -6108,15 +6108,16 @@ gatsby-page-utils@^1.12.0:
     lodash "^4.17.21"
     micromatch "^4.0.4"
 
-gatsby-plugin-advanced-sitemap@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-2.0.0.tgz#bb055ff4820a159866b0c1f7cc8fe19614f9a416"
-  integrity sha512-UIe/rbdIVTtU1fBZkN8Gmru+aNOePlcuYRRi6V2LrSrNC4FFIFqlOa5W7j8piVUQLuzy/Ei2w6BNZA5c0S1M2Q==
+gatsby-plugin-advanced-sitemap@2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-advanced-sitemap/-/gatsby-plugin-advanced-sitemap-2.1.0.tgz#50b236858b12cc2d7851ca6b078a47e5891abb6f"
+  integrity sha512-h+IM+UWC18eWodH0TvAHdOM70UjA/4qWz8tD/q3aKTj0MrMxGY+x00PrrNL/oFD0XOcrVXZB3pBtA63yAHD1jg==
   dependencies:
     "@babel/runtime" "7.14.0"
-    fs-extra "10.0.0"
+    fs-extra "10.0.1"
     lodash "4.17.21"
     moment "2.29.1"
+    pify "5.0.0"
     xml "^1.0.1"
 
 gatsby-plugin-catch-links@3.12.0:
@@ -10019,6 +10020,11 @@ picomatch@^2.0.4, picomatch@^2.2.1, picomatch@^2.2.3:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.0.tgz#f1f061de8f6a4bf022892e2d128234fb98302972"
   integrity sha512-lY1Q/PiJGC2zOv/z391WOTD+Z02bCgsFfvxoXXf6h7kv9o+WmsmzYqrAwY63sNgOxE4xEdq0WyUnXfKeBrSvYw==
+
+pify@5.0.0:
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/pify/-/pify-5.0.0.tgz#1f5eca3f5e87ebec28cc6d54a0e4aaf00acc127f"
+  integrity sha512-eW/gHNMlxdSP6dmG6uJip6FXN0EQBwm2clYYd8Wul42Cwu/DK8HEftzsapcNdYe2MfLiIwZqsDk2RDEsTE79hA==
 
 pify@^2.0.0, pify@^2.2.0, pify@^2.3.0:
   version "2.3.0"
