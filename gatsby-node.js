@@ -73,7 +73,7 @@ exports.createPages = async ({ graphql, actions }) => {
         // a `/tag/:slug/` permalink.
         const url = `/tag/${node.slug}`
 
-        const items = Array.from({length: totalPosts})
+        const items = Array.from({ length: totalPosts })
 
         // Create pagination
         paginate({
@@ -81,10 +81,10 @@ exports.createPages = async ({ graphql, actions }) => {
             items: items,
             itemsPerPage: postsPerPage,
             component: tagsTemplate,
-            pathPrefix: ({ pageNumber }) => (pageNumber === 0) ? url : `${url}/page`,
+            pathPrefix: ({ pageNumber }) => ((pageNumber === 0) ? url : `${url}/page`),
             context: {
-                slug: node.slug
-            }
+                slug: node.slug,
+            },
         })
     })
 
@@ -96,7 +96,7 @@ exports.createPages = async ({ graphql, actions }) => {
         // a `/author/:slug/` permalink.
         const url = `/author/${node.slug}`
 
-        const items = Array.from({length: totalPosts})
+        const items = Array.from({ length: totalPosts })
 
         // Create pagination
         paginate({
@@ -104,10 +104,10 @@ exports.createPages = async ({ graphql, actions }) => {
             items: items,
             itemsPerPage: postsPerPage,
             component: authorTemplate,
-            pathPrefix: ({ pageNumber }) => (pageNumber === 0) ? url : `${url}/page`,
+            pathPrefix: ({ pageNumber }) => ((pageNumber === 0) ? url : `${url}/page`),
             context: {
-                slug: node.slug
-            }
+                slug: node.slug,
+            },
         })
     })
 
