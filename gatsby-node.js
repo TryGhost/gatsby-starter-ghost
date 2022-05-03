@@ -1,6 +1,7 @@
 const path = require(`path`)
 const { postsPerPage } = require(`./src/utils/siteConfig`)
 const { paginate } = require(`gatsby-awesome-pagination`)
+const blogPath = `/blog`
 
 /**
  * Here is the place where Gatsby creates the URLs for all the
@@ -71,7 +72,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
         // This part here defines, that our tag pages will use
         // a `/tag/:slug/` permalink.
-        const url = `/tag/${node.slug}`
+        const url = `${blogPath}/tag/${node.slug}`
 
         const items = Array.from({ length: totalPosts })
 
@@ -94,7 +95,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
         // This part here defines, that our author pages will use
         // a `/author/:slug/` permalink.
-        const url = `/author/${node.slug}`
+        const url = `${blogPath}/author/${node.slug}`
 
         const items = Array.from({ length: totalPosts })
 
@@ -115,7 +116,7 @@ exports.createPages = async ({ graphql, actions }) => {
     pages.forEach(({ node }) => {
         // This part here defines, that our pages will use
         // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
+        node.url = `${blogPath}/${node.slug}/`
 
         createPage({
             path: node.url,
@@ -132,7 +133,7 @@ exports.createPages = async ({ graphql, actions }) => {
     posts.forEach(({ node }) => {
         // This part here defines, that our posts will use
         // a `/:slug/` permalink.
-        node.url = `/${node.slug}/`
+        node.url = `${blogPath}/${node.slug}/`
 
         createPage({
             path: node.url,
@@ -153,9 +154,9 @@ exports.createPages = async ({ graphql, actions }) => {
         component: indexTemplate,
         pathPrefix: ({ pageNumber }) => {
             if (pageNumber === 0) {
-                return `/`
+                return `${blogPath}/`
             } else {
-                return `/page`
+                return `${blogPath}/page`
             }
         },
     })
