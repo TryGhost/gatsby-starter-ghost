@@ -1,10 +1,10 @@
 {
   "development": {
-    "apiUrl": "https://art-of-code-admin.herokuapp.com",
-    "contentApiKey": "954638bd2d6e21f3a3fb359147"
+    "apiUrl": "https://art-of-code-admin-staging.herokuapp.com",
+    "contentApiKey": "68b3f0cd78131a4236899f9c9f"
   },
   "production": {
-    "apiUrl": "https://art-of-code-admin.herokuapp.com",
-    "contentApiKey": "954638bd2d6e21f3a3fb359147"
+    "apiUrl": "https://art-of-code-admin-production.herokuapp.com",
+    "contentApiKey": "70cd3568869190ee0b67c2d1ea"
   }
 }
