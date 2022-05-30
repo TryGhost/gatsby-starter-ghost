@@ -10,6 +10,8 @@ var _objectWithoutPropertiesLoose2 = _interopRequireDefault(require("@babel/runt
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
 
+var _excluded = ["icon"];
+
 var fs = require("fs");
 
 var path = require("path");
@@ -41,7 +43,7 @@ exports.onPostBuild = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             graphql = _ref.graphql;
-            icon = pluginOptions.icon, manifest = (0, _objectWithoutPropertiesLoose2.default)(pluginOptions, ["icon"]);
+            icon = pluginOptions.icon, manifest = (0, _objectWithoutPropertiesLoose2.default)(pluginOptions, _excluded);
             _context.next = 4;
             return graphql(pluginOptions.query);
 
