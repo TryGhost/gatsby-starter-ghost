@@ -58,6 +58,7 @@
     "lodash": "4.17.21",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-helmet": "6.1.0"
+    "react-helmet": "6.1.0",
+    "url": "0.11.0"
   }
 }
