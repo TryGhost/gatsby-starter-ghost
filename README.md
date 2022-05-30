@@ -1,8 +1,8 @@
 # Gatsby Starter Ghost
 
-A starter template to build lightning fast websites with [Ghost](https://ghost.org) & [Gatsby](https://gatsbyjs.org)
+A starter template to build lightning fast websites with [Ghost](https://ghost.org/) & [Gatsby](https://gatsbyjs.org)
 
-**Demo:** https://gatsby.ghost.org
+**Demo:** https://gatsby.ghost.org/
 
 &nbsp;
 
@@ -50,18 +50,18 @@ Finally, configure your desired URL in `siteConfig.js`, so links (e. g. canonica
 
 To use this starter without issues, your Ghost installation needs to be at least on version `2.10.0`.
 
-The default Ghost version that is used for this starter is `3.x`. If your Ghost installation is on a lower version, you will need to pass in a `version` property in your `.ghost.json` settings:
+The default Ghost version that is used for this starter is `5.x`. If your Ghost installation is on a lower version, you will need to pass in a `version` property in your `.ghost.json` settings:
 
-**Ghost >=2.10.0 <3.0.0**
+**Ghost >=2.10.0 <5.0.0**
 ```json
 {
     "apiUrl": "https://gatsby.ghost.io",
     "contentApiKey": "9cc5c67c358edfdd81455149d0",
-    "version": "v2"
+    "version": "v4.0"
 }
 ```
 
-**Ghost >=3.0.0**
+**Ghost >=5.0.0**
 ```json
 {
     "apiUrl": "https://gatsby.ghost.io",
@@ -81,7 +81,7 @@ To deploy to your Netlify account, hit the button below.
 
 Content API Keys are generally not considered to be sensitive information, they exist so that they can be changed in the event of abuse; so most people commit it directly to their `.ghost.json` config file. If you prefer to keep this information out of your repository you can remove this config and set [Netlify ENV variables](https://www.netlify.com/docs/continuous-deployment/#build-environment-variables) for production builds instead.
 
-Once deployed, you can set up a [Ghost + Netlify Integration](https://docs.ghost.org/integrations/netlify/) to use deploy hooks from Ghost to trigger Netlify rebuilds. That way, any time data changes in Ghost, your site will rebuild on Netlify.
+Once deployed, you can set up a [Ghost + Netlify Integration](https://ghost.org/integrations/netlify/) to use deploy hooks from Ghost to trigger Netlify rebuilds. That way, any time data changes in Ghost, your site will rebuild on Netlify.
 
 &nbsp;
 
