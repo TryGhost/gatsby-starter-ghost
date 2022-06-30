@@ -11,6 +11,7 @@ import config from '../../../utils/siteConfig'
 const WebsiteMeta = ({ data, settings, canonical, title, description, image, type }) => {
     settings = settings.allGhostSettings.edges[0].node
 
+    const googleSiteVerificationId = process.env.GHOST_GOOGLE_SITE_VERIFICATION_ID
     const publisherLogo = url.resolve(config.siteUrl, (settings.logo || config.siteIcon))
     let shareImage = image || data.feature_image || _.get(settings, `cover_image`, null)
 
@@ -63,6 +64,7 @@ const WebsiteMeta = ({ data, settings, canonical, title, description, image, typ
                 <meta name="twitter:url" content={canonical} />
                 {settings.twitter && <meta name="twitter:site" content={`https://twitter.com/${settings.twitter.replace(/^@/, ``)}/`} />}
                 {settings.twitter && <meta name="twitter:creator" content={settings.twitter} />}
+                {googleSiteVerificationId && <meta name="google-site-verification" content={googleSiteVerificationId} />}
                 <script type="application/ld+json">{JSON.stringify(jsonLd, undefined, 4)}</script>
             </Helmet>
             <ImageMeta image={shareImage} />
