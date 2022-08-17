@@ -11,24 +11,44 @@ A starter template to build lightning fast websites with [Ghost](https://ghost.o
 &nbsp;
 
 
-# Installing
+# Setup and Installation
+
+Install the [Gatsby CLI](https://www.gatsbyjs.com/docs/reference/gatsby-cli/) if you do not already have it installed.
+
+Ensure `gatsby-cli` is configured to use `yarn` as your package manager. [Docs](https://www.gatsbyjs.com/docs/glossary/yarn/#using-yarn-as-your-gatsby-package-manager)
+
+
+## Install With Gatsby CLI
 
 ```bash
-# With Gatsby CLI
+# Start new project with Gatsby
 gatsby new gatsby-starter-ghost https://github.com/TryGhost/gatsby-starter-ghost.git
-```
 
-```bash
-# From Source
-git clone https://github.com/TryGhost/gatsby-starter-ghost.git
+# Install dependencies
 cd gatsby-starter-ghost
-```
-
-Then install dependencies
-
-```bash
 yarn
 ```
+
+## Install From Source
+
+```bash
+# Start new project by cloning from source
+git clone https://github.com/TryGhost/gatsby-starter-ghost.git
+
+# Install Dependencies
+cd gatsby-starter-ghost
+yarn
+```
+
+## Using NPM
+
+If you wish to use `npm` as your package manager instead of `yarn`:
+
+1) update the  Gatsby `packageManager` config to use `npm`
+2) delete the existing `yarn.lock` file
+3) delete the existing `node_modules/` folder
+4) generate a new `package-lock.json` file by running `npm install`
+
 
 &nbsp;
 
