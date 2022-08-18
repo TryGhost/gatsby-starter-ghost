@@ -1,4 +1,4 @@
-const config = require(`../../.ghost.json`).production;
+const config = require(`../../.ghost.json`).production
 module.exports = {
     siteUrl:
         process.env.NODE_ENV === `production`
@@ -17,4 +17,4 @@ module.exports = {
     siteIcon: `favicon.png`, // Logo in /static dir used for SEO, RSS, and App manifest
     backgroundColor: `#e9e9e9`, // Used for Offline Manifest
     themeColor: `#15171A`, // Used for Offline Manifest
-};
+}

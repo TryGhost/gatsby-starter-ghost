@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Link } from "gatsby";
-import { Layout } from "../components/common";
+import * as React from "react"
+import { Link } from "gatsby"
+import { Layout } from "../components/common"
 
 const NotFoundPage = () => (
     <Layout>
@@ -14,6 +14,6 @@ const NotFoundPage = () => (
             </article>
         </div>
     </Layout>
-);
+)
 
-export default NotFoundPage;
+export default NotFoundPage

@@ -1,12 +1,12 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import { StaticQuery, graphql } from "gatsby";
-import url from "url";
+import * as React from "react"
+import PropTypes from "prop-types"
+import { StaticQuery, graphql } from "gatsby"
+import url from "url"
 
-import config from "../../../utils/siteConfig";
-import ArticleMeta from "./ArticleMeta";
-import WebsiteMeta from "./WebsiteMeta";
-import AuthorMeta from "./AuthorMeta";
+import config from "../../../utils/siteConfig"
+import ArticleMeta from "./ArticleMeta"
+import WebsiteMeta from "./WebsiteMeta"
+import AuthorMeta from "./AuthorMeta"
 
 /**
  * MetaData will generate all relevant meta data information incl.
@@ -14,18 +14,18 @@ import AuthorMeta from "./AuthorMeta";
  *
  */
 const MetaData = ({ data, settings, title, description, image, location }) => {
-    const canonical = url.resolve(config.siteUrl, location.pathname);
-    const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data;
-    settings = settings.allGhostSettings.edges[0].node;
+    const canonical = url.resolve(config.siteUrl, location.pathname)
+    const { ghostPost, ghostTag, ghostAuthor, ghostPage } = data
+    settings = settings.allGhostSettings.edges[0].node
 
     if (ghostPost) {
-        return <ArticleMeta data={ghostPost} canonical={canonical} />;
+        return <ArticleMeta data={ghostPost} canonical={canonical} />
     } else if (ghostTag) {
         return (
             <WebsiteMeta data={ghostTag} canonical={canonical} type="Series" />
-        );
+        )
     } else if (ghostAuthor) {
-        return <AuthorMeta data={ghostAuthor} canonical={canonical} />;
+        return <AuthorMeta data={ghostAuthor} canonical={canonical} />
     } else if (ghostPage) {
         return (
             <WebsiteMeta
@@ -33,14 +33,14 @@ const MetaData = ({ data, settings, title, description, image, location }) => {
                 canonical={canonical}
                 type="WebSite"
             />
-        );
+        )
     } else {
-        title = title || config.siteTitleMeta || settings.title;
+        title = title || config.siteTitleMeta || settings.title
         description =
-            description || config.siteDescriptionMeta || settings.description;
-        image = image || settings.cover_image || null;
+            description || config.siteDescriptionMeta || settings.description
+        image = image || settings.cover_image || null
 
-        image = image ? url.resolve(config.siteUrl, image) : null;
+        image = image ? url.resolve(config.siteUrl, image) : null
 
         return (
             <WebsiteMeta
@@ -51,13 +51,13 @@ const MetaData = ({ data, settings, title, description, image, location }) => {
                 image={image}
                 type="WebSite"
             />
-        );
+        )
     }
-};
+}
 
 MetaData.defaultProps = {
     data: {},
-};
+}
 
 MetaData.propTypes = {
     data: PropTypes.shape({
@@ -68,6 +68,9 @@ MetaData.propTypes = {
     }).isRequired,
     settings: PropTypes.shape({
         allGhostSettings: PropTypes.object.isRequired,
+        cover_image: PropTypes.string,
+        description: PropTypes.string,
+        title: PropTypes.string,
     }).isRequired,
     location: PropTypes.shape({
         pathname: PropTypes.string.isRequired,
@@ -75,9 +78,9 @@ MetaData.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     image: PropTypes.string,
-};
+}
 
-const MetaDataQuery = (props) => (
+const MetaDataQuery = props => (
     <StaticQuery
         query={graphql`
             query GhostSettingsMetaData {
@@ -91,8 +94,8 @@ const MetaDataQuery = (props) => (
                 }
             }
         `}
-        render={(data) => <MetaData settings={data} {...props} />}
+        render={data => <MetaData settings={data} {...props} />}
     />
-);
+)
 
-export default MetaDataQuery;
+export default MetaDataQuery

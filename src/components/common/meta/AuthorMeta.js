@@ -1,21 +1,21 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import PropTypes from "prop-types";
-import _ from "lodash";
-import { StaticQuery, graphql } from "gatsby";
+import * as React from "react"
+import { Helmet } from "react-helmet"
+import PropTypes from "prop-types"
+import _ from "lodash"
+import { StaticQuery, graphql } from "gatsby"
 
-import ImageMeta from "./ImageMeta";
-import getAuthorProperties from "./getAuthorProperties";
-import config from "../../../utils/siteConfig";
+import ImageMeta from "./ImageMeta"
+import getAuthorProperties from "./getAuthorProperties"
+import config from "../../../utils/siteConfig"
 
 const AuthorMeta = ({ data, settings, canonical }) => {
-    settings = settings.allGhostSettings.edges[0].node;
+    settings = settings.allGhostSettings.edges[0].node
 
-    const author = getAuthorProperties(data);
-    const shareImage = author.image || _.get(settings, `cover_image`, null);
-    const title = `${data.name} - ${settings.title}`;
+    const author = getAuthorProperties(data)
+    const shareImage = author.image || _.get(settings, `cover_image`, null)
+    const title = `${data.name} - ${settings.title}`
     const description =
-        data.bio || config.siteDescriptionMeta || settings.description;
+        data.bio || config.siteDescriptionMeta || settings.description
 
     const jsonLd = {
         "@context": `https://schema.org/`,
@@ -25,18 +25,18 @@ const AuthorMeta = ({ data, settings, canonical }) => {
         url: canonical,
         image: shareImage
             ? {
-                  "@type": `ImageObject`,
-                  url: shareImage,
-                  width: config.shareImageWidth,
-                  height: config.shareImageHeight,
-              }
+                "@type": `ImageObject`,
+                url: shareImage,
+                width: config.shareImageWidth,
+                height: config.shareImageHeight,
+            }
             : undefined,
         mainEntityOfPage: {
             "@type": `WebPage`,
             "@id": config.siteUrl,
         },
         description,
-    };
+    }
 
     return (
         <>
@@ -70,8 +70,8 @@ const AuthorMeta = ({ data, settings, canonical }) => {
             </Helmet>
             <ImageMeta image={shareImage} />
         </>
-    );
-};
+    )
+}
 
 AuthorMeta.propTypes = {
     data: PropTypes.shape({
@@ -89,9 +89,9 @@ AuthorMeta.propTypes = {
         allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
-};
+}
 
-const AuthorMetaQuery = (props) => (
+const AuthorMetaQuery = props => (
     <StaticQuery
         query={graphql`
             query GhostSettingsAuthorMeta {
@@ -104,8 +104,8 @@ const AuthorMetaQuery = (props) => (
                 }
             }
         `}
-        render={(data) => <AuthorMeta settings={data} {...props} />}
+        render={data => <AuthorMeta settings={data} {...props} />}
     />
-);
+)
 
-export default AuthorMetaQuery;
+export default AuthorMetaQuery

@@ -51,7 +51,7 @@ module.exports = {
     siteMetadata: {
         siteUrl: process.env.SITEURL || config.siteUrl,
     },
-    trailingSlash: 'always',
+    trailingSlash: `always`,
     plugins: [
         /**
          *  Content Plugins

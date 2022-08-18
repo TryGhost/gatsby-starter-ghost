@@ -1,33 +1,33 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { StaticQuery, graphql } from "gatsby";
-import PropTypes from "prop-types";
-import _ from "lodash";
-import url from "url";
+import * as React from "react"
+import { Helmet } from "react-helmet"
+import { StaticQuery, graphql } from "gatsby"
+import PropTypes from "prop-types"
+import _ from "lodash"
+import url from "url"
 
-import getAuthorProperties from "./getAuthorProperties";
-import ImageMeta from "./ImageMeta";
-import config from "../../../utils/siteConfig";
+import getAuthorProperties from "./getAuthorProperties"
+import ImageMeta from "./ImageMeta"
+import config from "../../../utils/siteConfig"
 
-import { tags as tagsHelper } from "@tryghost/helpers";
+import { tags as tagsHelper } from "@tryghost/helpers"
 
 const ArticleMetaGhost = ({ data, settings, canonical }) => {
-    const ghostPost = data;
-    settings = settings.allGhostSettings.edges[0].node;
+    const ghostPost = data
+    settings = settings.allGhostSettings.edges[0].node
 
-    const author = getAuthorProperties(ghostPost.primary_author);
+    const author = getAuthorProperties(ghostPost.primary_author)
     const publicTags = _.map(
-        tagsHelper(ghostPost, { visibility: `public`, fn: (tag) => tag }),
+        tagsHelper(ghostPost, { visibility: `public`, fn: tag => tag }),
         `name`
-    );
-    const primaryTag = publicTags[0] || ``;
+    )
+    const primaryTag = publicTags[0] || ``
     const shareImage = ghostPost.feature_image
         ? ghostPost.feature_image
-        : _.get(settings, `cover_image`, null);
+        : _.get(settings, `cover_image`, null)
     const publisherLogo =
         settings.logo || config.siteIcon
             ? url.resolve(config.siteUrl, settings.logo || config.siteIcon)
-            : null;
+            : null
 
     const jsonLd = {
         "@context": `https://schema.org/`,
@@ -45,11 +45,11 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
         dateModified: ghostPost.updated_at,
         image: shareImage
             ? {
-                  "@type": `ImageObject`,
-                  url: shareImage,
-                  width: config.shareImageWidth,
-                  height: config.shareImageHeight,
-              }
+                "@type": `ImageObject`,
+                url: shareImage,
+                width: config.shareImageWidth,
+                height: config.shareImageHeight,
+            }
             : undefined,
         publisher: {
             "@type": `Organization`,
@@ -66,7 +66,7 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
             "@type": `WebPage`,
             "@id": config.siteUrl,
         },
-    };
+    }
 
     return (
         <>
@@ -159,8 +159,8 @@ const ArticleMetaGhost = ({ data, settings, canonical }) => {
             </Helmet>
             <ImageMeta image={shareImage} />
         </>
-    );
-};
+    )
+}
 
 ArticleMetaGhost.propTypes = {
     data: PropTypes.shape({
@@ -194,9 +194,9 @@ ArticleMetaGhost.propTypes = {
         allGhostSettings: PropTypes.object.isRequired,
     }).isRequired,
     canonical: PropTypes.string.isRequired,
-};
+}
 
-const ArticleMetaQuery = (props) => (
+const ArticleMetaQuery = props => (
     <StaticQuery
         query={graphql`
             query GhostSettingsArticleMeta {
@@ -209,8 +209,8 @@ const ArticleMetaQuery = (props) => (
                 }
             }
         `}
-        render={(data) => <ArticleMetaGhost settings={data} {...props} />}
+        render={data => <ArticleMetaGhost settings={data} {...props} />}
     />
-);
+)
 
-export default ArticleMetaQuery;
+export default ArticleMetaQuery

@@ -1,10 +1,10 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import { graphql } from "gatsby";
-import { Helmet } from "react-helmet";
+import * as React from "react"
+import PropTypes from "prop-types"
+import { graphql } from "gatsby"
+import { Helmet } from "react-helmet"
 
-import { Layout } from "../components/common";
-import { MetaData } from "../components/common/meta";
+import { Layout } from "../components/common"
+import { MetaData } from "../components/common/meta"
 
 /**
  * Single post view (/:slug)
@@ -13,7 +13,7 @@ import { MetaData } from "../components/common/meta";
  *
  */
 const Post = ({ data, location }) => {
-    const post = data.ghostPost;
+    const post = data.ghostPost
 
     return (
         <>
@@ -45,8 +45,8 @@ const Post = ({ data, location }) => {
                 </div>
             </Layout>
         </>
-    );
-};
+    )
+}
 
 Post.propTypes = {
     data: PropTypes.shape({
@@ -58,9 +58,9 @@ Post.propTypes = {
         }).isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
-};
+}
 
-export default Post;
+export default Post
 
 export const postQuery = graphql`
     query ($slug: String!) {
@@ -68,4 +68,4 @@ export const postQuery = graphql`
             ...GhostPostFields
         }
     }
-`;
+`
