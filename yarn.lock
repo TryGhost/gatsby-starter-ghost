@@ -5229,10 +5229,10 @@ eslint-module-utils@^2.7.3:
     debug "^3.2.7"
     find-up "^2.1.0"
 
-eslint-plugin-ember@11.0.5:
-  version "11.0.5"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-11.0.5.tgz#b4a1ce7df123e6b2d18c148b9340e62d32bc6b98"
-  integrity sha512-Hc6aQ6lsdjf9xPrgO0rRY5EjTSIssUEJ4IJZU+idtexead0DX1C5hZDgG9XTKYQIYwRR3JFFC5R4h6KOPCcQRQ==
+eslint-plugin-ember@11.0.6:
+  version "11.0.6"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ember/-/eslint-plugin-ember-11.0.6.tgz#95fc44639b9f8f3d5a0f7a20bd06903a32194798"
+  integrity sha512-iQzqn8/GdBbNv2T3YetpjEBemoH0v9e9ea8Bu6JLOX2TN+HMK2l52/QBRFgrnaxLXBjPO3iy2c3sCieYV27EvQ==
   dependencies:
     "@ember-data/rfc395-data" "^0.0.4"
     css-tree "^2.0.4"
@@ -5269,13 +5269,13 @@ eslint-plugin-flowtype@^5.10.0:
     lodash "^4.17.15"
     string-natural-compare "^3.0.1"
 
-eslint-plugin-ghost@2.15.1:
-  version "2.15.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ghost/-/eslint-plugin-ghost-2.15.1.tgz#fef07109ef99c344e5400bded638824e3c02ecec"
-  integrity sha512-ou8YgfnM0aJhfonjzLnKJSdqm9tYxoY6ZBA9dMS//PV1JEp4YDvCPSvkyRNcjx2nuVpglYEL6EKnXKHnmR2mHw==
+eslint-plugin-ghost@2.16.0:
+  version "2.16.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ghost/-/eslint-plugin-ghost-2.16.0.tgz#ec85aa6e5e690c9808c04a30f102a8728d66d12a"
+  integrity sha512-yEMAH9ZY/4w5zqZwe+ZdFlg9Uyumi1OuAjqoq4FApA2POehgaT3e1ZwR/P1hmjFx9yqLibaL5J6dTocFsj0yew==
   dependencies:
     "@kapouer/eslint-plugin-no-return-in-loop" "1.0.0"
-    eslint-plugin-ember "11.0.5"
+    eslint-plugin-ember "11.0.6"
     eslint-plugin-filenames "1.3.2"
     eslint-plugin-mocha "7.0.1"
     eslint-plugin-node "11.1.0"
