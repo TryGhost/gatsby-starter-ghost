@@ -5477,10 +5477,10 @@ eslint-plugin-flowtype@^5.10.0:
     lodash "^4.17.15"
     string-natural-compare "^3.0.1"
 
-eslint-plugin-ghost@2.18.1:
-  version "2.18.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-ghost/-/eslint-plugin-ghost-2.18.1.tgz#4a9f55cc59eb236dc78b12bd76761d606393fa29"
-  integrity sha512-Un3kFRiAC0E2BfmcUOHc8fAiRV45f/eTi36pRyTV+b/fb3JkYR1siJmHlhBGh1wMJTnhXxIqWqTtgQT+9I/tjw==
+eslint-plugin-ghost@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-ghost/-/eslint-plugin-ghost-3.0.0.tgz#6d9f55f086b15b81257769cbddb44ac05e1fca00"
+  integrity sha512-Ouu6/MVNalP9HuRHZ94MudVpLR9JViZZnfWIOrnsRxHLoyDRRggewdfKtGD3hhMGtFXJHYdIjatT5naF8B0JbQ==
   dependencies:
     "@kapouer/eslint-plugin-no-return-in-loop" "1.0.0"
     eslint-plugin-ember "11.5.2"
