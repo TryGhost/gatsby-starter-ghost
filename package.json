@@ -10,7 +10,7 @@
     "url": "git+https://github.com/tryghost/gatsby-starter-ghost.git"
   },
   "engines": {
-    "node": ">= 12.13.0"
+    "node": ">=12.13.0"
   },
   "bugs": {
     "url": "https://github.com/tryghost/gatsby-starter-ghost/issues"
