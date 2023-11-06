@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "8.52.0",
+    "eslint": "8.53.0",
     "eslint-plugin-ghost": "3.4.0",
     "eslint-plugin-react": "7.33.2"
   },
