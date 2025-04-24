@@ -32,7 +32,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "babel-eslint": "10.1.0",
+    "@babel/eslint-parser": "7.11.0",
     "eslint": "8.57.0",
     "eslint-plugin-ghost": "3.4.0",
     "eslint-plugin-react": "7.35.0"
