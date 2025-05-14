@@ -2197,10 +2197,10 @@
   resolved "https://registry.yarnpkg.com/@tokenizer/token/-/token-0.3.0.tgz#fe98a93fe789247e998c75e74e9c7c63217aa276"
   integrity sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==
 
-"@tryghost/content-api@1.11.5":
-  version "1.11.5"
-  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.11.5.tgz#8023bd03c9e0073a4aaf244c7d527cdd71a80b13"
-  integrity sha512-dDU3EBgi8fpSZqnEOunYra/W/yABGlJng6f6i99ZLHir/y/KbShA+zA5/R19Y7Z109ocB8R4VWHk44GjFSTeBA==
+"@tryghost/content-api@1.11.7":
+  version "1.11.7"
+  resolved "https://registry.yarnpkg.com/@tryghost/content-api/-/content-api-1.11.7.tgz#5b779a319f4af16f9687c49459e475c9ca607b2f"
+  integrity sha512-G6Ovb0LSnlvx/nVzNDYd5kMyMmsTjwdiOANRbh/NPgaNUHS5RdUbbhPpYFvD1Cdi8xoliowCaGorv5wxI3Wb2Q==
   dependencies:
     axios "^0.27.0"
 
@@ -6515,15 +6515,15 @@ gatsby-source-filesystem@4.15.0:
     valid-url "^1.0.9"
     xstate "^4.26.1"
 
-gatsby-source-ghost@5.0.2:
-  version "5.0.2"
-  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-5.0.2.tgz#05b08af0e27514f19439c2dede6f53b5ab8cea92"
-  integrity sha512-xizrhlE4vDS0Z2qzSv0NUFOwUo/YmdDJX8iiRzLyatxFowmX2NCBan64Nsa1eR2QoZU0xnuL57paO0p4SlE6Zg==
+gatsby-source-ghost@5.0.3:
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/gatsby-source-ghost/-/gatsby-source-ghost-5.0.3.tgz#8b00a13384203e96283c0b464904a4561b72f002"
+  integrity sha512-7xQN2MFHv81KogDiSuoKYU0BFRMtw/jQm4IvwJeFd8BelGehIDdOuX3rw2oor9SJYaO53GN+Y1MLrJYQ8H6rTw==
   dependencies:
-    "@tryghost/content-api" "1.11.5"
+    "@tryghost/content-api" "1.11.7"
     cheerio "1.0.0-rc.12"
     gatsby-node-helpers "0.3.0"
-    qs "6.11.0"
+    qs "6.11.1"
 
 gatsby-telemetry@^3.25.0:
   version "3.25.0"
@@ -9606,6 +9606,13 @@ qs@6.11.0:
   version "6.11.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
   integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
+  dependencies:
+    side-channel "^1.0.4"
+
+qs@6.11.1:
+  version "6.11.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.1.tgz#6c29dff97f0c0060765911ba65cbc9764186109f"
+  integrity sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==
   dependencies:
     side-channel "^1.0.4"
 
