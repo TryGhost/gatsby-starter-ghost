@@ -2204,10 +2204,10 @@
   dependencies:
     axios "^0.27.0"
 
-"@tryghost/helpers-gatsby@2.0.30":
-  version "2.0.30"
-  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-2.0.30.tgz#c0bcc1a8ec452d926ad82c2178e657b7180c29c8"
-  integrity sha512-yxoWHAQsryJhNgffQrmKT6WGBX7JUFPcQLklJS0lUdyq8MfXgf17teW/IRT+Qwn43JNlgpTIE37OSh/EwX6XWA==
+"@tryghost/helpers-gatsby@2.0.31":
+  version "2.0.31"
+  resolved "https://registry.yarnpkg.com/@tryghost/helpers-gatsby/-/helpers-gatsby-2.0.31.tgz#04727470d2f568fdc52daa5690f7aae38c5fc812"
+  integrity sha512-+DGlpO6rfF6ARlfojWACl0LKYfcSBBlkZ+hTLuVl0ipVKTY1EeSRxSENa9v71UKDIgFpof/jWf7F7NXyG99gNw==
   dependencies:
     "@gatsbyjs/reach-router" "1.3.9"
     "@tryghost/helpers" "^1.1.99"
